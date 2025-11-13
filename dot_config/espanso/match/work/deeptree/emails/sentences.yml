@@ -1,0 +1,87 @@
+# espanso match file
+
+# Print the current date
+matches:
+  - trigger: ;noresponse
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: random
+        params:
+          choices:
+            - As we have not received a recent response, we would like to confirm the current status of your ticket and ensure it is addressed in a timely manner.
+            - As we have not yet received a reply, we would like to confirm the current status of your ticket and ensure it is progressing appropriately.
+            - Since we have not heard back recently, we are reaching out to verify the status of your ticket and confirm that it is being addressed in a timely manner.
+            - Because no recent response has been received, we are checking in to determine the current status of your ticket and to confirm it remains on track for resolution.
+            - As there has been no recent communication, we would like to follow up regarding the status of your ticket and confirm that it is moving forward as expected.
+            - Given we do not have a recent update, we are writing to check on the current status of your ticket and ensure it receives the attention it requires.
+            - Since we have not received an update, we would like to confirm where your ticket currently stands and make sure it is being handled without delay.
+            - As we have not heard from you, we want to follow up on the status of your ticket and ensure it is receiving the necessary attention.
+            - Because no recent update has been provided, we are reaching out to review the current status of your ticket and confirm timely resolution.
+
+  - trigger: ;stillreqass
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: random
+        params:
+          choices:
+            - If you still require assistance, we kindly request that you respond to this email or call us at {{dthelp}} at your earliest convenience to confirm the next steps regarding your ticket.
+            - As we have not received a recent response, we would like to confirm the current status of your ticket and ensure it is addressed in a timely manner. Please respond to this ticket or call {{dthelp}} to address the next steps for your ticket.
+            - If you continue to need assistance, please respond to this email or call us at {{dthelp}} at your earliest convenience so we can discuss the next steps for your ticket.
+            - Should you still require support, we ask that you reply to this email or contact us at {{dthelp}} to determine the appropriate next steps regarding your ticket.
+            - If further assistance is needed, kindly reply to this email or call {{dthelp}} at your convenience so we may proceed with the next steps for your ticket.
+            - To move forward, please respond to this email or reach out to us at {{dthelp}} if you continue to require assistance with your ticket.
+            - If you still need help, we encourage you to respond to this email or call us at {{dthelp}} promptly so that we can determine the next steps for your ticket.
+            - Should you require additional assistance, please reply to this email or call {{dthelp}} at your earliest convenience to confirm the next steps for your ticket.
+            - If you would like us to continue assisting you, kindly respond to this email or contact us at {{dthelp}} so we can determine how best to proceed with your ticket.
+            - If assistance is still needed, please reply to this email or call {{dthelp}} at your convenience to review the next steps.
+            - To ensure we can continue supporting you, we ask that you respond to this email or call {{dthelp}} so we may confirm the next steps on your ticket.
+            - If you still require our help, please reply to this email or reach us at {{dthelp}} to determine how we should proceed with your ticket.
+
+  - trigger: ;nolongerreqass
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: random
+        params:
+          choices:
+            - If the issue has been resolved and no further support is needed, please let us know so that we may proceed with closing the ticket.
+            - If the matter has already been resolved and you no longer need assistance, kindly let us know so we can proceed with closing the ticket.
+            - Should the issue be resolved and no additional support required, please inform us so we may finalize and close the ticket.
+            - If your concern has been addressed and no further help is needed, please reply to confirm so that we can close the ticket.
+            - In the event that the issue has been resolved and support is no longer necessary, please notify us so we may close the ticket.
+            - If the problem has been resolved and you require no additional assistance, kindly let us know so that we can complete the ticket closure.
+            - Should no further assistance be required and the matter be resolved, please confirm with us so we may close the ticket accordingly.
+            - If your issue has been successfully resolved and you no longer need support, please inform us so we can proceed with closing the ticket.
+            - Once the issue is resolved and no additional support is necessary, we kindly ask that you let us know so we may close the ticket.
+            - If there is no longer a need for support and the issue is resolved, please reply to this message so that we may close the ticket.
+            - Should the matter already be resolved and no further help required, please confirm with us so we may finalize the ticket closure.
+
+  - trigger: ;setappointment
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: random
+        params:
+          choices:
+            - To better facilitate this request, it would be best if we could set an appointment to work with them on this. Do you have a time that we could schedule to connect with the technician? If you could let me know when you are available, I will do my best to set an appointment around your schedule!
+            - To best support this request, I recommend setting an appointment so we can work with the technician directly. Could you provide a time that works for you, and I will do my best to coordinate around your schedule?
+            - In order to move forward effectively, it would be helpful to schedule an appointment with the technician. Please let me know your availability so I can arrange a time that works best for you.
+            - To ensure this request is handled smoothly, I suggest we set up an appointment with the technician. If you share your availability, I will work to align the appointment with your schedule.
+            - For efficiency, it would be beneficial to schedule a time to work with the technician. Could you let me know when you are available, and I will make every effort to set the appointment accordingly?
+            - To facilitate this request, scheduling an appointment with the technician would be ideal. Please let me know your availability, and I will do my best to arrange the appointment around your schedule.
+
+  - trigger: ;deadlines
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: random
+        params:
+          choices:
+            - If you do not want to work directly with the technician, do you have any deadlines for this request? If so, please let me know! That way, I can add this to the technician's worklist appropriately.
+            - If you prefer not to work directly with the technician, could you let me know if there are any deadlines for this request? This will help me assign it to the technician's worklist appropriately.
+            - Should you not wish to work directly with the technician, please advise if there are any deadlines we should be aware of. I will ensure these are noted in the technician's worklist.
+            - If you would rather not coordinate directly with the technician, are there any deadlines I should be aware of for this request? I can then schedule it accordingly on their worklist.
+            - In the event you do not want to work directly with the technician, please let me know of any deadlines. I will add these details to the technician's worklist to prioritize appropriately.
+            - If you do not wish to handle this directly with the technician, could you share any deadlines tied to this request? This will allow me to add the task to their worklist in the proper order.

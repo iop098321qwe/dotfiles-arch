@@ -1,0 +1,12 @@
+# espanso match file
+
+matches:
+  - trigger: ";form"
+    form: |
+      [[choices]]
+    form_fields:
+      choices:
+        type: choice 
+        values:
+          - First choice
+          - Second choice
