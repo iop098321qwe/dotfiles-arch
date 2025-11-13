@@ -1,8 +1,10 @@
 #!/bin/sh
 
-# Install espanso-wayland
-if ! yay -Qs espanso-wayland &> /dev/null; then
+# Install Espanso
+if ! yay -Qs espanso &> /dev/null; then
   yay -S --noconfirm --needed espanso-wayland
+  espanso service register
+  espanso start
 else
-  echo "espanso-wayland already installed."
+  echo "espanso already installed."
 fi
