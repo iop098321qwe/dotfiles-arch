@@ -1,0 +1,16 @@
+{
+	"__internal__": {
+		"migrations": {
+			"version": "1.32.11"
+		}
+	},
+	"theme": "dark",
+	"windowConfig": {
+		"x": 0,
+		"y": 0,
+		"width": 1276,
+		"height": 690,
+		"maximized": true,
+		"zoomLevel": 0
+	}
+}
