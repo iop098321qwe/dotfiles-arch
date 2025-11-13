@@ -3,6 +3,6 @@
 # Install espanso-wayland
 if ! yay -Qs espanso-wayland &> /dev/null; then
   yay -S --noconfirm --needed espanso-wayland
-else:
+else
   echo "espanso-wayland already installed."
 fi
