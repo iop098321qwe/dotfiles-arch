@@ -12,3 +12,8 @@ source ~/.local/share/omarchy/default/bash/rc
 
 # Set vim mode
 set -o vi
+
+. "$HOME/.atuin/bin/env"
+
+[[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
+eval "$(atuin init bash)"
