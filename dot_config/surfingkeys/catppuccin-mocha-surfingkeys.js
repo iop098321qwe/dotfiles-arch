@@ -369,6 +369,60 @@ const themeCSS = `
     backdrop-filter: blur(16px);
   }
 
+  #sk_tabs .sk_tab_group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0.35rem 0.65rem;
+    border-radius: 12px;
+    transition: background 0.2s ease;
+  }
+
+  #sk_tabs .sk_tab_group:hover {
+    background: rgba(69, 71, 90, 0.45);
+  }
+
+  #sk_tabs .sk_tab_group_header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  #sk_tabs .sk_tab_group_controls {
+    margin-left: auto;
+    display: flex;
+    gap: 0.35rem;
+    align-items: center;
+  }
+
+  #sk_tabs .sk_tab_group_toggle {
+    background: ${mochaPalette.surface1};
+    color: ${mochaPalette.text};
+    border: 1px solid ${mochaPalette.surface2};
+    border-radius: 999px;
+    padding: 2px 10px;
+    font-size: 9pt;
+    font-family: ${fontStack};
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+  }
+
+  #sk_tabs .sk_tab_group_toggle:hover,
+  #sk_tabs .sk_tab_group_toggle:focus-visible {
+    background: ${hoverBackgroundColor};
+    border-color: ${focusBorderColor};
+    color: ${mochaPalette.yellow};
+  }
+
+  #sk_tabs .sk_tab_group:not(.catppuccin-expanded) .sk_tab_group_details {
+    display: none;
+  }
+
+  #sk_tabs .sk_tab_group.catppuccin-expanded .sk_tab_group_details {
+    display: block;
+  }
+
   #sk_tabs div.sk_tab {
     vertical-align: bottom;
     justify-items: center;
@@ -414,15 +468,29 @@ const themeCSS = `
     color: ${mochaPalette.text};
   }
 
+  #sk_tabs div.sk_tab_hint,
+  #sk_tabs div.sk_tab_group div.sk_tab_hint {
+    border: 0.5px solid ${mochaPalette.crust};
+    color: ${mochaPalette.base};
+    background: ${mochaPalette.yellow};
+    font-family: ${fontStack};
+    font-size: 8pt;
+    padding: 0.5px 2px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px rgba(17, 17, 27, 0.6);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    max-width: max-content;
+    min-width: 0;
+    white-space: nowrap;
+  }
+
   #sk_tabs.vertical div.sk_tab_hint {
     position: inherit;
     left: 8pt;
     margin-top: 3px;
-    border: 1px solid ${contrastBorderColor};
-    color: ${mochaPalette.rosewater};
-    background: ${mochaPalette.base};
-    font-family: ${fontStack};
-    box-shadow: ${heavyShadow};
   }
 
   #sk_tabs.vertical div.sk_tab_wrap {
@@ -857,4 +925,91 @@ const themeCSS = `
 `;
 
 settings.theme = themeCSS;
+
+/**
+ * Collapse tab group details by default and add an explicit expansion toggle.
+ */
+(function enableCatppuccinGroupToggles() {
+  if (typeof document === "undefined") {
+    return;
+  }
+
+  const tabsContainerId = "sk_tabs";
+  const processedAttr = "data-catppuccin-group-enhanced";
+
+  const updateToggleLabel = (button, group) => {
+    const details = group.querySelector(".sk_tab_group_details");
+    const tabCount = details ? details.querySelectorAll(".sk_tab").length : 0;
+    const expanded = group.classList.contains("catppuccin-expanded");
+    const verb = expanded ? "Hide" : "Show";
+    const suffix = tabCount ? ` (${tabCount})` : "";
+    button.textContent = `${verb} tabs${suffix}`;
+    button.setAttribute("aria-expanded", expanded ? "true" : "false");
+  };
+
+  const enhanceGroup = (group) => {
+    if (group.getAttribute(processedAttr) === "true") {
+      return;
+    }
+
+    const details = group.querySelector(".sk_tab_group_details");
+    if (!details) {
+      return;
+    }
+
+    group.setAttribute(processedAttr, "true");
+    group.classList.remove("catppuccin-expanded");
+
+    const header = group.querySelector(".sk_tab_group_header") || group;
+    let controls = header.querySelector(".sk_tab_group_controls");
+    if (!controls) {
+      controls = document.createElement("div");
+      controls.className = "sk_tab_group_controls";
+      header.append(controls);
+    }
+
+    const toggleButton = document.createElement("button");
+    toggleButton.type = "button";
+    toggleButton.className = "sk_tab_group_toggle";
+    toggleButton.addEventListener("click", (event) => {
+      event.stopPropagation();
+      event.preventDefault();
+      group.classList.toggle("catppuccin-expanded");
+      updateToggleLabel(toggleButton, group);
+    });
+
+    controls.append(toggleButton);
+    updateToggleLabel(toggleButton, group);
+  };
+
+  const processGroups = () => {
+    const tabsContainer = document.getElementById(tabsContainerId);
+    if (!tabsContainer) {
+      return;
+    }
+    tabsContainer.querySelectorAll(".sk_tab_group").forEach(enhanceGroup);
+  };
+
+  const waitForTabsContainer = () => {
+    const tabsContainer = document.getElementById(tabsContainerId);
+    if (!tabsContainer) {
+      window.setTimeout(waitForTabsContainer, 250);
+      return;
+    }
+
+    const observer = new MutationObserver((mutations) => {
+      if (mutations.some((mutation) => mutation.addedNodes.length > 0)) {
+        processGroups();
+      }
+    });
+    observer.observe(tabsContainer, { childList: true, subtree: true });
+    processGroups();
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", waitForTabsContainer, { once: true });
+  } else {
+    waitForTabsContainer();
+  }
+})();
 
