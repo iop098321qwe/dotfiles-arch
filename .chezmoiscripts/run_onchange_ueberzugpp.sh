@@ -1,4 +1,4 @@
 #!/bin/sh
 
-# Install Ueberzug
+# Install Ueberzugpp
 yay -S --noconfirm --needed ueberzugpp
