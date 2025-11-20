@@ -287,55 +287,55 @@ keymap = [
     "g",
     "R",
   ], run = "cd ~/Documents/github_repositories", desc = "github_repositories" },
-  { on = [
-    "g",
-    "r",
-    "c",
-  ], run = "cd ~/Documents/github_repositories/custom_bash_commands", desc = "custom_bash_commands" },
-  { on = [
-    "g",
-    "r",
-    "d",
-    "e",
-  ], run = "cd ~/Documents/github_repositories/deeptree_espanso", desc = "deeptree_espanso" },
-  { on = [
-    "g",
-    "r",
-    "d",
-    "w",
-  ], run = "cd ~/Documents/github_repositories/deeptree_espanso_windows", desc = "deeptree_espanso_windows" },
-  { on = [
-    "g",
-    "r",
-    "i",
-  ], run = "cd ~/Documents/github_repositories/iop098321qwe", desc = "iop098321qwe" },
-  { on = [
-    "g",
-    "r",
-    "k",
-  ], run = "cd ~/Documents/github_repositories/kaiser_page", desc = "kaiser_page" },
-  { on = [
-    "g",
-    "r",
-    "m",
-  ], run = "cd ~/Documents/github_repositories/main_page", desc = "main_page" },
-  { on = [
-    "g",
-    "r",
-    "p",
-    "t",
-  ], run = "cd ~/Documents/github_repositories/pomodoro-tui", desc = "pomodoro-tui" },
-  { on = [
-    "g",
-    "r",
-    "p",
-    "s",
-  ], run = "cd ~/Documents/github_repositories/powershell_scripts", desc = "powershell_scripts" },
-  { on = [
-    "g",
-    "r",
-    "y",
-  ], run = "cd ~/Documents/github_repositories/yt-dlp", desc = "yt-dlp" },
+  # { on = [
+  #   "g",
+  #   "r",
+  #   "c",
+  # ], run = "cd ~/Documents/github_repositories/custom_bash_commands", desc = "custom_bash_commands" },
+  # { on = [
+  #   "g",
+  #   "r",
+  #   "d",
+  #   "e",
+  # ], run = "cd ~/Documents/github_repositories/deeptree_espanso", desc = "deeptree_espanso" },
+  # { on = [
+  #   "g",
+  #   "r",
+  #   "d",
+  #   "w",
+  # ], run = "cd ~/Documents/github_repositories/deeptree_espanso_windows", desc = "deeptree_espanso_windows" },
+  # { on = [
+  #   "g",
+  #   "r",
+  #   "i",
+  # ], run = "cd ~/Documents/github_repositories/iop098321qwe", desc = "iop098321qwe" },
+  # { on = [
+  #   "g",
+  #   "r",
+  #   "k",
+  # ], run = "cd ~/Documents/github_repositories/kaiser_page", desc = "kaiser_page" },
+  # { on = [
+  #   "g",
+  #   "r",
+  #   "m",
+  # ], run = "cd ~/Documents/github_repositories/main_page", desc = "main_page" },
+  # { on = [
+  #   "g",
+  #   "r",
+  #   "p",
+  #   "t",
+  # ], run = "cd ~/Documents/github_repositories/pomodoro-tui", desc = "pomodoro-tui" },
+  # { on = [
+  #   "g",
+  #   "r",
+  #   "p",
+  #   "s",
+  # ], run = "cd ~/Documents/github_repositories/powershell_scripts", desc = "powershell_scripts" },
+  # { on = [
+  #   "g",
+  #   "r",
+  #   "y",
+  # ], run = "cd ~/Documents/github_repositories/yt-dlp", desc = "yt-dlp" },
   { on = [
     "g",
     "t",
@@ -739,3 +739,8 @@ desc = "Move in relative steps"
 on = [ "9" ]
 run = "plugin relative-motions 9"
 desc = "Move in relative steps"
+
+[[mgr.prepend_keymap]]
+on = ["g", "r"]
+run = "plugin cd-git-root"
+desc = "Go to repo ROOT"
