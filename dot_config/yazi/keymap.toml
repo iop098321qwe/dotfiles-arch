@@ -744,3 +744,8 @@ desc = "Move in relative steps"
 on = ["g", "r"]
 run = "plugin cd-git-root"
 desc = "Go to repo ROOT"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "i" ]
+run  = "plugin lazygit"
+desc = "run lazygit"

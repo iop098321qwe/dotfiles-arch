@@ -43,6 +43,11 @@ use = "ciarandg/cd-git-root"
 rev = "a0e0f4b"
 hash = "b84a85f3b513bd9c0a0ab93cc7c8e4c3"
 
+[[plugin.deps]]
+use = "Lil-Dank/lazygit"
+rev = "8f37dc5"
+hash = "ee71543790f0ce3951161045a3787abd"
+
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
 rev = "f6b425a"
