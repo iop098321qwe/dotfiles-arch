@@ -35,8 +35,8 @@ keymap = [
   { on = "G", run = "arrow bot", desc = "Go to bottom" },
 
   # Navigation
-  { on = "h", run = "leave", desc = "Back to the parent directory" },
-  { on = "l", run = "enter", desc = "Enter the child directory" },
+  { on = "H", run = "leave", desc = "Back to the parent directory" },
+  { on = "L", run = "enter", desc = "Enter the child directory" },
 
   { on = "<Left>", run = "leave", desc = "Back to the parent directory" },
   { on = "<Right>", run = "enter", desc = "Enter the child directory" },
@@ -776,3 +776,25 @@ desc = "Restore last deleted files/folders"
 on = [ "U" ]
 run = "plugin restore -- --interactive --interactive-overwrite"
 desc = "Restore deleted files/folders (Interactive overwrite)"
+
+
+# keymap.toml
+[[mgr.prepend_keymap]]
+on   = "T"
+run  = "plugin toggle-pane max-preview"
+desc = "Maximize or restore the preview pane"
+
+# [[mgr.prepend_keymap]]
+# on   = "l"
+# run  = "plugin smart-enter"
+# desc = "Enter the child directory, or open the file"
+
+[[mgr.prepend_keymap]]
+on = [ "l" ]
+run = "plugin bypass smart-enter"
+desc = "Open a file, or recursively enter child directory, skipping children with only a single subdirectory"
+
+[[mgr.prepend_keymap]]
+on = [ "h" ]
+run = "plugin bypass reverse"
+desc = "Recursively enter parent directory, skipping parents with only a single subdirectory"
