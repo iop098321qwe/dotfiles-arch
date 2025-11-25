@@ -1,0 +1,81 @@
+# ~/.config/starship.toml
+# Config file for starship for iop098321qwe
+
+# Disable newlines
+add_newline = false
+
+# Set custom prompt
+format = '''
+(bold #a6e3a1)$directory$rust$package$git_branch$git_status$cmd_duration
+'''
+
+# Customize the username module
+[username]
+show_always = true
+disabled = false
+style_user = "bold #f9e2af"
+
+# Customize the hostname module
+[hostname]
+disabled = false
+style = "bold #94e2d5"
+
+# Customize the os module
+[os]
+disabled = true
+style = "bold #ffffff"
+
+# Customize the character module
+[character]
+disabled = false
+success_symbol = "[❯](bold #a6e3a1)"
+error_symbol = "[❯](bold #f38ba8)"
+vimcmd_symbol = "[❮](bold #a6e3a1)"
+vimcmd_replace_one_symbol = "[❮](bold #b4befe)"
+vimcmd_replace_symbol = "[❮](bold #b4befe)"
+vimcmd_visual_symbol = "[❮](bold #f9e2af)"
+
+# Customize the directory module
+[directory]
+truncation_length = 5
+truncation_symbol = '.../'
+style = "bold #89b4fa"
+disabled = false
+
+# Customize the git_branch module
+[git_branch]
+symbol = " "          # Optional: Git branch symbol
+style = "bold #cba6f7"
+disabled = false
+
+# Customize the git_status module
+[git_status]
+conflicted = "✖"                              # Conflicted file
+ahead = "⇡${count}"                           # Ahead of upstream
+behind = "⇣${count}"                          # Behind upstream
+diverged = "⇕⇡${ahead_count}⇣${behind_count}" # Diverged
+untracked = "?"                               # Untracked files
+stashed = "!"                                 # Stashed changes
+modified = "✚"                                # Modified files
+staged = "●"                                  # Staged files
+renamed = "➜"                                 # Renamed files
+deleted = "–"                                 # Deleted files
+style = "bold #f38ba8"
+disabled = false
+
+# Customize the rust module
+[rust]
+symbol = "🦀 "
+style = "bold #f38ba8"
+disabled = false
+
+# Customize the package module
+[package]
+disabled = false
+
+# Customize the command duration module
+[cmd_duration]
+min_time = 1
+style = 'bold #89b4fa'
+format = 'took [$duration]($style)'
+disabled = false
