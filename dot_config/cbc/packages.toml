@@ -10,3 +10,8 @@ use = "iop098321qwe/cbcmod"
 rev = "7f9b4f5"
 hash = "7f9b4f552fa059c05411bcb9591d6a652e146ca4"
 
+[[module.deps]]
+use = "iop098321qwe/cbcmod2"
+rev = "5361b3a"
+hash = "5361b3afa4862df110cc9321bce31b99dbb4f0a8"
+
