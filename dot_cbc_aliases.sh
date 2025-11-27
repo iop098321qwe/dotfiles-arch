@@ -4,76 +4,63 @@
 # This will be a modularized way to keep the main script clean and organized
 # The custom_bash_commands.sh script will source this file to load all of the aliases
 
-###################################################################################################################################################################
+################################################################################
 # ALIASES
-###################################################################################################################################################################
+################################################################################
 
-alias dup='f() { file=$(fzf); [ -n "$file" ] && awk '"'"'!seen[$0]++'"'"' "$file" | sponge "$file"; }; f'
-alias naked='f=$(find . -type f -name "*.txt" -empty) && [ -z "$f" ] && echo "No empty .txt files." || { echo "$f"; read -p "Delete these empty .txt files? [y/N]: " ans; [ "$ans" = y ] && echo "$f" | xargs -d "\n" rm; }'
-alias back='cd ..'
-alias bat='batcat'
-alias batch_open='file=$(cat _master_batch.txt | fzf --prompt="Select a file: "); while IFS= read -r line; do xdg-open "$line"; done < "$file"'
-alias bo='batch_open'
-alias c='clear'
-alias cdgh='cd ~/Documents/github_repositories'
-alias ch='chezmoi'
-alias chd='chezmoi cd'
-alias chup='chezmoi update'
-alias chap='chezmoi apply'
-alias chra='chezmoi re-add'
-alias commands='cbcs | batcat'
-alias commandsmore='cbcs -a | batcat'
+alias dl='downloads'
+alias editbash='$EDITOR ~/.bashrc'
+alias fman='compgen -c | fzf | xargs man'
+alias fzf='fzf -m'
+# TODO: add if statement to check for wayland or x11 and alias accordingly
+alias imv='imv-x11'
+alias line='read -p "Enter line number: " line && file=$(fzf --prompt="Select a file: ") && nvim +$line "$file"'
+alias myip='curl http://ipecho.net/plain; echo'
+alias nv='files=$(fzf --multi --prompt="Select files/dirs for nvim: " --bind "enter:accept") && [ -n "$files" ] && nvim $files'
+alias please='sudo $(history -p !!)'
+alias refresh='source ~/.bashrc && clear'
+alias rma='rm -rfI'
+# TODO: Check if sortalpha still exists, if not remove this alias
+alias sa='sortalpha'
+# TODO: Check if smartsort still exists, if not remove this alias
+alias ssort='smartsort'
+
+################################################################################
+# CBC SPECIFIC
+################################################################################
+
 alias comm='commands'
 alias commm='commandsmore'
-alias cp='cp -i'
 alias di='display_info'
-alias dl='downloads'
-alias docs='cd ~/Documents'
-alias downloads='cd ~/Downloads'
 alias dv='display_version'
-alias editbash='$EDITOR ~/.bashrc'
 alias ext='extract'
-alias fcome='fcomexact'
-alias fcom='eval "$(compgen -c | fzf)"'
-alias fcomexact='eval "$(compgen -c | fzf -e)"'
-alias fhelpe='fhelpexact'
-alias fhelp='eval "$(compgen -c | fzf)" -h'
-alias fhelpexact='eval "$(compgen -c | fzf -e)" -h'
 alias fh='filehash'
-alias fman='compgen -c | fzf | xargs man'
-alias fobs='fobsidian'
-alias fobsidian='find ~/Documents/grymms_grimoires -type f | fzf | xargs -I {} obsidian "obsidian://open?vault=$(basename ~/Documents/grymms_grimoires)&file={}"'
-alias foe='fopenexact'
-alias fo='fopen'
-alias fopenexact='fzf -m -e | xargs -r -d "\n" -I {} nohup open "{}"'
-alias fopen='fzf -m | xargs -r -d "\n" -I {} nohup open "{}"'
-alias fzf='fzf -m'
-alias gb='git branch'
-alias gco='git checkout $(git branch --all | grep -vE "HEAD|->" | sed -e "s/^[* ]*//" -e "s@remotes/[^/]*/@@g" | fzf --prompt="Branch: ")'
-alias gcom='git checkout main'
-alias gcomm='git commit'
-alias ga='git add'
-alias gaa='git add .'
-alias gpsh='git push'
-alias gpll='git pull'
-alias gpfom='git push --follow-tags origin main'
-alias gs='git status'
-alias gsw='git switch'
-alias gswm='git switch main'
-alias gswt='git switch test'
-alias historysearchexact='history | sort -nr | fzf -m -e --query="$1" --no-sort --preview="echo {}" --preview-window=down:20%:wrap | awk '\''{ $1=""; sub(/^ /, ""); print }'\'' | xargs -d "\n" echo -n | xclip -selection clipboard'
-alias historysearch='history | sort -nr | fzf -m --query="$1" --no-sort --preview="echo {}" --preview-window=down:20%:wrap | awk '\''{ $1=""; sub(/^ /, ""); print }'\'' | xargs -d "\n" echo -n | xclip -selection clipboard'
-alias home='cd ~'
-alias hsearch='historysearch'
-alias hse='historysearchexact'
-alias hs='historysearch'
+alias rh='regex_help'
+alias test='source ~/Documents/github_repositories/custom_bash_commands/custom_bash_commands.sh; source ~/Documents/github_repositories/custom_bash_commands/cbc_aliases.sh'
+alias ucbc='updatecbc'
+
+################################################################################
+# VIM TO NVIM
+################################################################################
+
+alias vim='nvim'
+
+################################################################################
+# SINGLE LETTER ALIAS
+################################################################################
+
+alias c='clear'
 alias i='sudo apt install'
-# TODO add if statement to check for wayland or x11 and alias accordingly
-alias imv='imv-x11'
-alias iopen='find . -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) | fzf -m | xargs -r -d "\n" -I {} nohup open "{}"'
-alias iopenexact='find . -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) | fzf -m -e | xargs -r -d "\n" -I {} nohup open "{}"'
-alias io='iopen'
-alias ioe='iopenexact'
+alias s='sudo'
+alias v='nvim'
+alias x='chmod +x'
+alias z='zellij'
+
+################################################################################
+# EZA
+################################################################################
+
+# TODO: only use eza aliases if not on Arch Linux
 alias la="eza --icons=always --group-directories-first -a"
 alias lar="eza --icons=always -r --group-directories-first -a"
 alias le="eza --icons=always --group-directories-first -s extension"
@@ -84,53 +71,29 @@ alias ls="eza --icons=always --group-directories-first"
 alias lsf="eza --icons=always --group-directories-first -f"
 alias lsr="eza --icons=always --group-directories-first -r"
 alias lt="eza --icons=always --group-directories-first -T"
-alias ln='ln -i'
-alias line='read -p "Enter line number: " line && file=$(fzf --prompt="Select a file: ") && nvim +$line "$file"'
-alias lg='lazygit'
-alias lzd='lazydocker'
-alias lzg='lazygit'
-alias man='sudo man'
-alias mopen='find . -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" -o -iname "*.mp4" -o -iname "*.mkv" -o -iname "*.avi" -o -iname "*.mov" -o -iname "*.webm" \) | fzf -m | xargs -r -d "\n" -I {} nohup open "{}"'
-alias mopenexact='find . -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" -o -iname "*.mp4" -o -iname "*.mkv" -o -iname "*.avi" -o -iname "*.mov" -o -iname "*.webm" \) | fzf -m -e | xargs -r -d "\n" -I {} nohup open "{}"'
-alias mo='mopen'
-alias moe='mopenexact'
-alias mv='mv -i'
-alias myip='curl http://ipecho.net/plain; echo'
-alias nv='files=$(fzf --multi --prompt="Select files/dirs for nvim: " --bind "enter:accept") && [ -n "$files" ] && nvim $files'
-alias please='sudo $(history -p !!)'
-alias pron='fzf --multi=1 < _master_batch.txt | xargs -I {} yt-dlp --config-locations _configs.txt --batch-file {}'
-alias pronfile='cd /media/$USER/T7 Shield/yt-dlp'
-alias pronupdate='pronfile && pron || pron'
-alias pu='pronupdate'
+
+################################################################################
+# PYTHON
+################################################################################
+
 alias py='python3'
 alias python='python3'
-alias refresh='source ~/.bashrc && clear'
-alias rh='regex_help'
-alias rma='rm -rfI'
-alias rm='rm -I'
+
+################################################################################
+# BATCAT
+################################################################################
+
+alias bat='batcat'
+alias commands='cbcs | batcat'
+alias commandsmore='cbcs -a | batcat'
 alias seebash='batcat ~/.bashrc'
-alias sa='sortalpha'
-alias s='sudo'
-alias selectivebatchopen='file=$(fzf --prompt="Select URL list file: ") || return; fzf -m < "$file" | xargs -r -d "\n" -I {} xdg-open "{}"'
-alias sbo='selectivebatchopen'
-alias so='sopen'
-alias soe='sopenexact'
-alias ssort='smartsort'
-alias temp='cd ~/Documents/Temporary'
-alias test='source ~/Documents/github_repositories/custom_bash_commands/custom_bash_commands.sh; source ~/Documents/github_repositories/custom_bash_commands/cbc_aliases.sh'
-alias ucbc='updatecbc'
-alias update_master_list='cat _master_batch.txt | xargs -I {} cat {} | sort -u > _temp_master_list.txt && mv _temp_master_list.txt _master_list.txt && batcat _master_list.txt'
-alias uml='update_master_list'
-alias vault='cd ~/Documents/grymms_grimoires'
-alias ver='npx commit-and-tag-version'
-alias verg='ver && gpfom && printf "\n Run gh cr to create a release\n"'
-alias vim='nvim'
-alias v='nvim'
-alias vopen='find . -type f \( -iname "*.mp4" -o -iname "*.mkv" -o -iname "*.avi" -o -iname "*.mov" -o -iname "*.webm" \) | fzf -m | xargs -r -d "\n" -I {} nohup open "{}"'
-alias vopenexact='find . -type f \( -iname "*.mp4" -o -iname "*.mkv" -o -iname "*.avi" -o -iname "*.mov" -o -iname "*.webm" \) | fzf -m -e | xargs -r -d "\n" -I {} nohup open "{}"'
-alias vo='vopen'
-alias voe='vopenexact'
-alias x='chmod +x'
-alias z='zellij'
-alias ':wq'='exit'
-alias ':q'='exit'
+
+################################################################################
+# HISTORY
+################################################################################
+
+alias historysearchexact='history | sort -nr | fzf -m -e --query="$1" --no-sort --preview="echo {}" --preview-window=down:20%:wrap | awk '\''{ $1=""; sub(/^ /, ""); print }'\'' | xargs -d "\n" echo -n | xclip -selection clipboard'
+alias historysearch='history | sort -nr | fzf -m --query="$1" --no-sort --preview="echo {}" --preview-window=down:20%:wrap | awk '\''{ $1=""; sub(/^ /, ""); print }'\'' | xargs -d "\n" echo -n | xclip -selection clipboard'
+alias hsearch='historysearch'
+alias hse='historysearchexact'
+alias hs='historysearch'
