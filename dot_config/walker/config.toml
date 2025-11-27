@@ -9,6 +9,8 @@ hide_action_hints = true                                                    # gl
 
 [keybinds]
 quick_activate = []
+next = ["Down", "ctrl j"]
+previous = ["Up", "ctrl k"]
 
 [providers]
 max_results = 256 # 256 should be enough for everyone
@@ -40,3 +42,7 @@ provider = "websearch"
 [[providers.prefixes]]
 prefix = "$"
 provider = "clipboard"
+
+[keymap]
+up = ["Up", "Ctrl+k"]
+down = ["Down", "Ctrl+j"]
