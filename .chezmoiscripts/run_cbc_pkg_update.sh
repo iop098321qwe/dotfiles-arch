@@ -2,11 +2,7 @@
 
 # Upgrade cbc modules
 if gum confirm "Would you like to update cbc modules?"; then
-  if command -v cbc &> /dev/null; then
-    cbc pkg update
-  else
-    echo "cbc is not installed."
-  fi
+  cbc pkg update
 else
   echo "Skipping cbc modules update."
 fi
