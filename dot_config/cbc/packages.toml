@@ -31,11 +31,6 @@ rev = "e2251f9"
 hash = "e2251f950672ba64aee690f93b2404be1523bb82"
 
 [[module.deps]]
-use = "iop098321qwe/commit-and-tag-version"
-rev = "fe8f0ae"
-hash = "fe8f0aebe99788ecb024f07856d54d47c2b83bd3"
-
-[[module.deps]]
 use = "iop098321qwe/lazymod"
 rev = "b06468b"
 hash = "b06468bcf528bdc7d38546ecf79587edc8f254c3"
@@ -59,4 +54,9 @@ hash = "c56ca7a8d7a0f751460a5e3a123a2c9bec768d38"
 use = "iop098321qwe/surfingkeys-update"
 rev = "cf8098e"
 hash = "cf8098e833a2eb6f0fe6ce6396a93fb7650a7b7e"
+
+[[module.deps]]
+use = "iop098321qwe/commit-and-tag-version"
+rev = "d8b0867"
+hash = "d8b0867bfd16f2892a854ba3d9377b218dd5721b"
 
