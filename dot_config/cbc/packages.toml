@@ -27,8 +27,8 @@ hash = "365c3bdf70fc13c55f1c320014a36f8d66169fa7"
 
 [[module.deps]]
 use = "iop098321qwe/makeman"
-rev = "4cf838b"
-hash = "4cf838bc948917e1008127c0ff635e4c58c76605"
+rev = "d6c3c40"
+hash = "d6c3c405d88166ab6d283b4c44decb777af14505"
 
 [[module.deps]]
 use = "iop098321qwe/commit-and-tag-version"
@@ -54,4 +54,9 @@ hash = "b790aea549a5884459cef91fd8523772ac9da0e7"
 use = "iop098321qwe/interactive"
 rev = "c56ca7a"
 hash = "c56ca7a8d7a0f751460a5e3a123a2c9bec768d38"
+
+[[module.deps]]
+use = "iop098321qwe/surfingkeys-update"
+rev = "cf8098e"
+hash = "cf8098e833a2eb6f0fe6ce6396a93fb7650a7b7e"
 
