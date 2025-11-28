@@ -27,8 +27,8 @@ hash = "365c3bdf70fc13c55f1c320014a36f8d66169fa7"
 
 [[module.deps]]
 use = "iop098321qwe/makeman"
-rev = "d6c3c40"
-hash = "d6c3c405d88166ab6d283b4c44decb777af14505"
+rev = "e2251f9"
+hash = "e2251f950672ba64aee690f93b2404be1523bb82"
 
 [[module.deps]]
 use = "iop098321qwe/commit-and-tag-version"

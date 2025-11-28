@@ -14,7 +14,7 @@ pager:
 aliases:
     co: pr checkout
     prc: pr create
-    prm: pr merge
+    prm: pr merge --admin
     cr: release create --notes-file CHANGELOG.md -d
     prcm: pr create -B main
     prcd: pr create -B develop
