@@ -3,7 +3,7 @@
     "minimizeToTray": true,
     "arRPC": true,
     "splashColor": "rgb(166, 173, 200)",
-    "splashBackground": "rgb(30, 30, 46)",
+    "splashBackground": "color(srgb 0.117647 0.117647 0.180392)",
     "customTitleBar": false,
     "enableMenu": false
 }
