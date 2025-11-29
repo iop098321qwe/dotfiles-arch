@@ -2,8 +2,8 @@
 
 [[module.deps]]
 use = "iop098321qwe/av"
-rev = "56b2011"
-hash = "56b2011065871992501ae3d26c53e20a9178653e"
+rev = "6c13bb8"
+hash = "6c13bb8800699dfd95b01d3bae6f66cc0d3e452c"
 
 [[module.deps]]
 use = "iop098321qwe/gitmod"
@@ -57,6 +57,6 @@ hash = "cf8098e833a2eb6f0fe6ce6396a93fb7650a7b7e"
 
 [[module.deps]]
 use = "iop098321qwe/commit-and-tag-version"
-rev = "3a9c797"
-hash = "3a9c797dbabefcde04cc2cf18a79132bcbf60004"
+rev = "cc725c6"
+hash = "cc725c6269d7a742fbe0947bd7b87e74a92e863d"
 
