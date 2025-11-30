@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Install btop
 if ! yay -Qs btop &> /dev/null; then
