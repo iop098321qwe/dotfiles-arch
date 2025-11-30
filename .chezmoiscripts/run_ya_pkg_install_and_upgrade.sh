@@ -1,18 +1,13 @@
 #!/usr/bin/env bash
 
-# Update Spicetify
-if command -v spotify >/dev/null 2>&1; then
-  if command -v spicetify >/dev/null 2>&1; then
-    if gum confirm "Would you like to update Spicetify?"; then
-      spicetify
-      spicetify backup apply enable-devtools
-      spicetify update
-    else
-      echo "Skipping Spicetify update."
-    fi
+# Upgrade ya packages
+if gum confirm "Would you like to update yazi packages?"; then
+  if yay -Qs yazi &> /dev/null; then
+    ya pkg install && ya pkg upgrade
   else
-    echo "Spicetify is not installed."
+    echo "yazi is not installed."
   fi
 else
-  echo "Spotify is not installed."
+  echo "Skipping yazi packages update."
+fi
 fi
