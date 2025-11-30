@@ -52,8 +52,8 @@ hash = "c56ca7a8d7a0f751460a5e3a123a2c9bec768d38"
 
 [[module.deps]]
 use = "iop098321qwe/surfingkeys-update"
-rev = "cf8098e"
-hash = "cf8098e833a2eb6f0fe6ce6396a93fb7650a7b7e"
+rev = "8a453a1"
+hash = "8a453a14ded6892d7d17bdc3b5ab2eb61275f4c9"
 
 [[module.deps]]
 use = "iop098321qwe/commit-and-tag-version"
@@ -62,6 +62,6 @@ hash = "cc725c6269d7a742fbe0947bd7b87e74a92e863d"
 
 [[module.deps]]
 use = "iop098321qwe/netbrief"
-rev = "83ece27"
-hash = "83ece271f9297ca0d21e497f329339219c420a3f"
+rev = "527cb9b"
+hash = "527cb9b25154ce333e2da4cc2f67d69b8d4451b6"
 
