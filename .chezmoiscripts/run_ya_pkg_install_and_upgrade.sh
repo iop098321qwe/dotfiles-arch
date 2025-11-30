@@ -10,4 +10,3 @@ if gum confirm "Would you like to update yazi packages?"; then
 else
   echo "Skipping yazi packages update."
 fi
-fi
