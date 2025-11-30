@@ -60,3 +60,8 @@ use = "iop098321qwe/commit-and-tag-version"
 rev = "cc725c6"
 hash = "cc725c6269d7a742fbe0947bd7b87e74a92e863d"
 
+[[module.deps]]
+use = "iop098321qwe/netbrief"
+rev = "83ece27"
+hash = "83ece271f9297ca0d21e497f329339219c420a3f"
+
