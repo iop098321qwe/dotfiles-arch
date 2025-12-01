@@ -9,15 +9,16 @@
 // - modify it via the UI (e.g. via about:config in the browser); or
 // - set it within a user.js file in your profile.
 
-user_pref("app.update.lastUpdateTime.addon-background-update-timer", 1763086930);
-user_pref("app.update.lastUpdateTime.region-update-timer", 1763086930);
-user_pref("app.update.lastUpdateTime.services-settings-poll-changes", 1763086930);
-user_pref("app.update.lastUpdateTime.xpi-signature-verification", 1763086930);
+user_pref("app.update.lastUpdateTime.addon-background-update-timer", 1764629590);
+user_pref("app.update.lastUpdateTime.region-update-timer", 1764629590);
+user_pref("app.update.lastUpdateTime.services-settings-poll-changes", 1764629590);
+user_pref("app.update.lastUpdateTime.xpi-signature-verification", 1764629590);
+user_pref("betterbird.donation.eoy.version.viewed", 2024);
 user_pref("betterbird.migration", 1);
 user_pref("betterbird.update.blocklist", "{\"140\":{\"TagToolbar\":{\"id\":\"{61A64500-335C-418D-8FCB-E072A9ABF3DA}\",\"version\":\"*\"},\"CardBook\":{\"id\":\"cardbook@vigneau.philippe\",\"version\":\"100.2\"},\"ManuallySortFolders\":{\"id\":\"tbsortfolders@xulforum.org\",\"version\":\"*\"},\"ConfirmAddress\":{\"id\":\"confirm-address@kenmaz.net\",\"version\":\"*\"}}}");
-user_pref("betterbird.update.lastCheckTime", 1763086830);
+user_pref("betterbird.update.lastCheckTime", 1764629574);
 user_pref("browser.download.lastDir", "/home/grymm/Downloads");
-user_pref("browser.region.update.updated", 1763086829);
+user_pref("browser.region.update.updated", 1764629590);
 user_pref("browser.search.region", "US");
 user_pref("calendar.caldav.googleResync", 1763086829);
 user_pref("calendar.list.sortOrder", "1eef3f26-0675-4a59-8a33-93f879733e81");
@@ -35,7 +36,7 @@ user_pref("datareporting.dau.cachedUsageProfileID", "3ade6971-820e-4179-b3b0-fe1
 user_pref("extensions.activeThemeID", "default-theme@mozilla.org");
 user_pref("extensions.blocklist.pingCountVersion", 0);
 user_pref("extensions.databaseSchema", 37);
-user_pref("extensions.getAddons.cache.lastUpdate", 1763086930);
+user_pref("extensions.getAddons.cache.lastUpdate", 1764629590);
 user_pref("extensions.getAddons.databaseSchema", 6);
 user_pref("extensions.hasExperimentsInstalled", false);
 user_pref("extensions.hasExtensionsInstalled", false);
@@ -131,13 +132,13 @@ user_pref("media.gmp.storage.version.observed", 1);
 user_pref("pdfjs.enabledCache.state", true);
 user_pref("pdfjs.migrationVersion", 2);
 user_pref("privacy.bounceTrackingProtection.hasMigratedUserActivationData", true);
-user_pref("services.settings.clock_skew_seconds", -1674);
+user_pref("services.settings.clock_skew_seconds", -18895);
 user_pref("services.settings.last_etag", "\"1648185887941\"");
-user_pref("services.settings.last_update_seconds", 1763088603);
-user_pref("services.settings.thunderbird.hijack-blocklists.last_check", 1763088603);
-user_pref("services.settings.thunderbird.search-config.last_check", 1763088603);
-user_pref("services.settings.thunderbird.url-classifier-skip-urls.last_check", 1763088603);
-user_pref("toolkit.startup.last_success", 1763086899);
+user_pref("services.settings.last_update_seconds", 1764648485);
+user_pref("services.settings.thunderbird.hijack-blocklists.last_check", 1764648485);
+user_pref("services.settings.thunderbird.search-config.last_check", 1764648485);
+user_pref("services.settings.thunderbird.url-classifier-skip-urls.last_check", 1764648485);
+user_pref("toolkit.startup.last_success", 1764629558);
 user_pref("toolkit.telemetry.cachedClientID", "c0ffeec0-ffee-c0ff-eec0-ffeec0ffeec0");
 user_pref("toolkit.telemetry.cachedProfileGroupID", "decafdec-afde-cafd-ecaf-decafdecafde");
 user_pref("toolkit.telemetry.previousBuildID", "20251108103444");
