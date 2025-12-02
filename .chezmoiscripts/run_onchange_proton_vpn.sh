@@ -14,8 +14,8 @@ else
   echo "networkmanager already installed."
 fi
 
-systemctl enable networkmanager.service
-systemctl start networkmanager.service
+systemctl enable NetworkManager.service
+systemctl start NetworkManager.service
 
 # Install network-manager-applet
 if ! yay -Qs network-manager-applet &> /dev/null; then
