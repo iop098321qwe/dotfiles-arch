@@ -27,7 +27,6 @@ matches:
         params:
           choices:
             - If you still require assistance, we kindly request that you respond to this email or call us at {{dthelp}} at your earliest convenience to confirm the next steps regarding your ticket.
-            - As we have not received a recent response, we would like to confirm the current status of your ticket and ensure it is addressed in a timely manner. Please respond to this ticket or call {{dthelp}} to address the next steps for your ticket.
             - If you continue to need assistance, please respond to this email or call us at {{dthelp}} at your earliest convenience so we can discuss the next steps for your ticket.
             - Should you still require support, we ask that you reply to this email or contact us at {{dthelp}} to determine the appropriate next steps regarding your ticket.
             - If further assistance is needed, kindly reply to this email or call {{dthelp}} at your convenience so we may proceed with the next steps for your ticket.
