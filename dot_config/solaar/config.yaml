@@ -6,7 +6,7 @@
     m-key-leds, mr-key-led, multiplatform, gesture2-gestures, gesture2-divert, gesture2-params, sidetone, equalizer, adc_power_management]
   _battery: 4100
   _modelId: B03400000000
-  _sensitive: {dpi: false}
+  _sensitive: {dpi: false, thumb-scroll-invert: false}
   _serial: 361EED8A
   _unitId: 361EED8A
   _wpid: B034
@@ -19,7 +19,7 @@
   reprogrammable-keys: {80: 80, 81: 81, 82: 82, 83: 83, 86: 86, 195: 195, 196: 196}
   scroll-ratchet: 2
   smart-shift: 10
-  thumb-scroll-invert: false
+  thumb-scroll-invert: true
   thumb-scroll-mode: false
 - _NAME: Wireless Touch Keyboard K400 Plus
   _absent: [hi-res-scroll, lowres-scroll-mode, hires-smooth-invert, hires-smooth-resolution, hires-scroll-mode, scroll-ratchet, smart-shift, thumb-scroll-invert,
@@ -29,6 +29,7 @@
     multiplatform, change-host, sidetone, equalizer, adc_power_management]
   _battery: 4096
   _modelId: 404D00000000
+  _sensitive: {hires-scroll-mode: ignore, hires-smooth-invert: ignore, hires-smooth-resolution: ignore}
   _serial: 7A6489E3
   _unitId: 8BE1CFD9
   _wpid: 404D
