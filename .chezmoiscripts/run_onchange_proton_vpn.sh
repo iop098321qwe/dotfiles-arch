@@ -10,11 +10,12 @@ fi
 # Install networkmanager
 if ! yay -Qs networkmanager &> /dev/null; then
   yay -S --noconfirm --needed networkmanager
-  systemctl enable networkmanager.service
-  systemctl start networkmanager.service
 else
   echo "networkmanager already installed."
 fi
+
+systemctl enable networkmanager.service
+systemctl start networkmanager.service
 
 # Install network-manager-applet
 if ! yay -Qs network-manager-applet &> /dev/null; then
