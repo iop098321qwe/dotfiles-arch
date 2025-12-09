@@ -2,3 +2,4 @@
 require("config.lazy")
 require("obsidian")
 require("yazi")
+require('lspconfig').harper_ls.setup {}
