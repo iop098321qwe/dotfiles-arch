@@ -38,7 +38,7 @@ matches:
 
   # Print the disabled date in ISO 8861 format
   - trigger: ";disdate"
-    replace: "Disableed {{mydate}}"
+    replace: "Disabled {{mydate}}"
     vars:
       - name: mydate
         type: date

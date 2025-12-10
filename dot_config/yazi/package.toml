@@ -1,31 +1,31 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "eaf6920"
+rev = "19dc890"
 hash = "3996fc74044bc44144b323686f887e1"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-filter"
-rev = "eaf6920"
+rev = "19dc890"
 hash = "bcda8eeb3f4013bae156aecabfc745e8"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-paste"
-rev = "eaf6920"
+rev = "19dc890"
 hash = "75fd60b2df7115e0a6ca31a6a804d320"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:diff"
-rev = "eaf6920"
+rev = "19dc890"
 hash = "82376c3381ae915fd799d40f4dd4c6cd"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
-rev = "eaf6920"
+rev = "19dc890"
 hash = "5b2eb0cc2050cec1e4de83cfa51a5b90"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "eaf6920"
+rev = "19dc890"
 hash = "8a7c58225816a163a6e8730c0adafbc8"
 
 [[plugin.deps]]
@@ -45,12 +45,12 @@ hash = "ee71543790f0ce3951161045a3787abd"
 
 [[plugin.deps]]
 use = "boydaihungst/restore"
-rev = "2161735"
-hash = "901741afba1979739b4650324265162e"
+rev = "6395e52"
+hash = "f107436db5d2cccccc11ab54bc97b761"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-enter"
-rev = "eaf6920"
+rev = "19dc890"
 hash = "56fdabc96fc1f4d53c96eb884b02a5be"
 
 [[plugin.deps]]
@@ -60,10 +60,10 @@ hash = "208e77480824f62558a5b037c8569d61"
 
 [[plugin.deps]]
 use = "Rolv-Apneseth/starship"
-rev = "d7056e3"
-hash = "be8e1b31833e356cad14dcda9d8ad2d3"
+rev = "eca1861"
+hash = "e519d894e94ded741e06aae4d4775981"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
-rev = "3edeb49"
-hash = "14b111562c00eb1917fe3ca3ae9bb771"
+rev = "ffe6e3a"
+hash = "8d7799e4598ff079fa5ee5c770d9bc08"
