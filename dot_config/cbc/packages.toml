@@ -56,12 +56,12 @@ rev = "8a453a1"
 hash = "8a453a14ded6892d7d17bdc3b5ab2eb61275f4c9"
 
 [[module.deps]]
-use = "iop098321qwe/commit-and-tag-version"
-rev = "cc725c6"
-hash = "cc725c6269d7a742fbe0947bd7b87e74a92e863d"
-
-[[module.deps]]
 use = "iop098321qwe/netbrief"
 rev = "527cb9b"
 hash = "527cb9b25154ce333e2da4cc2f67d69b8d4451b6"
+
+[[module.deps]]
+use = "iop098321qwe/commit-and-tag-version"
+rev = "04be16c"
+hash = "04be16c28bb2aaf47e4167d009ee2baa26594dc4"
 
