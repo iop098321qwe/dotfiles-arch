@@ -2,4 +2,12 @@
 require("config.lazy")
 require("obsidian")
 require("yazi")
-require('lspconfig').harper_ls.setup {}
+require('lspconfig').harper_ls.setup {
+  settings = {
+    ["harper-ls"] = {
+      excludePatterns = {
+        "*CHANGELOG*"
+      }
+    }
+  }
+}
