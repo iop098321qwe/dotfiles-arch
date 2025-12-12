@@ -340,14 +340,3 @@ matches:
       Sent first response email to {{person}}.
 
       {{nswc}}
-
-  # Create a match for ticket triage
-  - trigger: ";tri"
-    replace: |-
-      Reviewed the ticket to confirm accuracy and completeness.
-      Reviewed the notes to understand prior actions or context.
-      Edited the ticket to match standard formatting and documentation.
-      Assigned the ticket to an appropriate technician or queue.
-      Reviewed the schedule to plan next steps or appointments.
-      Sent the client first response email.
-      $|$

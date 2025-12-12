@@ -6,12 +6,12 @@ matches:
   - trigger: ";trins"
     replace: |-
       Completed Tasks:
-      Reviewing the ticket information.
-      Formatting the ticket to match ticket templates.
-      Assigning the ticket to a technician.
-      Sending the first response (if required) to the client.
-      Setting the status to 'Needs Scheduled'.
-      Sending notification (if required) to the assigned technician.
+      Reviewed the ticket information.
+      Formatted the ticket to match ticket templates.
+      Assigned the ticket to a technician.
+      Sent the first response (if required) to the client.
+      Set the status to 'Needs Scheduled'.
+      Sent notification (if required) to the assigned technician.
 
       Next Steps:
       'Needs Scheduled'
@@ -21,12 +21,12 @@ matches:
   - trigger: ";triwc"
     replace: |-
       Completed Tasks:
-      Reviewing the ticket information.
-      Formatting the ticket to match ticket templates.
-      Assigning the ticket to a technician.
-      Sending the first response (if required) to the client.
-      Setting the status to 'Needs Scheduled'.
-      Sending notification (if required) to the assigned technician.
+      Reviewed the ticket information.
+      Formatted the ticket to match ticket templates.
+      Assigned the ticket to a technician.
+      Sent the first response (if required) to the client.
+      Set the status to 'Needs Scheduled'.
+      Sent notification (if required) to the assigned technician.
 
       Next Steps:
       'Waiting Customer'
