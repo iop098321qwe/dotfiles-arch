@@ -56,6 +56,10 @@
   margin-right: 18px;
 }
 
+#mpris {
+  margin-right: 40px;
+}
+
 tooltip {
   padding: 2px;
 }
