@@ -182,7 +182,7 @@
     "spacing": 17
   },
   "mpris": {
-    "interval": 3,
+    "interval": 5,
     "format": "{player_icon} {dynamic}",
     "format-paused": "{status_icon} {artist} {title}",
     "on-click-middle": "playerctl play-pause",
@@ -215,7 +215,7 @@
       "firefox",
       "zen"
     ],
-    "max-length": 120,
+    "max-length": 180,
   },
   "custom/separator#blank": {
     "format": " ",
