@@ -215,7 +215,7 @@
       "firefox",
       "zen"
     ],
-    "max-length": 100,
+    "max-length": 120,
   },
   "custom/separator#blank": {
     "format": " ",
