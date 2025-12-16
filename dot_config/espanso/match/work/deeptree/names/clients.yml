@@ -224,11 +224,11 @@ matches:
     trigger: ";ssmh"
     replace: "Samuel Simmonds Memorial Hospital$|$"
 
-  - name: "Steve Fishback Architecture"
-    label: "Steve Fishback Architecture"
+  - name: "Steve Fishback Architect"
+    label: "Steve Fishback Architect"
     replace_preview: true
     trigger: ";sfa"
-    replace: "Steve Fishback Architecture$|$"
+    replace: "Steve Fishback Architect$|$"
 
   - name: "The American Legion"
     label: "The American Legion"
