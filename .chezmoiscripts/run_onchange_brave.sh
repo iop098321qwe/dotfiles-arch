@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Install Brave Browser
 if ! yay -Qs brave &> /dev/null; then

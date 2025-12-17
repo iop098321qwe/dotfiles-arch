@@ -13,6 +13,9 @@ source ~/.local/share/omarchy/default/bash/rc
 # Set vim mode
 set -o vi
 
+# ble.sh (must be loaded before atuin init)
+source /usr/share/blesh/ble.sh 2>/dev/null || true
+
 . "$HOME/.atuin/bin/env"
 
 [[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh

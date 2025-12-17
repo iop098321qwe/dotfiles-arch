@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Install Atuin
 if ! yay -Qs atuin &> /dev/null; then
@@ -7,3 +7,8 @@ else
   echo "atuin already installed."
 fi
 
+if ! yay -Qs blesh &> /dev/null; then
+  yay -S --noconfirm --needed blesh-git
+else
+  echo "blesh already installed."
+fi
