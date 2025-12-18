@@ -798,3 +798,8 @@ desc = "Open a file, or recursively enter child directory, skipping children wit
 on = [ "h" ]
 run = "plugin bypass reverse"
 desc = "Recursively enter parent directory, skipping parents with only a single subdirectory"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "C" ]
+run  = "plugin vcs-files"
+desc = "Show Git file changes"

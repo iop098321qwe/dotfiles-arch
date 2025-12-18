@@ -40,8 +40,8 @@ hash = "b84a85f3b513bd9c0a0ab93cc7c8e4c3"
 
 [[plugin.deps]]
 use = "Lil-Dank/lazygit"
-rev = "8f37dc5"
-hash = "ee71543790f0ce3951161045a3787abd"
+rev = "699712a"
+hash = "14f96284461507db0f384da0eeebe432"
 
 [[plugin.deps]]
 use = "boydaihungst/restore"
@@ -62,6 +62,11 @@ hash = "208e77480824f62558a5b037c8569d61"
 use = "Rolv-Apneseth/starship"
 rev = "eca1861"
 hash = "e519d894e94ded741e06aae4d4775981"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:vcs-files"
+rev = "19dc890"
+hash = "4ee57085277d616acfa0ef1fef37dc00"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
