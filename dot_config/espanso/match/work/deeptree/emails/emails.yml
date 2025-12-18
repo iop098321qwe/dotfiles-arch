@@ -78,6 +78,49 @@ matches:
       ---
       {{quote}}
 
+  - regex: ";emaildisk(?P<person>.*)\\."
+    label: Dynamic Request For Disk Space Email
+    vars:
+      - name: quote
+        type: match
+        params:
+          trigger: ";quote"
+      - name: greeting
+        type: match
+        params:
+          trigger: ";greet"
+      - name: addongreeting
+        type: match
+        params:
+          trigger: ";addongreet"
+      - name: signoff
+        type: match
+        params:
+          trigger: ";signoff"
+    force_mode: clipboard
+    replace: |-
+      {{greeting}}{{person}},{{addongreeting}}
+
+      **RESPONSE REQUESTED**
+
+      We have an automatic alert that was generated for your computer. This alert is a notification that the storage has exceed 95% capacity on your computer.
+
+      Due to this alert, we would like to coordinate a time (typically around an hour) to perform cleanup on the computer when it is not in use. We do not need to work directly with you to perform the cleanup, however we will need to ensure that we are connecting at a time that the computer will not be needed for the duration of the appointment.
+
+      If you have any days/times that would work for this appointment, we would love to get it onto our calendar so that we can perform this cleanup operation.
+      $|$
+      We kindly request that you respond to this email or call us at {{dthelp}} at your earliest convenience to confirm the next steps regarding your ticket.
+
+      {{signoff}}
+
+      {{myname}}
+      {{title}}
+      {{company}}
+      {{dthelp}}
+
+      ---
+      {{quote}}
+
   - regex: ";emailfu(?P<person>.*)\\."
     label: Dynamic Follow-Up Email
     vars:
