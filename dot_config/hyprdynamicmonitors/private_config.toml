@@ -1,0 +1,48 @@
+[general]
+destination = "$HOME/.config/hypr/monitors.conf"
+
+[lid_events]
+[lid_events.dbus_query_object]
+destination = "org.freedesktop.UPower"
+path = "/org/freedesktop/UPower"
+method = "org.freedesktop.DBus.Properties.Get"
+expected_lid_closing_value = "true"
+
+[[lid_events.dbus_query_object.args]]
+arg = "org.freedesktop.UPower"
+
+[[lid_events.dbus_query_object.args]]
+arg = "LidIsClosed"
+
+[[lid_events.dbus_signal_match_rules]]
+interface = "org.freedesktop.DBus.Properties"
+object_path = "/org/freedesktop/UPower"
+member = "PropertiesChanged"
+
+[[lid_events.dbus_signal_receive_filters]]
+name = "org.freedesktop.DBus.Properties.PropertiesChanged"
+body = "LidIsClosed"
+
+[profiles]
+
+[profiles.closed]
+config_file = "/home/grymm/.config/hyprdynamicmonitors/hyprconfigs/closed.go.tmpl"
+config_file_type = "template"
+
+[profiles.closed.conditions]
+lid_state = "Closed"
+
+[[profiles.closed.conditions.required_monitors]]
+description = "Samsung Electric Company LS27AG32x H9JW800006"
+monitor_tag = "monitor1"
+
+[profiles.open]
+config_file = "/home/grymm/.config/hyprdynamicmonitors/hyprconfigs/open.go.tmpl"
+config_file_type = "template"
+
+[profiles.open.conditions]
+lid_state = "Opened"
+
+[[profiles.open.conditions.required_monitors]]
+description = "Samsung Electric Company LS27AG32x H9JW800006"
+monitor_tag = "monitor1"

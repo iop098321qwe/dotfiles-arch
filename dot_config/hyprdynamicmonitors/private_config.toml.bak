@@ -1,0 +1,65 @@
+[general]
+destination = "$HOME/.config/hypr/monitors.conf"
+
+[power_events]
+
+[power_events.dbus_query_object]
+path = "/org/freedesktop/UPower/devices/line_power_AC"
+
+[[power_events.dbus_signal_match_rules]]
+object_path = "/org/freedesktop/UPower/devices/line_power_AC"
+
+[lid_events]
+
+[lid_events.dbus_query_object]
+destination = "org.freedesktop.UPower"
+path = "/org/freedesktop/UPower"
+method = "org.freedesktop.DBus.Properties.Get"
+expected_lid_closing_value = "true"
+
+[[lid_events.dbus_query_object.args]]
+arg = "org.freedesktop.UPower"
+
+[[lid_events.dbus_query_object.args]]
+arg = "LidIsClosed"
+
+[[lid_events.dbus_signal_match_rules]]
+interface = "org.freedesktop.DBus.Properties"
+object_path = "/org/freedesktop/UPower"
+member = "PropertiesChanged"
+
+[[lid_events.dbus_signal_receive_filters]]
+name = "org.freedesktop.DBus.Properties.PropertiesChanged"
+body = "LidIsClosed"
+
+[profiles]
+
+
+[profiles.closed]
+config_file = "/home/grymm/.config/hyprdynamicmonitors/hyprconfigs/closed.go.tmpl"
+config_file_type = "template"
+[profiles.closed.conditions.required_lid_states]
+state = "Closed"
+
+[[profiles.closed.conditions.required_monitors]]
+description = "InfoVision Optoelectronics (Kunshan) Co.Ltd China 0x3D41 0x00000004"
+monitor_tag = "monitor0"
+
+[[profiles.closed.conditions.required_monitors]]
+description = "Samsung Electric Company LS27AG32x H9JW800006"
+monitor_tag = "monitor1"
+
+
+[profiles.open]
+config_file = "/home/grymm/.config/hyprdynamicmonitors/hyprconfigs/open.go.tmpl"
+config_file_type = "template"
+[profiles.open.conditions.required_lid_states]
+state = "Opened"
+
+[[profiles.open.conditions.required_monitors]]
+description = "InfoVision Optoelectronics (Kunshan) Co.Ltd China 0x3D41 0x00000004"
+monitor_tag = "monitor0"
+
+[[profiles.open.conditions.required_monitors]]
+description = "Samsung Electric Company LS27AG32x H9JW800006"
+monitor_tag = "monitor1"
