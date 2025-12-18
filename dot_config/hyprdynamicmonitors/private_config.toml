@@ -46,3 +46,13 @@ lid_state = "Opened"
 [[profiles.open.conditions.required_monitors]]
 description = "Samsung Electric Company LS27AG32x H9JW800006"
 monitor_tag = "monitor1"
+
+
+[profiles.laptop-only]
+config_file = "/home/grymm/.config/hyprdynamicmonitors/hyprconfigs/laptop-only.go.tmpl"
+config_file_type = "template"
+[profiles.laptop-only.conditions]
+
+[[profiles.laptop-only.conditions.required_monitors]]
+description = "InfoVision Optoelectronics (Kunshan) Co.Ltd China 0x3D41 0x00000004"
+monitor_tag = "monitor0"
