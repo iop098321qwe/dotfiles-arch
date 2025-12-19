@@ -40,8 +40,8 @@ hash = "b84a85f3b513bd9c0a0ab93cc7c8e4c3"
 
 [[plugin.deps]]
 use = "Lil-Dank/lazygit"
-rev = "699712a"
-hash = "14f96284461507db0f384da0eeebe432"
+rev = "ea20d05"
+hash = "b95f2d56dd4b2df1be338179a6f1f6c9"
 
 [[plugin.deps]]
 use = "boydaihungst/restore"
@@ -70,5 +70,5 @@ hash = "4ee57085277d616acfa0ef1fef37dc00"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
-rev = "ffe6e3a"
+rev = "5e0e49e"
 hash = "8d7799e4598ff079fa5ee5c770d9bc08"
