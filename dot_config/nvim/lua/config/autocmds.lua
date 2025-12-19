@@ -30,14 +30,14 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlight yanked text",
 })
 
--- Automatically fold all folds on file open
-vim.api.nvim_create_autocmd("BufReadPost", {
-  pattern = "*",
-  callback = function()
-    vim.cmd("normal! zM") -- Fold all folds
-  end,
-  desc = "Automatically fold all folds on file open",
-})
+-- -- Automatically fold all folds on file open
+-- vim.api.nvim_create_autocmd("BufReadPost", {
+--   pattern = "*",
+--   callback = function()
+--     vim.cmd("normal! zM") -- Fold all folds
+--   end,
+--   desc = "Automatically fold all folds on file open",
+-- })
 
 -- Set foldmethod to indent for HTML files
 vim.api.nvim_create_autocmd("FileType", {
