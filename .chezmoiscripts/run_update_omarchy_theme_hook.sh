@@ -9,8 +9,8 @@ else
 fi
 
 if [ $update == true ]; then
-  echo "theme-hook-update updating..."
+  echo "Commencing theme-hook-update update."
   theme-hook-update
 else
-  echo "theme-hook-update not updated."
+  echo "Skipping theme-hook-update update."
 fi
