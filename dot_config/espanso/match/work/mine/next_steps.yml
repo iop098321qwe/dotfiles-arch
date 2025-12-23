@@ -1,6 +1,6 @@
 # Espanso Match File
 
-# Matches for next steps in ticket notes.
+# Matches for next steps in ticket notes
 matches:
   # Inputting next steps for "Complete".
   - trigger: ";nscom"

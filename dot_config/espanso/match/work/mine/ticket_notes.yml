@@ -102,7 +102,7 @@ matches:
       Determined if cloud storage services are in use/locally downloaded on {{computer}}.
       Ran PatchCleaner to remove orphaned installation files.
       Utilized BCUninstaller to remove outdated or unused applications.
-      Reclaimed approximately [[percentage]]% of total disk space.
+      Reclaimed to approximately [[percentage]]% of total disk space.
 
       Next Steps:
       'Complete'
