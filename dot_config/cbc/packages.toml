@@ -12,8 +12,8 @@ hash = "24f4eb09faa124cd6e59620f70f3783686d6b5ae"
 
 [[module.deps]]
 use = "iop098321qwe/chezmod"
-rev = "46fcced"
-hash = "46fcced5a660afa798eba11f51aa4546374fedac"
+rev = "62472c3"
+hash = "62472c34197518414d48cb10caa24badfd7dcfed"
 
 [[module.deps]]
 use = "iop098321qwe/filemod"
