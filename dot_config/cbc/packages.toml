@@ -11,11 +11,6 @@ rev = "24f4eb0"
 hash = "24f4eb09faa124cd6e59620f70f3783686d6b5ae"
 
 [[module.deps]]
-use = "iop098321qwe/chezmod"
-rev = "62472c3"
-hash = "62472c34197518414d48cb10caa24badfd7dcfed"
-
-[[module.deps]]
 use = "iop098321qwe/filemod"
 rev = "e024d2a"
 hash = "e024d2a2f479bcd6297e32802449f9ff6a90c917"
@@ -64,4 +59,9 @@ hash = "527cb9b25154ce333e2da4cc2f67d69b8d4451b6"
 use = "iop098321qwe/commit-and-tag-version"
 rev = "04be16c"
 hash = "04be16c28bb2aaf47e4167d009ee2baa26594dc4"
+
+[[module.deps]]
+use = "iop098321qwe/chezmod"
+rev = "62472c3"
+hash = "62472c34197518414d48cb10caa24badfd7dcfed"
 
