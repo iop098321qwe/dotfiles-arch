@@ -21,6 +21,10 @@ return {
         name = "grymms_grimoires",
         path = "~/Documents/grymms_grimoires",
       },
+      {
+        name = "grymms_homelab",
+        path = "~/Documents/grymms_homelab",
+      },
     },
     -- Set the template directory.
     templates = {
