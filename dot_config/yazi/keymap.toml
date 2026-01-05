@@ -390,6 +390,10 @@ keymap = [
   ], run = "cd ~/Documents/grymms_grimoires/99999_sort", desc = "99999_sort" },
   { on = [
     "g",
+    "L",
+  ], run = "cd ~/Documents/grymms_homelab/", desc = "Homelab Vault" },
+  { on = [
+    "g",
     "<Space>",
   ], run = "cd --interactive", desc = "Jump Interactively" },
   { on = [

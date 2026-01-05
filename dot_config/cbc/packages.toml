@@ -2,8 +2,8 @@
 
 [[module.deps]]
 use = "iop098321qwe/av"
-rev = "6c13bb8"
-hash = "6c13bb8800699dfd95b01d3bae6f66cc0d3e452c"
+rev = "8f3beb8"
+hash = "8f3beb85ea3abba3179911cc2260f53f9a9e78a3"
 
 [[module.deps]]
 use = "iop098321qwe/gitmod"
