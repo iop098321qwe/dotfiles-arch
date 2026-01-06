@@ -27,8 +27,8 @@ hash = "e2251f950672ba64aee690f93b2404be1523bb82"
 
 [[module.deps]]
 use = "iop098321qwe/lazymod"
-rev = "b06468b"
-hash = "b06468bcf528bdc7d38546ecf79587edc8f254c3"
+rev = "0eb0067"
+hash = "0eb0067044cccb9cb19d3afb52d2869c5d602d17"
 
 [[module.deps]]
 use = "iop098321qwe/vim-exit"
