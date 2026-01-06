@@ -62,6 +62,6 @@ hash = "04be16c28bb2aaf47e4167d009ee2baa26594dc4"
 
 [[module.deps]]
 use = "iop098321qwe/chezmod"
-rev = "5c34c1d"
-hash = "5c34c1d935ac6c97c679b906f6b0d337d1381f28"
+rev = "8b52007"
+hash = "8b52007152b23e28a45d7894e272ccd72f02e9c1"
 
