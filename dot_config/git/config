@@ -52,3 +52,6 @@
     ; hyperlinks-file-link-format = "lazygit-edit://{path}:{line}"
     hyperlinks-file-link-format = "file://{path}#L{line}"
       ; pager: 'delta --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"'
+
+; [diff]
+;     colorMoved = default
