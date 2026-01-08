@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Install trash-cli
 if ! yay -Qs trash-cli &> /dev/null; then

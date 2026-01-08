@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Install Proton Mail Bridge
 if ! yay -Qs protonmail-bridge &> /dev/null; then

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Install Ghostty
 if ! yay -Qs ghostty &> /dev/null; then

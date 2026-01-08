@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Check if Spotify is installed
 if command -v spotify >/dev/null 2>&1; then

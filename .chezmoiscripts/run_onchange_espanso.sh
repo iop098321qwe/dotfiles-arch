@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Install Espanso
 if ! yay -Qs espanso &> /dev/null; then

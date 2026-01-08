@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Install Betterbird
 if ! yay -Qs betterbird &> /dev/null; then

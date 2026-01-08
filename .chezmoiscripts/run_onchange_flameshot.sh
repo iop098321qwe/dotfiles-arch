@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Install Flameshot
 if ! yay -Qs flameshot &> /dev/null; then

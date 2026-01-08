@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Install Yazi
 if ! yay -Qs yazi &> /dev/null; then

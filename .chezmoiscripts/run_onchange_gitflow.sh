@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Install Git Flow
 if ! yay -Qs git-flow &> /dev/null; then

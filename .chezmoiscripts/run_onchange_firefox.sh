@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Install Firefox
 if ! yay -Qs firefox &> /dev/null; then

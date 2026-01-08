@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Install delta diff tool
 if ! yay -Qs delta &> /dev/null; then

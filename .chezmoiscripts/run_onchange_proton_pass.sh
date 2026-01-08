@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Install Proton Pass
 if ! yay -Qs proton-pass &> /dev/null; then

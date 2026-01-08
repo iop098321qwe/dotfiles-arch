@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Install npm
 if ! yay -Qs npm &> /dev/null; then

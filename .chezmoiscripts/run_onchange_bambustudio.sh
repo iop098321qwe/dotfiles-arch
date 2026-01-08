@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Install bambustudio
 if ! yay -Qs bambustudio &> /dev/null; then

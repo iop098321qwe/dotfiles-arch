@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Install Vesktop
 if ! yay -Qs vesktop &> /dev/null; then
