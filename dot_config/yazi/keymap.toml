@@ -223,119 +223,55 @@ keymap = [
   { on = [
     "g",
     "c",
-  ], run = "cd ~/.config", desc = "~/.config" },
+  ], run = "cd ~/.config", desc = "Configs" },
   { on = [
     "g",
     "n",
-  ], run = "cd ~/.config/nvim", desc = ".config/nvim" },
+  ], run = "cd ~/.config/nvim", desc = "nvim" },
   { on = [
     "g",
-    "l",
-  ], run = "cd ~/.config/nvim/lua", desc = ".config/nvim/lua" },
+    "y",
+  ], run = "cd ~/.config/yazi", desc = "yazi" },
   { on = [
     "g",
     "H",
-  ], run = "cd ~/.config/hypr", desc = ".config/hypr" },
+  ], run = "cd ~/.config/hypr", desc = "hypr" },
   { on = [
     "g",
-    "M",
+    "m",
   ], run = "cd ~/.config/espanso/match", desc = "Espanso Matches" },
   { on = [
     "g",
-    "m",
-    "c",
-  ], run = "cd ~/.config/espanso/match/coding", desc = "espanso/match/coding" },
-  { on = [
-    "g",
-    "m",
-    "g",
-  ], run = "cd ~/.config/espanso/match/globals", desc = "espanso/match/globals" },
-  { on = [
-    "g",
-    "m",
-    "P",
-  ], run = "cd ~/.config/espanso/match/packages", desc = "espanso/match/packages" },
-  { on = [
-    "g",
-    "m",
-    "p",
-  ], run = "cd ~/.config/espanso/match/personal", desc = "espanso/match/personal" },
-  { on = [
-    "g",
-    "m",
-    "t",
-  ], run = "cd ~/.config/espanso/match/testing", desc = "espanso/match/testing" },
-  { on = [
-    "g",
-    "m",
-    "v",
-  ], run = "cd ~/.config/espanso/match/variables", desc = "espanso/match/variables" },
-  { on = [
-    "g",
-    "m",
-    "w",
-  ], run = "cd ~/.config/espanso/match/work", desc = "espanso/match/work" },
-  { on = [
-    "g",
-    "D",
+    "d",
   ], run = "cd ~/Downloads", desc = "Downloads" },
   { on = [
     "g",
-    "d",
+    "D",
   ], run = "cd ~/Documents", desc = "Documents" },
   { on = [
     "g",
     "R",
-  ], run = "cd ~/Documents/github_repositories", desc = "github_repositories" },
-  # { on = [
-  #   "g",
-  #   "r",
-  #   "c",
-  # ], run = "cd ~/Documents/github_repositories/custom_bash_commands", desc = "custom_bash_commands" },
-  # { on = [
-  #   "g",
-  #   "r",
-  #   "d",
-  #   "e",
-  # ], run = "cd ~/Documents/github_repositories/deeptree_espanso", desc = "deeptree_espanso" },
-  # { on = [
-  #   "g",
-  #   "r",
-  #   "d",
-  #   "w",
-  # ], run = "cd ~/Documents/github_repositories/deeptree_espanso_windows", desc = "deeptree_espanso_windows" },
-  # { on = [
-  #   "g",
-  #   "r",
-  #   "i",
-  # ], run = "cd ~/Documents/github_repositories/iop098321qwe", desc = "iop098321qwe" },
-  # { on = [
-  #   "g",
-  #   "r",
-  #   "k",
-  # ], run = "cd ~/Documents/github_repositories/kaiser_page", desc = "kaiser_page" },
-  # { on = [
-  #   "g",
-  #   "r",
-  #   "m",
-  # ], run = "cd ~/Documents/github_repositories/main_page", desc = "main_page" },
-  # { on = [
-  #   "g",
-  #   "r",
-  #   "p",
-  #   "t",
-  # ], run = "cd ~/Documents/github_repositories/pomodoro-tui", desc = "pomodoro-tui" },
-  # { on = [
-  #   "g",
-  #   "r",
-  #   "p",
-  #   "s",
-  # ], run = "cd ~/Documents/github_repositories/powershell_scripts", desc = "powershell_scripts" },
-  # { on = [
-  #   "g",
-  #   "r",
-  #   "y",
-  # ], run = "cd ~/Documents/github_repositories/yt-dlp", desc = "yt-dlp" },
+  ], run = "cd ~/Documents/github_repositories", desc = "Repos" },
+  { on = [
+    "g",
+    "G",
+    "c",
+  ], run = "cd ~/Documents/github_repositories/custom_bash_commands", desc = "custom_bash_commands" },
+  { on = [
+    "g",
+    "G",
+    "C",
+  ], run = "cd ~/Documents/github_repositories/cbc_modules", desc = "cbc_modules" },
+  { on = [
+    "g",
+    "G",
+    "m",
+  ], run = "cd ~/Documents/github_repositories/main_page", desc = "main_page" },
+  { on = [
+    "g",
+    "G",
+    "y",
+  ], run = "cd ~/Documents/github_repositories/yt-dlp", desc = "yt-dlp" },
   { on = [
     "g",
     "t",
@@ -346,48 +282,41 @@ keymap = [
   ], run = "cd ~/Documents/Temporary/screenshots", desc = "Screenshots" },
   { on = [
     "g",
+    "S",
+  ], run = "cd ~/Documents/Temporary/recordings/raw", desc = "Recordings" },
+  { on = [
+    "g",
     "V",
   ], run = "cd ~/Documents/grymms_grimoires", desc = "Vault" },
   { on = [
     "g",
     "v",
-    "1",
-  ], run = "cd ~/Documents/grymms_grimoires/10000_work", desc = "10000_work" },
-  { on = [
-    "g",
-    "v",
-    "2",
-  ], run = "cd ~/Documents/grymms_grimoires/20000_programming", desc = "20000_programming" },
-  { on = [
-    "g",
-    "v",
-    "3",
-  ], run = "cd ~/Documents/grymms_grimoires/30000_personal", desc = "30000_personal" },
-  { on = [
-    "g",
-    "v",
-    "4",
-  ], run = "cd ~/Documents/grymms_grimoires/40000_tech", desc = "40000_tech" },
-  { on = [
-    "g",
-    "v",
-    "5",
-  ], run = "cd ~/Documents/grymms_grimoires/50000_3d", desc = "50000_3d" },
+    "w",
+  ], run = "cd ~/Documents/grymms_grimoires/10000_work", desc = "Vault - Work" },
   { on = [
     "g",
     "v",
     "o",
-  ], run = "cd ~/Documents/grymms_grimoires/99000_other", desc = "99000_other" },
+  ], run = "cd ~/Documents/grymms_grimoires/99000_other", desc = "Vault - Other" },
+  { on = [
+    "g",
+    "B",
+  ], run = "cd ~/Documents/grymms_grimoires/99000_other/99900_backup_docs", desc = "Vault - Backup Docs" },
   { on = [
     "g",
     "v",
-    "k",
-  ], run = "cd ~/Documents/grymms_grimoires/99000_other/99900_backup_docs/kaiser", desc = "kaiser" },
+    "t",
+  ], run = "cd ~/Documents/grymms_grimoires/99000_other/99800_templates", desc = "Vault - Templates" },
+  { on = [
+    "g",
+    "v",
+    "a",
+  ], run = "cd ~/Documents/grymms_grimoires/99000_other/99600_attachments", desc = "Vault - Attachments" },
   { on = [
     "g",
     "v",
     "s",
-  ], run = "cd ~/Documents/grymms_grimoires/99999_sort", desc = "99999_sort" },
+  ], run = "cd ~/Documents/grymms_grimoires/99000_other/99999_sort", desc = "Vault - Sort" },
   { on = [
     "g",
     "L",
