@@ -50,6 +50,14 @@ matches:
       Performed research on ticket tasks, methods, questions, or requests.
       $|$
 
+  - regex: ";apptech(?P<technician>.*)\\."
+    form: |-
+      Set appointment for {{technician}} to address $|$ from [[start]]-[[end]] MST.
+
+  - regex: ';appclient(?P<technician>[^,]+),(?P<person>[^.]+)\.'
+    form: |-
+      Set appointment for {{technician}} to connect with {{person}} for $|$from [[start]]-[[end]] MST.
+
     # Create a match for "Agent".
   - trigger: ";agent"
     replace: |-

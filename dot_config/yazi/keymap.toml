@@ -300,7 +300,8 @@ keymap = [
   ], run = "cd ~/Documents/grymms_grimoires/99000_other", desc = "Vault - Other" },
   { on = [
     "g",
-    "B",
+    "v",
+    "b",
   ], run = "cd ~/Documents/grymms_grimoires/99000_other/99900_backup_docs", desc = "Vault - Backup Docs" },
   { on = [
     "g",
