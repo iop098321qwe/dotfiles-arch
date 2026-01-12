@@ -42,9 +42,9 @@ matches:
   # General new user
   - regex: ";pass(?P<person>.*)\\."
     replace: |-
-      Changed the password for the {{person}}.
+      Changed the password for {{person}}.
       Assisted {{person}} with signing back in.
-      Confirming {{person}} has access to all accounts.$|$
+      Confirming {{person}} has access to account and services.$|$
       {{person}} expressed satisfactory completion and verbally approved the closure of the ticket.
 
       Next Steps:
