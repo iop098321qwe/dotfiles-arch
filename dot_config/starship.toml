@@ -12,8 +12,8 @@ format = '''
 
 # Customize the username module
 [username]
+disabled = true
 show_always = true
-disabled = false
 style_user = "bold #f9e2af"
 
 # Customize the hostname module
@@ -38,19 +38,20 @@ vimcmd_visual_symbol = "[❮](bold #f9e2af)"
 
 # Customize the directory module
 [directory]
+disabled = false
 truncation_length = 5
 truncation_symbol = '.../'
 style = "bold #89b4fa"
-disabled = false
 
 # Customize the git_branch module
 [git_branch]
+disabled = false
 symbol = " "          # Optional: Git branch symbol
 style = "bold #cba6f7"
-disabled = false
 
 # Customize the git_status module
 [git_status]
+disabled = false
 conflicted = "✖"                              # Conflicted file
 ahead = "⇡${count}"                           # Ahead of upstream
 behind = "⇣${count}"                          # Behind upstream
@@ -62,7 +63,6 @@ staged = "●"                                  # Staged files
 renamed = "➜"                                 # Renamed files
 deleted = "–"                                 # Deleted files
 style = "bold #f38ba8"
-disabled = false
 
 # Customize the rust module
 [rust]
