@@ -5,24 +5,11 @@
 # (don't mess with these directly, just overwrite them here!)
 source ~/.local/share/omarchy/default/bash/rc
 
-# Add your own exports, aliases, and functions here.
-#
-# Make an alias for invoking commands you use constantly
-# alias p='python'
-
 # Set vim mode
 set -o vi
 
-# ble.sh (must be loaded before atuin init)
-source /usr/share/blesh/ble.sh 2>/dev/null || true
-
-. "$HOME/.atuin/bin/env"
-
 [[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
 eval "$(atuin init bash)"
-
-# Custom Bash Commands
-. "$HOME/.custom_bash_commands.sh"
 
 # Yazi
 function y() {
@@ -33,20 +20,10 @@ function y() {
   rm -f -- "$tmp"
 }
 
-# Manpager Syntax Highlighting (WIP)
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-
-# Set the default editor to neovim if and only if neovim is installed and set manpager as neovim
-
-if command -v nvim &>/dev/null; then
-  export EDITOR=nvim
-  export MANPAGER="nvim +Man!"
-fi
-
-# FZF Integration
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-# Source Autocompletions
-source ~/.autocompletions.sh
+# Source Other Sources
+source ~/.sources.sh
+###################################################################################################################################################################
+# Custom Additions
+###################################################################################################################################################################
+ 
+source ~/.custom_bash_commands.sh
