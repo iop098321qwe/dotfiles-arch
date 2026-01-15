@@ -57,8 +57,8 @@ hash = "527cb9b25154ce333e2da4cc2f67d69b8d4451b6"
 
 [[module.deps]]
 use = "iop098321qwe/commit-and-tag-version"
-rev = "04be16c"
-hash = "04be16c28bb2aaf47e4167d009ee2baa26594dc4"
+rev = "9180b02"
+hash = "9180b0275f1a9359894dde4c0288f104e5131e95"
 
 [[module.deps]]
 use = "iop098321qwe/chezmod"
@@ -69,4 +69,9 @@ hash = "8b52007152b23e28a45d7894e272ccd72f02e9c1"
 use = "iop098321qwe/cronmod"
 rev = "08fdf5a"
 hash = "08fdf5af78e3b517c54a35f14249b2f6db088b38"
+
+[[module.deps]]
+use = "iop098321qwe/opencodemod"
+rev = "9d0cea0"
+hash = "9d0cea016815ba624ed964cf267bdba2417fcce6"
 
