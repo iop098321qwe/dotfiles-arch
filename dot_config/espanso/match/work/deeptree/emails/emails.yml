@@ -299,6 +299,88 @@ matches:
       ---
       {{quote}}
 
+  - regex: ";emailmissnovm(?P<person>.*)\\."
+    label: Dynamic Missed Appointment Email
+    vars:
+      - name: quote
+        type: match
+        params:
+          trigger: ";quote"
+      - name: greeting
+        type: match
+        params:
+          trigger: ";greet"
+      - name: addongreeting
+        type: match
+        params:
+          trigger: ";addongreet"
+      - name: signoff
+        type: match
+        params:
+          trigger: ";signoff"
+    force_mode: clipboard
+    replace: |-
+      {{greeting}}{{person}},{{addongreeting}}
+
+      **RESPONSE REQUESTED**
+
+      I attempted to reach you by phone earlier but was unfortunately unable to make contact. I was not able to leave a voicemail at that time or was unable to reach the number on file, and am now following up with this email to ensure the message was received.$|$
+
+      As we were unable to reach you, leave a voicemail, or leave a message at the scheduled appointment time, our appointment could not be completed and we will need to coordinate a new time to connect that aligns with your availability.
+
+      We kindly request that you respond to this email or call us at {{dthelp}} at your earliest convenience to confirm the next steps regarding your ticket.
+
+      {{signoff}}
+
+      {{myname}}
+      {{title}}
+      {{company}}
+      {{dthelp}}
+
+      ---
+      {{quote}}
+
+  - regex: ";emailmissvm(?P<person>.*)\\."
+    label: Dynamic Missed Appointment w/ Voicemail or Message Email
+    vars:
+      - name: quote
+        type: match
+        params:
+          trigger: ";quote"
+      - name: greeting
+        type: match
+        params:
+          trigger: ";greet"
+      - name: addongreeting
+        type: match
+        params:
+          trigger: ";addongreet"
+      - name: signoff
+        type: match
+        params:
+          trigger: ";signoff"
+    force_mode: clipboard
+    replace: |-
+      {{greeting}}{{person}},{{addongreeting}}
+
+      **RESPONSE REQUESTED**
+
+      I attempted to reach you by phone earlier but was unfortunately unable to make contact. I had left a voicemail or a note at that time, and am following up with this email to ensure the message was received.$|$
+
+      As we were unable to reach you at the scheduled appointment time, our appointment could not be completed and we will need to coordinate a new time to connect that aligns with your availability.
+
+      We kindly request that you respond to this email or call us at {{dthelp}} at your earliest convenience to confirm the next steps regarding your ticket.
+
+      {{signoff}}
+
+      {{myname}}
+      {{title}}
+      {{company}}
+      {{dthelp}}
+
+      ---
+      {{quote}}
+
   - regex: ";emailnoti(?P<person>.*)\\."
     label: Dynamic Notification Email
     comment: "This is a dynamically generated email to send notifications. It is useful for sending emails that do not require a response."
