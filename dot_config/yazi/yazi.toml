@@ -69,6 +69,12 @@ rules = [
     "open",
     "reveal",
   ] },
+  # HTML
+  { mime = "text/html", use = [
+    "edit",
+    "open",
+    "reveal",
+  ] },
   # Text
   { mime = "text/*", use = [
     "edit",
