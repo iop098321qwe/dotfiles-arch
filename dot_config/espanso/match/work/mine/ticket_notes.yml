@@ -23,6 +23,12 @@ matches:
 
       {{complete}}
 
+  # Create a match for client verbally approving closure of ticket.
+  - regex: ";coord(?P<person>.*)\\."
+    replace: |-
+      Need to coordinate an appointment to work with {{person}} on this ticket.
+      $|$
+
     # Create a match for "Completed Tasks:".
   - trigger: ";cmp"
     replace: |-
