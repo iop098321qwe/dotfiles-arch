@@ -101,6 +101,12 @@ rules = [
     "edit",
     "reveal",
   ] },
+  # PDF
+  { mime = "application/pdf", use = [
+    "open",
+    "reveal",
+  ] },
+  # Javascript
   { mime = "*/javascript", use = [
     "edit",
     "reveal",
