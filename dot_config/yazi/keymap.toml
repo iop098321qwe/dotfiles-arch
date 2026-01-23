@@ -146,14 +146,14 @@ keymap = [
   # Sorting
   { on = [
     ",",
-    "m",
+    "M",
   ], run = [
     "sort mtime --reverse=no",
     "linemode mtime",
   ], desc = "Sort by modified time" },
   { on = [
     ",",
-    "M",
+    "m",
   ], run = [
     "sort mtime --reverse",
     "linemode mtime",
