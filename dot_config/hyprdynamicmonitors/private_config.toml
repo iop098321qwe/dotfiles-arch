@@ -33,7 +33,7 @@ config_file_type = "template"
 lid_state = "Closed"
 
 [[profiles.closed.conditions.required_monitors]]
-description = "Samsung Electric Company LS27AG32x H9JW800006"
+description = "Samsung Electric Company LC27G7xT H4ZR703280"
 monitor_tag = "monitor1"
 
 [profiles.open]
@@ -44,7 +44,7 @@ config_file_type = "template"
 lid_state = "Opened"
 
 [[profiles.open.conditions.required_monitors]]
-description = "Samsung Electric Company LS27AG32x H9JW800006"
+description = "Samsung Electric Company LC27G7xT H4ZR703280"
 monitor_tag = "monitor1"
 
 
