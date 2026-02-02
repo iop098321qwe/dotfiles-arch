@@ -27,6 +27,12 @@ description: "Create, update, and refine AGENTS.md files for a codebase. Use whe
 - Include a "Refining Existing AGENTS.md" section with steps for
   improving clarity and AI consumption.
 - Include a "Maintenance" section that documents the self-audit loop.
+- Require a "Tracked Files Overview" section in every AGENTS.md.
+  - Place it immediately after "Repository Overview" in the fixed order.
+  - List every tracked file in directory order with a concise purpose.
+  - Keep it updated whenever AGENTS.md changes or tracked files change.
+  - If a file purpose cannot be verified, mark "Verification needed".
+  - Keep entries short and atomic, with documented line exceptions.
 
 ## Required references
 
@@ -78,7 +84,7 @@ description: "Create, update, and refine AGENTS.md files for a codebase. Use whe
 5. Add the refining section.
    - Include the steps for improving and optimizing AGENTS.md for AI.
 6. Add the maintenance section.
-   - Include the self-audit loop and update recording guidance.
+   - Include the self-audit loop without change-log guidance.
 7. Validate the document against the checklist.
    - Use `references/agents-md-checklist.md`.
 
@@ -113,6 +119,13 @@ description: "Create, update, and refine AGENTS.md files for a codebase. Use whe
 
 - Summarize top-level directories with one-line roles.
 - Keep descriptions precise and verified.
+
+### Tracked Files Overview
+
+- List every tracked file in directory order with a one-line purpose.
+- Include files in the same order as they appear in the repo tree.
+- Mark unknown purposes as "Verification needed" with the source needed.
+- Keep entries short and atomic; document line-length exceptions.
 
 ### Architecture
 
@@ -168,14 +181,14 @@ description: "Create, update, and refine AGENTS.md files for a codebase. Use whe
 ### Maintenance
 
 - Define the self-audit loop and when to run it.
-- Record updates made to keep AGENTS.md current.
+- Do not record AGENTS.md changes inside AGENTS.md.
 
 ## Mandatory self-audit loop
 
 - Run the audit after any code change or config change.
 - Compare AGENTS.md to the repo and update mismatches.
 - Re-check commands, versions, directory names, and workflows.
-- Document the update in the Maintenance section.
+- Do not record AGENTS.md changes inside AGENTS.md.
 
 ## Conventional Commits requirement
 

@@ -238,6 +238,10 @@ keymap = [
   ], run = "cd ~/.config/hypr", desc = "hypr" },
   { on = [
     "g",
+    "o",
+  ], run = "cd ~/.config/opencode/skills", desc = "OpenCode Skills" },
+  { on = [
+    "g",
     "m",
   ], run = "cd ~/.config/espanso/match", desc = "Espanso Matches" },
   { on = [
@@ -267,11 +271,6 @@ keymap = [
     "G",
     "m",
   ], run = "cd ~/Documents/github_repositories/main_page", desc = "main_page" },
-  { on = [
-    "g",
-    "G",
-    "y",
-  ], run = "cd ~/Documents/github_repositories/yt-dlp", desc = "yt-dlp" },
   { on = [
     "g",
     "t",

@@ -18,6 +18,7 @@
 ## Architecture and structure
 
 - Top-level directories are explained.
+- Tracked files are listed in directory order with one-line purposes.
 - Core modules and boundaries are documented.
 - Data flow and integration points are summarized.
 

@@ -28,6 +28,10 @@ List required versions, OS constraints, and environment variables.
 
 Summarize top-level directories and their roles.
 
+## Tracked Files Overview
+
+List every tracked file in directory order with a one-line purpose.
+
 ## Architecture
 
 Describe key components and data flow at a high level.

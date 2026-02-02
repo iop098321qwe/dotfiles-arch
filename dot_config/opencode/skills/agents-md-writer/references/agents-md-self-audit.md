@@ -9,10 +9,11 @@
 ## Audit steps
 
 1. Re-scan the repo structure and tooling.
-2. Verify all commands still run and point to the right files.
-3. Compare AGENTS.md sections to current repo state.
-4. Update AGENTS.md where mismatches exist.
-5. Record the update in the Maintenance section.
+2. Re-scan tracked files and update the file list section.
+3. Verify all commands still run and point to the right files.
+4. Compare AGENTS.md sections to current repo state.
+5. Update AGENTS.md where mismatches exist.
+6. Record the update in the Maintenance section.
 
 ## Failure rules
 
