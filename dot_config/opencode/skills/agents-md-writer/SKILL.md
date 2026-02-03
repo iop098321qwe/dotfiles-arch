@@ -1,6 +1,6 @@
 ---
 name: agents-md-writer
-description: "Create, update, and refine AGENTS.md files for a codebase. Use when asked to write agent instructions, repo handoff guides, or project operating manuals, or when aligning AGENTS.md with the current code. Enforce a fixed section order, 80-character line limits (with documented exceptions), best practices and industry standards, and Conventional Commits when drafting commit messages. Always run a self-audit after code changes to keep AGENTS.md current."
+description: "Create, update, and refine AGENTS.md files for a codebase. Use when asked to write agent instructions, repo handoff guides, or project operating manuals, when aligning AGENTS.md with the current code, or whenever any AGENTS.md exists anywhere in the repo (must verify). Enforce a fixed section order, 80-character line limits (with documented exceptions), best practices and industry standards, and Conventional Commits when drafting commit messages. Always run a self-audit after code changes to keep AGENTS.md current."
 ---
 
 # AGENTS.md authoring and maintenance
@@ -8,6 +8,8 @@ description: "Create, update, and refine AGENTS.md files for a codebase. Use whe
 ## Purpose and scope
 
 - Create and maintain an accurate, thorough, and current AGENTS.md.
+- Use the references bundled with this skill. They are not part of the
+  target repo and must still be followed.
 - Use no assumptions. Every statement must be verified against the
   codebase, configuration, or explicit user input.
 - If verification is not possible, mark the item as
@@ -35,17 +37,25 @@ description: "Create, update, and refine AGENTS.md files for a codebase. Use whe
   - Keep entries short and atomic, with documented line exceptions.
 - Always use this skill whenever any AGENTS.md file is referenced,
   regardless of repository or directory.
+- Always verify whether any AGENTS.md exists anywhere in the repo, and use
+  this skill when one is found.
+- Always use this skill's references for requirements and format guidance,
+  even when the target repo does not contain those reference files.
 
 ## Required references
 
 - Read `references/agents-md-template.md` for the exact section order
-  and required headings.
+  and required headings. This reference is mandatory, even when the
+  target repo does not contain it.
 - Read `references/agents-md-checklist.md` to ensure completeness and
-  accuracy against the repo.
+  accuracy against the repo. This reference is mandatory, even when the
+  target repo does not contain it.
 - Read `references/agents-md-self-audit.md` and apply the audit loop
-  after any code change.
+  after any code change. This reference is mandatory, even when the
+  target repo does not contain it.
 - Read `references/conventional-commits.md` when drafting commit
-  messages.
+  messages. This reference is mandatory, even when the target repo does
+  not contain it.
 
 ## No-assumptions rule
 
