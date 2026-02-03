@@ -1,6 +1,16 @@
 ---
 name: agents-md-writer
-description: "Create, update, and refine AGENTS.md files for a codebase. Use when asked to write agent instructions, repo handoff guides, or project operating manuals, when aligning AGENTS.md with the current code, or whenever any AGENTS.md exists anywhere in the repo (must verify). Enforce a fixed section order, 80-character line limits (with documented exceptions), best practices and industry standards, and Conventional Commits when drafting commit messages. Always run a self-audit after code changes to keep AGENTS.md current."
+description: >-
+  Create, update, and refine AGENTS.md files for a codebase. Always
+  trigger when any command runs in a repo that contains AGENTS.md, even if
+  AGENTS.md is not referenced. Use when asked to write agent instructions,
+  repo handoff guides, or project operating manuals, when aligning
+  AGENTS.md with the current code, or whenever any AGENTS.md exists
+  anywhere in the repo (must verify). Enforce a fixed section order,
+  80-character line limits (with documented exceptions), best practices
+  and industry standards, and Conventional Commits when drafting commit
+  messages. Always run a self-audit after code changes to keep AGENTS.md
+  current.
 ---
 
 # AGENTS.md authoring and maintenance
@@ -39,6 +49,10 @@ description: "Create, update, and refine AGENTS.md files for a codebase. Use whe
   regardless of repository or directory.
 - Always verify whether any AGENTS.md exists anywhere in the repo, and use
   this skill when one is found.
+- Treat any command that runs in a repo with an AGENTS.md file as a
+  trigger to use this skill, even if AGENTS.md is not referenced.
+- After any non-AGENTS.md file change in such a repo, re-run the
+  self-audit loop and update AGENTS.md if it is out of sync.
 - Always use this skill's references for requirements and format guidance,
   even when the target repo does not contain those reference files.
 

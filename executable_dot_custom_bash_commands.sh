@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-CBC_VERSION="v306.12.1"
+CBC_VERSION="v306.14.0"
 
 ################################################################################
 # CUSTOM BASH COMMANDS (by iop098321qwe)
@@ -1025,17 +1025,17 @@ wiki() {
       ;;
     C)
       cbc_style_message "$CATPPUCCIN_SKY" "Opening Cheatsheet..."
-      nohup xdg-open "$wiki_url/Cheatsheet" >/dev/null 2>&1 &
+      setsid -f xdg-open "$wiki_url/Cheatsheet" >/dev/null 2>&1
       return 0
       ;;
     A)
       cbc_style_message "$CATPPUCCIN_SKY" "Opening Alias Reference..."
-      nohup xdg-open "$wiki_url/Alias-Reference" >/dev/null 2>&1 &
+      setsid -f xdg-open "$wiki_url/Alias-Reference" >/dev/null 2>&1
       return 0
       ;;
     F)
       cbc_style_message "$CATPPUCCIN_SKY" "Opening Command Reference..."
-      nohup xdg-open "$wiki_url/Command-Reference" >/dev/null 2>&1 &
+      setsid -f xdg-open "$wiki_url/Command-Reference" >/dev/null 2>&1
       return 0
       ;;
     \?)
@@ -1044,7 +1044,7 @@ wiki() {
       ;;
     *)
       cbc_style_message "$CATPPUCCIN_SKY" "Opening CBC wiki..."
-      nohup xdg-open "$wiki_url" >/dev/null 2>&1 &
+      setsid -f xdg-open "$wiki_url" >/dev/null 2>&1
       return 0
       ;;
     esac
@@ -1054,7 +1054,7 @@ wiki() {
 
   # Function to open the CBC wiki in the default browser
   open_wiki() {
-    nohup xdg-open "$wiki_url" >/dev/null 2>&1 &
+    setsid -f xdg-open "$wiki_url" >/dev/null 2>&1
   }
 
   # Call the open_wiki function
@@ -1107,11 +1107,60 @@ changes() {
 
   # Function to open the changelog in the default browser
   open_changelog() {
-    nohup xdg-open "$changelog_url" >/dev/null 2>&1 &
+    setsid -f xdg-open "$changelog_url" >/dev/null 2>&1
   }
 
   # Call the open_changelog function
   open_changelog
+}
+
+################################################################################
+# README
+################################################################################
+
+readme() {
+  OPTIND=1
+
+  local readme_url="https://github.com/iop098321qwe/custom_bash_commands/blob/main/README.md"
+
+  usage() {
+    cbc_style_box "$CATPPUCCIN_MAUVE" "Description:" \
+      "  Open the Custom Bash Commands README in your default browser."
+
+    cbc_style_box "$CATPPUCCIN_BLUE" "Usage:" \
+      "  readme [-h|-c]"
+
+    cbc_style_box "$CATPPUCCIN_TEAL" "Options:" \
+      "  -h    Display this help message" \
+      "  -c    Copy the README URL to the clipboard"
+
+    cbc_style_box "$CATPPUCCIN_PEACH" "Example:" \
+      "  readme"
+  }
+
+  while getopts ":hc" opt; do
+    case $opt in
+    h)
+      usage
+      return 0
+      ;;
+    c)
+      echo "$readme_url" | xclip -selection clipboard
+      cbc_style_message "$CATPPUCCIN_GREEN" "README URL copied to clipboard."
+      return 0
+      ;;
+    *)
+      cbc_style_message "$CATPPUCCIN_RED" "Invalid option: -$OPTARG"
+      return 1
+      ;;
+    esac
+  done
+
+  open_readme() {
+    setsid -f xdg-open "$readme_url" >/dev/null 2>&1
+  }
+
+  open_readme
 }
 
 ################################################################################
@@ -1160,7 +1209,7 @@ releases() {
 
   # Function to open the changelog in the default browser
   open_releases() {
-    nohup xdg-open "$releases_url" >/dev/null 2>&1 &
+    setsid -f xdg-open "$releases_url" >/dev/null 2>&1
   }
 
   # Call the open_releases function
@@ -1207,7 +1256,7 @@ dotfiles() {
   dotfiles_url="https://github.com/iop098321qwe/dotfiles"
 
   # Open the dotfiles repository in the default browser
-  xdg-open "$dotfiles_url"
+  setsid -f xdg-open "$dotfiles_url" >/dev/null 2>&1
 }
 
 ################################################################################
@@ -1250,7 +1299,7 @@ arch_dotfiles() {
   arch_dotfiles_url="https://github.com/iop098321qwe/dotfiles-arch"
 
   # Open the arch_dotfiles repository in the default browser
-  xdg-open "$arch_dotfiles_url"
+  setsid -f xdg-open "$arch_dotfiles_url" >/dev/null 2>&1
 }
 
 ################################################################################
@@ -1554,6 +1603,7 @@ cbcs() {
     "  display_info"
     "  display_version"
     "  dotfiles"
+    "  readme"
     "  regex_help"
     "  releases"
     "  setup_directories"
@@ -1618,6 +1668,7 @@ cbcs() {
     "  display_info       Show CBC version info"
     "  display_version    Print the current CBC version"
     "  dotfiles           Open the dotfiles repository"
+    "  readme             Open the CBC README in a browser"
     "  regex_help         Regex cheat-sheets with flavor selection"
     "  releases           Open the CBC releases page"
     "  setup_directories  Create common directories under ~/Documents"

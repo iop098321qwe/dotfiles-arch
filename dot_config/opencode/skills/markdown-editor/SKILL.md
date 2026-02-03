@@ -1,15 +1,17 @@
 ---
 name: markdown-editor
 description: "Edit or update Markdown files (.md) following best practices and
-industry standards. Use for any .md change, unless the file is inside a
-directory that contains a .obsidian/ folder (treat as Obsidian vault and do not
-use this skill)."
+industry standards. ALWAYS use for any .md edit or review, even if the user does
+not explicitly request it, unless the file is inside a directory that contains a
+.obsidian/ folder (treat as Obsidian vault and do not use this skill)."
 ---
 
 # Markdown editing guidance
 
 ## Core rules
 
+- Always invoke this skill for any .md edit or review unless the Obsidian
+  exception applies.
 - Use GitHub Flavored Markdown unless the repo specifies otherwise.
 - Preserve the existing file style and structure.
 - Keep heading levels consistent and sequential.
