@@ -35,3 +35,4 @@
 - Section order matches the template.
 - Bullets are short and action-focused.
 - No stale or duplicated content remains.
+- No update notes or logs appear in AGENTS.md.

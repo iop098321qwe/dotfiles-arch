@@ -39,6 +39,8 @@ description: >-
 - Include a "Refining Existing AGENTS.md" section with steps for
   improving clarity and AI consumption.
 - Include a "Maintenance" section that documents the self-audit loop.
+- Always scan AGENTS.md for update notes or logs and remove them.
+- Never append or preserve update notes or logs in AGENTS.md.
 - Require a "Tracked Files Overview" section in every AGENTS.md.
   - Place it immediately after "Repository Overview" in the fixed order.
   - List every tracked file in directory order with a concise purpose.
@@ -111,6 +113,7 @@ description: >-
    - Include the steps for improving and optimizing AGENTS.md for AI.
 6. Add the maintenance section.
    - Include the self-audit loop without change-log guidance.
+   - Require a scan to remove update notes or logs.
 7. Validate the document against the checklist.
    - Use `references/agents-md-checklist.md`.
 
@@ -208,6 +211,7 @@ description: >-
 
 - Define the self-audit loop and when to run it.
 - Do not record AGENTS.md changes inside AGENTS.md.
+- Remove any update notes or logs from AGENTS.md.
 
 ## Mandatory self-audit loop
 

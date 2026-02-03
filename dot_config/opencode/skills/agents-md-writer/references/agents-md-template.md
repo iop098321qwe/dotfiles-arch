@@ -76,4 +76,4 @@ for AI consumption. Keep this section maintained.
 ## Maintenance
 
 Explain the self-audit loop: after any code change, re-check this file
-against the repo and update it. Record update notes here.
+against the repo and update it. Do not record update notes or logs.

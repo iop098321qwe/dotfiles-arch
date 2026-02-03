@@ -13,7 +13,7 @@
 3. Verify all commands still run and point to the right files.
 4. Compare AGENTS.md sections to current repo state.
 5. Update AGENTS.md where mismatches exist.
-6. Record the update in the Maintenance section.
+6. Remove any update notes or logs from AGENTS.md.
 
 ## Failure rules
 
