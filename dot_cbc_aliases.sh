@@ -8,7 +8,6 @@
 # ALIASES
 ################################################################################
 
-alias dl='downloads'
 alias editbash='$EDITOR ~/.bashrc'
 alias fman='compgen -c | fzf | xargs man'
 alias fzf='fzf -m'
@@ -19,7 +18,6 @@ alias myip='curl http://ipecho.net/plain; echo'
 alias nv='files=$(fzf --multi --prompt="Select files/dirs for nvim: " --bind "enter:accept") && [ -n "$files" ] && nvim $files'
 alias please='sudo $(history -p !!)'
 alias refresh='source ~/.bashrc && clear'
-alias rma='rm -rfI'
 
 ################################################################################
 # CBC SPECIFIC
@@ -88,9 +86,9 @@ if [ -f /etc/os-release ]; then
   esac
 fi
 
-alias commands='cbcs | batcat'
-alias commandsmore='cbcs -a | batcat'
-alias seebash='batcat ~/.bashrc'
+alias commands='cbcs | bat'
+alias commandsmore='cbcs -a | bat'
+alias seebash='bat ~/.bashrc'
 
 ################################################################################
 # HISTORY

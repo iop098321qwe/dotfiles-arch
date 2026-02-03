@@ -37,18 +37,13 @@ hash = "b790aea549a5884459cef91fd8523772ac9da0e7"
 
 [[module.deps]]
 use = "iop098321qwe/interactive"
-rev = "c56ca7a"
-hash = "c56ca7a8d7a0f751460a5e3a123a2c9bec768d38"
+rev = "aa93eba"
+hash = "aa93eba5bf6147f491b7cff6734135d6029a14d6"
 
 [[module.deps]]
 use = "iop098321qwe/surfingkeys-update"
 rev = "8a453a1"
 hash = "8a453a14ded6892d7d17bdc3b5ab2eb61275f4c9"
-
-[[module.deps]]
-use = "iop098321qwe/netbrief"
-rev = "527cb9b"
-hash = "527cb9b25154ce333e2da4cc2f67d69b8d4451b6"
 
 [[module.deps]]
 use = "iop098321qwe/commit-and-tag-version"

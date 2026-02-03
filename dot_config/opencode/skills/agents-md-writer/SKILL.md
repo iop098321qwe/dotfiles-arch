@@ -33,6 +33,8 @@ description: "Create, update, and refine AGENTS.md files for a codebase. Use whe
   - Keep it updated whenever AGENTS.md changes or tracked files change.
   - If a file purpose cannot be verified, mark "Verification needed".
   - Keep entries short and atomic, with documented line exceptions.
+- Always use this skill whenever any AGENTS.md file is referenced,
+  regardless of repository or directory.
 
 ## Required references
 
