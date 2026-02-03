@@ -32,8 +32,8 @@ hash = "4ffbb1eb3cf97b97382e400d454f96592f79917c"
 
 [[module.deps]]
 use = "iop098321qwe/cd-shortcuts"
-rev = "b790aea"
-hash = "b790aea549a5884459cef91fd8523772ac9da0e7"
+rev = "7aac2a8"
+hash = "7aac2a8893afd61e171ac77a7ab41232858e8c5e"
 
 [[module.deps]]
 use = "iop098321qwe/interactive"
