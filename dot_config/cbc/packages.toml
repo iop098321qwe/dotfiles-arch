@@ -37,8 +37,8 @@ hash = "7aac2a8893afd61e171ac77a7ab41232858e8c5e"
 
 [[module.deps]]
 use = "iop098321qwe/interactive"
-rev = "aa93eba"
-hash = "aa93eba5bf6147f491b7cff6734135d6029a14d6"
+rev = "9274980"
+hash = "9274980ed4c11fe941472f6930f076bed38694b0"
 
 [[module.deps]]
 use = "iop098321qwe/surfingkeys-update"
@@ -62,6 +62,6 @@ hash = "08fdf5af78e3b517c54a35f14249b2f6db088b38"
 
 [[module.deps]]
 use = "iop098321qwe/opencodemod"
-rev = "9d0cea0"
-hash = "9d0cea016815ba624ed964cf267bdba2417fcce6"
+rev = "2c24601"
+hash = "2c24601d10630a6f74ddb1c37f14a1d48be9433d"
 
