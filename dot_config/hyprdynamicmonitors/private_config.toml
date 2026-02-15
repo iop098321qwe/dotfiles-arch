@@ -44,6 +44,10 @@ config_file_type = "template"
 lid_state = "Opened"
 
 [[profiles.open.conditions.required_monitors]]
+description = "InfoVision Optoelectronics (Kunshan) Co.Ltd China 0x3D41 0x00000004"
+monitor_tag = "monitor0"
+
+[[profiles.open.conditions.required_monitors]]
 description = "Samsung Electric Company LC27G7xT H4ZR703280"
 monitor_tag = "monitor1"
 
@@ -51,6 +55,7 @@ monitor_tag = "monitor1"
 [profiles.laptop-only]
 config_file = "/home/grymm/.config/hyprdynamicmonitors/hyprconfigs/laptop-only.go.tmpl"
 config_file_type = "template"
+
 [profiles.laptop-only.conditions]
 
 [[profiles.laptop-only.conditions.required_monitors]]
