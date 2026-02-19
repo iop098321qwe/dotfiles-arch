@@ -65,3 +65,8 @@ use = "iop098321qwe/opencodemod"
 rev = "2c24601"
 hash = "2c24601d10630a6f74ddb1c37f14a1d48be9433d"
 
+[[module.deps]]
+use = "iop098321qwe/githubmod"
+rev = "5c1c8e7"
+hash = "5c1c8e7a4e7793892842f08981d737090e706e20"
+
