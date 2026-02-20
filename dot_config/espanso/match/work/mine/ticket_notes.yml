@@ -8,7 +8,7 @@ matches:
       - name: "clipb"
         type: "clipboard"
     replace: |-
-      Temporary Password: {{clipb}}
+      Password: {{clipb}}
       $|$
 
   # Create a match for client verbally approving closure of ticket.
