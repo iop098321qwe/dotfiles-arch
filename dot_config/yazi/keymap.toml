@@ -804,6 +804,6 @@ run = "plugin autosession -- save-and-quit"
 desc = "Save session and quit"
 
 [[mgr.prepend_keymap]]
-on = ["B"]
+on = ["b"]
 run = "plugin recycle-bin"
 desc = "Open Recycle Bin menu"
