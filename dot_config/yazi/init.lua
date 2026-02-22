@@ -21,3 +21,6 @@ require("starship"):setup({
 
 -- Autosession
 require("autosession"):setup()
+
+-- Recycle Bin
+require("recycle-bin"):setup()

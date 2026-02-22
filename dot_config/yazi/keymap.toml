@@ -802,3 +802,8 @@ desc = "sudo chmod"
 on = ["q"]
 run = "plugin autosession -- save-and-quit"
 desc = "Save session and quit"
+
+[[mgr.prepend_keymap]]
+on = ["B"]
+run = "plugin recycle-bin"
+desc = "Open Recycle Bin menu"

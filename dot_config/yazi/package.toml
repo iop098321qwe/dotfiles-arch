@@ -78,6 +78,11 @@ use = "barbanevosa/autosession"
 rev = "cbdde95"
 hash = "bd7b86e05fa0ffae4e0410b1b6135c4a"
 
+[[plugin.deps]]
+use = "uhs-robert/recycle-bin"
+rev = "fa68711"
+hash = "8714306b5cac6359edbacbf545fbd691"
+
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
 rev = "3001521"
