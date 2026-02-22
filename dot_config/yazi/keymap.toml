@@ -803,6 +803,7 @@ on = ["q"]
 run = "plugin autosession -- save-and-quit"
 desc = "Save session and quit"
 
+# recycle-bin plugin
 [[mgr.prepend_keymap]]
 on = ["b"]
 run = "plugin recycle-bin"
