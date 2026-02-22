@@ -19,8 +19,8 @@ require("starship"):setup({
   config_file = "~/.config/yazi_starship.toml", -- Default: nil
 })
 
--- Autosession
-require("autosession"):setup()
+-- -- Autosession
+-- require("autosession"):setup()
 
 -- Recycle Bin
 require("recycle-bin"):setup()
