@@ -808,3 +808,14 @@ desc = "Save session and quit"
 on = ["b"]
 run = "plugin recycle-bin"
 desc = "Open Recycle Bin menu"
+
+# close-and-restore-tab plugin
+[[mgr.prepend_keymap]]
+on = [ "<C-w>" ]
+run = "plugin close-and-restore-tab close_to_right"
+desc = "Close the current tab and turn to right tab, or quit if it is last tab"
+
+[[mgr.prepend_keymap]]
+on = [ "<C-t>" ]
+run = "plugin close-and-restore-tab restore"
+desc = "Restore the closed tab"
