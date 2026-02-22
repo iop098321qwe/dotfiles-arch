@@ -819,3 +819,13 @@ desc = "Close the current tab and turn to right tab, or quit if it is last tab"
 on = [ "<C-t>" ]
 run = "plugin close-and-restore-tab restore"
 desc = "Restore the closed tab"
+
+# nextension bwd
+[[mgr.prepend_keymap]]
+on = "<"
+run = "plugin nextension bwd"
+
+# nextension fwd
+[[mgr.prepend_keymap]]
+on = ">"
+run = "plugin nextension fwd"
