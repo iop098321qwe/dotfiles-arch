@@ -111,6 +111,11 @@ rules = [
     "open",
     "reveal",
   ] },
+  # Application
+  { mime = "application/*", use = [
+    "open",
+    "reveal",
+  ] },
   # Javascript
   { mime = "*/javascript", use = [
     "edit",
