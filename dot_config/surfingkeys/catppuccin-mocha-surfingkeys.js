@@ -104,6 +104,8 @@ const themeCSS = `
     --sk-surface-glass: rgba(24, 24, 37, 0.78);
     --sk-surface-card: rgba(49, 50, 68, 0.72);
     --sk-focus-ring: rgba(180, 190, 254, 0.45);
+    --sk-status-input-bg: rgba(30, 30, 46, 0.9);
+    --sk-status-input-border: rgba(137, 180, 250, 0.45);
   }
 
   .sk_theme {
@@ -1020,38 +1022,145 @@ const themeCSS = `
     right: auto;
     transform: translateX(-50%);
     z-index: 2147483000;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    padding: 8px 12px 6px;
+    gap: 0.35rem;
+    padding: 0.35rem 0.45rem;
     width: auto;
-    max-width: 22rem;
-    min-width: 12rem;
+    max-width: calc(100vw - 1.5rem);
+    min-width: 11rem;
     margin-bottom: 1rem;
     text-align: center;
-    background: ${softBackdrop};
+    background: var(--sk-surface-glass);
     color: ${mochaPalette.text};
     border: var(--sk-panel-border, 2px solid ${contrastBorderColor});
     border-radius: var(--sk-radius-md);
-    box-shadow: 0px 20px 40px 2px rgba(17, 17, 27, 1);
+    box-shadow: 0 16px 34px rgba(17, 17, 27, 0.82);
     backdrop-filter: blur(12px);
     transition: border-color var(--sk-motion-fast) var(--sk-motion-ease), box-shadow var(--sk-motion-fast) var(--sk-motion-ease);
   }
 
   #sk_status > span {
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
+    padding: 0 !important;
     border-right: none !important;
   }
 
+  #sk_status.catppuccin-finder-open {
+    justify-content: flex-start;
+    width: min(34rem, calc(100vw - 1.5rem));
+    padding: 0.45rem 0.5rem;
+    gap: 0.4rem;
+    border-color: ${mochaPalette.blue};
+  }
+
+  #sk_status.catppuccin-finder-open > span:nth-child(1) {
+    display: none;
+  }
+
+  #sk_status.catppuccin-finder-open > span:nth-child(2) {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 0.08rem 0.5rem !important;
+    border-radius: 10px;
+    border: 1px solid var(--sk-status-input-border);
+    background: var(--sk-status-input-bg);
+    box-shadow: inset 0 1px 0 rgba(205, 214, 244, 0.08);
+  }
+
+  #sk_status.catppuccin-finder-open > span:nth-child(3) {
+    margin-left: 0.15rem;
+    color: ${mochaPalette.subtext1};
+    font-size: 9pt;
+  }
+
+  #sk_status.catppuccin-find-not-found {
+    overflow: visible;
+  }
+
+  #sk_status.catppuccin-find-not-found:not(.catppuccin-finder-open) {
+    width: 0;
+    min-width: 0;
+    padding: 0;
+    border-color: transparent;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  #sk_status.catppuccin-find-not-found > span:nth-child(3) {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 0.45rem);
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.42rem;
+    min-width: 14rem;
+    max-width: min(34rem, calc(100vw - 1.5rem));
+    padding: 0.42rem 0.65rem !important;
+    border-radius: var(--sk-radius-sm);
+    border: 1px solid rgba(243, 139, 168, 0.75);
+    background: rgba(49, 50, 68, 0.95);
+    color: ${mochaPalette.rosewater};
+    font-size: 9.4pt;
+    font-weight: 600;
+    line-height: 1.35;
+    text-align: center;
+    white-space: normal;
+    box-shadow: 0 14px 28px rgba(17, 17, 27, 0.78);
+    z-index: 1;
+  }
+
+  #sk_status.catppuccin-find-not-found > span:nth-child(3)::before {
+    content: "No Match";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.1rem 0.42rem;
+    border-radius: 999px;
+    border: 1px solid rgba(243, 139, 168, 0.52);
+    background: rgba(30, 30, 46, 0.92);
+    color: ${mochaPalette.red};
+    font-size: 8pt;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    flex: 0 0 auto;
+  }
+
   #sk_find {
-    font-size: 10pt;
-    font-weight: bold;
+    font-size: 11pt;
+    font-weight: 500;
     text-align: left;
-    padding: 0.35rem 0.75rem;
-    flex: 1 1 14rem;
-    max-width: 16rem;
-    min-width: 10rem;
+    width: 100%;
+    flex: 1 1 auto;
+    max-width: none;
+    min-width: 0;
+    padding: 0.2rem 0.18rem;
     margin: 0;
+    letter-spacing: 0.01em;
+    color: ${mochaPalette.text} !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    caret-color: ${mochaPalette.rosewater};
+  }
+
+  #sk_find:focus,
+  #sk_find:active {
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  #sk_find::placeholder {
+    color: ${mochaPalette.overlay1};
   }
 
   #sk_status span:empty {
@@ -1241,9 +1350,30 @@ const themeCSS = `
       padding: 0.4rem 0.45rem;
     }
     #sk_status {
-      min-width: 10rem;
-      max-width: calc(100vw - 1.5rem);
+      min-width: 0;
+      width: calc(100vw - 1.5rem);
       margin-bottom: 0.5rem;
+      padding: 0.4rem 0.45rem;
+    }
+    #sk_status.catppuccin-finder-open {
+      width: calc(100vw - 1.5rem);
+      padding: 0.35rem 0.4rem;
+      gap: 0.3rem;
+    }
+    #sk_status.catppuccin-find-not-found > span:nth-child(3) {
+      min-width: 0;
+      width: calc(100vw - 1rem);
+      max-width: calc(100vw - 1rem);
+      font-size: 9pt;
+      padding: 0.38rem 0.52rem !important;
+    }
+    #sk_status.catppuccin-find-not-found > span:nth-child(3)::before {
+      font-size: 7.4pt;
+      padding: 0.08rem 0.34rem;
+    }
+    #sk_find {
+      font-size: 10pt;
+      padding: 0.16rem 0.12rem;
     }
   }
 `;
@@ -1334,5 +1464,48 @@ settings.theme = themeCSS;
     document.addEventListener("DOMContentLoaded", waitForTabsContainer, { once: true });
   } else {
     waitForTabsContainer();
+  }
+})();
+
+/**
+ * Track finder/status states so CSS can present dedicated UI treatments.
+ */
+(function enableCatppuccinStatusStateClasses() {
+  if (typeof document === "undefined") {
+    return;
+  }
+
+  const statusContainerId = "sk_status";
+  const finderOpenClass = "catppuccin-finder-open";
+  const findNotFoundClass = "catppuccin-find-not-found";
+  const notFoundPattern = /^Pattern not found:/i;
+
+  const syncStatusClasses = (statusBar) => {
+    const statusSpans = statusBar.querySelectorAll("span");
+    const finderInput = statusBar.querySelector("#sk_find");
+    const tertiaryStatus = statusSpans[2] ? statusSpans[2].textContent.trim() : "";
+
+    statusBar.classList.toggle(finderOpenClass, Boolean(finderInput));
+    statusBar.classList.toggle(findNotFoundClass, notFoundPattern.test(tertiaryStatus));
+  };
+
+  const waitForStatusContainer = () => {
+    const statusBar = document.getElementById(statusContainerId);
+    if (!statusBar) {
+      window.setTimeout(waitForStatusContainer, 250);
+      return;
+    }
+
+    const observer = new MutationObserver(() => {
+      syncStatusClasses(statusBar);
+    });
+    observer.observe(statusBar, { childList: true, subtree: true, characterData: true });
+    syncStatusClasses(statusBar);
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", waitForStatusContainer, { once: true });
+  } else {
+    waitForStatusContainer();
   }
 })();
