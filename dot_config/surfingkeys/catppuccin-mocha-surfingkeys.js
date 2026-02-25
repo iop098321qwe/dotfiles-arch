@@ -104,6 +104,8 @@ const themeCSS = `
     --sk-surface-glass: rgba(24, 24, 37, 0.78);
     --sk-surface-card: rgba(49, 50, 68, 0.72);
     --sk-focus-ring: rgba(180, 190, 254, 0.45);
+    --sk-status-token-bg: rgba(49, 50, 68, 0.9);
+    --sk-status-token-border: rgba(249, 226, 175, 0.45);
     --sk-status-input-bg: rgba(30, 30, 46, 0.9);
     --sk-status-input-border: rgba(137, 180, 250, 0.45);
   }
@@ -1058,7 +1060,16 @@ const themeCSS = `
   }
 
   #sk_status.catppuccin-finder-open > span:nth-child(1) {
-    display: none;
+    flex: 0 0 auto;
+    min-width: 2rem;
+    justify-content: center;
+    padding: 0.16rem 0.55rem !important;
+    border-radius: 999px;
+    border: 1px solid var(--sk-status-token-border);
+    background: var(--sk-status-token-bg);
+    color: ${mochaPalette.yellow};
+    font-weight: 700;
+    letter-spacing: 0.03em;
   }
 
   #sk_status.catppuccin-finder-open > span:nth-child(2) {
@@ -1359,6 +1370,10 @@ const themeCSS = `
       width: calc(100vw - 1.5rem);
       padding: 0.35rem 0.4rem;
       gap: 0.3rem;
+    }
+    #sk_status.catppuccin-finder-open > span:nth-child(1) {
+      min-width: 1.7rem;
+      padding: 0.14rem 0.45rem !important;
     }
     #sk_status.catppuccin-find-not-found > span:nth-child(3) {
       min-width: 0;
