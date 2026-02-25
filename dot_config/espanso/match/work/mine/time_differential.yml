@@ -1,0 +1,12 @@
+# espanso match file
+
+# Inputting time differential for time entry
+matches:
+  - trigger: ";td"
+    replace: |-
+      *Time Differential*:
+      `Txxxxxxxxxxxx` ~Time Differential, {{myfirst}}, {{today}}
+
+      $|$
+
+      :scheduled: *1230-1330* ~LUNCH

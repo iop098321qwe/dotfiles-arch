@@ -1,0 +1,23 @@
+matches:
+  - regex: ";signature"
+    label: Dynamic Deeptree Email
+    vars:
+      - name: quote
+        type: match
+        params:
+          trigger: ";quote"
+      - name: signoff
+        type: match
+        params:
+          trigger: ";signoff"
+    force_mode: clipboard
+    replace: |-
+      {{signoff}}
+
+      {{myname}}
+      {{title}}
+      {{company}}
+      {{dthelp}}
+
+      ---
+      {{quote}}

@@ -1,0 +1,356 @@
+# Espanso Match File
+
+# Matches for Ticket Notes.
+matches:
+  # Create a match for pasting the temporary password.
+  - trigger: ";tp"
+    vars:
+      - name: "clipb"
+        type: "clipboard"
+    replace: |-
+      Password: {{clipb}}
+      $|$
+
+  # Create a match for client verbally approving closure of ticket.
+  - regex: ";va(?P<person>.*)\\."
+    vars:
+      - name: complete
+        type: match
+        params:
+          trigger: ";nscom"
+    replace: |-
+      {{person}} expressed satisfactory completion and verbally approved the closure of the ticket.
+
+      {{complete}}
+
+  # Create a match for client verbally approving closure of ticket.
+  - regex: ";coord(?P<person>.*)\\."
+    replace: |-
+      Need to coordinate an appointment to work with {{person}} on this ticket.
+      $|$
+
+    # Create a match for "Completed Tasks:".
+  - trigger: ";cmp"
+    replace: |-
+      Completed Tasks:
+      $|$
+
+    # Create a match for "Determined that ...".
+  - trigger: ";det"
+    replace: |-
+      Determined that $|$
+
+    # Create a match for "Needs time scheduled ...".
+  - trigger: ";nts"
+    replace: |-
+      Needs time scheduled $|$
+
+    # Create a match for "Attempted to ...".
+  - trigger: ";att"
+    replace: |-
+      Attempted to $|$
+
+    # Create a match for "Research".
+  - trigger: ";research"
+    replace: |-
+      Performed research on ticket tasks, methods, questions, or requests.
+      $|$
+
+  - regex: ";apptech(?P<technician>.*)\\."
+    form: |-
+      Set appointment for {{technician}} to address $|$ from [[start]]-[[end]] MST.
+
+  - regex: ';appclient(?P<technician>[^,]+),(?P<person>[^.]+)\.'
+    form: |-
+      Set appointment for {{technician}} to connect with {{person}} for $|$from [[start]]-[[end]] MST.
+
+    # Create a match for "Agent".
+  - trigger: ";agent"
+    replace: |-
+      Acquired installation media for RMM Agent.
+      Performed steps to install RMM Agent.
+      Successfully installed RMM Agent on the users computer.
+      Tested the RMM Agent installation to ensure proper operation.
+      Determined necessary settings for RMM Agent.
+      Configured RMM Agent with necessary settings.
+      Tested RMM Agent > successful.
+      Posted in RC for RMM Agent approval.
+      $|$
+
+    # Create a match for "Estimated Time for Completion:".
+  - trigger: ";etc"
+    form: |-
+      Estimated Time for Completion (ETC): ~[[minutes]] minutes$|$
+
+    # Create a match for "Estimated Appointment Time:".
+  - trigger: ";eat"
+    form: |-
+      Estimated Appointment Time (EAT): ~[[minutes]] minutes$|$
+
+    # Create a match for "Review".
+  - trigger: ";rev"
+    replace: |-
+      Reviewed the ticket body, ticket notes, time entries, and/or any supplementary information.
+      $|$
+
+    # Create a match for "Acknowledged".
+  - trigger: ";ack"
+    replace: |-
+      This ticket was reviewed and acknowledged and may be closed as complete at this time.
+      No further action is necessary.
+
+  # Create a match for Disk Space Remediation
+  - regex: ";disk(?P<computer>.*)\\."
+    form: |-
+      Completed Tasks:
+      Ensured that {{computer}} is powered on and connected to a network.
+      Verified that {{computer}} is showing online in Datto RMM portal.
+      Successfully connected to {{computer}} via PowerShell/RMM Agent.
+      Installed/verified installation of WizTree on {{computer}}.
+      Installed/verified installation PatchCleaner on {{computer}}.
+      Installed/verified installation BCUninstaller on {{computer}}.
+      Ran DISM to perform system cleanup and repair on {{computer}}.
+      Executed the built-in Disk Cleanup utility on {{computer}} to remove temporary and cached files.
+      Used WizTree to identify and delete large or unnecessary files occupying excessive space.
+      Determined if large/excessive user files could be removed.
+      Determined if cloud storage services are in use/locally downloaded on {{computer}}.
+      Ran PatchCleaner to remove orphaned installation files.
+      Utilized BCUninstaller to remove outdated or unused applications.
+      Reclaimed to approximately [[percentage]]% of total disk space.
+
+      Next Steps:
+      'Complete'
+      $|$
+
+  - regex: ";fue(?P<person>.*)\\."
+    replace: |-
+      Drafted a follow up email for {{person}}.
+      Determined any updates and notes to include.
+      Confirmed email details.
+      Sent {{person}} the follow up email.
+
+      Next Steps:
+      'Waiting Customer'
+      $|$
+
+  # Create a match for SSL certificates
+  - trigger: ";cert"
+    replace: |-
+      Completed Tasks:
+      Verified certificate should auto-renew.
+
+      Next Steps:
+      'Complete'
+
+  # Create a match for Domain Renewal
+  - trigger: ";dom"
+    replace: |-
+      Completed Tasks:
+      Verified that the credit card is valid.
+      Verified that the domain is scheduled to renew.
+      Verified that the domain renewal is scheduled within the expiration date of the card.
+      There should be no known issues with the domain renewal.
+
+      Next Steps:
+      'Complete'
+      $|$
+
+  # Create a match for travel completion
+  - trigger: ";trav"
+    form: |-
+      Travel to/from [[place]] > Mileage = [[distance]] Miles
+      $|$
+
+  - regex: ";conf(?P<software>.*)\\."
+    replace: |-
+      Performed research on {{software}} settings.
+      Determined necessary settings for {{software}}.
+      Configured {{software}} with necessary settings.
+      Tested {{software}} > successful.
+      $|$
+
+  - regex: ";sett(?P<software>.*)\\."
+    replace: |-
+      Adjusted the settings for {{software}}.
+      Ensured that settings were effective for {{software}}.
+      $|$
+
+  - regex: ";update(?P<device>.*)\\."
+    replace: |-
+      Initiated review of {{device}} to determine whether updates were required.
+      Confirmed that system prerequisites and dependencies were in place to ensure a successful update process on {{device}}.
+      Proceeded with applying the appropriate updates to {{device}}. 
+      Ensured that the latest stable versions and patches were implemented on {{device}}.
+      Monitored the update process to verify successful installation and to confirm that no errors or warnings were encountered on {{device}}.
+      Completed update process for {{device}} and confirmed operational stability following the changes.
+
+  - regex: ";upgrade(?P<device>.*)\\."
+    replace: |-
+      Initiated review of {{device}} to confirm the need for a full Operating System upgrade.
+      Verified hardware and software compatibility prerequisites to ensure {{device}} was capable of supporting the latest Operating System release.
+      Backed up critical data and validated recovery options to mitigate potential risks associated with the upgrade.
+      Proceeded with performing the Operating System upgrade on {{device}}, applying the latest stable release.
+      Monitored the upgrade process to track progress and ensure completion without errors or interruptions.
+      Conducted post-upgrade validation, confirming that core functions, applications, and services on {{device}} remained operational.
+      Completed full Operating System upgrade on {{device}}.
+
+  - regex: ";ques(?P<person>.*)\\."
+    replace: |-
+      Answered questions for {{person}}.
+      Determined if {{person}} had any additional questions.
+      $|$
+
+  - regex: ";install(?P<software>.*)\\."
+    replace: |-
+      Acquired installation media for {{software}}.
+      Performed steps to install {{software}}.
+      Successfully installed {{software}} on the users computer.
+      Tested the {{software}} installation to ensure proper operation.
+      $|$
+
+  - regex: ";reinstall(?P<software>.*)\\."
+    replace: |-
+      Reviewed license information for {{software}} (if applicable).
+      Uninstalled {{software}} from the users computer.
+      Cleaned up files after uninstalling {{software}}.
+      Tested to ensure that {{software}} is successfully uninstalled.
+      Acquired installation media for {{software}}.
+      Performed steps to install {{software}}.
+      Successfully installed {{software}} on the users computer.
+      Tested the {{software}} installation to ensure proper operation.
+      $|$
+
+  - regex: ";tstsucc(?P<person>.*)\\."
+    replace: |-
+      Tested proper operation with {{person}}.
+      Confirmed with {{person}} if further steps are required.
+      Confirmed successful and proper operation with {{person}}.
+      $|$
+
+  - regex: ";tstfail(?P<person>.*)\\."
+    replace: |-
+      Tested proper operation with {{person}}.
+      Confirmed with {{person}} if further steps are required.
+      Confirmed unsuccessful and improper operation with {{person}}.
+      Further troubleshooting/adjustments must be made.
+      Communication with {{person}} regarding next steps.
+      $|$
+
+  - regex: ";ws(?P<workstation>.*)\\."
+    replace: |-
+      Workstation(s): {{workstation}}
+
+      $|$
+
+  - regex: ";conn(?P<workstation>.*)\\."
+    replace: |-
+      Ensured that {{workstation}} is powered on and connected to a network.
+      Verified that {{workstation}} is showing online in Datto RMM portal.
+      Successfully connected to the {{workstation}} device.
+      $|$
+
+  - regex: ';userconn(?P<person>[^,]+),(?P<workstation>[^.]+)\.'
+    replace: |-
+      Worked with {{person}} to confirm that {{workstation}} is the correct device.
+      Confirmed with {{person}} that {{workstation}} is powered on and connected to a network.
+      Verified that {{workstation}} is showing online in Datto RMM portal.
+      Successfully connected to the {{workstation}} device with {{person}}.
+      $|$
+
+  - regex: ";ass(?P<person>.*)\\."
+    replace: |-
+      Assisted {{person}} with $|$
+
+  - regex: ";req(?P<person>.*)\\."
+    replace: |-
+      Ascertained that {{person}} is requesting/requested $|$
+
+  - regex: ";power(?P<device>.*)\\."
+    replace: |-
+      Performed a power cycle on (the) {{device}}.
+      Ensured that (the) {{device}} powered off.
+      Confirmed that (the) {{device}} powered back on.
+
+  - regex: ";call(?P<person>.*)\\."
+    replace: |-
+      Successfully connected and spoke with {{person}} via a phone call.
+      $|$
+
+  - regex: ";vm(?P<person>.*)\\."
+    replace: |-
+      Called the phone number in the ticket and attempted to connect with {{person}}.
+      Unable to make contact with {{person}} via phone call.
+      Successfully left a voicemail or note for {{person}}.
+      $|$
+
+  - regex: ";novm(?P<person>.*)\\."
+    replace: |-
+      Called the phone number in the ticket and attempted to connect with {{person}}.
+      Unable to make contact with {{person}} via phone call.
+      Currently unable to leave a voicemail or note for {{person}}.
+      $|$
+
+  - regex: ";disc(?P<person>.*)\\."
+    replace: |-
+      Commenced discussion with {{person}} regarding the ticket, ticket notes, supplementary information, status updates, and questions.
+      Discussed with {{person}} if next steps are required.
+      Determined next steps with {{person}} (If applicable).
+      $|$
+
+  - regex: ";walk(?P<person>.*)\\."
+    replace: |-
+      Requested additional information from {{person}}.
+      Requested that {{person}} walk through their normal process under observation.
+      Observed {{person}}'s process to determine potential points of failure.
+      $|$
+
+  - regex: ";setapp(?P<person>.*)\\."
+    replace: |-
+      Reach out to coordinate an appointment with {{person}} to work together on their ticket.
+      Confirm appointment date/time with {{person}}.
+      Add the set appointment time with {{person}} to the assigned technicians schedule.
+      $|$
+
+  - regex: ";vpn(?P<person>.*)\\."
+    replace: |-
+      Successfully connected and spoke with {{person}} via a phone call.
+      Signed into local admin account on {{person}}'s computer.
+      Ascertained that {{person}}'s password was expired.
+      Set up the VPN profile for the admin account (if not already present).
+      Signed into the VPN on the admin account.
+      Switched the profile back to {{person}}'s account.
+      Had {{person}} attempt to sign in and create their new password.
+      Signed into {{person}}'s account.
+      Signed out of the admin profile and VPN connection.
+      Tested {{person}}'s VPN profile with the new password.
+      Verified access to the VPN.
+      Verified access to server files and emails as {{person}}'s VPN connection allows.
+      Provided additional instruction for {{person}} regarding password expiration while working remotely.$|$
+      {{person}} expressed satisfactory completion and verbally approved the closure of the ticket.
+
+      Next Steps:
+      'Complete'
+
+  - regex: ";frns(?P<person>.*)\\."
+    vars:
+      - name: nsns
+        type: match
+        params:
+          trigger: ";nsns"
+    replace: |-
+      Reviewed the ticket body, ticket notes, time entries, and/or any supplementary information.
+      Sent first response email to {{person}}.
+
+      {{nsns}}
+
+  - regex: ";frwc(?P<person>.*)\\."
+    vars:
+      - name: nswc
+        type: match
+        params:
+          trigger: ";nswc"
+    replace: |-
+      Reviewed the ticket body, ticket notes, time entries, and/or any supplementary information.
+      Sent first response email to {{person}}.
+
+      {{nswc}}

@@ -1,0 +1,43 @@
+# Espanso Match File
+
+# Icon Statuses for Self Time Tracking
+matches:
+  # Inputting icon for time entry
+  - trigger: ";te"
+    form: ":timeentry: *[[time]]* $|$"
+
+  - trigger: ";tidi"
+    label: Normal Time Differential Entry
+    comment: "Normal entry for tracking input times in message to myself."
+    form: ":timeentry: *[[time]]* `Txxxxxxxxxxxx` ~Time Differential, {{myfirst}}, {{today}} `$|$`"
+
+  - trigger: ";bua"
+    label: Backup Auditing Time Differential Entry
+    comment: "Backup Auditing entry for tracking input times in message to myself."
+    form: ":timeentry: *[[time]]* `Txxxxxxxxxxxx` ~Time Differential, {{myfirst}}, {{today}} `Backup Auditing$|$`"
+
+  - trigger: ";disp"
+    label: Dispatch Coverage Time Differential Entry
+    comment: "Dispatch coverage entry for tracking input times in message to myself."
+    form: ":timeentry: *[[time]]* `Txxxxxxxxxxxx` ~Time Differential, {{myfirst}}, {{today}} `Dispatch Coverage$|$`"
+
+  - trigger: ";meet"
+    label: MSP Meeting Time Differential Entry
+    comment: "MSP meeting entry for tracking input times in message to myself."
+    form: ":timeentry: *[[time]]* `Txxxxxxxxxxxx` ~Time Differential, {{myfirst}}, {{today}} `MSP Meeting$|$`"
+
+  # Inputting icon for complete
+  - trigger: ";com"
+    form: ":complete: *[[time]]* $|$"
+
+  # Inputting icon for lunch
+  - trigger: ";lun"
+    form: ":complete: *[[time]]* ~LUNCH"
+
+  # Inputting icon for scheduled
+  - trigger: ";sch"
+    form: ":scheduled: *[[time]]* $|$"
+
+  # Inputting icon for in progress
+  - trigger: ";inpr"
+    form: ":in_progress: *[[time]]* $|$"
