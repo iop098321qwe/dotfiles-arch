@@ -46,6 +46,7 @@ application/ogg=mpv.desktop
 x-scheme-handler/mailto=eu.betterbird.Betterbird.desktop
 x-scheme-handler/discord=vesktop.desktop
 text/markdown=nvim.desktop
+inode/directory=org.gnome.Nautilus.desktop
 
 [Added Associations]
 text/markdown=nvim.desktop;

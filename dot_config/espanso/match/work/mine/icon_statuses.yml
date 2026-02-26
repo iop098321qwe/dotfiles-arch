@@ -41,23 +41,19 @@ matches:
   # Inputting icon for in progress
   - trigger: ";inpr"
     form: "{{inprogresssym}} *[[time]]* $|$"
-  #
-  #   # Testing Complete
-  # - trigger: ";tstcom"
-  #   form: "{{completesym}} *[[time]]* $|$"
-  #
-  # # Testing Time Entry
-  # - trigger: ";tstte"
-  #   form: "{{timeentrysym}} *[[time]]* $|$"
-  #
-  # # Testing In Progress
-  # - trigger: ";tstinpr"
-  #   form: "{{inprogresssym}} *[[time]]* $|$"
-  #
-  # # Testing Scheduled
-  # - trigger: ";tstsch"
-  #   form: "{{scheduledsym}} *[[time]]* $|$"
-  #
-  # # Testing Lunch
-  # - trigger: ";tstlun"
-  #   form: "{{lunchsym}} *[[time]]* ~LUNCH"
+
+  # Inputting icon for complete
+  - trigger: ";symcom"
+    replace: "{{completesym}}"
+
+  # Inputting icon for scheduled
+  - trigger: ";symsch"
+    replace: "{{scheduledsym}}"
+
+  # Inputting icon for in progress
+  - trigger: ";syminpr"
+    replace: "{{inprogresssym}}"
+
+  # Inputting icon for time entry
+  - trigger: ";symte"
+    replace: "{{timeentrysym}}"

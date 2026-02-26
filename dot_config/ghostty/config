@@ -34,3 +34,6 @@ shell-integration-features = ssh-env
 mouse-scroll-multiplier = 0.95
 
 shell-integration = none
+
+# Fix general slowness on hyprland (https://github.com/ghostty-org/ghostty/discussions/3224)
+async-backend = epoll
