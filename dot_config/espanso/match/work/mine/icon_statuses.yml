@@ -4,40 +4,60 @@
 matches:
   # Inputting icon for time entry
   - trigger: ";te"
-    form: ":timeentry: *[[time]]* $|$"
+    form: "{{timeentrysym}} *[[time]]* $|$"
 
   - trigger: ";tidi"
     label: Normal Time Differential Entry
     comment: "Normal entry for tracking input times in message to myself."
-    form: ":timeentry: *[[time]]* `Txxxxxxxxxxxx` ~Time Differential, {{myfirst}}, {{today}} `$|$`"
+    form: "{{timeentrysym}} *[[time]]* `Txxxxxxxxxxxx` ~Time Differential, {{myfirst}}, {{today}} `$|$`"
 
   - trigger: ";bua"
     label: Backup Auditing Time Differential Entry
     comment: "Backup Auditing entry for tracking input times in message to myself."
-    form: ":timeentry: *[[time]]* `Txxxxxxxxxxxx` ~Time Differential, {{myfirst}}, {{today}} `Backup Auditing$|$`"
+    form: "{{timeentrysym}} *[[time]]* `Txxxxxxxxxxxx` ~Time Differential, {{myfirst}}, {{today}} `Backup Auditing$|$`"
 
   - trigger: ";disp"
     label: Dispatch Coverage Time Differential Entry
     comment: "Dispatch coverage entry for tracking input times in message to myself."
-    form: ":timeentry: *[[time]]* `Txxxxxxxxxxxx` ~Time Differential, {{myfirst}}, {{today}} `Dispatch Coverage$|$`"
+    form: "{{timeentrysym}} *[[time]]* `Txxxxxxxxxxxx` ~Time Differential, {{myfirst}}, {{today}} `Dispatch Coverage$|$`"
 
   - trigger: ";meet"
     label: MSP Meeting Time Differential Entry
     comment: "MSP meeting entry for tracking input times in message to myself."
-    form: ":timeentry: *[[time]]* `Txxxxxxxxxxxx` ~Time Differential, {{myfirst}}, {{today}} `MSP Meeting$|$`"
+    form: "{{timeentrysym}} *[[time]]* `Txxxxxxxxxxxx` ~Time Differential, {{myfirst}}, {{today}} `MSP Meeting$|$`"
 
   # Inputting icon for complete
   - trigger: ";com"
-    form: ":complete: *[[time]]* $|$"
+    form: "{{completesym}} *[[time]]* $|$"
 
   # Inputting icon for lunch
   - trigger: ";lun"
-    form: ":complete: *[[time]]* ~LUNCH"
+    form: "{{lunchsym}} *[[time]]* ~LUNCH"
 
   # Inputting icon for scheduled
   - trigger: ";sch"
-    form: ":scheduled: *[[time]]* $|$"
+    form: "{{scheduledsym}} *[[time]]* $|$"
 
   # Inputting icon for in progress
   - trigger: ";inpr"
-    form: ":in_progress: *[[time]]* $|$"
+    form: "{{inprogresssym}} *[[time]]* $|$"
+  #
+  #   # Testing Complete
+  # - trigger: ";tstcom"
+  #   form: "{{completesym}} *[[time]]* $|$"
+  #
+  # # Testing Time Entry
+  # - trigger: ";tstte"
+  #   form: "{{timeentrysym}} *[[time]]* $|$"
+  #
+  # # Testing In Progress
+  # - trigger: ";tstinpr"
+  #   form: "{{inprogresssym}} *[[time]]* $|$"
+  #
+  # # Testing Scheduled
+  # - trigger: ";tstsch"
+  #   form: "{{scheduledsym}} *[[time]]* $|$"
+  #
+  # # Testing Lunch
+  # - trigger: ";tstlun"
+  #   form: "{{lunchsym}} *[[time]]* ~LUNCH"

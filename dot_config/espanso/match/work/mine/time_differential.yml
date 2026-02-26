@@ -9,4 +9,4 @@ matches:
 
       $|$
 
-      :scheduled: *1230-1330* ~LUNCH
+      {{scheduledsym}} *1230-1330* ~LUNCH
