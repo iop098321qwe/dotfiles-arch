@@ -65,3 +65,8 @@ use = "iop098321qwe/opencodemod"
 rev = "2c24601"
 hash = "2c24601d10630a6f74ddb1c37f14a1d48be9433d"
 
+[[module.deps]]
+use = "iop098321qwe/tmuxmod"
+rev = "57bdbd5"
+hash = "57bdbd57a855d89c9b1fbbcfd7c976f02b81ca96"
+
