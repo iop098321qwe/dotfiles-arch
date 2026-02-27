@@ -70,3 +70,8 @@ use = "iop098321qwe/tmuxmod"
 rev = "5ab461a"
 hash = "5ab461ae0d2e034cdb7466b4d536180ec4b44e9b"
 
+[[module.deps]]
+use = "iop098321qwe/smartsort"
+rev = "092fa49"
+hash = "092fa490e87505a9fad53e945a71fbfd934439ff"
+
