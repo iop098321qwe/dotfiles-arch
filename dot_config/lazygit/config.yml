@@ -29,6 +29,8 @@ gui:
     defaultFgColor:
       - "#cdd6f4"
   showListFooter: true
+  # hide the command log by default
+  showCommandLog: false
   authorColors:
     "iop098321qwe": "#89dceb"
     "Dallas Elliott": "#89dceb"

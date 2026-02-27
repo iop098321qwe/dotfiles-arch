@@ -67,6 +67,6 @@ hash = "2c24601d10630a6f74ddb1c37f14a1d48be9433d"
 
 [[module.deps]]
 use = "iop098321qwe/tmuxmod"
-rev = "57bdbd5"
-hash = "57bdbd57a855d89c9b1fbbcfd7c976f02b81ca96"
+rev = "5ab461a"
+hash = "5ab461ae0d2e034cdb7466b4d536180ec4b44e9b"
 
