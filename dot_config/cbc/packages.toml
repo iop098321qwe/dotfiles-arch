@@ -72,6 +72,6 @@ hash = "ddbd6fab46d76d8d418e9610306f21892cb5388e"
 
 [[module.deps]]
 use = "iop098321qwe/smartsort"
-rev = "092fa49"
-hash = "092fa490e87505a9fad53e945a71fbfd934439ff"
+rev = "57dfd47"
+hash = "57dfd4717b5dec2437eee52edef2492a2ae65959"
 

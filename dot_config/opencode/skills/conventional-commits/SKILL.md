@@ -74,13 +74,18 @@ description: >-
 
 - Allow only these creatable branch prefixes: `feature/`, `bugfix/`,
   `hotfix/`, `release/`, `docs/`, `test/`, `refactor/`, and `chore/`.
-- Treat `main` and `develop` as reserved literal branch names, not prefixes.
-- Do not create `main` or `develop` unless the user explicitly requests it.
+- Treat `main`, `master`, and `develop` as reserved literal branch names,
+  not prefixes.
+- Do not create `main`, `master`, or `develop` unless the user explicitly
+  requests it.
+- Create `hotfix/*` branches from `main`, or `master` when `master` is the
+  repository's default/main branch.
+- Create all other allowed branch types from `develop`.
 - Use `prefix/short-description` with a lowercase kebab-case description.
 - Validate creatable names with
   `^(feature|bugfix|hotfix|release|docs|test|refactor|chore)\/[a-z0-9]+(?:-[a-z0-9]+)*$`.
 - Valid examples: `feature/add-sso-login`, `bugfix/fix-null-check`.
-- Invalid examples: `main/foo`, `develop/foo`, `Feature/new-ui`,
+- Invalid examples: `main/foo`, `master/foo`, `develop/foo`, `Feature/new-ui`,
   `bugfix/fix_bug`, `release/`.
 
 ## Align PR titles and bodies
