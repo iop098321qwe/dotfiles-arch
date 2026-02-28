@@ -32,8 +32,8 @@ hash = "4ffbb1eb3cf97b97382e400d454f96592f79917c"
 
 [[module.deps]]
 use = "iop098321qwe/cd-shortcuts"
-rev = "7aac2a8"
-hash = "7aac2a8893afd61e171ac77a7ab41232858e8c5e"
+rev = "e129fcd"
+hash = "e129fcdaa3408746597e7a2a773c6951ab61fa01"
 
 [[module.deps]]
 use = "iop098321qwe/interactive"
@@ -67,8 +67,8 @@ hash = "2c24601d10630a6f74ddb1c37f14a1d48be9433d"
 
 [[module.deps]]
 use = "iop098321qwe/tmuxmod"
-rev = "ddbd6fa"
-hash = "ddbd6fab46d76d8d418e9610306f21892cb5388e"
+rev = "2cd5eaf"
+hash = "2cd5eaf4a8151526f79f35ae6118ede07511be86"
 
 [[module.deps]]
 use = "iop098321qwe/smartsort"
