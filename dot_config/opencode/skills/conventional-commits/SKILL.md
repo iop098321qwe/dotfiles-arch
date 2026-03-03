@@ -78,15 +78,21 @@ description: >-
   not prefixes.
 - Do not create `main`, `master`, or `develop` unless the user explicitly
   requests it.
+- Do not create a bare `docs` branch name. Treat `docs` as a prefix only.
 - Create `hotfix/*` branches from `main`, or `master` when `master` is the
   repository's default/main branch.
 - Create all other allowed branch types from `develop`.
+- For documentation requests, create `docs/<short-description>` and derive a
+  descriptive lowercase kebab-case slug from the requested doc changes.
+- Avoid generic docs slugs like `update-docs` or `misc`; include the docs area
+  and intent when possible.
 - Use `prefix/short-description` with a lowercase kebab-case description.
 - Validate creatable names with
   `^(feature|bugfix|hotfix|release|docs|test|refactor|chore)\/[a-z0-9]+(?:-[a-z0-9]+)*$`.
-- Valid examples: `feature/add-sso-login`, `bugfix/fix-null-check`.
+- Valid examples: `feature/add-sso-login`, `bugfix/fix-null-check`,
+  `docs/update-api-auth-guide`.
 - Invalid examples: `main/foo`, `master/foo`, `develop/foo`, `Feature/new-ui`,
-  `bugfix/fix_bug`, `release/`.
+  `bugfix/fix_bug`, `release/`, `docs`, `docs/`, `docs/update-docs`.
 
 ## Align PR titles and bodies
 
