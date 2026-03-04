@@ -9,7 +9,7 @@ return {
       require("which-key").setup(opts or {})
 
       -----------------------------------------------------------------------
-      -- REGISTERS: helper functions
+      -- Registers Helper Functions
       -----------------------------------------------------------------------
       local function PasteRegister()
         local reg = vim.fn.input("Paste register: ")
@@ -35,8 +35,9 @@ return {
       local wk = require("which-key")
 
       -----------------------------------------------------------------------
-      -- OBSIDIAN group + mappings (NORMAL)
+      -- Obsidian
       -----------------------------------------------------------------------
+
       wk.add({
         { "<leader>fo",  group = "Obsidian" },
         { "<leader>foD", "<cmd>ObsidianDebug<CR>",    desc = "Debug" },
@@ -46,15 +47,27 @@ return {
         { "<leader>fot", "<cmd>ObsidianTemplate<CR>", desc = "Template" },
       }, {
         mode = "n",
-        silent = true,  -- vim.keymap.set is noremap by default; silent keeps cmdline clean
+        silent = true, -- vim.keymap.set is noremap by default; silent keeps cmdline clean
       })
 
       -----------------------------------------------------------------------
-      -- REGISTERS group + mappings (NORMAL)
+      -- Yazi
       -----------------------------------------------------------------------
+
       wk.add({
-        { "<leader>R",  group = "Registers" },
-        { "<leader>Rh", PasteRegister,      desc = "Paste register contents" },
+        { "<leader>y", icon = "󰇥", group = "Yazi" },
+      }, {
+        mode = "n",
+        silent = true, -- vim.keymap.set is noremap by default; silent keeps cmdline clean
+      })
+
+      -----------------------------------------------------------------------
+      -- Registers
+      -----------------------------------------------------------------------
+
+      wk.add({
+        { "<leader>R", icon = "", group = "Registers" },
+        { "<leader>Rh", PasteRegister, desc = "Paste register contents" },
         { "<leader>RH", YankLineToRegister, desc = "Yank line into register" },
       }, {
         mode = "n",
@@ -62,12 +75,13 @@ return {
       })
 
       -----------------------------------------------------------------------
-      -- MOVE LINE DOWN/UP (NORMAL + VISUAL)
+      -- Move Line Down/Up
       -----------------------------------------------------------------------
+
       -- Normal-mode: use <cmd> for cleaner execution and to avoid lag
       wk.add({
         { "<leader>j", "<cmd>m .+1<CR>==", desc = "Move line down" },
-        { "<leader>k", "<cmd>m .-2<CR>==", desc = "Move line up"   },
+        { "<leader>k", "<cmd>m .-2<CR>==", desc = "Move line up" },
       }, {
         mode = "n",
         silent = true,
@@ -80,6 +94,8 @@ return {
       }, {
         silent = true,
       })
+
+      -----------------------------------------------------------------------
     end,
   },
 }
