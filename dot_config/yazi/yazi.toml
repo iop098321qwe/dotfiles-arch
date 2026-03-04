@@ -80,6 +80,12 @@ rules = [
     "edit",
     "reveal",
   ] },
+  # Lua
+  { mime = "text/*", use = [
+    "open",
+    "edit",
+    "reveal",
+  ] },
   # Image
   { mime = "image/*", use = [
     "image",

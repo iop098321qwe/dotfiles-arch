@@ -13,6 +13,7 @@ return {
   dependencies = {
     -- Required.
     "nvim-lua/plenary.nvim",
+    "nvim-telescope/telescope.nvim",
   },
   opts = {
     -- Set the path to your Obsidian vault.
@@ -41,7 +42,7 @@ return {
     open_app_foreground = true,
     -- Set the picker options.
     picker = {
-      name = "fzf-lua",
+      name = "telescope.nvim",
     },
     daily_notes = {
       -- Optional, if you keep daily notes in a separate directory.
