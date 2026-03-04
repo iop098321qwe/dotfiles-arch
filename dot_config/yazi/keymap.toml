@@ -299,6 +299,11 @@ keymap = [
   { on = [
     "g",
     "v",
+    "q",
+  ], run = "cd ~/Documents/grymms_grimoires/10000_work/16000_quick_notes", desc = "Vault - Work - Quick Notes" },
+  { on = [
+    "g",
+    "v",
     "o",
   ], run = "cd ~/Documents/grymms_grimoires/99000_other", desc = "Vault - Other" },
   { on = [
