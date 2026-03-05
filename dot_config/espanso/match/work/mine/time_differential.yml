@@ -7,6 +7,8 @@ matches:
       *Time Differential*:
       `Txxxxxxxxxxxx` ~Time Differential, {{myfirst}}, {{today}}
 
+      🟥🟧🟨🟩🟦🟪⬛️⬜️🟫
+
       $|$
 
-      {{scheduledsym}} *1230-1330* ~LUNCH
+      {{lunchsym}} *1230-1330* ~LUNCH
