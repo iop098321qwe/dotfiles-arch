@@ -1,0 +1,14 @@
+{
+  "Unordered list (5 items)": {
+    "prefix": "list",
+    "body": [
+      "- ${1:item 1}",
+      "- ${2:item 2}",
+      "- ${3:item 3}",
+      "- ${4:item 4}",
+      "- ${5:item 5}",
+      "${0}"
+    ],
+    "description": "Insert a 5-item unordered list"
+  }
+}
