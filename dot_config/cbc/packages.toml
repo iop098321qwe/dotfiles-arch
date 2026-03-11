@@ -27,8 +27,8 @@ hash = "0eb0067044cccb9cb19d3afb52d2869c5d602d17"
 
 [[module.deps]]
 use = "iop098321qwe/vim-exit"
-rev = "4ffbb1e"
-hash = "4ffbb1eb3cf97b97382e400d454f96592f79917c"
+rev = "0cc6b03"
+hash = "0cc6b0393f8f63b9328ddc05994fb76a89a4ea1b"
 
 [[module.deps]]
 use = "iop098321qwe/cd-shortcuts"
@@ -74,4 +74,9 @@ hash = "2cd5eaf4a8151526f79f35ae6118ede07511be86"
 use = "iop098321qwe/smartsort"
 rev = "4d7b418"
 hash = "4d7b418be77dc0d5ccb61b58f134d5dfb0cfeb5e"
+
+[[module.deps]]
+use = "iop098321qwe/appendprependmod"
+rev = "a50944f"
+hash = "a50944f23aa5b000aa0063011a66e5cec66cf951"
 

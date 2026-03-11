@@ -11,3 +11,4 @@ require('lspconfig').harper_ls.setup {
     }
   }
 }
+require("octo")
