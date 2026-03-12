@@ -31,6 +31,13 @@ matches:
       'Waiting Customer'
       $|$
 
+  # Inputting next steps for "Waiting Materials".
+  - trigger: ";nswm"
+    replace: |-
+      Next Steps:
+      'Waiting Materials'
+      $|$
+
   # Inputting next steps for "Waiting Vendor".
   - trigger: ";nswv"
     replace: |-
