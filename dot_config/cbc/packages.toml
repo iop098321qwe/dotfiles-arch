@@ -42,13 +42,13 @@ hash = "8a453a14ded6892d7d17bdc3b5ab2eb61275f4c9"
 
 [[module.deps]]
 use = "iop098321qwe/commit-and-tag-version"
-rev = "abe1f1c"
-hash = "abe1f1cfe8fb430a2dc0b1f02f843d496311ad22"
+rev = "86503a5"
+hash = "86503a58d44e73c28b722c35b210ca0ba74a4fee"
 
 [[module.deps]]
 use = "iop098321qwe/chezmod"
-rev = "6b8fe97"
-hash = "6b8fe97b5e6ad1fa1c00fad36aad1f02c2eb71b0"
+rev = "6c5e3a5"
+hash = "6c5e3a59f4659e7905acb3b759f51fc396617663"
 
 [[module.deps]]
 use = "iop098321qwe/cronmod"
