@@ -51,11 +51,6 @@ rev = "ec0835e"
 hash = "ec0835e60954290a29d5cc7d12db2453962a469b"
 
 [[module.deps]]
-use = "iop098321qwe/tmuxmod"
-rev = "3939469"
-hash = "3939469f4526e3b284a7417b700f0fcf3a7af4b6"
-
-[[module.deps]]
 use = "iop098321qwe/smartsort"
 rev = "f26e3d4"
 hash = "f26e3d4027105f0b83faf501338a0a52892437e3"
@@ -79,4 +74,9 @@ hash = "741eb8fd0a75aacb6261cc7297731d87b89bd772"
 use = "iop098321qwe/repeat"
 rev = "4db0ecc"
 hash = "4db0ecc8a0fbcad04daeb1a2a2a8db3fd5d2aeca"
+
+[[module.deps]]
+use = "iop098321qwe/tmuxmod"
+rev = "ec62a9d"
+hash = "ec62a9d0894a68bbe72584d28d923d2967827b22"
 
