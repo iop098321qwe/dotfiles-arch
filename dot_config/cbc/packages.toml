@@ -31,11 +31,6 @@ rev = "bc5005b"
 hash = "bc5005b98bf8221ab4e1cf635c0b71760845fd38"
 
 [[module.deps]]
-use = "iop098321qwe/commit-and-tag-version"
-rev = "f310ee8"
-hash = "f310ee8bf0822a4bd50383bfd2789fca8e0eebe8"
-
-[[module.deps]]
 use = "iop098321qwe/chezmod"
 rev = "a23eabf"
 hash = "a23eabf937a7d1701e283ef84230bbfb852eacaa"
@@ -79,4 +74,9 @@ hash = "4db0ecc8a0fbcad04daeb1a2a2a8db3fd5d2aeca"
 use = "iop098321qwe/tmuxmod"
 rev = "525d627"
 hash = "525d627144380ac05904f64f7aac195c7e84900f"
+
+[[module.deps]]
+use = "iop098321qwe/commit-and-tag-version"
+rev = "3076d8c"
+hash = "3076d8c8ca586b208d359204553d3d63a1d138d0"
 
