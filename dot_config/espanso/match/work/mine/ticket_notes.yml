@@ -57,12 +57,14 @@ matches:
       $|$
 
   - regex: ";apptech(?P<technician>.*)\\."
+    label: Technician Appointment
     form: |-
-      Set appointment for {{technician}} to address $|$ from [[start]]-[[end]] MST.
+      Set appointment for {{technician}} to address $|$ from [[time]] MST.
 
   - regex: ';appclient(?P<technician>[^,]+),(?P<person>[^.]+)\.'
+    label: Client Appointment
     form: |-
-      Set appointment for {{technician}} to connect with {{person}} for $|$from [[start]]-[[end]] MST.
+      Set appointment for {{technician}} to connect with {{person}} for $|$from [[time]] MST.
 
     # Create a match for "Agent".
   - trigger: ";agent"
