@@ -16,6 +16,71 @@ api.mapkey('M<', '#3Move current tab to far right', function() {
   api.RUNTIME('moveTab', { step: -99 });
 });
 
+api.mapkey(';gn', '#3Create new tab group (prompt for title)', function() {
+  api.Front.openOmnibar({ type: 'Commands', pref: 'createTabGroup' });
+});
+
+api.mapkey(';gu', '#3Ungroup current tab', () => {
+  api.RUNTIME('ungroupTab');
+});
+
+api.mapkey(';gc', '#3Toggle tab group collapse', () => {
+  api.RUNTIME('getTabGroups', null, res => {
+    const groups = (res && res.groups) || [];
+    const active = groups.find(g => g.active);
+    if (active) {
+      api.RUNTIME('collapseGroup', { groupId: active.id, collapsed: !active.collapsed });
+    }
+  });
+});
+
+api.mapkey(';gj', '#3Create new tab group (title from clipboard)', function() {
+  api.Clipboard.read(function(resp) {
+    const title = (resp && resp.data ? resp.data : '').trim();
+    if (!title) {
+      api.Front.showBanner('Clipboard empty', 2000);
+      return;
+    }
+    api.RUNTIME('createTabGroup', { title, color: 'grey' });
+  });
+});
+
+api.mapkey(';T', '#3List tab groups in current window', function() {
+  api.RUNTIME('getTabs', { queryInfo: { currentWindow: true } }, function(tabRes) {
+    const tabs = (tabRes && tabRes.tabs) || [];
+    const groupsById = new Map();
+    tabs.forEach(t => {
+      if (t.groupId !== -1) {
+        if (!groupsById.has(t.groupId)) {
+          groupsById.set(t.groupId, []);
+        }
+        groupsById.get(t.groupId).push(t);
+      }
+    });
+    api.RUNTIME('getTabGroups', {}, function(res) {
+      const groups = (res && res.groups) || [];
+      const items = groups
+        .filter(g => groupsById.has(g.id))
+        .map(g => {
+          const groupTabs = groupsById.get(g.id).sort((a, b) => a.index - b.index);
+          const first = groupTabs[0];
+          const name = (g.title && g.title.trim()) ? g.title : 'Untitled group';
+          const color = g.color ? ` • ${g.color}` : '';
+          return {
+            title: `${name}${color} (${groupTabs.length})`,
+            url: first.url,
+            uid: `T${first.windowId}:${first.id}`
+          };
+        });
+      if (!items.length) {
+        api.Front.showBanner('No tab groups in current window', 2000);
+        return;
+      }
+      api.Front.openOmnibar({ type: 'UserURLs', extra: items });
+    });
+  });
+});
+
 // Theme
 /**
  * Catppuccin Mocha × Surfingkeys

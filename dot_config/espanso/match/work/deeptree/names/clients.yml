@@ -110,11 +110,11 @@ matches:
     trigger: ";ccs"
     replace: "CCS Early Learning$|$"
 
-  - name: "Cross Roads Medical Center"
-    label: "Cross Roads Medical Center"
+  - name: "Cross Road Medical Center"
+    label: "Cross Road Medical Center"
     replace_preview: true
     trigger: ";crmc"
-    replace: "Cross Roads Medical Center$|$"
+    replace: "Cross Road Medical Center$|$"
 
   - name: "Deeptree, Inc"
     label: "Deeptree, Inc"
