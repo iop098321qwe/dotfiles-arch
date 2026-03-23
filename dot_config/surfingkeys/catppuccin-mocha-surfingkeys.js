@@ -4,6 +4,8 @@ settings.modeAfterYank = "Normal";
 
 settings.smoothScroll = true;
 
+settings.repeatThreshold = 100;
+
 /**
  * Catppuccin Mocha × Surfingkeys
  * ------------------------------
