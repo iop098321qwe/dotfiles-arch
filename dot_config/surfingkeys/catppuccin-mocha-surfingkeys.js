@@ -1,3 +1,4 @@
+// Settings
 settings.scrollStepSize = 35;
 
 settings.modeAfterYank = "Normal";
@@ -6,6 +7,16 @@ settings.smoothScroll = true;
 
 settings.repeatThreshold = 100;
 
+// Keybindings
+api.mapkey('M>', '#3Move current tab to far right', function() {
+  api.RUNTIME('moveTab', { step: 99 });
+});
+
+api.mapkey('M<', '#3Move current tab to far right', function() {
+  api.RUNTIME('moveTab', { step: -99 });
+});
+
+// Theme
 /**
  * Catppuccin Mocha × Surfingkeys
  * ------------------------------
