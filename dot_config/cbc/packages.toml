@@ -27,8 +27,8 @@ hash = "352fcea6433fcd85a80194c6dd63a856056170f5"
 
 [[module.deps]]
 use = "iop098321qwe/surfingkeys-update"
-rev = "d6f9af8"
-hash = "d6f9af873325cefe0bb3f32e8dfb9dd4f411525c"
+rev = "5a36b20"
+hash = "5a36b20ce1e236a4aa773ee3e541a67369b944ba"
 
 [[module.deps]]
 use = "iop098321qwe/chezmod"
