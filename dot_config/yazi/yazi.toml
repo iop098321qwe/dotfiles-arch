@@ -96,29 +96,19 @@ rules = [
     "extract",
     "reveal",
   ] },
-  # JSON
-  { mime = "application/{json,ndjson}", use = [
+  # JSON, Javascript
+  { mime = "application/{json,ndjson,javascript}", use = [
     "edit",
     "reveal",
   ] },
-  # PDF
-  { mime = "application/pdf", use = [
-    "open",
-    "reveal",
-  ] },
-  # ODS
-  { mime = "application/*opendocument*", use = [
+  # PDF, ODS
+  { mime = "application/{pdf,*opendocument*}", use = [
     "open",
     "reveal",
   ] },
   # Application
   { mime = "application/*", use = [
     "open",
-    "reveal",
-  ] },
-  # Javascript
-  { mime = "*/javascript", use = [
-    "edit",
     "reveal",
   ] },
   # Empty file

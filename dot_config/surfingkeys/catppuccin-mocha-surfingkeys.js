@@ -8,6 +8,10 @@ settings.smoothScroll = true;
 settings.repeatThreshold = 100;
 
 // Keybindings
+
+api.cmap('<Alt-j>', '<Ctrl-n>');
+api.cmap('<Alt-k>', '<Ctrl-p>');
+
 api.mapkey('M>', '#3Move current tab to far right', function() {
   api.RUNTIME('moveTab', { step: 99 });
 });
