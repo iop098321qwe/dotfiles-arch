@@ -32,8 +32,8 @@ hash = "5a36b20ce1e236a4aa773ee3e541a67369b944ba"
 
 [[module.deps]]
 use = "iop098321qwe/chezmod"
-rev = "7c1e517"
-hash = "7c1e5171f912347f3ef873a2977649b2285f9143"
+rev = "4e73ea3"
+hash = "4e73ea3caca7cba7fe5ab7638fc991a2bc8f5df3"
 
 [[module.deps]]
 use = "iop098321qwe/cronmod"
