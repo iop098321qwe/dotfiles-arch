@@ -45,6 +45,11 @@ matches:
     replace: |-
       Needs time scheduled $|$
 
+    # Create a match for "Needs Rescheduled ...".
+  - trigger: ";ntr"
+    replace: |-
+      Needs to be rescheduled. $|$
+
     # Create a match for "Attempted to ...".
   - trigger: ";att"
     replace: |-
