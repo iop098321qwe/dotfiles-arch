@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# Install pandoc
-if ! yay -Qs pandoc &> /dev/null; then
-  yay -S --noconfirm --needed pandoc-cli
+# Install lazyssh
+if ! yay -Qs lazyssh &> /dev/null; then
+  yay -S --noconfirm --needed lazyssh
 else
-  echo "pandoc already installed."
+  echo "lazyssh already installed."
 fi
 
