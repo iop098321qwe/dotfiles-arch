@@ -52,6 +52,9 @@ description: >-
 - Follow the `conventional-commits` skill for type, scope, and header
   format.
 - Stage relevant changes only (`git add ...`).
+- When changes include `AGENTS.md` or `README.md` (any path), create a
+  separate `docs` Conventional Commit that contains only those files.
+  Stage them separately and do not combine them with non-doc changes.
 - Do not create empty commits.
 - Include a short descriptive body (1-2 sentences) that explains intent or
   impact, not just the file changes.

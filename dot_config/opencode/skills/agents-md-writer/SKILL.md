@@ -53,6 +53,9 @@ description: >-
   this skill when one is found.
 - Treat any command that runs in a repo with an AGENTS.md file as a
   trigger to use this skill, even if AGENTS.md is not referenced.
+- Never make direct edits to `CHANGELOG.md`. If a changelog update is
+  required, stop and ask for the release process or automation that should
+  generate it.
 - After any non-AGENTS.md file change in such a repo, re-run the
   self-audit loop and update AGENTS.md if it is out of sync.
 - Always use this skill's references for requirements and format guidance,

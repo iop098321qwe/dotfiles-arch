@@ -16,3 +16,16 @@ aa119a37c845d4c933d7fff3e5dbe04327a768dc aa119a37c845d4c933d7fff3e5dbe04327a768d
 aa119a37c845d4c933d7fff3e5dbe04327a768dc aa119a37c845d4c933d7fff3e5dbe04327a768dc iop098321qwe <iop098321qwe@pm.me> 1773955551 -0600	checkout: moving from develop to main
 aa119a37c845d4c933d7fff3e5dbe04327a768dc aa119a37c845d4c933d7fff3e5dbe04327a768dc iop098321qwe <iop098321qwe@pm.me> 1773963298 -0600	checkout: moving from main to develop
 aa119a37c845d4c933d7fff3e5dbe04327a768dc aa119a37c845d4c933d7fff3e5dbe04327a768dc iop098321qwe <iop098321qwe@pm.me> 1773963299 -0600	checkout: moving from develop to main
+aa119a37c845d4c933d7fff3e5dbe04327a768dc aa119a37c845d4c933d7fff3e5dbe04327a768dc iop098321qwe <iop098321qwe@pm.me> 1774915529 -0600	checkout: moving from main to feature/add-docs-rules
+aa119a37c845d4c933d7fff3e5dbe04327a768dc b12ad13ce988859922e0996310e425f2a7a094a9 iop098321qwe <iop098321qwe@pm.me> 1774915533 -0600	commit: feat(docs): add rules for `AGENTS` or `README` files
+b12ad13ce988859922e0996310e425f2a7a094a9 aa119a37c845d4c933d7fff3e5dbe04327a768dc iop098321qwe <iop098321qwe@pm.me> 1774915560 -0600	checkout: moving from feature/add-docs-rules to develop
+aa119a37c845d4c933d7fff3e5dbe04327a768dc 57fae694186eba0c9f4ff14bfc5d5b5547cab540 iop098321qwe <iop098321qwe@pm.me> 1774915561 -0600	pull --ff-only origin develop: Fast-forward
+57fae694186eba0c9f4ff14bfc5d5b5547cab540 57fae694186eba0c9f4ff14bfc5d5b5547cab540 iop098321qwe <iop098321qwe@pm.me> 1774915570 -0600	checkout: moving from develop to release/0.0.2
+57fae694186eba0c9f4ff14bfc5d5b5547cab540 aa119a37c845d4c933d7fff3e5dbe04327a768dc iop098321qwe <iop098321qwe@pm.me> 1774915579 -0600	checkout: moving from release/0.0.2 to main
+aa119a37c845d4c933d7fff3e5dbe04327a768dc 4761584c429e8072d6e14570024fe75aa0e93201 iop098321qwe <iop098321qwe@pm.me> 1774915579 -0600	pull --ff-only origin main: Fast-forward
+4761584c429e8072d6e14570024fe75aa0e93201 f80d4920cbadfb953f4a1416237950c369c66381 iop098321qwe <iop098321qwe@pm.me> 1774915592 -0600	commit: chore(release): 0.0.2
+f80d4920cbadfb953f4a1416237950c369c66381 57fae694186eba0c9f4ff14bfc5d5b5547cab540 iop098321qwe <iop098321qwe@pm.me> 1774915613 -0600	checkout: moving from main to develop
+57fae694186eba0c9f4ff14bfc5d5b5547cab540 f80d4920cbadfb953f4a1416237950c369c66381 iop098321qwe <iop098321qwe@pm.me> 1774915613 -0600	rebase (start): checkout main
+f80d4920cbadfb953f4a1416237950c369c66381 f80d4920cbadfb953f4a1416237950c369c66381 iop098321qwe <iop098321qwe@pm.me> 1774915613 -0600	rebase (finish): returning to refs/heads/develop
+f80d4920cbadfb953f4a1416237950c369c66381 f80d4920cbadfb953f4a1416237950c369c66381 iop098321qwe <iop098321qwe@pm.me> 1774915732 -0600	checkout: moving from develop to main
+f80d4920cbadfb953f4a1416237950c369c66381 f80d4920cbadfb953f4a1416237950c369c66381 iop098321qwe <iop098321qwe@pm.me> 1774915733 -0600	checkout: moving from main to develop

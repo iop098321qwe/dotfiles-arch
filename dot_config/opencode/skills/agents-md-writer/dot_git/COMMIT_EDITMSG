@@ -1,1 +1,5 @@
-initial commit
+docs(agents-md-writer): forbid direct changelog edits
+
+Clarifies that CHANGELOG.md must be managed by release tooling, not
+
+manual edits, and prompts for the proper process when requested.

@@ -66,6 +66,8 @@ description: >-
 ## Resolve mixed changes
 
 - Prefer multiple commits when changes naturally fit different types or scopes.
+- Always split README.md or AGENTS.md updates into their own `docs` commit
+  and include a brief body describing the documentation changes.
 - If a single commit is required, choose the highest user impact type in this
   order: feat, fix, perf, refactor, docs, test, build, ci, chore.
 - Avoid `chore` when any specific type applies.

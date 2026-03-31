@@ -24,3 +24,6 @@
 [branch "develop"]
 	remote = origin
 	merge = refs/heads/develop
+[branch "feature/prevent-changelog-edits"]
+	remote = origin
+	merge = refs/heads/feature/prevent-changelog-edits

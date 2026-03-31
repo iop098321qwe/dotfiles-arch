@@ -49,6 +49,26 @@ api.mapkey(';gj', '#3Create new tab group (title from clipboard)', function() {
   });
 });
 
+api.mapkey(';gf', '#3Create new tab group (TFU, yellow)', function() {
+  api.RUNTIME('createTabGroup', { title: 'TFU', color: 'yellow' });
+});
+
+api.mapkey(';gg', '#3Create new tab group (TE, yellow)', function() {
+  api.RUNTIME('createTabGroup', { title: 'TE', color: 'yellow' });
+});
+
+api.mapkey(';g^', '#3Go to second tab', function() {
+  api.RUNTIME('getTabs', { queryInfo: { currentWindow: true } }, function(tabRes) {
+    const tabs = (tabRes && tabRes.tabs) || [];
+    const secondTab = tabs.find(tab => tab.index === 1);
+    if (!secondTab) {
+      api.Front.showBanner('No second tab in current window', 2000);
+      return;
+    }
+    api.RUNTIME('focusTab', { tabId: secondTab.id });
+  });
+});
+
 api.mapkey(';T', '#3List tab groups in current window', function() {
   api.RUNTIME('getTabs', { queryInfo: { currentWindow: true } }, function(tabRes) {
     const tabs = (tabRes && tabRes.tabs) || [];

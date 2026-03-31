@@ -26,3 +26,7 @@
 	merge = refs/heads/develop
 [gitflow "branch.release/0.0.1"]
 	base = develop
+[gitflow "branch.feature/add-docs-rules"]
+	base = develop
+[gitflow "branch.release/0.0.2"]
+	base = develop
