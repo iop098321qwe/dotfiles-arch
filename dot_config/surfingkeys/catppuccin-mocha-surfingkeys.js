@@ -57,7 +57,7 @@ api.mapkey(';gg', '#3Create new tab group (TE, yellow)', function() {
   api.RUNTIME('createTabGroup', { title: 'TE', color: 'yellow' });
 });
 
-api.mapkey(';g^', '#3Go to second tab', function() {
+api.mapkey('g^', '#3Go to second tab', function() {
   api.RUNTIME('getTabs', { queryInfo: { currentWindow: true } }, function(tabRes) {
     const tabs = (tabRes && tabRes.tabs) || [];
     const secondTab = tabs.find(tab => tab.index === 1);
