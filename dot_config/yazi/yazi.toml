@@ -96,8 +96,8 @@ rules = [
     "extract",
     "reveal",
   ] },
-  # JSON, Javascript
-  { mime = "application/{json,ndjson,javascript}", use = [
+  # JSON, Javascript, WINE EXTENSION
+  { mime = "application/{json,ndjson,javascript,*wine-extension-ini*}", use = [
     "edit",
     "reveal",
   ] },
