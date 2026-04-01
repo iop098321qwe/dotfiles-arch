@@ -238,6 +238,10 @@ keymap = [
   ], run = "cd ~/.config/yazi", desc = "yazi" },
   { on = [
     "g",
+    "T",
+  ], run = "cd ~/.config/tmux", desc = "tmux" },
+  { on = [
+    "g",
     "H",
   ], run = "cd ~/.config/hypr", desc = "hypr" },
   { on = [
