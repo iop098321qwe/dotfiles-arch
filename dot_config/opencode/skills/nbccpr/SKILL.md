@@ -55,6 +55,9 @@ description: >-
 - When changes include `AGENTS.md` or `README.md` (any path), create a
   separate `docs` Conventional Commit that contains only those files.
   Stage them separately and do not combine them with non-doc changes.
+- Never edit or stage `CHANGELOG.md`. If it is modified, stop and ask
+  for the release process or tooling that updates it; do not include it
+  in commits.
 - Do not create empty commits.
 - Include a short descriptive body (1-2 sentences) that explains intent or
   impact, not just the file changes.

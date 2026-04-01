@@ -24,3 +24,5 @@
 [branch "develop"]
 	remote = origin
 	merge = refs/heads/develop
+[gitflow "branch.release/0.0.1"]
+	base = develop

@@ -13,6 +13,9 @@ description: >-
 - Inspect CONTRIBUTING, commitlint configs, .gitmessage, and release tooling.
 - Follow repo-specific constraints over this skill when they conflict.
 - Match existing commit casing and scope patterns when they are consistent.
+- Never edit CHANGELOG.md directly. If CHANGELOG.md appears in staged
+  or unstaged changes, stop and ask for the repo's release tooling or
+  workflow before proceeding.
 
 ## Format commit headers
 

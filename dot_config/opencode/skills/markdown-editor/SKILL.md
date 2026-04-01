@@ -19,6 +19,8 @@ not explicitly request it, unless the file is inside a directory that contains a
 - Avoid raw HTML unless Markdown cannot express the requirement.
 - Default to 80 characters per line, but preserve the established line-length
   convention when it is clearly present in the file.
+- Never make direct changes to `CHANGELOG.md`. When a changelog update is
+  needed, follow the repository's designated process or ask for guidance.
 
 ## Obsidian exception
 

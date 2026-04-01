@@ -30,3 +30,5 @@
 	base = develop
 [gitflow "branch.release/0.0.3"]
 	base = develop
+[gitflow "branch.release/0.0.4"]
+	base = develop

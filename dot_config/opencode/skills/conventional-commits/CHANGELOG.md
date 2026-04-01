@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.4](https://github.com/iop098321qwe/conventional-commits/compare/v0.0.3...v0.0.4) (2026-04-01)
+
+
+### Features
+
+* **conventional-commits:** block direct changelog edits ([b201e41](https://github.com/iop098321qwe/conventional-commits/commit/b201e41ae3ab781e9b35d446f04ab64c6ac371a6))
+
 ## [0.0.3](https://github.com/iop098321qwe/conventional-commits/compare/v0.0.2...v0.0.3) (2026-03-31)
 
 
