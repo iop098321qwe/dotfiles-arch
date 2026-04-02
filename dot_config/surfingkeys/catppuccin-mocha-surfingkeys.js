@@ -57,6 +57,26 @@ api.mapkey(';gg', '#3Create new tab group (TE, yellow)', function() {
   api.RUNTIME('createTabGroup', { title: 'TE', color: 'yellow' });
 });
 
+api.mapkey(';gr', '#3Go to random tab in current window', function() {
+  api.RUNTIME('getTabs', { queryInfo: { currentWindow: true } }, function(tabRes) {
+    const tabs = (tabRes && tabRes.tabs) || [];
+    if (!tabs.length) {
+      api.Front.showBanner('No tabs in current window', 2000);
+      return;
+    }
+    const activeTab = tabs.find(tab => tab.active);
+    const candidates = (activeTab && tabs.length > 1)
+      ? tabs.filter(tab => tab.id !== activeTab.id)
+      : tabs;
+    if (!candidates.length) {
+      api.Front.showBanner('No other tabs in current window', 2000);
+      return;
+    }
+    const randomTab = candidates[Math.floor(Math.random() * candidates.length)];
+    api.RUNTIME('focusTab', { tabId: randomTab.id });
+  });
+});
+
 api.mapkey('g^', '#3Go to second tab', function() {
   api.RUNTIME('getTabs', { queryInfo: { currentWindow: true } }, function(tabRes) {
     const tabs = (tabRes && tabRes.tabs) || [];
