@@ -31,6 +31,13 @@ matches:
       'Waiting Customer'
       $|$
 
+  # Inputting next steps for "Pending Approval to Close".
+  - trigger: ";nspac"
+    replace: |-
+      Next Steps:
+      'Pending Approval to Close'
+      $|$
+
   # Inputting next steps for "Waiting Materials".
   - trigger: ";nswm"
     replace: |-
