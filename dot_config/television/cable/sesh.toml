@@ -14,6 +14,7 @@ command = "sesh preview '{strip_ansi|split: :1..|join: }'"
 [keybindings]
 enter = "actions:connect"
 ctrl-d = [ "actions:kill_session", "reload_source",]
+f2 = ["actions:rename_session", "reload_source"]
 
 [actions.connect]
 description = "Connect to selected session"
@@ -24,3 +25,13 @@ mode = "execute"
 description = "Kill selected tmux session (press Ctrl+r to reload)"
 command = "tmux kill-session -t '{strip_ansi|split: :1..|join: }'"
 mode = "fork"
+
+# [actions.rename_session]
+# description = "Rename selected tmux session"
+# command = "tmux command-prompt -p 'Rename session:' \"rename-session -t '{strip_ansi|split: :1..|join: }' '%%'\""
+# mode = "execute"
+
+[actions.rename_session]
+description = "Rename selected tmux session"
+command = "tmux command-prompt -I \"#{session_name}\" -p 'rename session:' \"rename-session -t '{strip_ansi|split: :1..|join: }' '%%'\""
+mode = "execute"
