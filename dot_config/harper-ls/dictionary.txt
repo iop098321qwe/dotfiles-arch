@@ -6,6 +6,7 @@ Bambustudio
 Betterbird
 BleachBit
 Btop
+CRL
 CSC
 Catppuccin
 Cron
@@ -15,8 +16,10 @@ Datto
 Deeptree
 Digifort
 Dimond
+Dutchware
 Emby
 Espanso
+Evenk
 FQDN
 Farrimond
 Flameshot
@@ -34,11 +37,14 @@ Immich
 InVidTech
 JetBoil
 Kdenlive
+Klemheist
 LXC
 Logitech
 MB
 MikroTik
 Multiboard
+N/A
+NAMA
 NetBox
 Nextcloud
 Ntfy
@@ -49,6 +55,7 @@ PiKVM
 PiVPN
 PriceBuddy
 Proxmox
+Prusik
 RMM
 Raphire
 SARemediation
@@ -68,10 +75,13 @@ WizTree
 WunderTech
 Zellij
 Zoxide
+arborists
+canyoneering
 chezmoi
 crontab
 exe
 grymm
+guyline
 guylines
 hiberfil
 homelab
@@ -87,5 +97,7 @@ ridgeline
 ridgelines
 searxng
 sys
+tensioning
 writeup
 zenmap
+ziplining
