@@ -18,6 +18,7 @@ Dimond
 Emby
 Espanso
 FQDN
+Farrimond
 Flameshot
 Flexarm
 Foliate
@@ -71,6 +72,7 @@ chezmoi
 crontab
 exe
 grymm
+guylines
 hiberfil
 homelab
 kasm
@@ -81,6 +83,8 @@ omarchy
 pagefile
 pihole
 pve
+ridgeline
+ridgelines
 searxng
 sys
 writeup

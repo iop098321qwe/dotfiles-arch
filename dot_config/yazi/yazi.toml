@@ -270,7 +270,10 @@ prepend_preloaders = [
   { mime = "application/ms-*", run = "office" },
   { mime = "application/msword", run = "office" },
   { name = "*.docx", run = "office" },
+  # 3d
   { url = "*.{scad,csg,3mf,amf,dxf,off,stl}", run = "openscad" },
+  # markdown
+  { name = "*.md", run = "glow" },
 ]
 
 prepend_previewers = [
@@ -280,6 +283,9 @@ prepend_previewers = [
   { mime = "application/ms-*", run = "office" },
   { mime = "application/msword", run = "office" },
   { name = "*.docx", run = "office" },
+  # 3d
   { url = "*.{scad,csg,3mf,amf,dxf,off,stl}", run = "openscad" },
+  # markdown
+  { name = "*.md", run = "glow" },
 ]
 
