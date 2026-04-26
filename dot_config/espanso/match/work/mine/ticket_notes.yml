@@ -283,6 +283,11 @@ matches:
       Successfully connected and spoke with {{person}} via a phone call.
       $|$
 
+    # Create a match for "Confirmed that".
+  - trigger: ";conf"
+    replace: |-
+      Confirmed that $|$
+
   - regex: ";vm(?P<person>.*)\\."
     replace: |-
       Called the phone number in the ticket and attempted to connect with {{person}}.
