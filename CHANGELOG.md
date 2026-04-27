@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.2](https://github.com/iop098321qwe/dotfiles-arch/compare/v0.0.1...v0.0.2) (2026-04-27)
+
+
+### Features
+
+* **config:** remove hyprdynamicmonitors config and installation script ([b53c354](https://github.com/iop098321qwe/dotfiles-arch/commit/b53c354930c2977a50a179d925c26c14957a16b7))
+
 ## 0.0.1 (2026-03-01)
 
 
