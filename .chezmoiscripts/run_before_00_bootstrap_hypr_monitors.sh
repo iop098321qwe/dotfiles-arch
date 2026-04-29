@@ -1,38 +1,73 @@
 #!/usr/bin/env bash
 
-readonly HOSTNAME_VALUE="$(chezmoi execute-template '{{ .chezmoi.hostname }}')"
-readonly SOURCE_DIR="$(chezmoi source-path)"
-readonly TEMPLATE_DIR="${SOURCE_DIR}/.chezmoitemplates/hypr/monitors"
-readonly HOST_TEMPLATE_FILE="${TEMPLATE_DIR}/${HOSTNAME_VALUE}.conf"
-readonly LIVE_MONITORS_FILE="${HOME}/.config/hypr/monitors.conf"
+require_command() {
+  local command_name="$1"
 
-case "${HOSTNAME_VALUE}" in
-  "")
-    printf 'ERROR: chezmoi hostname is empty. Cannot bootstrap monitors.conf.\n' >&2
-    exit 1
-    ;;
-esac
+  case "$(command -v "${command_name}" 2>/dev/null || true)" in
+    "")
+      printf 'ERROR: Required command not found: %s\n' "${command_name}" >&2
+      exit 1
+      ;;
+  esac
+}
 
-mkdir -p "${TEMPLATE_DIR}"
+get_chezmoi_hostname() {
+  chezmoi execute-template '{{ .chezmoi.hostname }}'
+}
 
-case -f "${HOST_TEMPLATE_FILE}" in
-  true)
-    printf 'Hyprland monitors bootstrap skipped; host file already exists:\n  %s\n' "${HOST_TEMPLATE_FILE}"
-    exit 0
-    ;;
-esac
+get_chezmoi_source_dir() {
+  chezmoi source-path
+}
 
-case -f "${LIVE_MONITORS_FILE}" in
-  true)
-    cp -- "${LIVE_MONITORS_FILE}" "${HOST_TEMPLATE_FILE}"
-    printf 'Hyprland monitors bootstrap created host file:\n  %s\n' "${HOST_TEMPLATE_FILE}"
-    ;;
-  false)
-    cat > "${HOST_TEMPLATE_FILE}" <<EOF
-# Hyprland monitors.conf for ${HOSTNAME_VALUE}
+bootstrap_hypr_monitors() {
+  local hostname_value
+  local source_dir
+  local template_dir
+  local host_template_file
+  local live_monitors_file
+
+  hostname_value="$(get_chezmoi_hostname)"
+  source_dir="$(get_chezmoi_source_dir)"
+
+  case "${hostname_value}" in
+    "")
+      printf 'ERROR: chezmoi hostname is empty. Cannot bootstrap monitors.conf.\n' >&2
+      exit 1
+      ;;
+  esac
+
+  case "${source_dir}" in
+    "")
+      printf 'ERROR: chezmoi source directory is empty. Cannot bootstrap monitors.conf.\n' >&2
+      exit 1
+      ;;
+  esac
+
+  template_dir="${source_dir}/.chezmoitemplates/hypr/monitors"
+  host_template_file="${template_dir}/${hostname_value}.conf"
+  live_monitors_file="${HOME}/.config/hypr/monitors.conf"
+
+  mkdir -p -- "${template_dir}"
+
+  case -f "${host_template_file}" in
+    true)
+      printf 'Hyprland monitors bootstrap skipped; host file already exists:\n  %s\n' "${host_template_file}"
+      return 0
+      ;;
+  esac
+
+  case -f "${live_monitors_file}" in
+    true)
+      cp -- "${live_monitors_file}" "${host_template_file}"
+
+      printf 'Hyprland monitors bootstrap created host file:\n  %s\n' "${host_template_file}"
+      ;;
+    false)
+      cat > "${host_template_file}" <<EOF
+# Hyprland monitors.conf for ${hostname_value}
 #
 # This file was created automatically because no live monitors.conf existed at:
-#   ${LIVE_MONITORS_FILE}
+#   ${live_monitors_file}
 #
 # Replace this placeholder with the correct Hyprland monitor configuration.
 #
@@ -40,6 +75,14 @@ case -f "${LIVE_MONITORS_FILE}" in
 # monitor=,preferred,auto,1
 EOF
 
-    printf 'Hyprland monitors bootstrap created placeholder host file:\n  %s\n' "${HOST_TEMPLATE_FILE}"
-    ;;
-esac
+      printf 'Hyprland monitors bootstrap created placeholder host file:\n  %s\n' "${host_template_file}"
+      ;;
+  esac
+}
+
+main() {
+  require_command chezmoi
+  bootstrap_hypr_monitors
+}
+
+main "$@"
