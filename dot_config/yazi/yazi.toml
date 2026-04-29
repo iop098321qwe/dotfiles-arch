@@ -36,6 +36,7 @@ edit = [
   { run = 'code -w %*', block = true, desc = "code (block)", for = "windows" },
 ]
 chezmoi = [
+  # Use chezmoi edit with apply flag
   { run = 'chezmoi edit "$@" --apply', desc = "Chezmoi", block = true, for = "unix" },
 ]
 open = [
@@ -60,9 +61,7 @@ play = [
   { run = 'mpv --force-window %*', orphan = true, for = "windows" },
   { run = '''mediainfo "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },
 ]
-image = [
-  { run = 'imv-x11 "$@"', orphan = true, for = "linux" }
-]
+image = [{ run = 'imv-x11 "$@"', orphan = true, for = "linux" }]
 
 [open]
 rules = [
@@ -297,4 +296,3 @@ prepend_previewers = [
   # markdown
   { name = "*.md", run = "glow" },
 ]
-
