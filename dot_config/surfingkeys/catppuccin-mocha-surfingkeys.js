@@ -16,37 +16,8 @@ api.mapkey('M>', '#3Move current tab to far right', function() {
   api.RUNTIME('moveTab', { step: 99 });
 });
 
-api.mapkey('M<', '#3Move current tab to far right', function() {
+api.mapkey('M<', '#3Move current tab to far left', function() {
   api.RUNTIME('moveTab', { step: -99 });
-});
-
-api.mapkey('Mb', '#3Move current tab to start of tab group', function() {
-  api.RUNTIME(
-    'getTabs',
-    { queryInfo: { currentWindow: true } },
-    function(tabRes) {
-      const tabs = (tabRes && tabRes.tabs) || [];
-      const currentTab = tabs.find(tab => tab.active);
-      if (!currentTab) {
-        api.Front.showBanner('No active tab in current window', 2000);
-        return;
-      }
-      if (currentTab.groupId === -1) {
-        api.Front.showBanner('Not in tab group.', 2000);
-        return;
-      }
-
-      const firstIndex = Math.min(
-        ...tabs
-          .filter(tab => tab.groupId === currentTab.groupId)
-          .map(tab => tab.index)
-      );
-      const step = firstIndex - currentTab.index;
-      if (step !== 0) {
-        api.RUNTIME('moveTab', { step });
-      }
-    }
-  );
 });
 
 api.mapkey(';gn', '#3Create new tab group (prompt for title)', function() {
@@ -228,6 +199,84 @@ api.mapkey(';gr', '#3Go to random tab in current window', function() {
     api.RUNTIME('focusTab', { tabId: randomTab.id });
   });
 });
+
+const focusLeftmostMatchingTab = (description, matchesTabUrl) => {
+  api.RUNTIME(
+    'getTabs',
+    { queryInfo: { currentWindow: true } },
+    function(tabRes) {
+      const tabs = (tabRes && tabRes.tabs) || [];
+      const matchingTab = tabs.reduce((leftmostMatch, tab) => {
+        let tabUrl;
+
+        try {
+          tabUrl = new URL(tab.url);
+        } catch (error) {
+          return leftmostMatch;
+        }
+
+        if (!matchesTabUrl(tabUrl)) {
+          return leftmostMatch;
+        }
+
+        if (!leftmostMatch || tab.index < leftmostMatch.index) {
+          return tab;
+        }
+
+        return leftmostMatch;
+      }, null);
+
+      if (!matchingTab) {
+        api.Front.showBanner(
+          `No ${description} tab in current window`,
+          2000
+        );
+        return;
+      }
+
+      api.RUNTIME('focusTab', { tabId: matchingTab.id });
+    }
+  );
+};
+
+api.mapkey(';oi', '#3Focus leftmost deeptree.itglue.com tab', function() {
+  focusLeftmostMatchingTab('deeptree.itglue.com', function(tabUrl) {
+    return tabUrl.hostname === 'deeptree.itglue.com';
+  });
+});
+
+api.mapkey(
+  ';os',
+  '#3Focus leftmost zinfandel.rmm.datto.com tab',
+  function() {
+    focusLeftmostMatchingTab('zinfandel.rmm.datto.com', function(tabUrl) {
+      return tabUrl.hostname === 'zinfandel.rmm.datto.com';
+    });
+  }
+);
+
+api.mapkey(';od', '#3Focus leftmost Dispatcher Workshop tab', function() {
+  focusLeftmostMatchingTab('Dispatcher Workshop', function(tabUrl) {
+    return (
+      tabUrl.hostname === 'ww15.autotask.net' &&
+      tabUrl.pathname ===
+        '/Autotask/Views/DispatcherWorkshop/DispatcherWorkshopContainer.aspx'
+    );
+  });
+});
+
+api.mapkey(
+  ';oa',
+  '#3Focus leftmost Autotask Onyx landing page tab',
+  function() {
+    focusLeftmostMatchingTab('Autotask Onyx landing page', function(tabUrl) {
+      return (
+        tabUrl.hostname === 'ww15.autotask.net' &&
+        tabUrl.pathname === '/AutotaskOnyx/LandingPage'
+      );
+    });
+  }
+);
 
 api.mapkey('g^', '#3Go to second tab', function() {
   api.RUNTIME('getTabs', { queryInfo: { currentWindow: true } }, function(tabRes) {
