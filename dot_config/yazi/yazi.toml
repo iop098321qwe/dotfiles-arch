@@ -36,7 +36,7 @@ edit = [
   { run = 'code -w %*', block = true, desc = "code (block)", for = "windows" },
 ]
 chezmoi = [
-  { run = 'chezmoi edit "$@"', desc = "Chezmoi", block = true, for = "unix" },
+  { run = 'chezmoi edit "$@" --apply', desc = "Chezmoi", block = true, for = "unix" },
 ]
 open = [
   { run = 'xdg-open "$1"', desc = "Open", for = "linux" },
