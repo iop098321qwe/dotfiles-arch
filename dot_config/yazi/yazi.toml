@@ -35,6 +35,9 @@ edit = [
   { run = 'code %*', orphan = true, desc = "code", for = "windows" },
   { run = 'code -w %*', block = true, desc = "code (block)", for = "windows" },
 ]
+chezmoi = [
+  { run = 'chezmoi edit "$@"', desc = "Chezmoi", block = true, for = "unix" },
+]
 open = [
   { run = 'xdg-open "$1"', desc = "Open", for = "linux" },
   { run = 'open "$@"', desc = "Open", for = "macos" },
@@ -66,18 +69,21 @@ rules = [
   # Folder
   { name = "*/", use = [
     "edit",
+    "chezmoi",
     "open",
     "reveal",
   ] },
   # HTML
   { mime = "text/html", use = [
     "edit",
+    "chezmoi",
     "open",
     "reveal",
   ] },
   # Text
   { mime = "text/*", use = [
     "edit",
+    "chezmoi",
     "reveal",
   ] },
   # Image
@@ -99,6 +105,7 @@ rules = [
   # JSON, Javascript, WINE EXTENSION
   { mime = "application/{json,ndjson,javascript,*wine-extension-ini*}", use = [
     "edit",
+    "chezmoi",
     "reveal",
   ] },
   # PDF, ODS
@@ -114,11 +121,13 @@ rules = [
   # Empty file
   { mime = "inode/empty", use = [
     "edit",
+    "chezmoi",
     "reveal",
   ] },
   # Fallback
   { name = "*", use = [
     "open",
+    "chezmoi",
     "reveal",
   ] },
 ]
