@@ -7,6 +7,14 @@ settings.smoothScroll = true;
 
 settings.repeatThreshold = 100;
 
+// Replace Surfingkeys' built-in Baidu search alias so `sb` uses Brave.
+api.removeSearchAlias('b');
+api.addSearchAlias(
+  'b',
+  'brave',
+  'https://search.brave.com/search?q='
+);
+
 // Keybindings
 
 api.cmap('<Alt-j>', '<Ctrl-n>');
