@@ -1,3 +1,4 @@
+AMAR
 Atuin
 Authentik
 BCUninstaller
@@ -41,6 +42,8 @@ Klemheist
 LXC
 Logitech
 MB
+MDM
+MSP
 MikroTik
 Multiboard
 N/A
@@ -60,6 +63,7 @@ RMM
 Raphire
 SARemediation
 Solaar
+Sophos
 SourceForge
 Starship
 SupportAssist
@@ -74,6 +78,7 @@ Wireshark
 WizTree
 WunderTech
 Zellij
+Zoho
 Zoxide
 arborists
 canyoneering

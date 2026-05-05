@@ -25,3 +25,5 @@ source ~/.sources.sh
 ##############################################################################
  
 source ~/.custom_bash_commands.sh
+
+eval "$(thefuck --alias)"
