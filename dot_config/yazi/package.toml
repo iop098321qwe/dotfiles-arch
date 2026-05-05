@@ -112,3 +112,8 @@ hash = "5af4b06948bb7b825a243131eea2075c"
 use = "yazi-rs/flavors:catppuccin-mocha"
 rev = "0670801"
 hash = "7dfe41c9c3d9be76da8a844263d0bbed"
+
+[[flavor.deps]]
+use = "matt-dong-123/base16"
+rev = "b02b7a8"
+hash = "fdb3a7d76f51c0a46bde55322ede9171"
