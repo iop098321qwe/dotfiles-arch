@@ -877,3 +877,9 @@ desc = "Merge current tab to other projects"
 on = [ "M", "M" ]
 run = "plugin projects 'merge all'"
 desc = "Merge current project to other projects"
+
+# Pandoc
+[[mgr.prepend_keymap]]
+on   = [ "c", "p" ]
+run  = "plugin pandoc"
+desc = "Pandoc: Interactive Convert"
