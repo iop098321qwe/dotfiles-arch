@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# Install btop
-if ! yay -Qs btop &> /dev/null; then
+# Install fuck
+if ! yay -Qs fuck &> /dev/null; then
   omarchy pkg aur add fuck
 else
-  echo "btop already installed."
+  echo "fuck already installed."
 fi
 
