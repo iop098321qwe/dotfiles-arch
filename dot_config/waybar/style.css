@@ -109,3 +109,8 @@ tooltip {
 #custom-voxtype.recording {
   color: #a55555;
 }
+
+#mpris {
+  margin-right: 40px;
+  margin-left: 40px;
+}
