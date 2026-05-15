@@ -27,3 +27,6 @@ source ~/.sources.sh
 source ~/.custom_bash_commands.sh
 
 eval "$(thefuck --alias)"
+
+# OpenCode get-shit-done
+export PATH="$(npm prefix -g)/bin:$PATH"   

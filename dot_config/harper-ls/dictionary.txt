@@ -1,4 +1,5 @@
 AMAR
+ArchWiki
 Atuin
 Authentik
 BCUninstaller
@@ -10,6 +11,7 @@ Btop
 CRL
 CSC
 Catppuccin
+Codecademy
 Cron
 DHCP
 DISM
@@ -27,9 +29,11 @@ Flameshot
 Flexarm
 Foliate
 Fraks
+GSD
 Ghostty
 Gitea
 Gridfinity
+Grymm's
 GrymmWeeper
 Hikvision
 Hikvision's
@@ -44,6 +48,7 @@ Logitech
 MB
 MDM
 MSP
+MakerWorld
 MikroTik
 Multiboard
 N/A
@@ -52,6 +57,7 @@ NetBox
 Nextcloud
 Ntfy
 Okular
+Omacom
 P1S
 PatchCleaner
 PiKVM
