@@ -249,6 +249,10 @@ keymap = [
   ], run = "cd ~/.config/opencode/skills", desc = "OpenCode Skills" },
   { on = [
     "g",
+    "O",
+  ], run = "cd ~/.local/share/omarchy", desc = "Omarchy" },
+  { on = [
+    "g",
     "m",
   ], run = "cd ~/.config/espanso/match", desc = "Espanso Matches" },
   { on = [
