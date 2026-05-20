@@ -127,8 +127,8 @@ end
 
 -- Map the toggle function to <leader>tc in Normal mode
 vim.api.nvim_set_keymap(
-  'n',                     -- Normal mode
-  '<leader>tc',            -- Key combination: <leader> followed by 'tc'
-  ':lua ToggleAutoCommenting()<CR>',  -- Command to execute the function
+  'n',                               -- Normal mode
+  '<leader>tc',                      -- Key combination: <leader> followed by 'tc'
+  ':lua ToggleAutoCommenting()<CR>', -- Command to execute the function
   { noremap = true, silent = true, desc = "Toggle auto-commenting on new lines" }
 )

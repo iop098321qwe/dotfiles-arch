@@ -20,6 +20,89 @@ api.addSearchAlias(
 api.cmap('<Alt-j>', '<Ctrl-n>');
 api.cmap('<Alt-k>', '<Ctrl-p>');
 
+const historyDuplicateStepKey = 'catppuccinHistoryDuplicateStep';
+
+const getHistoryWindow = () => {
+  try {
+    if (window.top && window.top.location.href) {
+      return window.top;
+    }
+  } catch (error) {
+    return window;
+  }
+
+  return window;
+};
+
+const readPendingHistoryDuplicateStep = historyWindow => {
+  try {
+    const value = historyWindow.sessionStorage.getItem(
+      historyDuplicateStepKey
+    );
+    if (value === null) {
+      return null;
+    }
+
+    historyWindow.sessionStorage.removeItem(historyDuplicateStepKey);
+    const step = Number(value);
+
+    return step === -1 || step === 1 ? step : null;
+  } catch (error) {
+    return null;
+  }
+};
+
+const runPendingHistoryDuplicateNavigation = () => {
+  const historyWindow = getHistoryWindow();
+  const step = readPendingHistoryDuplicateStep(historyWindow);
+  if (step === null) {
+    return;
+  }
+
+  historyWindow.setTimeout(() => {
+    historyWindow.history.go(step);
+  }, 100);
+};
+
+const queueHistoryDuplicateNavigation = (historyWindow, step) => {
+  try {
+    historyWindow.sessionStorage.setItem(historyDuplicateStepKey, String(step));
+    historyWindow.setTimeout(() => {
+      if (
+        historyWindow.sessionStorage.getItem(historyDuplicateStepKey) ===
+        String(step)
+      ) {
+        historyWindow.sessionStorage.removeItem(historyDuplicateStepKey);
+      }
+    }, 2000);
+    return true;
+  } catch (error) {
+    api.Front.showBanner('Unable to prepare history tab', 2000);
+    return false;
+  }
+};
+
+const openHistoryEntryInNewTab = (step, unavailableMessage) => {
+  const historyWindow = getHistoryWindow();
+  const nav = historyWindow.navigation;
+
+  if (step < 0 && nav && nav.canGoBack === false) {
+    api.Front.showBanner(unavailableMessage, 2000);
+    return;
+  }
+
+  if (step > 0 && nav && nav.canGoForward === false) {
+    api.Front.showBanner(unavailableMessage, 2000);
+    return;
+  }
+
+  if (queueHistoryDuplicateNavigation(historyWindow, step)) {
+    api.RUNTIME('duplicateTab');
+  }
+};
+
+runPendingHistoryDuplicateNavigation();
+
 api.mapkey('M>', '#3Move current tab to far right', function() {
   api.RUNTIME('moveTab', { step: 99 });
 });
@@ -27,6 +110,14 @@ api.mapkey('M>', '#3Move current tab to far right', function() {
 api.mapkey('M<', '#3Move current tab to far left', function() {
   api.RUNTIME('moveTab', { step: -99 });
 });
+
+api.mapkey(';S', '#4Open previous page in new tab', function() {
+  openHistoryEntryInNewTab(-1, 'No previous page in history');
+}, { repeatIgnore: true });
+
+api.mapkey(';D', '#4Open next page in new tab', function() {
+  openHistoryEntryInNewTab(1, 'No next page in history');
+}, { repeatIgnore: true });
 
 api.mapkey(';gn', '#3Create new tab group (prompt for title)', function() {
   api.Front.openOmnibar({ type: 'Commands', pref: 'createTabGroup' });
