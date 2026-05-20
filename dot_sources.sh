@@ -17,6 +17,3 @@ source /usr/share/blesh/ble.sh 2>/dev/null || true
 
 # Exports
 [ -f ~/.exports.sh ] && source ~/.exports.sh
-
-# thefuck
-eval "$(thefuck --alias)"
