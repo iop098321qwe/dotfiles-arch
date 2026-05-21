@@ -15,4 +15,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 # OpenCode get-shit-done
-export PATH="$(npm prefix -g)/bin:$PATH"   
+# export PATH="$(npm prefix -g)/bin:$PATH"   

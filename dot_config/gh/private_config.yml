@@ -12,13 +12,13 @@ prefer_editor_prompt: disabled
 pager:
 # Aliases allow you to create nicknames for gh commands
 aliases:
-    co: pr checkout
-    prc: pr create
-    prm: pr merge --admin
-    cr: release create --notes-file CHANGELOG.md -d
-    prcm: pr create -B main
-    prcd: pr create -B develop
-    rb: browse -r
+  co: pr checkout
+  prc: pr create
+  prm: pr merge --admin
+  cr: release create --notes-file CHANGELOG.md -d
+  prcm: pr create -B main -f
+  prcd: pr create -B develop -f
+  rb: browse -r
 # The path to a unix socket through which to send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
 # What web browser gh should use when opening URLs. If blank, will refer to environment.

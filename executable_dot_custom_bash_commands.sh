@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-CBC_VERSION="v3.0.1"
+CBC_VERSION="v3.2.0"
 
 ################################################################################
 # CUSTOM BASH COMMANDS (by iop098321qwe)
@@ -24,9 +24,11 @@ CBC_THEME_CACHE_MTIME=""
 # CBC CONFIG
 ################################################################################
 
-cbc_config_trim() {
-  local text="$1"
-  printf "%s" "$text" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'
+cbc_trim_in_place() {
+  local -n value_ref="$1"
+
+  value_ref="${value_ref#"${value_ref%%[![:space:]]*}"}"
+  value_ref="${value_ref%"${value_ref##*[![:space:]]}"}"
 }
 
 cbc_config_normalize_bool() {
@@ -96,7 +98,7 @@ cbc_config_load() {
 
   while IFS= read -r line || [ -n "$line" ]; do
     line="${line%%#*}"
-    line="$(cbc_config_trim "$line")"
+    cbc_trim_in_place line
 
     if [ -z "$line" ]; then
       continue
@@ -104,8 +106,10 @@ cbc_config_load() {
 
     case "$line" in
     *=*)
-      key="$(cbc_config_trim "${line%%=*}")"
-      value="$(cbc_config_trim "${line#*=}")"
+      key="${line%%=*}"
+      value="${line#*=}"
+      cbc_trim_in_place key
+      cbc_trim_in_place value
       value="${value%\"}"
       value="${value#\"}"
       value="${value%\'}"
@@ -239,7 +243,7 @@ cbc_theme_refresh_palette() {
   local color14=""
 
   while IFS= read -r line || [ -n "$line" ]; do
-    line="$(cbc_config_trim "$line")"
+    cbc_trim_in_place line
 
     if [ -z "$line" ] || [[ "$line" == \#* ]]; then
       continue
@@ -247,7 +251,8 @@ cbc_theme_refresh_palette() {
 
     case "$line" in
     *=*)
-      key="$(cbc_config_trim "${line%%=*}")"
+      key="${line%%=*}"
+      cbc_trim_in_place key
 
       if [[ "$line" =~ \#([0-9a-fA-F]{6}) ]]; then
         value="#${BASH_REMATCH[1],,}"
@@ -496,11 +501,6 @@ cbc_spinner() {
 # CBC MODULE LOADER
 ################################################################################
 
-cbc_pkg_trim() {
-  local text="$1"
-  printf "%s" "$text" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'
-}
-
 cbc_pkg_ensure_config() {
   mkdir -p "$CBC_CONFIG_DIR" "$CBC_MODULE_ROOT"
 }
@@ -613,7 +613,7 @@ cbc_pkg_read_manifest() {
 
   while IFS= read -r line || [ -n "$line" ]; do
     line="${line%%#*}"
-    line="$(cbc_pkg_trim "$line")"
+    cbc_trim_in_place line
 
     if [ -z "$line" ]; then
       continue
@@ -632,8 +632,10 @@ cbc_pkg_read_manifest() {
       continue
     fi
 
-    local key="$(cbc_pkg_trim "${line%%=*}")"
-    local value="$(cbc_pkg_trim "${line#*=}")"
+    local key="${line%%=*}"
+    local value="${line#*=}"
+    cbc_trim_in_place key
+    cbc_trim_in_place value
 
     value="${value%\"}"
     value="${value#\"}"
@@ -1320,15 +1322,14 @@ cbc_pkg_update() {
   cbc_pkg_load_modules auto
 }
 
-cbc_pkg_load_modules() {
+cbc_pkg_source_modules() {
   local auto_load="$1"
   shift || true
 
-  cbc_pkg_ensure_config
-  cbc_pkg_align_with_manifest
-
   local loaded_any=false
   local skipped_modules=()
+
+  [ -d "$CBC_MODULE_ROOT" ] || return 0
 
   shopt -s nullglob
   for module_dir in "$CBC_MODULE_ROOT"/*; do
@@ -1358,13 +1359,22 @@ cbc_pkg_load_modules() {
   fi
 }
 
+cbc_pkg_load_modules() {
+  local auto_load="$1"
+  shift || true
+
+  cbc_pkg_ensure_config
+  cbc_pkg_align_with_manifest
+  cbc_pkg_source_modules "$auto_load"
+}
+
 cbc_pkg_load() {
   OPTIND=1
   local show_help=false
 
   usage() {
     cbc_style_box "$CATPPUCCIN_MAUVE" "Description:" \
-      "  Load CBC modules from packages.toml and local modules."
+      "  Install missing manifest modules and source local modules."
 
     cbc_style_box "$CATPPUCCIN_BLUE" "Usage:" \
       "  cbc pkg load"
@@ -3422,7 +3432,7 @@ cbc_list() {
 # Auto-load installed CBC modules
 ###############################################################################
 
-cbc_pkg_load_modules auto
+cbc_pkg_source_modules auto
 
 ###############################################################################
 # Call the function to display information once per interactive session
