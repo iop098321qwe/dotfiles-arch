@@ -3,9 +3,6 @@
 # ble.sh (must be loaded before atuin init)
 source /usr/share/blesh/ble.sh 2>/dev/null || true
 
-# Atuin
-[ -f ~/.atuin/bin/env ] && source ~/.atuin/bin/env
-
 # FZF Integration
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
