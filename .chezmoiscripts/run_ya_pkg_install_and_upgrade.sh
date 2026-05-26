@@ -4,8 +4,8 @@ update=false
 # Upgrade ya packages
 
 yainstall() {
-  ya pkg install
-  ya pkg upgrade
+  ya pkg install --discard
+  ya pkg upgrade --discard
 }
 
 checkyainstall() {
