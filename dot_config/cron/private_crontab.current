@@ -1,1 +1,3 @@
 @daily /usr/bin/trash-empty 75
+@hourly /usr/bin/ya pkg upgrade
+@hourly /home/grymm/.local/share/mise/installs/node/25.2.1/bin/npm install -g npm@latest

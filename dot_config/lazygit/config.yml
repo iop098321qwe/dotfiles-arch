@@ -71,3 +71,14 @@ git:
       # externalDiffCommand: "delta --dark --paging=never"
 
 # confirmOnQuit: true
+
+customCommands:
+  - key: "I"
+    context: "global"
+    command: 'git commit --allow-empty -m "chore: initial commit"'
+    description: "Create empty initial commit"
+    loadingText: "Creating empty commit..."
+    prompts:
+      - type: "confirm"
+        title: "Create Empty Commit"
+        body: 'Are you sure you want to create an empty commit with message "chore: initial commit"?'
