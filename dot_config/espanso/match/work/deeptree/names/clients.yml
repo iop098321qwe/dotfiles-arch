@@ -2,6 +2,12 @@
 
 # clients
 matches:
+  - name: "Air Source Alaska"
+    label: "Air Source Alaska"
+    replace_preview: true
+    trigger: ";asa"
+    replace: "Air Source Alaska$|$"
+
   - name: "AK Child & Family"
     label: "AK Child & Family"
     replace_preview: true

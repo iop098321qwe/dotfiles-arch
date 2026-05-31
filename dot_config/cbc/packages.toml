@@ -57,8 +57,8 @@ hash = "c55711c3aa1d09c54ff530d82ef8c0c3f520838f"
 
 [[module.deps]]
 use = "iop098321qwe/projectmod"
-rev = "d38626d"
-hash = "d38626dfda4ec5606eb29dffccd9a06086ddd98b"
+rev = "f1eaebf"
+hash = "f1eaebf75ff87e8b086ff3a5406b0c61d96ee2a8"
 
 [[module.deps]]
 use = "iop098321qwe/makeman"
