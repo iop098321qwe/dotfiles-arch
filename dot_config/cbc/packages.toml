@@ -52,8 +52,8 @@ hash = "fb51c3a216e12c6485f065ac8e4e3d1315fb0728"
 
 [[module.deps]]
 use = "iop098321qwe/gitmod"
-rev = "83c88c5"
-hash = "83c88c5485fb1c13d4787bb8eda45e45feb61dc0"
+rev = "c55711c"
+hash = "c55711c3aa1d09c54ff530d82ef8c0c3f520838f"
 
 [[module.deps]]
 use = "iop098321qwe/projectmod"
@@ -77,6 +77,6 @@ hash = "8d39c59f98400bc2c330c12963b98bff4732ce61"
 
 [[module.deps]]
 use = "iop098321qwe/commit-and-tag-version"
-rev = "a5c61c4"
-hash = "a5c61c4214362967963f0913f27df7ea9c899368"
+rev = "30cb675"
+hash = "30cb67584b0f2c7fe497afcec3688d17cc71ebee"
 

@@ -16,8 +16,8 @@ aliases:
   prc: pr create
   prm: pr merge --admin
   cr: release create --notes-file CHANGELOG.md -d
-  prcm: pr create -B main -f
-  prcd: pr create -B develop -f
+  prcm: pr create -B main -e
+  prcd: pr create -B develop -e
   rb: browse -r
 # The path to a unix socket through which to send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
