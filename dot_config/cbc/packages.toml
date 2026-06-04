@@ -80,3 +80,13 @@ use = "iop098321qwe/commit-and-tag-version"
 rev = "30cb675"
 hash = "30cb67584b0f2c7fe497afcec3688d17cc71ebee"
 
+[[module.deps]]
+use = "iop098321qwe/protonmod"
+rev = "104b32f"
+hash = "104b32fab698e18d7d6c916eae95b4b41dbcd562"
+
+[[module.deps]]
+use = "iop098321qwe/randomod"
+rev = "7bc94f0"
+hash = "7bc94f0571fa5261f545afd150fe0b530d11a858"
+
