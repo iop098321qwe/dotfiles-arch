@@ -182,6 +182,12 @@ matches:
     trigger: ";jaoa"
     replace: "Junior Achievement of Alaska$|$"
 
+  - name: "Kijik Corporation"
+    label: "Kijik Corporation"
+    replace_preview: true
+    trigger: ";kc"
+    replace: "Kijik Corporation$|$"
+
   - name: "Knom Radio Mission, Inc."
     label: "Knom Radio Mission, Inc."
     replace_preview: true
