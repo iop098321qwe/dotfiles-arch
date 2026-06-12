@@ -57,8 +57,8 @@ hash = "c55711c3aa1d09c54ff530d82ef8c0c3f520838f"
 
 [[module.deps]]
 use = "iop098321qwe/projectmod"
-rev = "f1eaebf"
-hash = "f1eaebf75ff87e8b086ff3a5406b0c61d96ee2a8"
+rev = "ec664eb"
+hash = "ec664eb35df3f4455e6ab9ca933b1132874b97df"
 
 [[module.deps]]
 use = "iop098321qwe/makeman"
@@ -87,6 +87,6 @@ hash = "104b32fab698e18d7d6c916eae95b4b41dbcd562"
 
 [[module.deps]]
 use = "iop098321qwe/randomod"
-rev = "7bc94f0"
-hash = "7bc94f0571fa5261f545afd150fe0b530d11a858"
+rev = "291cd8a"
+hash = "291cd8a5041b6b143361bdeb41e5ff8045d0c3d3"
 
