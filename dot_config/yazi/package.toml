@@ -84,11 +84,6 @@ rev = "b2153bc"
 hash = "1493e40f8f4f222c9ecb24cf85ccabd2"
 
 [[plugin.deps]]
-use = "macydnah/office"
-rev = "41ebef8"
-hash = "5805affd3ae8adcb3c72b6997d21c0a6"
-
-[[plugin.deps]]
 use = "AminurAlam/yazi-plugins:nextension"
 rev = "6206bae"
 hash = "ad1329d711d44abd14e550a8cfb0ad26"
@@ -107,6 +102,11 @@ hash = "5a4e61f8cae42be53844acaa6c447d96"
 use = "lmnek/pandoc"
 rev = "fd2798b"
 hash = "5af4b06948bb7b825a243131eea2075c"
+
+[[plugin.deps]]
+use = "macydnah/office"
+rev = "41ebef8"
+hash = "5805affd3ae8adcb3c72b6997d21c0a6"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
