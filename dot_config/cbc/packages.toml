@@ -87,6 +87,6 @@ hash = "104b32fab698e18d7d6c916eae95b4b41dbcd562"
 
 [[module.deps]]
 use = "iop098321qwe/randomod"
-rev = "291cd8a"
-hash = "291cd8a5041b6b143361bdeb41e5ff8045d0c3d3"
+rev = "a040617"
+hash = "a0406170f71e299ca8e6d276403d084833f6b155"
 

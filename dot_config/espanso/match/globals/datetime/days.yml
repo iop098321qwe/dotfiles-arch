@@ -80,7 +80,7 @@ matches:
         type: shell
         params:
           cmd: |
-            date -d "last Monday" '+Monday %Y-%m-%d'
+            date -d "last Monday" '+last Monday, %Y-%m-%d'
 
   # Get date for last Monday minus N weeks
   - regex: ";(?P<weeks>[0-9]+)\\.lstmon"
@@ -101,7 +101,7 @@ matches:
         type: shell
         params:
           cmd: |
-            date -d "last Tuesday" '+Tuesday %Y-%m-%d'
+            date -d "last Tuesday" '+last Tuesday, %Y-%m-%d'
 
   # Get date for last Tuesday minus N weeks
   - regex: ";(?P<weeks>[0-9]+)\\.lsttue"
@@ -122,7 +122,7 @@ matches:
         type: shell
         params:
           cmd: |
-            date -d "last Wednesday" '+Wednesday %Y-%m-%d'
+            date -d "last Wednesday" '+last Wednesday, %Y-%m-%d'
 
   # Get date for last Wednesday minus N weeks
   - regex: ";(?P<weeks>[0-9]+)\\.lstwed"
@@ -143,7 +143,7 @@ matches:
         type: shell
         params:
           cmd: |
-            date -d "last Thursday" '+Thursday %Y-%m-%d'
+            date -d "last Thursday" '+last Thursday, %Y-%m-%d'
 
   # Get date for last Thursday minus N weeks
   - regex: ";(?P<weeks>[0-9]+)\\.lstthu"
@@ -164,7 +164,7 @@ matches:
         type: shell
         params:
           cmd: |
-            date -d "last Friday" '+Friday %Y-%m-%d'
+            date -d "last Friday" '+last Friday, %Y-%m-%d'
 
   # Get date for last Friday minus N weeks
   - regex: ";(?P<weeks>[0-9]+)\\.lstfri"
@@ -185,7 +185,7 @@ matches:
         type: shell
         params:
           cmd: |
-            date -d "last Saturday" '+Saturday %Y-%m-%d'
+            date -d "last Saturday" '+last Saturday, %Y-%m-%d'
 
   # Get date for last Saturday minus N weeks
   - regex: ";(?P<weeks>[0-9]+)\\.lstsat"
@@ -206,7 +206,7 @@ matches:
         type: shell
         params:
           cmd: |
-            date -d "last Sunday" '+Sunday %Y-%m-%d'
+            date -d "last Sunday" '+last Sunday, %Y-%m-%d'
 
   # Get date for last Sunday minus N weeks
   - regex: ";(?P<weeks>[0-9]+)\\.lstsun"
@@ -227,7 +227,7 @@ matches:
         type: shell
         params:
           cmd: |
-            date -d "next Monday + 7 days" '+Monday %Y-%m-%d'
+            date -d "next Monday + 7 days" '+next Monday, %Y-%m-%d'
 
   # Get date for next Monday plus N weeks
   - regex: ";(?P<weeks>[0-9]+)\\.nxtmon"
@@ -248,7 +248,7 @@ matches:
         type: shell
         params:
           cmd: |
-            date -d "next Tuesday + 7 days" '+Tuesday %Y-%m-%d'
+            date -d "next Tuesday + 7 days" '+next Tuesday, %Y-%m-%d'
 
   # Get date for next Tuesday plus N weeks
   - regex: ";(?P<weeks>[0-9]+)\\.nxttues"
@@ -269,7 +269,7 @@ matches:
         type: shell
         params:
           cmd: |
-            date -d "next Wednesday + 7 days" '+Wednesday %Y-%m-%d'
+            date -d "next Wednesday + 7 days" '+next Wednesday, %Y-%m-%d'
 
   # Get date for next Wednesday plus N weeks
   - regex: ";(?P<weeks>[0-9]+)\\.nxtwed"
@@ -290,7 +290,7 @@ matches:
         type: shell
         params:
           cmd: |
-            date -d "next Thursday + 7 days" '+Thursday %Y-%m-%d'
+            date -d "next Thursday + 7 days" '+next Thursday, %Y-%m-%d'
 
   # Get date for next Thursday plus N weeks
   - regex: ";(?P<weeks>[0-9]+)\\.nxtthur"
@@ -311,7 +311,7 @@ matches:
         type: shell
         params:
           cmd: |
-            date -d "next Friday + 7 days" '+Friday %Y-%m-%d'
+            date -d "next Friday + 7 days" '+next Friday, %Y-%m-%d'
 
   # Get date for next Friday plus N weeks
   - regex: ";(?P<weeks>[0-9]+)\\.nxtfri"
@@ -332,7 +332,7 @@ matches:
         type: shell
         params:
           cmd: |
-            date -d "next Saturday + 7 days" '+Saturday %Y-%m-%d'
+            date -d "next Saturday + 7 days" '+next Saturday, %Y-%m-%d'
 
   # Get date for next Saturday plus N weeks
   - regex: ";(?P<weeks>[0-9]+)\\.nxtsat"
@@ -353,7 +353,7 @@ matches:
         type: shell
         params:
           cmd: |
-            date -d "next Sunday + 7 days" '+Sunday %Y-%m-%d'
+            date -d "next Sunday + 7 days" '+next Sunday, %Y-%m-%d'
 
   # Get date for next Sunday plus N weeks
   - regex: ";(?P<weeks>[0-9]+)\\.nxtsun"
