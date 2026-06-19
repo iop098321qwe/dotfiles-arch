@@ -16,6 +16,7 @@ CSC
 Caswell
 Catppuccin
 Codecademy
+CompTIA
 Cron
 DHCP
 DISM
@@ -24,7 +25,9 @@ Deeptree
 Digifort
 Dimond
 Dutchware
+EVO
 Emby
+Entra
 Espanso
 Evenk
 FQDN
@@ -34,15 +37,18 @@ Flameshot
 Flexarm
 Foliate
 Fraks
+GIAC
 GSD
 Ghostty
 Gitea
 Gridfinity
 Grymm's
 GrymmWeeper
+HIPAA
 Hikvision
 Hikvision's
 IFHC
+ISC2
 ITGlue
 Immich
 InVidTech
@@ -61,6 +67,7 @@ MikroTik
 Multiboard
 N/A
 NAMA
+NIST
 NetBox
 Nextcloud
 Ntfy
@@ -74,6 +81,7 @@ PiVPN
 PriceBuddy
 Proxmox
 Prusik
+RDP
 RMM
 Raphire
 SARemediation
@@ -121,6 +129,8 @@ ridgelines
 searxng
 sys
 tensioning
+url
 writeup
 zenmap
+zensical
 ziplining

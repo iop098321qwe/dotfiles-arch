@@ -7,8 +7,8 @@ hash = "34ee0f6da57549a2f8a2cfa484ee50d04c4fe828"
 
 [[module.deps]]
 use = "iop098321qwe/lazymod"
-rev = "1968dfd"
-hash = "1968dfd96b278dadb7f05d23de3ed07e71bae4b7"
+rev = "d1f1328"
+hash = "d1f1328259dca070e35dd5b6c7c7da00a341bf29"
 
 [[module.deps]]
 use = "iop098321qwe/vim-exit"
@@ -57,8 +57,8 @@ hash = "c55711c3aa1d09c54ff530d82ef8c0c3f520838f"
 
 [[module.deps]]
 use = "iop098321qwe/projectmod"
-rev = "ec664eb"
-hash = "ec664eb35df3f4455e6ab9ca933b1132874b97df"
+rev = "c1bc05f"
+hash = "c1bc05fa471c8f8bd923a0e20c4da04a1da3827f"
 
 [[module.deps]]
 use = "iop098321qwe/makeman"
@@ -89,4 +89,14 @@ hash = "104b32fab698e18d7d6c916eae95b4b41dbcd562"
 use = "iop098321qwe/randomod"
 rev = "a040617"
 hash = "a0406170f71e299ca8e6d276403d084833f6b155"
+
+[[module.deps]]
+use = "iop098321qwe/tuxedomod"
+rev = "be6a07a"
+hash = "be6a07addf06c8e928b245fad6689509d825f285"
+
+[[module.deps]]
+use = "iop098321qwe/venvmod"
+rev = "c33191f"
+hash = "c33191f547e32b26ddf392a307f55d88bb4ac700"
 
