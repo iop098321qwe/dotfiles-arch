@@ -2,101 +2,106 @@
 
 [[module.deps]]
 use = "iop098321qwe/filemod"
-rev = "34ee0f6"
-hash = "34ee0f6da57549a2f8a2cfa484ee50d04c4fe828"
+rev = "2ab218f"
+hash = "2ab218f5edc6913c0e43d28d360f92896a6d9854"
 
 [[module.deps]]
 use = "iop098321qwe/lazymod"
-rev = "d1f1328"
-hash = "d1f1328259dca070e35dd5b6c7c7da00a341bf29"
+rev = "10e3fd0"
+hash = "10e3fd038a4bfed7a4e66bf73fcbedd01b510002"
 
 [[module.deps]]
 use = "iop098321qwe/vim-exit"
-rev = "d2b6077"
-hash = "d2b607755fff4817a5c8e0e3217a6d742e9a217b"
+rev = "925b383"
+hash = "925b3836e1c4821633d0210d34c35ccb8b81a65f"
 
 [[module.deps]]
 use = "iop098321qwe/cd-shortcuts"
-rev = "15fb346"
-hash = "15fb3462ea99a243bf4a28c5bc642b2cb8728c79"
+rev = "18f45b7"
+hash = "18f45b7fce0dd4c9033270d1a8b9f79ab28a1d32"
 
 [[module.deps]]
 use = "iop098321qwe/interactive"
-rev = "352fcea"
-hash = "352fcea6433fcd85a80194c6dd63a856056170f5"
+rev = "4bba216"
+hash = "4bba2169b931c3dac2df181cd73bd1e8bf90eb28"
 
 [[module.deps]]
 use = "iop098321qwe/surfingkeys-update"
-rev = "5a36b20"
-hash = "5a36b20ce1e236a4aa773ee3e541a67369b944ba"
+rev = "a87eb2f"
+hash = "a87eb2f7b2a33947f4f41c01b77223da4842b52f"
 
 [[module.deps]]
 use = "iop098321qwe/chezmod"
-rev = "b5f8ed2"
-hash = "b5f8ed201d0e2359deb166212997455a760e05ba"
+rev = "7af34d8"
+hash = "7af34d8fd645633b279d20e407d7b29e80dede82"
 
 [[module.deps]]
 use = "iop098321qwe/cronmod"
-rev = "ff917cf"
-hash = "ff917cfca9bec7335afdaca7d1dc1c4a5ca1c11b"
+rev = "001f86e"
+hash = "001f86eb935fdbca9b057fc0eb1b28470a46803a"
 
 [[module.deps]]
 use = "iop098321qwe/opencodemod"
-rev = "3d0c52a"
-hash = "3d0c52a394f3f71a266d48abb5bfe4b96a80fbd1"
+rev = "33e82b0"
+hash = "33e82b0c1edc977391c487576bfdafd184558fc4"
 
 [[module.deps]]
 use = "iop098321qwe/smartsort"
-rev = "fb51c3a"
-hash = "fb51c3a216e12c6485f065ac8e4e3d1315fb0728"
+rev = "029d4b5"
+hash = "029d4b54abf46db6b9f02e2e7be41b22b30856de"
 
 [[module.deps]]
 use = "iop098321qwe/gitmod"
-rev = "c55711c"
-hash = "c55711c3aa1d09c54ff530d82ef8c0c3f520838f"
-
-[[module.deps]]
-use = "iop098321qwe/projectmod"
-rev = "c1bc05f"
-hash = "c1bc05fa471c8f8bd923a0e20c4da04a1da3827f"
+rev = "f20beb0"
+hash = "f20beb0e4e8f8cf068f3d97645bf5875b1d78239"
 
 [[module.deps]]
 use = "iop098321qwe/makeman"
-rev = "b542054"
-hash = "b542054f1531aa01c41c05c39657093cf78bad16"
+rev = "098bdb0"
+hash = "098bdb02f6e9f55c895d07c0230641e70fa7571f"
 
 [[module.deps]]
 use = "iop098321qwe/repeat"
-rev = "93cf838"
-hash = "93cf83890236e875286145232efa5b75d044a0f5"
+rev = "bba0df1"
+hash = "bba0df196cfabf4c4ae4b1455fa4b44da017bb74"
 
 [[module.deps]]
 use = "iop098321qwe/tmuxmod"
-rev = "8d39c59"
-hash = "8d39c59f98400bc2c330c12963b98bff4732ce61"
+rev = "fba7154"
+hash = "fba71547f258a99673097728528cba6c5031724f"
 
 [[module.deps]]
 use = "iop098321qwe/commit-and-tag-version"
-rev = "30cb675"
-hash = "30cb67584b0f2c7fe497afcec3688d17cc71ebee"
+rev = "9ee458f"
+hash = "9ee458fb24ad729f1791274230aefd8e76cb6d3f"
 
 [[module.deps]]
 use = "iop098321qwe/protonmod"
-rev = "104b32f"
-hash = "104b32fab698e18d7d6c916eae95b4b41dbcd562"
+rev = "5695dc9"
+hash = "5695dc92205f95a17e50d5f1b5c5eada289666fb"
 
 [[module.deps]]
 use = "iop098321qwe/randomod"
-rev = "a040617"
-hash = "a0406170f71e299ca8e6d276403d084833f6b155"
+rev = "0931f37"
+hash = "0931f377a6a6c3f438c057c601a4f9117ca79760"
 
 [[module.deps]]
 use = "iop098321qwe/tuxedomod"
-rev = "be6a07a"
-hash = "be6a07addf06c8e928b245fad6689509d825f285"
+rev = "80c5328"
+hash = "80c532860a50117291456ad7a347528c9627fc37"
 
 [[module.deps]]
 use = "iop098321qwe/venvmod"
-rev = "c33191f"
-hash = "c33191f547e32b26ddf392a307f55d88bb4ac700"
+rev = "11e2e91"
+hash = "11e2e91cffbaab03637675c98607efb2fa504a94"
+
+[[module.deps]]
+use = "iop098321qwe/projectmod"
+rev = "25d500c"
+hash = "25d500cd68819b3a5037bdde0f801c32cee814e0"
+
+[[module.deps]]
+use = "iop098321qwe/prettiermod"
+rev = "f16e26e"
+hash = "f16e26ed81bce51a5221b4bb9eebfc5e3626589c"
 
