@@ -95,8 +95,10 @@ SystemPropertiesAdvanced
 TigerSpot
 ToolTrace
 Traefik
+Tuxedomod
 VE
 Vencord
+Venvmod
 Wasilla
 Win11Debloat
 WinSxS
@@ -129,7 +131,9 @@ ridgelines
 searxng
 sys
 tensioning
+todo
 url
+venv
 writeup
 zenmap
 zensical

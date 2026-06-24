@@ -12,8 +12,8 @@ hash = "10e3fd038a4bfed7a4e66bf73fcbedd01b510002"
 
 [[module.deps]]
 use = "iop098321qwe/vim-exit"
-rev = "925b383"
-hash = "925b3836e1c4821633d0210d34c35ccb8b81a65f"
+rev = "a566d36"
+hash = "a566d36bc3cf618fa50ac6413c535edcad58a4a1"
 
 [[module.deps]]
 use = "iop098321qwe/cd-shortcuts"
@@ -87,21 +87,21 @@ hash = "0931f377a6a6c3f438c057c601a4f9117ca79760"
 
 [[module.deps]]
 use = "iop098321qwe/tuxedomod"
-rev = "80c5328"
-hash = "80c532860a50117291456ad7a347528c9627fc37"
+rev = "5ae891a"
+hash = "5ae891a9fd52c75e6618a41fda6d646902c687f9"
 
 [[module.deps]]
 use = "iop098321qwe/venvmod"
-rev = "11e2e91"
-hash = "11e2e91cffbaab03637675c98607efb2fa504a94"
+rev = "8316aae"
+hash = "8316aae5c4d4f6263e94caba8def226f0ad7aa18"
 
 [[module.deps]]
 use = "iop098321qwe/projectmod"
-rev = "25d500c"
-hash = "25d500cd68819b3a5037bdde0f801c32cee814e0"
+rev = "997d511"
+hash = "997d5117020ec5f03168c19e1510907b39e8bb19"
 
 [[module.deps]]
 use = "iop098321qwe/prettiermod"
-rev = "f16e26e"
-hash = "f16e26ed81bce51a5221b4bb9eebfc5e3626589c"
+rev = "c039261"
+hash = "c0392610db5356140baafce3187c47368bc9d21b"
 

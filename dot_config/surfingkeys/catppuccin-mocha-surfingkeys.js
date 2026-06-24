@@ -1,12 +1,16 @@
 // Settings
-settings.scrollStepSize = 35;
+api.imap('jj', "<Esc>");
+
+// Map 'jj' to Escape specifically inside the Ctrl+i ACE editor
+api.aceVimMap('jj', '<Esc>', 'insert');   
+
+settings.scrollStepSize = 15;
 
 settings.modeAfterYank = "Normal";
 
-settings.smoothScroll = true;
+settings.smoothScroll = false;
 
 settings.repeatThreshold = 100;
-
 // Replace Surfingkeys' built-in Baidu search alias so `sb` uses Brave.
 api.removeSearchAlias('b');
 api.addSearchAlias(
