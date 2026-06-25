@@ -1,8 +1,4 @@
 // Settings
-api.imap('jj', "<Esc>");
-
-// Map 'jj' to Escape specifically inside the Ctrl+i ACE editor
-api.aceVimMap('jj', '<Esc>', 'insert');   
 
 settings.scrollStepSize = 15;
 
@@ -12,54 +8,87 @@ settings.smoothScroll = false;
 
 settings.repeatThreshold = 100;
 // Replace Surfingkeys' built-in Baidu search alias so `sb` uses Brave.
-api.removeSearchAlias('b');
-api.addSearchAlias(
-  'b',
-  'brave',
-  'https://search.brave.com/search?q='
-);
+api.removeSearchAlias("b");
+api.addSearchAlias("b", "brave", "https://search.brave.com/search?q=");
 
 // Keybindings
 
-api.cmap('<Alt-j>', '<Ctrl-n>');
-api.cmap('<Alt-k>', '<Ctrl-p>');
+// Map `jj` to Escape in insert mode for Surfingkeys
+api.imap("jj", "<Esc>");
 
-api.mapkey('M>', '#3Move current tab to far right', function() {
-  api.RUNTIME('moveTab', { step: 99 });
+// Map `jj` to Escape specifically inside the ACE Vim editor
+api.aceVimMap("jj", "<Esc>", "insert");
+
+// Map `ZZ` in Ace Vim Editor to save and quit
+api.aceVimMap("ZZ", ":wq", "normal");
+
+// Map `ZQ` in Ace Vim Editor to quit
+api.aceVimMap("ZQ", ":q!", "normal");
+
+// Unmap Surfingkeys' default `ZQ` and `ZZ` bindings to avoid conflicts with Ace Vim Editor mappings
+api.unmap("ZQ");
+api.unmap("ZZ");
+
+// Map `ZQ` to quit the browser with confirmation
+api.mapkey("ZQ", "#5Quit browser with confirmation", function () {
+  if (window.confirm("Quit the browser and close all windows?")) {
+    api.RUNTIME("quit");
+  }
 });
 
-api.mapkey('M<', '#3Move current tab to far left', function() {
-  api.RUNTIME('moveTab', { step: -99 });
+// Map `ZZ` to save the last session and quit the browser with confirmation
+api.mapkey("ZZ", "#5Save LAST session and quit with confirmation", function () {
+  if (window.confirm("Save session LAST and quit the browser?")) {
+    api.RUNTIME("createSession", {
+      name: "LAST",
+      quitAfterSaved: true,
+    });
+  }
 });
 
-api.mapkey(';gn', '#3Create new tab group (prompt for title)', function() {
-  api.Front.openOmnibar({ type: 'Commands', pref: 'createTabGroup' });
+// Map Alt-j and Alt-k to navigate through tabs
+api.cmap("<Alt-j>", "<Ctrl-n>");
+api.cmap("<Alt-k>", "<Ctrl-p>");
+
+api.mapkey("M>", "#3Move current tab to far right", function () {
+  api.RUNTIME("moveTab", { step: 99 });
 });
 
-api.mapkey(';gu', '#3Ungroup current tab', () => {
-  api.RUNTIME('ungroupTab');
+api.mapkey("M<", "#3Move current tab to far left", function () {
+  api.RUNTIME("moveTab", { step: -99 });
 });
 
-api.mapkey(';gc', '#3Toggle tab group collapse', () => {
-  api.RUNTIME('getTabGroups', null, res => {
+api.mapkey(";gn", "#3Create new tab group (prompt for title)", function () {
+  api.Front.openOmnibar({ type: "Commands", pref: "createTabGroup" });
+});
+
+api.mapkey(";gu", "#3Ungroup current tab", () => {
+  api.RUNTIME("ungroupTab");
+});
+
+api.mapkey(";gc", "#3Toggle tab group collapse", () => {
+  api.RUNTIME("getTabGroups", null, (res) => {
     const groups = (res && res.groups) || [];
-    const active = groups.find(g => g.active);
+    const active = groups.find((g) => g.active);
     if (active) {
-      api.RUNTIME('collapseGroup', { groupId: active.id, collapsed: !active.collapsed });
+      api.RUNTIME("collapseGroup", {
+        groupId: active.id,
+        collapsed: !active.collapsed,
+      });
     }
   });
 });
 
 const getTopMessageOrigin = () => {
-  const origin = window.location.origin || '*';
-  return origin === 'file://' || origin === 'null' ? '*' : origin;
+  const origin = window.location.origin || "*";
+  return origin === "file://" || origin === "null" ? "*" : origin;
 };
 
 let groupTabWatcherToken = 0;
 
 const getGroupedTabEndStep = (tabs, currentTab) => {
-  const groupTabs = tabs.filter(tab => tab.groupId === currentTab.groupId);
-  const lastIndex = Math.max(...groupTabs.map(tab => tab.index));
+  const groupTabs = tabs.filter((tab) => tab.groupId === currentTab.groupId);
+  const lastIndex = Math.max(...groupTabs.map((tab) => tab.index));
 
   return lastIndex - currentTab.index;
 };
@@ -84,57 +113,53 @@ const watchGroupedTabPlacement = (tabId, initialGroupId) => {
       return;
     }
 
-    api.RUNTIME(
-      'getTabs',
-      { queryInfo: { currentWindow: true } },
-      tabRes => {
-        if (watcherToken !== groupTabWatcherToken) {
+    api.RUNTIME("getTabs", { queryInfo: { currentWindow: true } }, (tabRes) => {
+      if (watcherToken !== groupTabWatcherToken) {
+        return;
+      }
+
+      const tabs = (tabRes && tabRes.tabs) || [];
+      const currentTab = tabs.find((tab) => tab.id === tabId);
+      if (!currentTab) {
+        return;
+      }
+      if (currentTab.groupId !== initialGroupId) {
+        if (currentTab.groupId === -1) {
           return;
         }
 
-        const tabs = (tabRes && tabRes.tabs) || [];
-        const currentTab = tabs.find(tab => tab.id === tabId);
-        if (!currentTab) {
-          return;
+        // Chrome can report the new group before its own insertion settles.
+        if (targetGroupId !== currentTab.groupId) {
+          targetGroupId = currentTab.groupId;
+          moveCooldownUntil = 0;
+          settledPolls = 0;
         }
-        if (currentTab.groupId !== initialGroupId) {
-          if (currentTab.groupId === -1) {
-            return;
-          }
 
-          // Chrome can report the new group before its own insertion settles.
-          if (targetGroupId !== currentTab.groupId) {
-            targetGroupId = currentTab.groupId;
-            moveCooldownUntil = 0;
-            settledPolls = 0;
+        const step = getGroupedTabEndStep(tabs, currentTab);
+        if (step > 0) {
+          if (Date.now() >= moveCooldownUntil) {
+            api.RUNTIME("moveTab", { step });
+            moveCooldownUntil = Date.now() + 150;
           }
-
-          const step = getGroupedTabEndStep(tabs, currentTab);
-          if (step > 0) {
-            if (Date.now() >= moveCooldownUntil) {
-              api.RUNTIME('moveTab', { step });
-              moveCooldownUntil = Date.now() + 150;
-            }
-            scheduleNextPoll();
-            return;
-          }
-
-          if (Date.now() < moveCooldownUntil) {
-            scheduleNextPoll();
-            return;
-          }
-
-          settledPolls += 1;
-          if (settledPolls >= settlePollsRequired) {
-            return;
-          }
-
           scheduleNextPoll();
           return;
         }
+
+        if (Date.now() < moveCooldownUntil) {
+          scheduleNextPoll();
+          return;
+        }
+
+        settledPolls += 1;
+        if (settledPolls >= settlePollsRequired) {
+          return;
+        }
+
         scheduleNextPoll();
+        return;
       }
-    );
+      scheduleNextPoll();
+    });
   };
 
   poll();
@@ -142,81 +167,86 @@ const watchGroupedTabPlacement = (tabId, initialGroupId) => {
 
 const openBuiltinGroupPicker = () => {
   const origin = getTopMessageOrigin();
-  document.dispatchEvent(new CustomEvent('surfingkeys:ensureFrontEnd'));
+  document.dispatchEvent(new CustomEvent("surfingkeys:ensureFrontEnd"));
   window.setTimeout(() => {
-    top.postMessage({
-      surfingkeys_uihost_data: {
-        action: 'groupTab',
-        id: `group-tab-${Date.now()}`,
-        origin,
-        toFrontend: true
-      }
-    }, origin);
+    top.postMessage(
+      {
+        surfingkeys_uihost_data: {
+          action: "groupTab",
+          id: `group-tab-${Date.now()}`,
+          origin,
+          toFrontend: true,
+        },
+      },
+      origin,
+    );
   }, 150);
 };
 
-api.unmap(';G');
-api.mapkey(';G', '#3Group this tab', function() {
+api.unmap(";G");
+api.mapkey(";G", "#3Group this tab", function () {
+  api.RUNTIME("getTabs", { queryInfo: { currentWindow: true } }, (tabRes) => {
+    const tabs = (tabRes && tabRes.tabs) || [];
+    const currentTab = tabs.find((tab) => tab.active);
+    if (!currentTab) {
+      api.Front.showBanner("No active tab in current window", 2000);
+      return;
+    }
+    watchGroupedTabPlacement(currentTab.id, currentTab.groupId);
+    openBuiltinGroupPicker();
+  });
+});
+
+api.mapkey(";gj", "#3Create new tab group (title from clipboard)", function () {
+  api.Clipboard.read(function (resp) {
+    const title = (resp && resp.data ? resp.data : "").trim();
+    if (!title) {
+      api.Front.showBanner("Clipboard empty", 2000);
+      return;
+    }
+    api.RUNTIME("createTabGroup", { title, color: "grey" });
+  });
+});
+
+api.mapkey(";gf", "#3Create new tab group (TFU, yellow)", function () {
+  api.RUNTIME("createTabGroup", { title: "TFU", color: "yellow" });
+});
+
+api.mapkey(";gg", "#3Create new tab group (TE, yellow)", function () {
+  api.RUNTIME("createTabGroup", { title: "TE", color: "yellow" });
+});
+
+api.mapkey(";gr", "#3Go to random tab in current window", function () {
   api.RUNTIME(
-    'getTabs',
+    "getTabs",
     { queryInfo: { currentWindow: true } },
-    tabRes => {
+    function (tabRes) {
       const tabs = (tabRes && tabRes.tabs) || [];
-      const currentTab = tabs.find(tab => tab.active);
-      if (!currentTab) {
-        api.Front.showBanner('No active tab in current window', 2000);
+      if (!tabs.length) {
+        api.Front.showBanner("No tabs in current window", 2000);
         return;
       }
-      watchGroupedTabPlacement(currentTab.id, currentTab.groupId);
-      openBuiltinGroupPicker();
-    }
+      const activeTab = tabs.find((tab) => tab.active);
+      const candidates =
+        activeTab && tabs.length > 1
+          ? tabs.filter((tab) => tab.id !== activeTab.id)
+          : tabs;
+      if (!candidates.length) {
+        api.Front.showBanner("No other tabs in current window", 2000);
+        return;
+      }
+      const randomTab =
+        candidates[Math.floor(Math.random() * candidates.length)];
+      api.RUNTIME("focusTab", { tabId: randomTab.id });
+    },
   );
-});
-
-api.mapkey(';gj', '#3Create new tab group (title from clipboard)', function() {
-  api.Clipboard.read(function(resp) {
-    const title = (resp && resp.data ? resp.data : '').trim();
-    if (!title) {
-      api.Front.showBanner('Clipboard empty', 2000);
-      return;
-    }
-    api.RUNTIME('createTabGroup', { title, color: 'grey' });
-  });
-});
-
-api.mapkey(';gf', '#3Create new tab group (TFU, yellow)', function() {
-  api.RUNTIME('createTabGroup', { title: 'TFU', color: 'yellow' });
-});
-
-api.mapkey(';gg', '#3Create new tab group (TE, yellow)', function() {
-  api.RUNTIME('createTabGroup', { title: 'TE', color: 'yellow' });
-});
-
-api.mapkey(';gr', '#3Go to random tab in current window', function() {
-  api.RUNTIME('getTabs', { queryInfo: { currentWindow: true } }, function(tabRes) {
-    const tabs = (tabRes && tabRes.tabs) || [];
-    if (!tabs.length) {
-      api.Front.showBanner('No tabs in current window', 2000);
-      return;
-    }
-    const activeTab = tabs.find(tab => tab.active);
-    const candidates = (activeTab && tabs.length > 1)
-      ? tabs.filter(tab => tab.id !== activeTab.id)
-      : tabs;
-    if (!candidates.length) {
-      api.Front.showBanner('No other tabs in current window', 2000);
-      return;
-    }
-    const randomTab = candidates[Math.floor(Math.random() * candidates.length)];
-    api.RUNTIME('focusTab', { tabId: randomTab.id });
-  });
 });
 
 const focusLeftmostMatchingTab = (description, matchesTabUrl) => {
   api.RUNTIME(
-    'getTabs',
+    "getTabs",
     { queryInfo: { currentWindow: true } },
-    function(tabRes) {
+    function (tabRes) {
       const tabs = (tabRes && tabRes.tabs) || [];
       const matchingTab = tabs.reduce((leftmostMatch, tab) => {
         let tabUrl;
@@ -239,116 +269,119 @@ const focusLeftmostMatchingTab = (description, matchesTabUrl) => {
       }, null);
 
       if (!matchingTab) {
-        api.Front.showBanner(
-          `No ${description} tab in current window`,
-          2000
-        );
+        api.Front.showBanner(`No ${description} tab in current window`, 2000);
         return;
       }
 
-      api.RUNTIME('focusTab', { tabId: matchingTab.id });
-    }
+      api.RUNTIME("focusTab", { tabId: matchingTab.id });
+    },
   );
 };
 
-api.mapkey(';oi', '#3Focus leftmost deeptree.itglue.com tab', function() {
-  focusLeftmostMatchingTab('deeptree.itglue.com', function(tabUrl) {
-    return tabUrl.hostname === 'deeptree.itglue.com';
+api.mapkey(";oi", "#3Focus leftmost deeptree.itglue.com tab", function () {
+  focusLeftmostMatchingTab("deeptree.itglue.com", function (tabUrl) {
+    return tabUrl.hostname === "deeptree.itglue.com";
   });
 });
 
-api.mapkey(
-  ';os',
-  '#3Focus leftmost zinfandel.rmm.datto.com tab',
-  function() {
-    focusLeftmostMatchingTab('zinfandel.rmm.datto.com', function(tabUrl) {
-      return tabUrl.hostname === 'zinfandel.rmm.datto.com';
-    });
-  }
-);
+api.mapkey(";os", "#3Focus leftmost zinfandel.rmm.datto.com tab", function () {
+  focusLeftmostMatchingTab("zinfandel.rmm.datto.com", function (tabUrl) {
+    return tabUrl.hostname === "zinfandel.rmm.datto.com";
+  });
+});
 
-api.mapkey(';od', '#3Focus leftmost Dispatcher Workshop tab', function() {
-  focusLeftmostMatchingTab('Dispatcher Workshop', function(tabUrl) {
+api.mapkey(";od", "#3Focus leftmost Dispatcher Workshop tab", function () {
+  focusLeftmostMatchingTab("Dispatcher Workshop", function (tabUrl) {
     return (
-      tabUrl.hostname === 'ww15.autotask.net' &&
+      tabUrl.hostname === "ww15.autotask.net" &&
       tabUrl.pathname ===
-        '/Autotask/Views/DispatcherWorkshop/DispatcherWorkshopContainer.aspx'
+        "/Autotask/Views/DispatcherWorkshop/DispatcherWorkshopContainer.aspx"
     );
   });
 });
 
 api.mapkey(
-  ';oa',
-  '#3Focus leftmost Autotask Onyx landing page tab',
-  function() {
-    focusLeftmostMatchingTab('Autotask Onyx landing page', function(tabUrl) {
+  ";oa",
+  "#3Focus leftmost Autotask Onyx landing page tab",
+  function () {
+    focusLeftmostMatchingTab("Autotask Onyx landing page", function (tabUrl) {
       return (
-        tabUrl.hostname === 'ww15.autotask.net' &&
-        tabUrl.pathname === '/AutotaskOnyx/LandingPage'
+        tabUrl.hostname === "ww15.autotask.net" &&
+        tabUrl.pathname === "/AutotaskOnyx/LandingPage"
       );
     });
-  }
+  },
 );
 
-api.mapkey('g^', '#3Go to second tab', function() {
-  api.RUNTIME('getTabs', { queryInfo: { currentWindow: true } }, function(tabRes) {
-    const tabs = (tabRes && tabRes.tabs) || [];
-    const secondTab = tabs.find(tab => tab.index === 1);
-    if (!secondTab) {
-      api.Front.showBanner('No second tab in current window', 2000);
-      return;
-    }
-    api.RUNTIME('focusTab', { tabId: secondTab.id });
-  });
-});
-
-const closeSideTabsThenCurrent = sideCloseKeys => {
-  api.Normal.feedkeys(sideCloseKeys);
-  window.setTimeout(() => api.Normal.feedkeys('x'), 100);
-};
-
-api.mapkey('gX0', '#3Close tabs on left including current tab', function() {
-  closeSideTabsThenCurrent('gx0');
-});
-
-api.mapkey('gX$', '#3Close tabs on right including current tab', function() {
-  closeSideTabsThenCurrent('gx$');
-});
-
-api.mapkey(';T', '#3List tab groups in current window', function() {
-  api.RUNTIME('getTabs', { queryInfo: { currentWindow: true } }, function(tabRes) {
-    const tabs = (tabRes && tabRes.tabs) || [];
-    const groupsById = new Map();
-    tabs.forEach(t => {
-      if (t.groupId !== -1) {
-        if (!groupsById.has(t.groupId)) {
-          groupsById.set(t.groupId, []);
-        }
-        groupsById.get(t.groupId).push(t);
-      }
-    });
-    api.RUNTIME('getTabGroups', {}, function(res) {
-      const groups = (res && res.groups) || [];
-      const items = groups
-        .filter(g => groupsById.has(g.id))
-        .map(g => {
-          const groupTabs = groupsById.get(g.id).sort((a, b) => a.index - b.index);
-          const first = groupTabs[0];
-          const name = (g.title && g.title.trim()) ? g.title : 'Untitled group';
-          const color = g.color ? ` • ${g.color}` : '';
-          return {
-            title: `${name}${color} (${groupTabs.length})`,
-            url: first.url,
-            uid: `T${first.windowId}:${first.id}`
-          };
-        });
-      if (!items.length) {
-        api.Front.showBanner('No tab groups in current window', 2000);
+api.mapkey("g^", "#3Go to second tab", function () {
+  api.RUNTIME(
+    "getTabs",
+    { queryInfo: { currentWindow: true } },
+    function (tabRes) {
+      const tabs = (tabRes && tabRes.tabs) || [];
+      const secondTab = tabs.find((tab) => tab.index === 1);
+      if (!secondTab) {
+        api.Front.showBanner("No second tab in current window", 2000);
         return;
       }
-      api.Front.openOmnibar({ type: 'UserURLs', extra: items });
-    });
-  });
+      api.RUNTIME("focusTab", { tabId: secondTab.id });
+    },
+  );
+});
+
+const closeSideTabsThenCurrent = (sideCloseKeys) => {
+  api.Normal.feedkeys(sideCloseKeys);
+  window.setTimeout(() => api.Normal.feedkeys("x"), 100);
+};
+
+api.mapkey("gX0", "#3Close tabs on left including current tab", function () {
+  closeSideTabsThenCurrent("gx0");
+});
+
+api.mapkey("gX$", "#3Close tabs on right including current tab", function () {
+  closeSideTabsThenCurrent("gx$");
+});
+
+api.mapkey(";T", "#3List tab groups in current window", function () {
+  api.RUNTIME(
+    "getTabs",
+    { queryInfo: { currentWindow: true } },
+    function (tabRes) {
+      const tabs = (tabRes && tabRes.tabs) || [];
+      const groupsById = new Map();
+      tabs.forEach((t) => {
+        if (t.groupId !== -1) {
+          if (!groupsById.has(t.groupId)) {
+            groupsById.set(t.groupId, []);
+          }
+          groupsById.get(t.groupId).push(t);
+        }
+      });
+      api.RUNTIME("getTabGroups", {}, function (res) {
+        const groups = (res && res.groups) || [];
+        const items = groups
+          .filter((g) => groupsById.has(g.id))
+          .map((g) => {
+            const groupTabs = groupsById
+              .get(g.id)
+              .sort((a, b) => a.index - b.index);
+            const first = groupTabs[0];
+            const name = g.title && g.title.trim() ? g.title : "Untitled group";
+            const color = g.color ? ` • ${g.color}` : "";
+            return {
+              title: `${name}${color} (${groupTabs.length})`,
+              url: first.url,
+              uid: `T${first.windowId}:${first.id}`,
+            };
+          });
+        if (!items.length) {
+          api.Front.showBanner("No tab groups in current window", 2000);
+          return;
+        }
+        api.Front.openOmnibar({ type: "UserURLs", extra: items });
+      });
+    },
+  );
 });
 
 // Theme
@@ -387,10 +420,11 @@ const mochaPalette = Object.freeze({
   surface0: "#313244",
   base: "#1e1e2e",
   mantle: "#181825",
-  crust: "#11111b"
+  crust: "#11111b",
 });
 
-const fontStack = '"JetBrains Mono NL", "Maple Mono", "Cascadia Code", "Iosevka", Consolas, Menlo, monospace';
+const fontStack =
+  '"JetBrains Mono NL", "Maple Mono", "Cascadia Code", "Iosevka", Consolas, Menlo, monospace';
 const heavyShadow = "0px 30px 50px rgba(17, 17, 27, 0.8)"; // crust shadow depth
 const cardShadow = "1px 3px 5px rgba(17, 17, 27, 0.6)";
 const contrastBorderColor = mochaPalette.sapphire; // accent used for framing floating windows
@@ -406,18 +440,16 @@ const baseHintStyles = [
   `border: solid 0.5px ${mochaPalette.crust}`,
   `color: ${mochaPalette.base} !important`,
   "border-radius: 5px",
-  `box-shadow: 3px 3px 5px rgba(17, 17, 27, 0.6)`
+  `box-shadow: 3px 3px 5px rgba(17, 17, 27, 0.6)`,
 ];
 
 const hintStyle = (extra) => `${[...baseHintStyles, ...extra].join("; ")};`;
 
-api.Hints.style(
-  hintStyle([`background: ${mochaPalette.yellow} !important`])
-);
+api.Hints.style(hintStyle([`background: ${mochaPalette.yellow} !important`]));
 
 api.Hints.style(
   hintStyle(["background: #ffffff !important", "font-weight: 600"]),
-  "text"
+  "text",
 );
 
 api.Hints.style(
@@ -426,9 +458,8 @@ api.Hints.style(
     `color: ${mochaPalette.crust} !important`,
     "border-width: 1px",
   ]),
-  "active"
+  "active",
 );
-
 
 const themeCSS = `
   :root {
@@ -1824,7 +1855,9 @@ settings.theme = themeCSS;
   };
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", waitForTabsContainer, { once: true });
+    document.addEventListener("DOMContentLoaded", waitForTabsContainer, {
+      once: true,
+    });
   } else {
     waitForTabsContainer();
   }
@@ -1846,10 +1879,15 @@ settings.theme = themeCSS;
   const syncStatusClasses = (statusBar) => {
     const statusSpans = statusBar.querySelectorAll("span");
     const finderInput = statusBar.querySelector("#sk_find");
-    const tertiaryStatus = statusSpans[2] ? statusSpans[2].textContent.trim() : "";
+    const tertiaryStatus = statusSpans[2]
+      ? statusSpans[2].textContent.trim()
+      : "";
 
     statusBar.classList.toggle(finderOpenClass, Boolean(finderInput));
-    statusBar.classList.toggle(findNotFoundClass, notFoundPattern.test(tertiaryStatus));
+    statusBar.classList.toggle(
+      findNotFoundClass,
+      notFoundPattern.test(tertiaryStatus),
+    );
   };
 
   const waitForStatusContainer = () => {
@@ -1862,12 +1900,18 @@ settings.theme = themeCSS;
     const observer = new MutationObserver(() => {
       syncStatusClasses(statusBar);
     });
-    observer.observe(statusBar, { childList: true, subtree: true, characterData: true });
+    observer.observe(statusBar, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+    });
     syncStatusClasses(statusBar);
   };
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", waitForStatusContainer, { once: true });
+    document.addEventListener("DOMContentLoaded", waitForStatusContainer, {
+      once: true,
+    });
   } else {
     waitForStatusContainer();
   }

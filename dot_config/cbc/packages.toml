@@ -72,8 +72,8 @@ hash = "fba71547f258a99673097728528cba6c5031724f"
 
 [[module.deps]]
 use = "iop098321qwe/commit-and-tag-version"
-rev = "9ee458f"
-hash = "9ee458fb24ad729f1791274230aefd8e76cb6d3f"
+rev = "86ff9bf"
+hash = "86ff9bf5eb7ee76812801fee42d2b598b62c5413"
 
 [[module.deps]]
 use = "iop098321qwe/protonmod"

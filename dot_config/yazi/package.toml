@@ -85,7 +85,7 @@ hash = "1493e40f8f4f222c9ecb24cf85ccabd2"
 
 [[plugin.deps]]
 use = "AminurAlam/yazi-plugins:nextension"
-rev = "4949660"
+rev = "dc36177"
 hash = "ad1329d711d44abd14e550a8cfb0ad26"
 
 [[plugin.deps]]
