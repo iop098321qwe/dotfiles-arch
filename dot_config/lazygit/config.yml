@@ -35,7 +35,7 @@ gui:
     "iop098321qwe": "#89dceb"
     "Dallas Elliott": "#89dceb"
   branchColorPatterns:
-    "^docs/": "#94e2d5" # use a deep blue for branches beginning with 'docs/'
+    "^(docs|chore)/": "#94e2d5" # use a deep blue for branches beginning with 'docs/'
     'issue-\d+': "#f5e0dc" # use a orange for branches containing 'issue-<some-number>'
     "^feature/": "#f5c2e7" # use a pink for branches starting with 'feature/'
     "^bugfix/": "#fab387" # use a maroon for branches starting with 'bugfix/'
