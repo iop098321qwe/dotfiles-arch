@@ -25,6 +25,7 @@ Deeptree
 Digifort
 Dimond
 Dutchware
+EHR
 EVO
 Emby
 Entra
@@ -112,7 +113,9 @@ arborists
 canyoneering
 chezmoi
 crontab
+eClinicalWorks
 exe
+firstname
 grymm
 guyline
 guylines
