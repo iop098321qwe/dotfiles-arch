@@ -25,6 +25,13 @@ api.aceVimMap("ZZ", ":wq", "normal");
 // Map `ZQ` in Ace Vim Editor to quit
 api.aceVimMap("ZQ", ":q!", "normal");
 
+// Map `fj` in Ace Vim Editor to format the first ticket on the line
+api.aceVimMap(
+  "fj",
+  ":s/`?(T(?:\\d{8}\\.\\d{4}|x{12}))`?\\s*[-~]\\s*/`$1` ~/<CR>",
+  "normal",
+);
+
 // Unmap Surfingkeys' default `ZQ` and `ZZ` bindings to avoid conflicts with Ace Vim Editor mappings
 api.unmap("ZQ");
 api.unmap("ZZ");
