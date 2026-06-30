@@ -102,6 +102,11 @@ hash = "997d5117020ec5f03168c19e1510907b39e8bb19"
 
 [[module.deps]]
 use = "iop098321qwe/prettiermod"
-rev = "c039261"
-hash = "c0392610db5356140baafce3187c47368bc9d21b"
+rev = "0a23cbb"
+hash = "0a23cbb1f97731754bef9020afb7ddd28cb893a5"
+
+[[module.deps]]
+use = "iop098321qwe/docsmod"
+rev = "02b4915"
+hash = "02b49153e972251ccf5eb1d12bc5ec34aafa9a8a"
 

@@ -85,7 +85,7 @@ hash = "1493e40f8f4f222c9ecb24cf85ccabd2"
 
 [[plugin.deps]]
 use = "AminurAlam/yazi-plugins:nextension"
-rev = "af1a48a"
+rev = "ce325af"
 hash = "ad1329d711d44abd14e550a8cfb0ad26"
 
 [[plugin.deps]]
@@ -110,7 +110,7 @@ hash = "5805affd3ae8adcb3c72b6997d21c0a6"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
-rev = "0f9204b"
+rev = "4770a34"
 hash = "7dfe41c9c3d9be76da8a844263d0bbed"
 
 [[flavor.deps]]
