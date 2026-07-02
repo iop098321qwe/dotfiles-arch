@@ -123,6 +123,7 @@ hiberfil
 homelab
 kasm
 keybindings
+lastname
 n8n
 nmap
 omarchy
