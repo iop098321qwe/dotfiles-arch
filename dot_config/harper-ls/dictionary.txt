@@ -1,5 +1,6 @@
 ACOA
 AMAR
+ASLC
 ArchWiki
 Atuin
 Authentik

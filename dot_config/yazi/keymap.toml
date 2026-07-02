@@ -311,6 +311,11 @@ keymap = [
   { on = [
     "g",
     "v",
+    "d",
+  ], run = "cd ~/Documents/grymms_grimoires/10000_work/14000_daily_summaries/2026", desc = "Vault - Work - Daily Summaries" },
+  { on = [
+    "g",
+    "v",
     "o",
   ], run = "cd ~/Documents/grymms_grimoires/99000_other", desc = "Vault - Other" },
   { on = [
