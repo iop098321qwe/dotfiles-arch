@@ -116,6 +116,12 @@ matches:
     trigger: ";ccs"
     replace: "CCS Early Learning$|$"
 
+  - name: "Commercial Contractors, Inc."
+    label: "Commercial Contractors, Inc."
+    replace_preview: true
+    trigger: ";cci"
+    replace: "Commercial Contractors, Inc.$|$"
+
   - name: "Cross Road Medical Center"
     label: "Cross Road Medical Center"
     replace_preview: true

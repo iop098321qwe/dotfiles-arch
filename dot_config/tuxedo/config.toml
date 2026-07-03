@@ -1,6 +1,6 @@
 # tuxedo config
 theme = Terminal
-density = cozy
+density = compact
 sort = priority
 show_left = true
 show_right = true
