@@ -101,12 +101,12 @@ rev = "aa18907"
 hash = "aa1890752b0e8d91ce9ead7a214f4e211825f635"
 
 [[module.deps]]
-use = "iop098321qwe/prettiermod"
-rev = "0a23cbb"
-hash = "0a23cbb1f97731754bef9020afb7ddd28cb893a5"
-
-[[module.deps]]
 use = "iop098321qwe/docsmod"
 rev = "fc09d59"
 hash = "fc09d598bc46d30c939139e98610bf335f49e1a8"
+
+[[module.deps]]
+use = "iop098321qwe/prettiermod"
+rev = "2fc3869"
+hash = "2fc3869646b00e91a841d60c9a37054d5c3bbd0d"
 
