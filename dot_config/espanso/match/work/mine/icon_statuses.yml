@@ -9,22 +9,22 @@ matches:
   - trigger: ";tidi"
     label: Normal Time Differential Entry
     comment: "Normal entry for tracking input times in message to myself."
-    form: "{{timeentrysym}} *[[time]]* `Txxxxxxxxxxxx` ~Time Differential, {{myfirst}}, {{today}} `$|$`"
+    form: "{{timeentrysym}} *[[time]]* `Txxxxxxxxxxxx` - Time Differential, {{myfirst}}, {{today}} `$|$`"
 
   - trigger: ";bua"
     label: Backup Auditing Time Differential Entry
     comment: "Backup Auditing entry for tracking input times in message to myself."
-    form: "{{timeentrysym}} *[[time]]* `Txxxxxxxxxxxx` ~Time Differential, {{myfirst}}, {{today}} `Backup Auditing$|$`"
+    form: "{{timeentrysym}} *[[time]]* `Txxxxxxxxxxxx` - Time Differential, {{myfirst}}, {{today}} `Backup Auditing$|$`"
 
   - trigger: ";disp"
     label: Dispatch Coverage Time Differential Entry
     comment: "Dispatch coverage entry for tracking input times in message to myself."
-    form: "{{timeentrysym}} *[[time]]* `Txxxxxxxxxxxx` ~Time Differential, {{myfirst}}, {{today}} `Dispatch Coverage$|$`"
+    form: "{{timeentrysym}} *[[time]]* `Txxxxxxxxxxxx` - Time Differential, {{myfirst}}, {{today}} `Dispatch Coverage$|$`"
 
   - trigger: ";meet"
     label: MSP Meeting Time Differential Entry
     comment: "MSP meeting entry for tracking input times in message to myself."
-    form: "{{timeentrysym}} *[[time]]* `Txxxxxxxxxxxx` ~Time Differential, {{myfirst}}, {{today}} `MSP Meeting$|$`"
+    form: "{{timeentrysym}} *[[time]]* `Txxxxxxxxxxxx` - Time Differential, {{myfirst}}, {{today}} `MSP Meeting$|$`"
 
   # Inputting icon for complete
   - trigger: ";com"
@@ -32,7 +32,7 @@ matches:
 
   # Inputting icon for lunch
   - trigger: ";lun"
-    form: "{{lunchsym}} *[[time]]* ~LUNCH"
+    form: "{{lunchsym}} *[[time]]* - LUNCH"
 
   # Inputting icon for scheduled
   - trigger: ";sch"

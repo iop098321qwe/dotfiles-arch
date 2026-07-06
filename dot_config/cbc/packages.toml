@@ -97,8 +97,8 @@ hash = "8316aae5c4d4f6263e94caba8def226f0ad7aa18"
 
 [[module.deps]]
 use = "iop098321qwe/projectmod"
-rev = "997d511"
-hash = "997d5117020ec5f03168c19e1510907b39e8bb19"
+rev = "aa18907"
+hash = "aa1890752b0e8d91ce9ead7a214f4e211825f635"
 
 [[module.deps]]
 use = "iop098321qwe/prettiermod"
@@ -107,6 +107,6 @@ hash = "0a23cbb1f97731754bef9020afb7ddd28cb893a5"
 
 [[module.deps]]
 use = "iop098321qwe/docsmod"
-rev = "02b4915"
-hash = "02b49153e972251ccf5eb1d12bc5ec34aafa9a8a"
+rev = "fc09d59"
+hash = "fc09d598bc46d30c939139e98610bf335f49e1a8"
 
