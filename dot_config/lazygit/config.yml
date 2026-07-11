@@ -1,6 +1,10 @@
 gui:
-  os:
-    shellFunctionsFile: ~/.cbc_aliases.sh
+  sidePanels:
+    - [status]
+    - [files, worktrees, submodules]
+    - [branches, remotes, tags]
+    - [commits, reflog]
+    - [stash]
   theme:
     activeBorderColor:
       - "#a6e3a1"
@@ -29,7 +33,6 @@ gui:
     defaultFgColor:
       - "#cdd6f4"
   showListFooter: true
-  # hide the command log by default
   showCommandLog: false
   authorColors:
     "iop098321qwe": "#89dceb"
@@ -62,15 +65,16 @@ gui:
       - "⠇"
       - "⠏"
     rate: 80
-# Config relating to git
+
+os:
+  shellFunctionsFile: ~/.custom_bash_commands.sh
+
 git:
   pagers:
     - colorArg: always
-      # pager: 'delta --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"'
       pager: 'delta --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"'
-      # externalDiffCommand: "delta --dark --paging=never"
-
-# confirmOnQuit: true
+  commit:
+    autoWrapWidth: 80
 
 customCommands:
   - key: "I"

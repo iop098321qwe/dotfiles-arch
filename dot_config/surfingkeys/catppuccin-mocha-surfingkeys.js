@@ -32,6 +32,15 @@ api.aceVimMap(
   "normal",
 );
 
+// Use an internal Ace Vim prefix so `<Space>` can act as leader.
+api.aceVimMap("<Space>", "<Hyper>", "normal");
+
+// Map `<Space>o` in Ace Vim Editor to add a line below and stay normal.
+api.aceVimMap("<Hyper>o", "o<Esc>", "normal");
+
+// Map `<Space>O` in Ace Vim Editor to add a line above and stay normal.
+api.aceVimMap("<Hyper>O", "O<Esc>", "normal");
+
 // Unmap Surfingkeys' default `ZQ` and `ZZ` bindings to avoid conflicts with Ace Vim Editor mappings
 api.unmap("ZQ");
 api.unmap("ZZ");
