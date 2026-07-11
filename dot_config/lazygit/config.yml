@@ -1,10 +1,9 @@
 gui:
   sidePanels:
-    - [status]
+    - [status, stash]
     - [files, worktrees, submodules]
     - [branches, remotes, tags]
     - [commits, reflog]
-    - [stash]
   theme:
     activeBorderColor:
       - "#a6e3a1"
@@ -52,6 +51,10 @@ gui:
   showBranchCommitHash: false
   showDivergenceFromBaseBranch: arrowAndNumber
   statusPanelView: allBranchesLog
+  sidePanelWidth: 0.3333
+  expandFocusedSidePanel: true
+  expandedSidePanelWeight: 2
+  shrinkSidePanelsToContent: true
   spinner:
     frames:
       - "⠋"
