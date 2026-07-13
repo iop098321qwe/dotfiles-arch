@@ -50,6 +50,12 @@ matches:
     trigger: ";arg"
     replace: "Alaska Rock Gym$|$"
 
+  - name: "Alaska Sealife Center"
+    label: "Alaska Sealife Center"
+    replace_preview: true
+    trigger: ";aslc"
+    replace: "Alaska Sealife Center$|$"
+
   - name: "Aleutians East Borough"
     label: "Aleutians East Borough"
     replace_preview: true
