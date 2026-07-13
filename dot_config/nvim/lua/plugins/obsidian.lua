@@ -27,6 +27,11 @@ return {
         path = "~/Documents/grymms_homelab",
       },
     },
+
+    disable_frontmatter = function(fname)
+      return fname and fname:match("^%.skills/") ~= nil
+    end,
+
     -- Set the template directory.
     templates = {
       folder = "99000_other/99800_templates",
