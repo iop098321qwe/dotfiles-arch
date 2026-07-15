@@ -326,6 +326,11 @@ keymap = [
   { on = [
     "g",
     "v",
+    "m",
+  ], run = "cd ~/Documents/grymms_grimoires/99000_other/99900_backup_docs/military", desc = "Vault - Military" },
+  { on = [
+    "g",
+    "v",
     "t",
   ], run = "cd ~/Documents/grymms_grimoires/99000_other/99800_templates", desc = "Vault - Templates" },
   { on = [
