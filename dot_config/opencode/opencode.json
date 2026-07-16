@@ -1,0 +1,11 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "lsp": true,
+  "autoupdate": false,
+  "permission": {
+    "question": "allow"
+  },
+  "plugin": [
+    "opencode-snippets"
+  ]
+}
