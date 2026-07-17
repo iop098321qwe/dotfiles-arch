@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 # Install OpenCode
-omarchy pkg add opencode
+omarchy pkg aur add opencode-bin
