@@ -1,0 +1,11 @@
+# espanso match file
+
+# links
+matches:
+  - trigger: ";link"
+    word: true
+    replace: |-
+      [$|$]({{clipboard}})
+    vars:
+      - name: "clipboard"
+        type: "clipboard"

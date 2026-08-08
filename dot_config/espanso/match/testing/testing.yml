@@ -1,0 +1,48 @@
+# Espanso Match File FUCK
+
+# Testing Matches:
+matches:
+  - regex: ";(?P<num>\\d*)\\s*usd" # US Dollar
+    # Enter trigger of type :33usd
+    # From https://eelinks.short.gy/regx4currency
+    replace: "${{num}}"
+
+  - regex: ";(?P<num>\\d*)\\s*euro" # Euro
+    force_mode: clipboard
+    replace: "{{num}}€"
+
+  - regex: ";(?P<num>\\d*)\\s*ukp" # British Pound
+    force_mode: clipboard
+    replace: "£{{num}}"
+
+  - regex: ";(?P<num>\\d*)\\s*yen" # Japanese Yen
+    force_mode: clipboard
+    replace: "{{num}}¥"
+
+  - regex: ";(?P<num>\\d*)\\s*inr" # Indian Rupee
+    force_mode: clipboard
+    replace: "{{num}}?"
+
+  - regex: ";(?P<num>\\d*)\\s*swf" # Swiss Franc
+    force_mode: clipboard
+    replace: "{{num}} CHF"
+
+  - regex: ";(?P<num>\\d*)\\s*aud" # Australian Dollar
+    force_mode: clipboard
+    replace: "AU${{num}}"
+
+  - regex: ";(?P<num>\\d*)\\s*cad" # Canadian Dollar
+    force_mode: clipboard
+    replace: "CA${{num}}"
+
+  - regex: ";(?P<num>\\d*)\\s*hkd" # Hong Kong Dollar
+    force_mode: clipboard
+    replace: "HK${{num}}"
+
+  - regex: ";(?P<num>\\d*)\\s*nzd" # New Zealand Dollar
+    force_mode: clipboard
+    replace: "NZ${{num}}"
+
+  - regex: ";(?P<num>\\d*)\\s*won" # South Korean Won
+    force_mode: clipboard
+    replace: "{{num}}₩"
