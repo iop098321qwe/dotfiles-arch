@@ -82,8 +82,8 @@ hash = "5695dc92205f95a17e50d5f1b5c5eada289666fb"
 
 [[module.deps]]
 use = "iop098321qwe/randomod"
-rev = "0931f37"
-hash = "0931f377a6a6c3f438c057c601a4f9117ca79760"
+rev = "eef6423"
+hash = "eef6423cb19a4b01ec18dc845c30ec91c43941b8"
 
 [[module.deps]]
 use = "iop098321qwe/tuxedomod"
