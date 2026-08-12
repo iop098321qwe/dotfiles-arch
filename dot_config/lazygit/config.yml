@@ -68,17 +68,14 @@ gui:
       - "⠇"
       - "⠏"
     rate: 80
-
 os:
   shellFunctionsFile: ~/.custom_bash_commands.sh
-
 git:
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: 'delta --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"'
+      command: 'delta --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"'
   commit:
     autoWrapWidth: 80
-
 customCommands:
   - key: "I"
     context: "global"
