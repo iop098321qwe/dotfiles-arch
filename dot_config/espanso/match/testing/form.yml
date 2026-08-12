@@ -1,0 +1,164 @@
+# espanso match file
+
+matches:
+  # - trigger: ";form"
+  #   form: |
+  #     [[choices]]
+  #   form_fields:
+  #     choices:
+  #       type: choice
+  #       values:
+  #         - First choice
+  #         - Second choice
+
+  - trigger: ";form"
+    label: Contact Info Email
+    force_mode: clipboard
+    form: |-
+      Hello [[clientname]],
+
+      I’m following up after [[choice]] to provide an update on the work completed. Here’s a quick summary:
+
+      [[debrief]]
+
+      After this, our next steps are:
+
+      [[nextsteps]]
+
+      You may respond to this email directly, or call {{dthelp}} with any additional information, questions, or concerns.
+
+      {{myname}}
+      {{title}}
+      {{company}}
+      {{dthelp}}
+    form_fields:
+      clientname:
+        type: text
+      choice:
+        type: choice
+        values:
+          - leaving a voicemail
+          - our on-site visit
+          - our phone call
+      debrief:
+        type: text
+        multiline: true
+        default: |-
+          1.
+          2.
+          3.
+      nextsteps:
+        type: text
+        multiline: true
+        default: |-
+          1.
+          2.
+          3.
+
+  # - trigger: ";form"
+  #   label: Contact Info Email
+  # vars:
+  #   - name: quote
+  #     type: match
+  #     params:
+  #       trigger: ";quote"
+  #   - name: greeting
+  #     type: match
+  #     params:
+  #       trigger: ";greet"
+  #   - name: addongreeting
+  #     type: match
+  #     params:
+  #       trigger: ";addongreet"
+  #   - name: signoff
+  #     type: match
+  #     params:
+  #       trigger: ";signoff"
+  # force_mode: clipboard
+  #   form: |
+  #     {{greeting}} [[clientname]],
+  #
+  #     I’m following up after [[choice]] to provide an update on the work completed. Here’s a quick summary:
+  #
+  #     [[debrief]]
+  #
+  #     You may respond to this email directly, or call {{dthelp}} with any additional information, questions, or concerns that you may have.
+  #
+  #     {{signoff}}
+  #
+  #     {{myname}}
+  #     {{title}}
+  #     {{company}}
+  #     {{dthelp}}
+  #
+  #     ---
+  #     {{quote}}
+  #   form_fields:
+  #     name:
+  #       type: text
+  #     email:
+  #       type: text
+  #     phone:
+  #       type: text
+  #     debrief:
+  #       type: text
+  #       multiline: true
+  #     type:
+  #       type: choice
+  #       values:
+  #         - leaving a voicemail
+  #         - our on-site visit
+  #         - our phone call
+
+# Hi [Client Name],
+#
+# I’m following up after [leaving a voicemail/our on-site visit] to provide an update on the work completed. Here’s a quick summary:
+#
+# [Include a brief recap of the work done]
+#
+# Please let us know if the work meets your expectations and if we can close the ticket. We’d also appreciate any feedback you have.
+#
+# You can reply to this email or reach us at 907-206-2373.
+#
+# Best regards,
+# [Technician Name]
+# helpdesk@deeptree.tech
+# 907-206-2373
+# Deeptree, Inc.
+
+# - regex: ";emailnorm(?P<person>.*)\\."
+#   label: Dynamic Deeptree Email
+#   vars:
+#     - name: quote
+#       type: match
+#       params:
+#         trigger: ";quote"
+#     - name: greeting
+#       type: match
+#       params:
+#         trigger: ";greet"
+#     - name: addongreeting
+#       type: match
+#       params:
+#         trigger: ";addongreet"
+#     - name: signoff
+#       type: match
+#       params:
+#         trigger: ";signoff"
+#   force_mode: clipboard
+#   replace: |-
+#     {{greeting}}{{person}},{{addongreeting}}
+#
+#     $|$
+#
+#     You may respond to this email directly, or call {{dthelp}} with any additional information, questions, or concerns that you may have.
+#
+#     {{signoff}}
+#
+#     {{myname}}
+#     {{title}}
+#     {{company}}
+#     {{dthelp}}
+#
+#     ---
+#     {{quote}}
