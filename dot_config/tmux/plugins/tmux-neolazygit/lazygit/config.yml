@@ -1,7 +1,0 @@
-promptToReturnFromSubprocess: false
-os:
-  edit: '$LAZYGIT_EDITOR {{filename}}'
-  editAtLine: '$LAZYGIT_EDITOR {{filename}} {{line}}'
-  editAtLineAndWait: '$LAZYGIT_EDITOR {{filename}} {{line}}'
-  editInTerminal: true
-  openDirInEditor: '$LAZYGIT_EDITOR {{dir}}'
