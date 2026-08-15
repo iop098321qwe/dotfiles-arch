@@ -1,4 +1,4 @@
 ---
 aliases: feat
 ---
-nbccpr feature. Ensure you use CC commits.
+Ensure you use CC commits. nbccpr feature
