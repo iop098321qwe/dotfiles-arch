@@ -383,7 +383,6 @@ keymap = [
   { on = "<F1>", run = "help", desc = "Open help" },
 ]
 
-
 [tasks]
 
 keymap = [
@@ -407,7 +406,6 @@ keymap = [
 ]
 
 [spot]
-
 
 keymap = [
   { on = "<Esc>", run = "close", desc = "Close the spot" },
@@ -434,7 +432,6 @@ keymap = [
 ]
 
 [pick]
-
 
 keymap = [
   { on = "<Esc>", run = "close", desc = "Cancel pick" },
@@ -655,47 +652,47 @@ run = "plugin chmod"
 desc = "Chmod on selected files"
 
 [[mgr.prepend_keymap]]
-on = [ "1" ]
+on = ["1"]
 run = "plugin relative-motions 1"
 desc = "Move in relative steps"
 
 [[mgr.prepend_keymap]]
-on = [ "2" ]
+on = ["2"]
 run = "plugin relative-motions 2"
 desc = "Move in relative steps"
 
 [[mgr.prepend_keymap]]
-on = [ "3" ]
+on = ["3"]
 run = "plugin relative-motions 3"
 desc = "Move in relative steps"
 
 [[mgr.prepend_keymap]]
-on = [ "4" ]
+on = ["4"]
 run = "plugin relative-motions 4"
 desc = "Move in relative steps"
 
 [[mgr.prepend_keymap]]
-on = [ "5" ]
+on = ["5"]
 run = "plugin relative-motions 5"
 desc = "Move in relative steps"
 
 [[mgr.prepend_keymap]]
-on = [ "6" ]
+on = ["6"]
 run = "plugin relative-motions 6"
 desc = "Move in relative steps"
 
 [[mgr.prepend_keymap]]
-on = [ "7" ]
+on = ["7"]
 run = "plugin relative-motions 7"
 desc = "Move in relative steps"
 
 [[mgr.prepend_keymap]]
-on = [ "8" ]
+on = ["8"]
 run = "plugin relative-motions 8"
 desc = "Move in relative steps"
 
 [[mgr.prepend_keymap]]
-on = [ "9" ]
+on = ["9"]
 run = "plugin relative-motions 9"
 desc = "Move in relative steps"
 
@@ -705,42 +702,41 @@ run = "plugin cd-git-root"
 desc = "Go to repo ROOT"
 
 [[mgr.prepend_keymap]]
-on   = [ "g", "i" ]
-run  = "plugin lazygit"
+on = ["g", "i"]
+run = "plugin lazygit"
 desc = "run lazygit"
 
 [[mgr.prepend_keymap]]
 # on = [ "u" ]
 # run = "plugin restore"
 # desc = "Restore last deleted files/folders"
-    # or use "d + u" like me
+# or use "d + u" like me
 # on = ["d", "u"]
-on = [ "u" ]
+on = ["u"]
 run = "plugin restore"
 desc = "Restore last deleted files/folders"
 
-    # Select files/folders to restore. Input item index or range separated by comma:
-    # - Restore a trashed file:
-    #      What file to restore [0..4]: 4
-    # - Restore multiple trashed files separated by comma, also support range:
-    #      What file to restore [0..3]: 0-2, 3
+# Select files/folders to restore. Input item index or range separated by comma:
+# - Restore a trashed file:
+#      What file to restore [0..4]: 4
+# - Restore multiple trashed files separated by comma, also support range:
+#      What file to restore [0..3]: 0-2, 3
 
 [[mgr.prepend_keymap]]
-    # This will throw error when there is existed file/folder
+# This will throw error when there is existed file/folder
 # on = [ "d", "U" ]
 # run = "plugin restore -- --interactive"
 # desc = "Restore deleted files/folders (Interactive)"
-    # Or auto overwrite existed file/folder
+# Or auto overwrite existed file/folder
 # on = [ "d", "U" ]
-on = [ "U" ]
+on = ["U"]
 run = "plugin restore -- --interactive --interactive-overwrite"
 desc = "Restore deleted files/folders (Interactive overwrite)"
 
-
 # keymap.toml
 [[mgr.prepend_keymap]]
-on   = "T"
-run  = "plugin toggle-pane max-preview"
+on = "T"
+run = "plugin toggle-pane max-preview"
 desc = "Maximize or restore the preview pane"
 
 # [[mgr.prepend_keymap]]
@@ -749,18 +745,18 @@ desc = "Maximize or restore the preview pane"
 # desc = "Enter the child directory, or open the file"
 
 [[mgr.prepend_keymap]]
-on = [ "l" ]
+on = ["l"]
 run = "plugin bypass smart-enter"
 desc = "Open a file, or recursively enter child directory, skipping children with only a single subdirectory"
 
 [[mgr.prepend_keymap]]
-on = [ "h" ]
+on = ["h"]
 run = "plugin bypass reverse"
 desc = "Recursively enter parent directory, skipping parents with only a single subdirectory"
 
 [[mgr.prepend_keymap]]
-on   = [ "g", "C" ]
-run  = "plugin vcs-files"
+on = ["g", "C"]
+run = "plugin vcs-files"
 desc = "Show Git file changes"
 
 # sudo cp/mv
@@ -837,12 +833,12 @@ desc = "Open Recycle Bin menu"
 
 # close-and-restore-tab plugin
 [[mgr.prepend_keymap]]
-on = [ "<C-w>" ]
+on = ["<C-w>"]
 run = "plugin close-and-restore-tab close_to_right"
 desc = "Close the current tab and turn to right tab, or quit if it is last tab"
 
 [[mgr.prepend_keymap]]
-on = [ "<C-t>" ]
+on = ["<C-t>"]
 run = "plugin close-and-restore-tab restore"
 desc = "Restore the closed tab"
 
@@ -858,42 +854,42 @@ run = "plugin nextension fwd"
 
 # Projects
 [[mgr.prepend_keymap]]
-on = [ "M", "s" ]
+on = ["M", "s"]
 run = "plugin projects save"
 desc = "Save current project"
 
 [[mgr.prepend_keymap]]
-on = [ "M", "l" ]
+on = ["M", "l"]
 run = "plugin projects load"
 desc = "Load project"
 
 [[mgr.prepend_keymap]]
-on = [ "M", "P" ]
+on = ["M", "P"]
 run = "plugin projects load_last"
 desc = "Load last project"
 
 [[mgr.prepend_keymap]]
-on = [ "M", "d" ]
+on = ["M", "d"]
 run = "plugin projects delete"
 desc = "Delete project"
 
 [[mgr.prepend_keymap]]
-on = [ "M", "D" ]
+on = ["M", "D"]
 run = "plugin projects delete_all"
 desc = "Delete all projects"
 
 [[mgr.prepend_keymap]]
-on = [ "M", "m" ]
+on = ["M", "m"]
 run = "plugin projects 'merge current'"
 desc = "Merge current tab to other projects"
 
 [[mgr.prepend_keymap]]
-on = [ "M", "M" ]
+on = ["M", "M"]
 run = "plugin projects 'merge all'"
 desc = "Merge current project to other projects"
 
 # Pandoc
 [[mgr.prepend_keymap]]
-on   = [ "c", "p" ]
-run  = "plugin pandoc"
+on = ["c", "p"]
+run = "plugin pandoc"
 desc = "Pandoc: Interactive Convert"
