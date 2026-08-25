@@ -1,0 +1,401 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+readonly HOME_DIR="{{ .chezmoi.homeDir }}"
+readonly SPOTIFY_PATH="/opt/spotify"
+readonly SPOTIFY_APPS_PATH="$SPOTIFY_PATH/Apps"
+readonly SPOTIFY_PREFS="$HOME_DIR/.config/spotify/prefs"
+readonly SPOTIFY_CACHE="$HOME_DIR/.cache/spotify"
+readonly SPICETIFY_HOOK="$HOME_DIR/.config/omarchy/hooks/theme-set.d/20-spicetify.sh"
+readonly STATE_DIR="$HOME_DIR/.local/state/chezmoi/spicetify"
+readonly BACKUP_STATE="$STATE_DIR/backup-versions"
+readonly DEVTOOLS_STATE="$STATE_DIR/devtools-version"
+readonly SPICETIFY_STATE_DIR="${SPICETIFY_STATE:-${XDG_STATE_HOME:-$HOME_DIR/.local/state}/spicetify}"
+readonly SPICETIFY_BACKUP_DIR="$SPICETIFY_STATE_DIR/Backup"
+readonly BACKUP_SCHEMA_VERSION="1"
+
+if (( EUID == 0 )); then
+  sudo_mode="root"
+elif sudo -n true 2>/dev/null; then
+  sudo_mode="noninteractive"
+elif [[ -t 0 ]]; then
+  sudo_mode="interactive"
+else
+  sudo_mode="unavailable"
+fi
+
+run_as_root() {
+  if [[ $sudo_mode == root ]]; then
+    "$@"
+  elif [[ $sudo_mode == noninteractive || $sudo_mode == interactive ]]; then
+    sudo "$@"
+  else
+    return 1
+  fi
+}
+
+spotify_prefs_version() {
+  if [[ -f "$SPOTIFY_PREFS" ]]; then
+    awk -F'"' '$1 == "app.last-launched-version=" { print $2; exit }' "$SPOTIFY_PREFS"
+  fi
+}
+
+print_quattro_reminder() {
+  local version
+
+  version=$(omarchy version 2>/dev/null || true)
+  if [[ $version == 4.* ]]; then
+    printf '%s\n' \
+      'Reminder: Omarchy Quattro is installed. Remove the Omarchy 3.x' \
+      '~/.config/omarchy/current fallback from the Spicetify hook after all' \
+      'managed hosts have upgraded.'
+  fi
+}
+
+launch_spotify() {
+  if command -v omarchy-launch-or-focus >/dev/null 2>&1 &&
+    command -v hyprctl >/dev/null 2>&1; then
+    setsid omarchy-launch-or-focus spotify >/dev/null 2>&1 &
+  elif command -v uwsm-app >/dev/null 2>&1; then
+    setsid uwsm-app -- spotify >/dev/null 2>&1 &
+  else
+    setsid spotify >/dev/null 2>&1 &
+  fi
+}
+
+stop_spotify() {
+  local attempt
+
+  if ! pgrep -x spotify >/dev/null 2>&1; then
+    return 0
+  fi
+
+  pkill -x spotify || true
+  for attempt in {1..50}; do
+    if ! pgrep -x spotify >/dev/null 2>&1; then
+      return 0
+    fi
+    sleep 0.2
+  done
+
+  pkill -KILL -x spotify || true
+}
+
+wait_for_spotify_ready() {
+  local installed_version="$1"
+  local prefs_version
+
+  prefs_version=$(spotify_prefs_version)
+  if [[ $prefs_version == "$installed_version" ]]; then
+    return 0
+  fi
+
+  if [[ -z ${WAYLAND_DISPLAY:-} && -z ${DISPLAY:-} ]]; then
+    printf 'Spotify first run requires a graphical session. Open Spotify, log in, and rerun chezmoi apply.\n' >&2
+    return 1
+  fi
+
+  if [[ -n $prefs_version ]] && pgrep -x spotify >/dev/null 2>&1; then
+    stop_spotify
+  fi
+
+  printf 'Launching Spotify. Log in and leave it open for at least 60 seconds.\n'
+  launch_spotify
+
+  if command -v gum >/dev/null 2>&1; then
+    gum spin --spinner dot --title 'Waiting 60 seconds for Spotify first run...' -- sleep 60
+  else
+    sleep 60
+  fi
+
+  prefs_version=$(spotify_prefs_version)
+  if [[ $prefs_version != "$installed_version" ]]; then
+    printf 'Spotify did not finish first-run setup for version %s. Log in and rerun chezmoi apply.\n' \
+      "$installed_version" >&2
+    return 1
+  fi
+}
+
+ensure_write_access() {
+  local path="$1"
+  local recursive="$2"
+  local user
+
+  [[ -e $path ]] || return 0
+  user=$(id -un)
+
+  if [[ $recursive == 1 ]]; then
+    if getfacl -Rcp "$path" 2>/dev/null | awk -F: '
+      (($1 == "group" && $2 == "") || $1 == "other") && $3 ~ /w/ { found = 1; exit }
+      END { exit !found }
+    '; then
+      if ! run_as_root chmod -R go-w "$path"; then
+        printf 'Warning: could not remove group/other write access from %s without sudo.\n' "$path" >&2
+      fi
+    fi
+    if [[ -n $(find "$path" ! -writable -print -quit) ]]; then
+      if ! run_as_root setfacl -R -m "u:$user:rwX" "$path"; then
+        printf 'Spicetify requires write access to %s. Rerun chezmoi apply in an interactive terminal.\n' \
+          "$path" >&2
+        return 1
+      fi
+    fi
+  else
+    if getfacl -cp "$path" 2>/dev/null | awk -F: '
+      (($1 == "group" && $2 == "") || $1 == "other") && $3 ~ /w/ { found = 1; exit }
+      END { exit !found }
+    '; then
+      if ! run_as_root chmod go-w "$path"; then
+        printf 'Warning: could not remove group/other write access from %s without sudo.\n' "$path" >&2
+      fi
+    fi
+    if [[ ! -w $path ]]; then
+      if ! run_as_root setfacl -m "u:$user:rwX" "$path"; then
+        printf 'Spicetify requires write access to %s. Rerun chezmoi apply in an interactive terminal.\n' \
+          "$path" >&2
+        return 1
+      fi
+    fi
+  fi
+}
+
+spotify_package_apps_are_pristine() {
+  local output
+
+  output=$(LC_ALL=C pacman -Qkk spotify 2>&1 || true)
+  ! grep -Eq \
+    'spotify: /opt/spotify/Apps/.*(No such file or directory|Size mismatch|SHA256 checksum mismatch)' \
+    <<<"$output"
+}
+
+restore_stock_spotify_apps() {
+  if spotify_package_apps_are_pristine && ! spotify_apps_have_directories; then
+    return 0
+  fi
+
+  printf 'Restoring package-owned Spotify app files before rebuilding the Spicetify backup.\n'
+  stop_spotify
+  if ! spotify_package_apps_are_pristine; then
+    if ! run_as_root pacman -S --noconfirm spotify; then
+      printf 'Spotify must be reinstalled to rebuild a clean Spicetify backup. Rerun chezmoi apply in an interactive terminal.\n' >&2
+      return 1
+    fi
+  fi
+
+  if spotify_apps_have_directories; then
+    if ! find "$SPOTIFY_APPS_PATH" -mindepth 1 -maxdepth 1 -type d -exec rm -rf -- {} +; then
+      if ! run_as_root find "$SPOTIFY_APPS_PATH" -mindepth 1 -maxdepth 1 -type d -exec rm -rf -- {} +; then
+        printf 'Could not remove extracted Spotify app directories. Rerun chezmoi apply in an interactive terminal.\n' >&2
+        return 1
+      fi
+    fi
+  fi
+
+  ensure_write_access "$SPOTIFY_PATH" 0
+  ensure_write_access "$SPOTIFY_APPS_PATH" 1
+  if ! spotify_package_apps_are_pristine; then
+    printf 'Spotify app files still differ from the installed package after reinstall.\n' >&2
+    return 1
+  fi
+  if spotify_apps_have_directories; then
+    printf 'Extracted Spotify app directories still exist after cleanup.\n' >&2
+    return 1
+  fi
+}
+
+reset_spotify_web_cache() {
+  local cache_path
+
+  stop_spotify
+  for cache_path in \
+    "$SPOTIFY_CACHE/Browser/Cache" \
+    "$SPOTIFY_CACHE/Browser/Code Cache" \
+    "$SPOTIFY_CACHE/Browser/DawnGraphiteCache" \
+    "$SPOTIFY_CACHE/Browser/DawnWebGPUCache" \
+    "$SPOTIFY_CACHE/Browser/GPUCache" \
+    "$SPOTIFY_CACHE/Browser/Service Worker/CacheStorage" \
+    "$SPOTIFY_CACHE/Default/Cache" \
+    "$SPOTIFY_CACHE/Default/Code Cache" \
+    "$SPOTIFY_CACHE/Default/DawnGraphiteCache" \
+    "$SPOTIFY_CACHE/Default/DawnWebGPUCache" \
+    "$SPOTIFY_CACHE/Default/GPUCache" \
+    "$SPOTIFY_CACHE/Default/Service Worker/CacheStorage" \
+    "$SPOTIFY_CACHE/GraphiteDawnCache" \
+    "$SPOTIFY_CACHE/GrShaderCache" \
+    "$SPOTIFY_CACHE/ShaderCache" \
+    "$SPOTIFY_CACHE/component_crx_cache" \
+    "$SPOTIFY_CACHE/extensions_crx_cache"; do
+    rm -rf "$cache_path"
+  done
+}
+
+backup_files_exist() {
+  [[ -f "$SPICETIFY_BACKUP_DIR/login.spa" && -f "$SPICETIFY_BACKUP_DIR/xpui.spa" ]]
+}
+
+spotify_apps_have_spa() {
+  [[ -n $(find "$SPOTIFY_APPS_PATH" -maxdepth 1 -type f -name '*.spa' -print -quit 2>/dev/null) ]]
+}
+
+spotify_apps_have_directories() {
+  [[ -n $(find "$SPOTIFY_APPS_PATH" -mindepth 1 -maxdepth 1 -type d -print -quit 2>/dev/null) ]]
+}
+
+backup_config_value() {
+  local key="$1"
+  local config_file
+
+  config_file=$(spicetify -c)
+  awk -F= -v key="$key" '
+    $0 == "[Backup]" { in_backup = 1; next }
+    /^\[/ { in_backup = 0 }
+    in_backup {
+      name = $1
+      gsub(/[[:space:]]/, "", name)
+      if (name == key) {
+        value = $2
+        gsub(/[[:space:]]/, "", value)
+        print value
+        exit
+      }
+    }
+  ' "$config_file"
+}
+
+backup_file_hash() {
+  local file_name="$1"
+
+  sha256sum "$SPICETIFY_BACKUP_DIR/$file_name" 2>/dev/null | awk '{ print $1 }'
+}
+
+backup_hashes_match_state() {
+  local current_login_hash current_xpui_hash stored_login_hash stored_xpui_hash
+
+  if [[ ! -f "$BACKUP_STATE" ]]; then
+    return 1
+  fi
+
+  stored_login_hash=$(awk 'NR == 4 { print; exit }' "$BACKUP_STATE")
+  stored_xpui_hash=$(awk 'NR == 5 { print; exit }' "$BACKUP_STATE")
+  if [[ -z $stored_login_hash && -z $stored_xpui_hash ]]; then
+    return 0
+  fi
+
+  current_login_hash=$(backup_file_hash login.spa || true)
+  current_xpui_hash=$(backup_file_hash xpui.spa || true)
+  [[ -n $current_login_hash && -n $current_xpui_hash &&
+    $current_login_hash == "$stored_login_hash" &&
+    $current_xpui_hash == "$stored_xpui_hash" ]]
+}
+
+record_backup_state() {
+  local installed_spotify_version="$1"
+  local installed_spicetify_version="$2"
+  local backup_spotify_version backup_spicetify_version login_hash xpui_hash
+
+  backup_spotify_version=$(backup_config_value version)
+  backup_spicetify_version=$(backup_config_value with)
+  login_hash=$(backup_file_hash login.spa || true)
+  xpui_hash=$(backup_file_hash xpui.spa || true)
+
+  if [[ $backup_spotify_version != "$installed_spotify_version" ||
+    $backup_spicetify_version != "$installed_spicetify_version" ||
+    -z $login_hash || -z $xpui_hash ]]; then
+    printf 'Spicetify backup metadata or files do not match the installed versions.\n' >&2
+    return 1
+  fi
+
+  mkdir -p "$STATE_DIR"
+  printf '%s\n%s\n%s\n%s\n%s\n' \
+    "$backup_spotify_version" \
+    "$backup_spicetify_version" \
+    "$BACKUP_SCHEMA_VERSION" \
+    "$login_hash" \
+    "$xpui_hash" >"$BACKUP_STATE"
+}
+
+if ! command -v omarchy >/dev/null 2>&1; then
+  printf 'Omarchy is required to install Spotify and Spicetify.\n' >&2
+  exit 1
+fi
+
+print_quattro_reminder
+
+if ! command -v spotify >/dev/null 2>&1; then
+  omarchy pkg add spotify
+fi
+
+if ! command -v spicetify >/dev/null 2>&1; then
+  omarchy pkg aur add spicetify-cli
+fi
+
+if ! command -v setfacl >/dev/null 2>&1; then
+  omarchy pkg add acl
+fi
+
+ensure_write_access "$SPOTIFY_PATH" 0
+ensure_write_access "$SPOTIFY_APPS_PATH" 1
+
+spotify_version=$(spotify --version | awk '{ print $3 }' | tr -d ',')
+if ! wait_for_spotify_ready "$spotify_version"; then
+  exit 0
+fi
+
+spicetify config \
+  spotify_path "$SPOTIFY_PATH/" \
+  prefs_path "$SPOTIFY_PREFS" \
+  current_theme omarchy \
+  color_scheme base \
+  replace_colors 1 \
+  inject_css 1 >/dev/null
+
+if [[ ! -x "$SPICETIFY_HOOK" ]]; then
+  printf 'Spicetify setup skipped: native Omarchy theme hook is missing.\n' >&2
+  exit 0
+fi
+
+OMARCHY_SPICETIFY_SKIP_APPLY=1 "$SPICETIFY_HOOK"
+
+spicetify_version=$(NO_COLOR=1 spicetify --version)
+backup_spotify_version=$(backup_config_value version)
+backup_spicetify_version=$(backup_config_value with)
+backup_schema_version=""
+if [[ -f "$BACKUP_STATE" ]]; then
+  backup_schema_version=$(awk 'NR == 3 { print; exit }' "$BACKUP_STATE")
+fi
+
+if ! spotify_apps_have_spa && ! spotify_apps_have_directories; then
+  printf 'Spotify Apps is empty. Reinstall Spotify, then rerun chezmoi apply.\n' >&2
+  exit 1
+elif ! backup_files_exist ||
+  [[ $backup_spotify_version != "$spotify_version" ||
+    $backup_schema_version != "$BACKUP_SCHEMA_VERSION" ]] ||
+  ! backup_hashes_match_state; then
+  restore_stock_spotify_apps
+  spicetify clear
+  reset_spotify_web_cache
+  spicetify backup apply
+elif [[ $backup_spicetify_version != "$spicetify_version" ]]; then
+  reset_spotify_web_cache
+  spicetify restore backup apply
+elif spotify_apps_have_spa; then
+  reset_spotify_web_cache
+  spicetify apply
+fi
+
+record_backup_state "$spotify_version" "$spicetify_version"
+
+devtools_version="$spotify_version|$spicetify_version"
+current_devtools_version=""
+if [[ -f "$DEVTOOLS_STATE" ]]; then
+  current_devtools_version=$(<"$DEVTOOLS_STATE")
+fi
+
+if [[ $devtools_version != "$current_devtools_version" ]]; then
+  if ! spicetify enable-devtools; then
+    printf 'Warning: Spicetify applied, but developer tools could not be enabled yet.\n' >&2
+  else
+    printf '%s\n' "$devtools_version" >"$DEVTOOLS_STATE"
+  fi
+fi
