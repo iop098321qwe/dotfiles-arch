@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+# config: {{ include "dot_config/private_spicetify/config-xpui.ini.tmpl" | sha256sum }}
+# css: {{ include "dot_config/private_spicetify/private_Themes/omarchy/user.css" | sha256sum }}
+# hook: {{ include "dot_config/omarchy/hooks/theme-set.d/executable_20-spicetify.sh" | sha256sum }}
+# legacy dispatcher: {{ include "dot_config/omarchy/hooks/executable_theme-set" | sha256sum }}
+
+set -euo pipefail
+
+readonly HOME_DIR="{{ .chezmoi.homeDir }}"
+readonly SPOTIFY_PREFS="$HOME_DIR/.config/spotify/prefs"
+readonly SPICETIFY_HOOK="$HOME_DIR/.config/omarchy/hooks/theme-set.d/20-spicetify.sh"
+
+if ! command -v spotify >/dev/null 2>&1 ||
+  ! command -v spicetify >/dev/null 2>&1; then
+  exit 0
+fi
+
+if [[ ! -f "$SPOTIFY_PREFS" ]]; then
+  printf 'Spicetify apply skipped: Spotify has not completed its first run.\n' >&2
+  exit 0
+fi
+
+spicetify config \
+  spotify_path /opt/spotify/ \
+  prefs_path "$SPOTIFY_PREFS" \
+  current_theme omarchy \
+  color_scheme base \
+  replace_colors 1 \
+  inject_css 1 >/dev/null
+
+if [[ -x "$SPICETIFY_HOOK" ]]; then
+  "$SPICETIFY_HOOK"
+else
+  printf 'Spicetify apply skipped: native Omarchy theme hook is missing.\n' >&2
+fi

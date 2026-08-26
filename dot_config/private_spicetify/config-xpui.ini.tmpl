@@ -1,0 +1,40 @@
+{{- $backupState := printf "%s/.local/state/chezmoi/spicetify/backup-versions" .chezmoi.homeDir -}}
+{{- $liveConfig := printf "%s/.config/spicetify/config-xpui.ini" .chezmoi.homeDir -}}
+{{- $spotifyBackupVersion := output "bash" "-c" "if [[ -f \"$1\" ]]; then awk 'NR == 1 { print; exit }' \"$1\"; fi" "_" $backupState | trim -}}
+{{- $spicetifyBackupVersion := output "bash" "-c" "if [[ -f \"$1\" ]]; then awk 'NR == 2 { print; exit }' \"$1\"; fi" "_" $backupState | trim -}}
+{{- if eq $spotifyBackupVersion "" -}}
+{{- $spotifyBackupVersion = output "bash" "-c" "if [[ -f \"$1\" ]]; then awk '$1 == \"version\" { print $3; exit }' \"$1\"; fi" "_" $liveConfig | trim -}}
+{{- $spicetifyBackupVersion = output "bash" "-c" "if [[ -f \"$1\" ]]; then awk '$1 == \"with\" { print $3; exit }' \"$1\"; fi" "_" $liveConfig | trim -}}
+{{- end -}}
+[Preprocesses]
+disable_sentry     = 1
+disable_ui_logging = 1
+remove_rtl_rule    = 1
+expose_apis        = 1
+
+[AdditionalOptions]
+custom_apps           = new-releases|lyrics-plus
+sidebar_config        = 0
+home_config           = 1
+experimental_features = 1
+extensions            = popupLyrics.js|bookmark.js|shuffle+.js|trashbin.js|fullAppDisplay.js
+
+[Patch]
+
+[Setting]
+prefs_path             = {{ .chezmoi.homeDir }}/.config/spotify/prefs
+color_scheme           = base
+replace_colors         = 1
+spotify_launch_flags   ={{ " " }}
+always_enable_devtools = 0
+spotify_path           = /opt/spotify/
+current_theme          = omarchy
+inject_theme_js        = 1
+inject_css             = 1
+overwrite_assets       = 0
+check_spicetify_update = 1
+
+; DO NOT CHANGE!
+[Backup]
+version = {{ $spotifyBackupVersion }}
+with    = {{ $spicetifyBackupVersion }}

@@ -2,7 +2,27 @@
 .encore-dark-theme,
 .encore-base-set,
 .encore-inverted-light-set {
+    --background-base: var(--spice-main) !important;
     --background-highlight: rgba(var(--spice-rgb-highlight), 0.25) !important;
+    --background-press: rgba(var(--spice-rgb-highlight), 0.18) !important;
+    --background-elevated-base: var(--spice-main-elevated) !important;
+    --background-elevated-highlight: var(--spice-highlight-elevated) !important;
+    --background-elevated-press: var(--spice-card) !important;
+    --background-tinted-base: rgba(var(--spice-rgb-selected-row), 0.12) !important;
+    --background-tinted-highlight: rgba(var(--spice-rgb-highlight), 0.16) !important;
+    --background-tinted-press: rgba(var(--spice-rgb-highlight), 0.22) !important;
+    --decorative-base: var(--spice-button) !important;
+    --encore-sidebar-base: var(--spice-sidebar) !important;
+    --essential-base: var(--spice-text) !important;
+    --essential-bright-accent: var(--spice-button-active) !important;
+    --essential-negative: var(--spice-notification-error) !important;
+    --essential-positive: var(--spice-button-active) !important;
+    --essential-subdued: var(--spice-button-disabled) !important;
+    --parents-essential-base: var(--essential-base) !important;
+    --text-base: var(--spice-text) !important;
+    --text-bright-accent: var(--spice-button-active) !important;
+    --text-negative: var(--spice-notification-error) !important;
+    --text-subdued: var(--spice-subtext) !important;
 }
 .main-nowPlayingBar-container {
     background-color: var(--background-base);
