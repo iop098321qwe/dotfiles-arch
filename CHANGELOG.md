@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.4](https://github.com/iop098321qwe/dotfiles-arch/compare/v0.0.2...v0.0.4) (2026-08-26)
+
+### Features
+
+* **install:** consolidate Omarchy package installers ([19d8d69](https://github.com/iop098321qwe/dotfiles-arch/commit/19d8d690a31cdf9c002fa82a357abac2cf4863cd))
+* **omarchy:** add native Spicetify theme hook ([186cffd](https://github.com/iop098321qwe/dotfiles-arch/commit/186cffdcf1f66ce60b7f7429107db0de38df5f5a))
+* **spicetify:** automate Omarchy setup and apply ([ae07207](https://github.com/iop098321qwe/dotfiles-arch/commit/ae07207c8bf55e1b88cbe1342094d737e9b4359b))
+
+### Bug Fixes
+
+* **spicetify:** bridge Spotify Encore color tokens ([0563657](https://github.com/iop098321qwe/dotfiles-arch/commit/0563657eae26fce14799f3eeef8288fcb97c7193))
 ## [0.0.3](https://github.com/iop098321qwe/dotfiles-arch/compare/v0.0.2...v0.0.3) (2026-08-25)
 
 ### Features
