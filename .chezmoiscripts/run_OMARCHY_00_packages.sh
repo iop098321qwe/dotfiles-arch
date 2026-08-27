@@ -21,7 +21,6 @@ packages=(
   python-curl_cffi
   solaar
   speedtest-cli
-  syncthing
   tailscale
   television
   trash-cli
