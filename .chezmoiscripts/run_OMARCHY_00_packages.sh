@@ -46,6 +46,7 @@ aur_packages=(
   proton-pass-bin
   proton-pass-cli-bin
   sesh-bin
+  t3code-bin
   ttl-bin
   vesktop-bin
   zennotes-bin
