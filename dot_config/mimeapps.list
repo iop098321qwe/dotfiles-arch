@@ -47,6 +47,7 @@ x-scheme-handler/mailto=eu.betterbird.Betterbird.desktop
 x-scheme-handler/discord=vesktop.desktop
 text/markdown=nvim.desktop
 inode/directory=org.gnome.Nautilus.desktop
+x-scheme-handler/t3code=t3code-url-handler.desktop
 
 [Added Associations]
 text/markdown=nvim.desktop;
