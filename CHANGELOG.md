@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.5](https://github.com/iop098321qwe/dotfiles-arch/compare/v0.0.4...v0.0.5) (2026-08-31)
+
+### Features
+
+* **atuin:** automate installation, configuration, and sync ([f99ff2e](https://github.com/iop098321qwe/dotfiles-arch/commit/f99ff2e8b0d829c8ff53c7f47bc99d182fbf3ca7))
+
+### Bug Fixes
+
+* **atuin:** move atuin to dedicated install script ([2dd299c](https://github.com/iop098321qwe/dotfiles-arch/commit/2dd299c8c27b900cd295dd92117d5eb91da705b4))
 ## [0.0.4](https://github.com/iop098321qwe/dotfiles-arch/compare/v0.0.2...v0.0.4) (2026-08-26)
 
 ### Features
