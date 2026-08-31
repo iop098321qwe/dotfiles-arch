@@ -25,5 +25,5 @@ hl.monitor({
   scale = omarchy_monitor_scale,
 })
 
-{{- $monitorConfig := printf "hypr/monitors/%s.lua" .chezmoi.hostname -}}
-{{- includeTemplate $monitorConfig . -}}
+{{ $monitorConfig := printf "hypr/monitors/%s.lua" .chezmoi.hostname }}
+{{ includeTemplate $monitorConfig . -}}
