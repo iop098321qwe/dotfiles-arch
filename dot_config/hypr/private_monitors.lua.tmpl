@@ -1,0 +1,29 @@
+{{- /*
+Machine-specific Omarchy Quattro monitor configuration.
+
+Rendered destination:
+  ~/.config/hypr/monitors.lua
+
+Expected source file:
+  .chezmoitemplates/hypr/monitors/<hostname>.lua
+
+Check hostname with:
+  chezmoi execute-template '{{ .chezmoi.hostname }}'
+*/ -}}
+
+-- See https://wiki.hypr.land/Configuring/Basics/Monitors/
+-- List current monitors and supported resolutions with: hyprctl monitors all
+
+local omarchy_gdk_scale = 1
+local omarchy_monitor_scale = 1.25
+
+hl.env("GDK_SCALE", tostring(omarchy_gdk_scale))
+hl.monitor({
+  output = "",
+  mode = "preferred",
+  position = "auto",
+  scale = omarchy_monitor_scale,
+})
+
+{{- $monitorConfig := printf "hypr/monitors/%s.lua" .chezmoi.hostname -}}
+{{- includeTemplate $monitorConfig . -}}
