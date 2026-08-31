@@ -7,23 +7,12 @@ Rendered destination:
 Expected source file:
   .chezmoitemplates/hypr/monitors/<hostname>.lua
 
+The host template renders a complete monitors.lua file, including the
+Omarchy Quattro defaults and host-specific monitor overrides.
+
 Check hostname with:
   chezmoi execute-template '{{ .chezmoi.hostname }}'
 */ -}}
 
--- See https://wiki.hypr.land/Configuring/Basics/Monitors/
--- List current monitors and supported resolutions with: hyprctl monitors all
-
-local omarchy_gdk_scale = 1
-local omarchy_monitor_scale = 1.25
-
-hl.env("GDK_SCALE", tostring(omarchy_gdk_scale))
-hl.monitor({
-  output = "",
-  mode = "preferred",
-  position = "auto",
-  scale = omarchy_monitor_scale,
-})
-
-{{ $monitorConfig := printf "hypr/monitors/%s.lua" .chezmoi.hostname }}
+{{- $monitorConfig := printf "hypr/monitors/%s.lua" .chezmoi.hostname -}}
 {{ includeTemplate $monitorConfig . -}}
