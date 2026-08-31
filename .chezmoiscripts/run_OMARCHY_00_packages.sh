@@ -2,7 +2,6 @@
 
 packages=(
   7zip
-  atuin
   btop
   diffnav
   entr
