@@ -34,7 +34,7 @@
 	helper = !/usr/bin/gh auth git-credential
 [user]
 	email = iop098321qwe@pm.me
-	name = iop098321qwe
+	name = Dallas Elliott
 [fetch]
 	prune = true
 
