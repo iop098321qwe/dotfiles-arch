@@ -2,8 +2,8 @@
 
 # config: {{ include "dot_config/private_spicetify/config-xpui.ini.tmpl" | sha256sum }}
 # css: {{ include "dot_config/private_spicetify/private_Themes/omarchy/user.css" | sha256sum }}
-# hook: {{ include "dot_config/omarchy/hooks/theme-set.d/executable_20-spicetify.sh" | sha256sum }}
-# legacy dispatcher: {{ include "dot_config/omarchy/hooks/executable_theme-set" | sha256sum }}
+# hook: {{ if stat "dot_config/omarchy/hooks/theme-set.d/executable_20-spicetify.sh" }}{{ include "dot_config/omarchy/hooks/theme-set.d/executable_20-spicetify.sh" | sha256sum }}{{ else }}missing{{ end }}
+# legacy dispatcher: {{ if stat "dot_config/omarchy/hooks/executable_theme-set" }}{{ include "dot_config/omarchy/hooks/executable_theme-set" | sha256sum }}{{ else }}missing{{ end }}
 
 set -euo pipefail
 
