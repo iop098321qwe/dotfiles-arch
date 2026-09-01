@@ -265,6 +265,10 @@ keymap = [
   ], run = "cd ~/Documents", desc = "Documents" },
   { on = [
     "g",
+    "p",
+  ], run = "cd ~/Projects", desc = "Projects" },
+  { on = [
+    "g",
     "R",
   ], run = "cd ~/Documents/github_repositories", desc = "Repos" },
   { on = [

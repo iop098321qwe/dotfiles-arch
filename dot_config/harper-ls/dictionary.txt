@@ -40,6 +40,7 @@ Flameshot
 Flexarm
 Foliate
 Fraks
+GCI
 GIAC
 GSD
 Ghostty
@@ -47,6 +48,7 @@ Gitea
 Gridfinity
 Grymm's
 GrymmWeeper
+HDD's
 HIPAA
 Hikvision
 Hikvision's
@@ -78,6 +80,8 @@ Offboarding
 Okular
 Omacom
 P1S
+PDU
+Palo
 PatchCleaner
 PiKVM
 PiVPN
@@ -88,6 +92,8 @@ RDP
 RMM
 Raphire
 SARemediation
+SR07
+SR09
 Solaar
 Sophos
 SourceForge
@@ -99,9 +105,12 @@ TigerSpot
 ToolTrace
 Traefik
 Tuxedomod
+UniFi
 VE
+VLAN
 Vencord
 Venvmod
+Walkie
 Wasilla
 Win11Debloat
 WinSxS
