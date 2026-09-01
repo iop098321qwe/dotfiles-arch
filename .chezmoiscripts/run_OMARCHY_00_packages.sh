@@ -47,6 +47,7 @@ aur_packages=(
   sesh-bin
   t3code-bin
   ttl-bin
+  tuxedo
   vesktop-bin
   zennotes-bin
 )
