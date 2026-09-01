@@ -35,7 +35,6 @@ aur_packages=(
   bambustudio-appimage
   betterbird-bin
   blesh-git
-  brave-bin
   brave-origin-bin
   gitflow-avh
   lazyssh-bin
