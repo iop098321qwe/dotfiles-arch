@@ -170,6 +170,10 @@ matches:
   - trigger: ";sfa"
     replace: "Steve Fishback Architect$|$"
 
+  # Stinebaugh & Company
+  - trigger: ";sco"
+    replace: "Stinebaugh & Company$|$"
+
   # The American Legion
   - trigger: ";al"
     replace: "The American Legion$|$"

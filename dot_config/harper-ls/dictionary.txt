@@ -77,6 +77,7 @@ NetBox
 Nextcloud
 Ntfy
 Offboarding
+Okta
 Okular
 Omacom
 P1S
