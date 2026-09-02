@@ -80,6 +80,7 @@ Offboarding
 Okta
 Okular
 Omacom
+Omarchy's
 P1S
 PDU
 Palo
@@ -136,7 +137,9 @@ homelab
 kasm
 keybindings
 lastname
+look'n'feel
 n8n
+niri
 nmap
 omarchy
 pagefile
