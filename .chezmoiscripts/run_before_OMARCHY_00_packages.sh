@@ -11,20 +11,18 @@ packages=(
   harper
   intel-media-driver
   moreutils
-  ncdu
   nmap
   npm
   openscad
   pandoc-cli
   proton-vpn-gtk-app
-  python-curl_cffi
   solaar
   speedtest-cli
   tailscale
   television
   trash-cli
+  tmux
   ttf-jetbrains-mono-nerd
-  ueberzugpp
   wireshark-cli
   wireshark-qt
   yazi
@@ -46,6 +44,7 @@ aur_packages=(
   sesh-bin
   t3code-bin
   ttl-bin
+  tmux-plugin-manager
   tuxedo
   vesktop-bin
   zennotes-bin
