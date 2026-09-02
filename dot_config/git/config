@@ -28,10 +28,10 @@
 	autoupdate = true        # Apply stored conflict resolutions automatically
 [credential "https://github.com"]
 	helper = 
-	helper = !/usr/bin/gh auth git-credential
+	helper = !/home/grymm/.local/share/mise/installs/gh/2.98.0/gh_2.98.0_linux_amd64/bin/gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = 
-	helper = !/usr/bin/gh auth git-credential
+	helper = !/home/grymm/.local/share/mise/installs/gh/2.98.0/gh_2.98.0_linux_amd64/bin/gh auth git-credential
 [user]
 	email = iop098321qwe@pm.me
 	name = Dallas Elliott
