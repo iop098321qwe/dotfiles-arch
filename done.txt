@@ -1,0 +1,6 @@
+x 2026-08-31 2026-08-31 convert neovim settings to be built on quattro default +quattro @feat
+x 2026-09-01 2026-08-31 convert tmux to quattro +quattro @feat
+x 2026-09-01 2026-09-01 install tmux tpm on setup +quattro @feat
+x 2026-09-01 2026-09-01 initialize tmux tpm and run plugin installations on setup +quattro @feat
+x 2026-09-02 2026-09-01 add `ya pkg install` to setup +quattro @feat
+x 2026-09-02 2026-09-01 add `cbc pkg load` to setup +quattro @feat
