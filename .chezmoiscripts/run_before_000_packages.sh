@@ -45,7 +45,7 @@ aur_packages=(
   t3code-bin
   ttl-bin
   tmux-plugin-manager
-  tuxedo
+  tuxedo-bin
   vesktop-bin
   zennotes-bin
 )
