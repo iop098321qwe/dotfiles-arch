@@ -41,7 +41,6 @@ aur_packages=(
   opencode-bin
   powershell-bin
   proton-pass-bin
-  proton-pass-cli-bin
   sesh-bin
   t3code-bin
   ttl-bin
