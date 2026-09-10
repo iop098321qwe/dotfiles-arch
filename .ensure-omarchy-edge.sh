@@ -3,7 +3,6 @@
 set -euo pipefail
 
 readonly REQUIRED_CHANNEL="edge"
-readonly REQUIRED_BRANCH="master"
 readonly STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/chezmoi"
 readonly REBOOT_MARKER="$STATE_DIR/omarchy-edge-channel-reboot-required"
 
@@ -26,21 +25,10 @@ current_omarchy_channel() {
   omarchy version channel 2>/dev/null || true
 }
 
-current_omarchy_branch() {
-  if omarchy version branch 2>/dev/null; then
-    return
-  fi
-
-  if [[ -n ${OMARCHY_PATH:-} ]]; then
-    git -C "$OMARCHY_PATH" rev-parse --abbrev-ref HEAD 2>/dev/null || true
-  fi
-}
-
 is_omarchy_edge() {
   local channel="$1"
-  local branch="$2"
 
-  [[ $channel == "$REQUIRED_CHANNEL" && $branch == "$REQUIRED_BRANCH" ]]
+  [[ $channel == "$REQUIRED_CHANNEL" ]]
 }
 
 prompt_reboot() {
@@ -69,7 +57,6 @@ require_interactive_gum() {
 
 prompt_switch_to_edge() {
   local channel="$1"
-  local branch="$2"
 
   require_interactive_gum
 
@@ -77,7 +64,6 @@ prompt_switch_to_edge() {
     'Omarchy edge channel is required before dotfiles initialization.' \
     '' \
     "Current channel: ${channel:-unknown}" \
-    "Current branch: ${branch:-unknown}" \
     '' \
     "This will run 'omarchy channel set edge', update Omarchy/packages," \
     'and stop dotfiles initialization until after a reboot.'
@@ -92,10 +78,9 @@ require_omarchy_edge() {
   command -v omarchy >/dev/null 2>&1 || \
     fail 'omarchy is required before dotfiles initialization.'
 
-  local boot_id marker_boot channel branch
+  local boot_id marker_boot channel
   boot_id=$(current_boot_id)
   channel=$(current_omarchy_channel)
-  branch=$(current_omarchy_branch)
 
   if [[ -f $REBOOT_MARKER ]]; then
     marker_boot=$(<"$REBOOT_MARKER")
@@ -107,7 +92,7 @@ require_omarchy_edge() {
       exit 1
     fi
 
-    if is_omarchy_edge "$channel" "$branch"; then
+    if is_omarchy_edge "$channel"; then
       rm -f "$REBOOT_MARKER"
       return
     fi
@@ -115,18 +100,17 @@ require_omarchy_edge() {
     rm -f "$REBOOT_MARKER"
   fi
 
-  if is_omarchy_edge "$channel" "$branch"; then
+  if is_omarchy_edge "$channel"; then
     return
   fi
 
-  prompt_switch_to_edge "$channel" "$branch"
+  prompt_switch_to_edge "$channel"
 
   omarchy channel set edge
 
   channel=$(current_omarchy_channel)
-  branch=$(current_omarchy_branch)
-  if ! is_omarchy_edge "$channel" "$branch"; then
-    fail "Omarchy is channel '${channel:-unknown}' on branch '${branch:-unknown}' after switching."
+  if ! is_omarchy_edge "$channel"; then
+    fail "Omarchy is channel '${channel:-unknown}' after switching."
   fi
 
   mkdir -p "$STATE_DIR"
