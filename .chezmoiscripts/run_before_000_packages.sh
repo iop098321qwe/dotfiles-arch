@@ -23,6 +23,7 @@ packages=(
   tailscale
   television
   trash-cli
+  tealdeer
   tmux
   ttf-jetbrains-mono-nerd
   wireshark-cli
