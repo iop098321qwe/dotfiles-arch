@@ -2,6 +2,9 @@
 
 set -euo pipefail
 
+source_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+bash "$source_dir/.ensure-omarchy-edge.sh"
+
 # Exit immediately if Proton Pass CLI is installed and authenticated.
 if command -v pass-cli >/dev/null 2>&1 &&
   pass-cli info >/dev/null 2>&1; then
