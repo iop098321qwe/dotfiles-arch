@@ -10,3 +10,4 @@ x 2026-09-09 2026-09-08 change all AUR packages to `-bin` versions for speed +qu
 (A) 2026-09-09 authenticate Atuin during initialization @feat +dotfiles
 (A) 2026-09-09 make a method of installing and authenticating github via chezmoi initialization +dotfiles @feat
 (A) 2026-09-09 fix automatic omarchy install of proton-pass-cli on chezmoi initialization +dotfiles @fix
+(A) 2026-09-09 ensure that omarchy is set to edge channel before installing all tools +quattro @feat
