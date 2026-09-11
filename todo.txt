@@ -6,7 +6,7 @@ x 2026-09-09 2026-09-08 change all AUR packages to `-bin` versions for speed +qu
 (C) 2026-09-08 change lazygit config to include 'stash' in block instead +dotfiles @fix
 (B) 2026-09-08 automate signing into Spotify +dotfiles @feat
 (A) 2026-09-08 change the default for gum responses to 'No' where applicable so setups are opt-in only @fix +dotfiles
-(A) 2026-09-08 remove the warning for removing Omarchy 3.x section (and relative portions to remove) +quattro @fix
+x 2026-09-11 2026-09-08 remove the warning for removing Omarchy 3.x section (and relative portions to remove) +quattro @fix
 (A) 2026-09-09 authenticate Atuin during initialization @feat +dotfiles
 (A) 2026-09-09 make a method of installing and authenticating github via chezmoi initialization +dotfiles @feat
 (A) 2026-09-09 fix automatic omarchy install of proton-pass-cli on chezmoi initialization +dotfiles @fix
