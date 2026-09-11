@@ -18,8 +18,7 @@ readonly BACKUP_SCHEMA_VERSION="1"
 readonly SPICETIFY_CONFIG_HASH='{{ include "dot_config/private_spicetify/config-xpui.ini.tmpl" | sha256sum }}'
 readonly SPICETIFY_THEME_HASH='{{ include "dot_config/private_spicetify/private_Themes/omarchy/user.css" | sha256sum }}'
 readonly SPICETIFY_HOOK_HASH='{{ if stat "dot_config/omarchy/hooks/theme-set.d/executable_20-spicetify.sh" }}{{ include "dot_config/omarchy/hooks/theme-set.d/executable_20-spicetify.sh" | sha256sum }}{{ else }}missing{{ end }}'
-readonly SPICETIFY_LEGACY_HOOK_HASH='{{ if stat "dot_config/omarchy/hooks/executable_theme-set" }}{{ include "dot_config/omarchy/hooks/executable_theme-set" | sha256sum }}{{ else }}missing{{ end }}'
-readonly SPICETIFY_SOURCE_HASH="${SPICETIFY_CONFIG_HASH}|${SPICETIFY_THEME_HASH}|${SPICETIFY_HOOK_HASH}|${SPICETIFY_LEGACY_HOOK_HASH}"
+readonly SPICETIFY_SOURCE_HASH="${SPICETIFY_CONFIG_HASH}|${SPICETIFY_THEME_HASH}|${SPICETIFY_HOOK_HASH}"
 
 if (( EUID == 0 )); then
   sudo_mode="root"
@@ -44,18 +43,6 @@ run_as_root() {
 spotify_prefs_version() {
   if [[ -f "$SPOTIFY_PREFS" ]]; then
     awk -F'"' '$1 == "app.last-launched-version=" { print $2; exit }' "$SPOTIFY_PREFS"
-  fi
-}
-
-print_quattro_reminder() {
-  local version
-
-  version=$(omarchy version 2>/dev/null || true)
-  if [[ $version == 4.* ]]; then
-    printf '%s\n' \
-      'Reminder: Omarchy Quattro is installed. Remove the Omarchy 3.x' \
-      '~/.config/omarchy/current fallback from the Spicetify hook after all' \
-      'managed hosts have upgraded.'
   fi
 }
 
@@ -372,8 +359,6 @@ if ! command -v omarchy >/dev/null 2>&1; then
   printf 'Omarchy is required to install Spotify and Spicetify.\n' >&2
   exit 1
 fi
-
-print_quattro_reminder
 
 if ! command -v spotify >/dev/null 2>&1; then
   omarchy pkg add spotify
