@@ -7,7 +7,6 @@ readonly SPOTIFY_PATH="/opt/spotify"
 readonly SPOTIFY_APPS_PATH="$SPOTIFY_PATH/Apps"
 readonly SPOTIFY_PREFS="$HOME_DIR/.config/spotify/prefs"
 readonly SPOTIFY_CACHE="$HOME_DIR/.cache/spotify"
-readonly SPICETIFY_HOOK="$HOME_DIR/.config/omarchy/hooks/theme-set.d/20-spicetify.sh"
 readonly STATE_DIR="$HOME_DIR/.local/state/chezmoi/spicetify"
 readonly BACKUP_STATE="$STATE_DIR/backup-versions"
 readonly DEVTOOLS_STATE="$STATE_DIR/devtools-version"
@@ -16,9 +15,7 @@ readonly SPICETIFY_STATE_DIR="${SPICETIFY_STATE:-${XDG_STATE_HOME:-$HOME_DIR/.lo
 readonly SPICETIFY_BACKUP_DIR="$SPICETIFY_STATE_DIR/Backup"
 readonly BACKUP_SCHEMA_VERSION="1"
 readonly SPICETIFY_CONFIG_HASH='{{ include "dot_config/private_spicetify/config-xpui.ini.tmpl" | sha256sum }}'
-readonly SPICETIFY_THEME_HASH='{{ include "dot_config/private_spicetify/private_Themes/omarchy/user.css" | sha256sum }}'
-readonly SPICETIFY_HOOK_HASH='{{ if stat "dot_config/omarchy/hooks/theme-set.d/executable_20-spicetify.sh" }}{{ include "dot_config/omarchy/hooks/theme-set.d/executable_20-spicetify.sh" | sha256sum }}{{ else }}missing{{ end }}'
-readonly SPICETIFY_SOURCE_HASH="${SPICETIFY_CONFIG_HASH}|${SPICETIFY_THEME_HASH}|${SPICETIFY_HOOK_HASH}"
+readonly SPICETIFY_SOURCE_HASH="$SPICETIFY_CONFIG_HASH"
 
 if (( EUID == 0 )); then
   sudo_mode="root"
@@ -383,17 +380,11 @@ fi
 spicetify config \
   spotify_path "$SPOTIFY_PATH/" \
   prefs_path "$SPOTIFY_PREFS" \
-  current_theme omarchy \
-  color_scheme base \
-  replace_colors 1 \
-  inject_css 1 >/dev/null
-
-if [[ ! -x "$SPICETIFY_HOOK" ]]; then
-  printf 'Spicetify setup skipped: native Omarchy theme hook is missing.\n' >&2
-  exit 0
-fi
-
-OMARCHY_SPICETIFY_SKIP_APPLY=1 "$SPICETIFY_HOOK"
+  current_theme "" \
+  color_scheme "" \
+  replace_colors 0 \
+  inject_css 0 \
+  inject_theme_js 0 >/dev/null
 
 spicetify_version=$(NO_COLOR=1 spicetify --version)
 backup_spotify_version=$(backup_config_value version)
@@ -434,7 +425,8 @@ record_backup_state "$spotify_version" "$spicetify_version"
 
 if [[ $SPICETIFY_SOURCE_HASH != "$current_source_hash" ]]; then
   if (( spicetify_applied == 0 )); then
-    "$SPICETIFY_HOOK"
+    reset_spotify_web_cache
+    spicetify apply
   fi
   record_source_state
 fi
