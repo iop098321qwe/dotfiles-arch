@@ -16,6 +16,7 @@ packages=(
   openscad
   pandoc-cli
   proton-vpn-gtk-app
+  python-curl_cffi
   solaar
   speedtest-cli
   tailscale
