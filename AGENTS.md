@@ -41,8 +41,8 @@ service credentials outside this repository.
 - Shell scripts use Bash via `#!/usr/bin/env bash`.
 - Chezmoi manages this source tree, verified by `.chezmoi.toml.tmpl` and
   `.chezmoiscripts/`.
-- `.chezmoi.toml.tmpl` enables Chezmoi git `autoCommit` and `autoPush`.
-- `pass-cli` is installed or authenticated by `.bootstrap-proton-pass.sh`.
+- `.chezmoi.toml.tmpl` enables Chezmoi git behavior and pre-read hook.
+- `pass-cli` is installed and authenticated by `.bootstrap-proton-pass.sh`.
 - Interactive prompts use `gum` in several scripts.
 - Some hooks call `sudo`, `systemctl`, `systemctl --user`, `pacman`, and
   Omarchy package commands.
@@ -61,8 +61,8 @@ service credentials outside this repository.
 - Top-level `dot_*` files map to dotfiles in the target home directory.
 - Top-level `private_*` files may contain sensitive target-home data.
 - Top-level `executable_*` files map to executable target-home files.
-- `AGENTS.md`, `CHANGELOG.md`, `LICENSE`, and local state files are ignored
-  by Chezmoi through `.chezmoiignore`.
+- `AGENTS.md`, `CHANGELOG.md`, `LICENSE`, the Omarchy edge helper, and
+  local state files are ignored by Chezmoi through `.chezmoiignore`.
 
 ## Tracked Files Overview
 
@@ -90,8 +90,8 @@ task need and user approval.
 
 ### Chezmoi Scripts
 
-- `.chezmoiscripts/run_before_000_000_omarchy_channel.sh.tmpl` checks edge.
-- `.chezmoiscripts/run_before_000_packages.sh` installs package sets.
+- `.chezmoiscripts/run_before_000_omarchy_channel.sh.tmpl` checks edge.
+- `.chezmoiscripts/run_before_001_packages.sh` installs package sets.
 - `.chezmoiscripts/run_000_syncthing.sh` installs and starts Syncthing.
 - `.chezmoiscripts/run_001_atuin.sh` installs, configures, and syncs Atuin.
 - `.chezmoiscripts/run_002_espanso.sh` installs and starts Espanso.
@@ -103,6 +103,7 @@ task need and user approval.
   Spotify and Spicetify setup after Spotify first-run is complete.
 - `.chezmoiscripts/run_after_002_update_crontab.sh` validates and installs
   the user crontab after confirmation.
+- `.chezmoiscripts/run_after_999_notify_complete.sh` prints completion notice.
 - `.chezmoiscripts/run_once_after_000_yazi_packages.sh` installs Yazi plugins.
 - `.chezmoiscripts/run_once_before_000_bootstrap_hypr_monitors.sh.tmpl`
   creates a host monitor template when one is missing.
@@ -194,6 +195,9 @@ task need and user approval.
 - `dot_config/omarchy/defaults/agent` sets the default agent to OpenCode.
 - `dot_config/omarchy/extensions/omarchy-menu.jsonc` extends Omarchy menu.
 - `dot_config/omarchy/hooks/*` contains Omarchy hook scripts.
+- `dot_config/omarchy/plugins/grymm.*` contains local menu and overlay clones
+  with Ctrl-based Vim navigation.
+- Each clone's `dot_omarchy-upstream/` stores its packaged source baseline.
 - `dot_config/omarchy/shell.json` configures Omarchy shell UI.
 - `dot_config/omarchy/themed/*.sample` stores theme template samples.
 
@@ -230,6 +234,8 @@ task need and user approval.
 ### Local Bin
 
 - `dot_local/bin/executable_cron_mirror.sh` is an executable local script.
+- `dot_local/bin/executable_omarchy-cloned-plugin-diff` reports upstream
+  changes to cloned Omarchy plugins.
 
 ## Architecture
 
@@ -255,6 +261,8 @@ task need and user approval.
 - `bash .ensure-omarchy-edge.sh`: check or prompt for Omarchy edge.
 - `cbc pkg load`: install and source CBC modules from the manifest.
 - `cbc pkg update`: update installed CBC modules and refresh the manifest.
+- `omarchy-cloned-plugin-diff`: show upstream changes to local plugin clones.
+- `omarchy-cloned-plugin-diff --summary`: list changed clone files only.
 - `ya pkg install`: install Yazi packages from `dot_config/yazi/package.toml`.
 - `ya pkg upgrade`: upgrade Yazi packages.
 - Verification needed: no Makefile, justfile, or package script centralizes
@@ -331,6 +339,8 @@ task need and user approval.
 - Tmux Plugin Manager installs tmux plugins after apply.
 - Yazi plugins are managed through `ya pkg` and `package.toml`.
 - LazyVim and lazy.nvim are bootstrapped by Neovim config.
+- The Omarchy post-update hook reports packaged plugin drift without changing
+  clone files or their baselines.
 
 ## Troubleshooting
 
@@ -338,7 +348,7 @@ task need and user approval.
   defers initialization until after reboot.
 - If `pass-cli` is missing, `.bootstrap-proton-pass.sh` installs Proton Pass
   CLI through Omarchy and requires authentication.
-- If Atuin is not logged in, the Atuin hook prompts for login and may skip sync.
+- If Atuin is not logged in, the Atuin hook reads credentials from Proton Pass.
 - If Espanso fails to start, check `systemctl --user status espanso.service`.
 - If crontab update fails, inspect `~/.config/cron/crontab.current` syntax.
 - If Spotify first run is incomplete, the Spicetify hook defers setup until
@@ -346,6 +356,7 @@ task need and user approval.
 - If tmux plugins do not install, verify tmux, git, the tmux config, and TPM.
 - If DisplayLink setup runs, expect interactive confirmation and possible
   reboot prompt.
+- If clone drift is reported, run `omarchy-cloned-plugin-diff` for a full diff.
 
 ## Refining Existing AGENTS.md
 
