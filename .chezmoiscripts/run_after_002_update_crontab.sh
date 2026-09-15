@@ -25,7 +25,7 @@ if ! crontab -T "$CRON_FILE" >/dev/null 2>&1; then
 fi
 
 # Only now does human confirmation matter
-if gum confirm "Apply validated crontab?"; then
+if gum confirm --default=false "Apply validated crontab?"; then
   crontab "$CRON_FILE"
   echo "Crontab successfully updated."
 else
