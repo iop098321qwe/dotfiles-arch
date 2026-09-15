@@ -31,8 +31,7 @@ service credentials outside this repository.
 - Use `git diff --check` as the safe baseline validation command.
 - Do not run `chezmoi apply` as routine validation. It is side-effectful.
 - Run `chezmoi apply` only when the user explicitly approves live changes.
-- Verification needed: no README or script defines a non-mutating full setup
-  command for this repository.
+- `README.md` documents the user-facing Omarchy Quattro bootstrap flow.
 
 ## Environment
 
@@ -80,6 +79,7 @@ task need and user approval.
 - `AGENTS.md` is this repository operating guide.
 - `CHANGELOG.md` is release history; never edit it directly.
 - `LICENSE` is the repository license.
+- `README.md` documents Omarchy Quattro bootstrap steps.
 - `dot_autocompletions.sh` defines Bash completions for helper commands.
 - `dot_bashrc` loads Omarchy Bash defaults and user shell sources.
 - `dot_cbc_aliases.sh` defines CBC and shell aliases.
