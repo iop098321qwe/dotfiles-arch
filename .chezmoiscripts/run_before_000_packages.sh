@@ -12,6 +12,7 @@ packages=(
   harper
   intel-media-driver
   moreutils
+  ncdu
   nmap
   npm
   openscad
