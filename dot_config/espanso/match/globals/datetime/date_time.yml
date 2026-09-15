@@ -1,31 +1,14 @@
 # Espanso Match File
 
-# Print the current date
+# Print the time
 matches:
-  - trigger: ;now
+  - trigger: ;time
     replace: "{{mytime}}"
     vars:
       - name: mytime
         type: date
         params:
           format: "%H:%M"
-
-  - triggers: [;fullnow, ;ddt]
-    word: true
-    vars:
-      - name: time
-        type: match
-        params:
-          trigger: ";now"
-      - name: day
-        type: match
-        params:
-          trigger: ";day"
-      - name: date
-        type: match
-        params:
-          trigger: ";date"
-    replace: "{{time}} {{day}} {{date}}"
 
   # Print the current date in ISO 8861 format
   - trigger: ";date"
@@ -46,7 +29,7 @@ matches:
           format: "%Y-%m-%d"
 
   # Write a full timestamp with date and time
-  - trigger: ";datime"
+  - triggers: [;now, ;ddt, ;datime, ;stamp]
     replace: "{{timestamp}}"
     vars:
       - name: timestamp
