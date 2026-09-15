@@ -11,7 +11,7 @@
     "layout": {
       "left": [
         {
-          "id": "omarchy.menu"
+          "id": "grymm.menu"
         },
         {
           "id": "omarchy.workspaces"
@@ -64,5 +64,27 @@
       ]
     }
   },
-  "plugins": []
+  "plugins": [
+    {
+      "id": "grymm.image-picker"
+    },
+    {
+      "id": "grymm.emojis"
+    },
+    {
+      "id": "grymm.clipboard"
+    }
+  ],
+  "disabledPlugins": [
+    "omarchy.menu",
+    "omarchy.image-picker",
+    "omarchy.emojis",
+    "omarchy.clipboard"
+  ],
+  "cloneSourceRestores": [
+    "grymm.menu",
+    "grymm.image-picker",
+    "grymm.emojis",
+    "grymm.clipboard"
+  ]
 }
