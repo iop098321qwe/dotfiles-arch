@@ -229,7 +229,7 @@ task need and user approval.
   flavor, license files, README, preview, and theme data.
 - `dot_config/yazi/init.lua` configures Yazi Lua startup.
 - `dot_config/yazi/keymap.toml` configures Yazi keybindings.
-- `dot_config/yazi/package.toml` records Yazi plugin and flavor deps.
+- `.chezmoitemplates/yazi/package.toml` seeds Yazi plugin and flavor deps.
 - `dot_config/yazi/theme.toml` configures Yazi theme behavior.
 - `dot_config/yazi/yazi.toml` configures Yazi managers and previewers.
 
@@ -265,7 +265,7 @@ task need and user approval.
 - `cbc pkg update`: update installed CBC modules and refresh the manifest.
 - `omarchy-cloned-plugin-diff`: show upstream changes to local plugin clones.
 - `omarchy-cloned-plugin-diff --summary`: list changed clone files only.
-- `ya pkg install`: install Yazi packages from `dot_config/yazi/package.toml`.
+- `ya pkg install`: install Yazi packages from the seeded manifest.
 - `ya pkg upgrade`: upgrade Yazi packages.
 - Verification needed: no Makefile, justfile, or package script centralizes
   project commands.
@@ -344,7 +344,7 @@ task need and user approval.
 - DisplayLink and EVDI are installed by the onchange DisplayLink hook.
 - Atuin history sync is configured by `run_001_atuin.sh`.
 - Tmux Plugin Manager installs tmux plugins after apply.
-- Yazi plugins are managed through `ya pkg` and `package.toml`.
+- Yazi plugins are managed through `ya pkg` and the seeded package manifest.
 - LazyVim and lazy.nvim are bootstrapped by Neovim config.
 - The Omarchy post-update hook reports packaged plugin drift without changing
   clone files or their baselines.
