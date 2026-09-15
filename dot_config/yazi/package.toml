@@ -89,11 +89,6 @@ rev = "4397564"
 hash = "996ad1c3b9260026ecdb2d8e7d454c50"
 
 [[plugin.deps]]
-use = "MasouShizuka/projects"
-rev = "22a4006"
-hash = "195d1b8c8fc1a944883b5ce3d92d7ca7"
-
-[[plugin.deps]]
 use = "lmnek/pandoc"
 rev = "fd2798b"
 hash = "5af4b06948bb7b825a243131eea2075c"
