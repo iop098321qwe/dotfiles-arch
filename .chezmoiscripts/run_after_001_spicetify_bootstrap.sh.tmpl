@@ -7,13 +7,15 @@ readonly SPOTIFY_PATH="/opt/spotify"
 readonly SPOTIFY_APPS_PATH="$SPOTIFY_PATH/Apps"
 readonly SPOTIFY_PREFS="$HOME_DIR/.config/spotify/prefs"
 readonly SPOTIFY_CACHE="$HOME_DIR/.cache/spotify"
-readonly SPICETIFY_HOOK="$HOME_DIR/.config/omarchy/hooks/theme-set.d/20-spicetify.sh"
 readonly STATE_DIR="$HOME_DIR/.local/state/chezmoi/spicetify"
 readonly BACKUP_STATE="$STATE_DIR/backup-versions"
 readonly DEVTOOLS_STATE="$STATE_DIR/devtools-version"
+readonly SOURCE_STATE="$STATE_DIR/source-hash"
 readonly SPICETIFY_STATE_DIR="${SPICETIFY_STATE:-${XDG_STATE_HOME:-$HOME_DIR/.local/state}/spicetify}"
 readonly SPICETIFY_BACKUP_DIR="$SPICETIFY_STATE_DIR/Backup"
 readonly BACKUP_SCHEMA_VERSION="1"
+readonly SPICETIFY_CONFIG_HASH='{{ include "dot_config/private_spicetify/config-xpui.ini.tmpl" | sha256sum }}'
+readonly SPICETIFY_SOURCE_HASH="$SPICETIFY_CONFIG_HASH"
 
 if (( EUID == 0 )); then
   sudo_mode="root"
@@ -41,18 +43,6 @@ spotify_prefs_version() {
   fi
 }
 
-print_quattro_reminder() {
-  local version
-
-  version=$(omarchy version 2>/dev/null || true)
-  if [[ $version == 4.* ]]; then
-    printf '%s\n' \
-      'Reminder: Omarchy Quattro is installed. Remove the Omarchy 3.x' \
-      '~/.config/omarchy/current fallback from the Spicetify hook after all' \
-      'managed hosts have upgraded.'
-  fi
-}
-
 launch_spotify() {
   if command -v omarchy-launch-or-focus >/dev/null 2>&1 &&
     command -v hyprctl >/dev/null 2>&1; then
@@ -62,6 +52,26 @@ launch_spotify() {
   else
     setsid spotify >/dev/null 2>&1 &
   fi
+}
+
+prompt_yes_no() {
+  local prompt="$1"
+  local reply
+
+  printf '%s [y/N] ' "$prompt"
+  if ! read -r reply; then
+    printf '\n'
+    return 1
+  fi
+
+  case $reply in
+  [yY] | [yY][eE][sS])
+    return 0
+    ;;
+  *)
+    return 1
+    ;;
+  esac
 }
 
 stop_spotify() {
@@ -85,6 +95,7 @@ stop_spotify() {
 wait_for_spotify_ready() {
   local installed_version="$1"
   local prefs_version
+  local attempt
 
   prefs_version=$(spotify_prefs_version)
   if [[ $prefs_version == "$installed_version" ]]; then
@@ -96,22 +107,43 @@ wait_for_spotify_ready() {
     return 1
   fi
 
+  if [[ ! -t 0 ]]; then
+    printf 'Spotify first run requires an interactive terminal. Log in to Spotify and rerun chezmoi apply.\n' >&2
+    return 1
+  fi
+
+  printf '%s\n' \
+    'Spotify must complete first-run authentication before Spicetify setup.' \
+    'Spicetify setup will be deferred unless you confirm Spotify is signed in.'
+
+  if ! prompt_yes_no 'Launch Spotify and authenticate now?'; then
+    printf 'Spicetify setup deferred until Spotify first run is complete.\n'
+    return 1
+  fi
+
   if [[ -n $prefs_version ]] && pgrep -x spotify >/dev/null 2>&1; then
     stop_spotify
   fi
 
-  printf 'Launching Spotify. Log in and leave it open for at least 60 seconds.\n'
+  printf 'Launching Spotify. Complete sign-in, then return to this terminal.\n'
   launch_spotify
 
-  if command -v gum >/dev/null 2>&1; then
-    gum spin --spinner dot --title 'Waiting 60 seconds for Spotify first run...' -- sleep 60
-  else
-    sleep 60
+  if ! prompt_yes_no 'Have you signed in and reached the Spotify app UI?'; then
+    printf 'Spicetify setup deferred until Spotify first run is complete.\n'
+    return 1
   fi
+
+  for attempt in {1..30}; do
+    prefs_version=$(spotify_prefs_version)
+    if [[ $prefs_version == "$installed_version" ]]; then
+      return 0
+    fi
+    sleep 1
+  done
 
   prefs_version=$(spotify_prefs_version)
   if [[ $prefs_version != "$installed_version" ]]; then
-    printf 'Spotify did not finish first-run setup for version %s. Log in and rerun chezmoi apply.\n' \
+    printf 'Spotify did not finish first-run setup for version %s. Leave Spotify open and rerun chezmoi apply.\n' \
       "$installed_version" >&2
     return 1
   fi
@@ -315,12 +347,15 @@ record_backup_state() {
     "$xpui_hash" >"$BACKUP_STATE"
 }
 
+record_source_state() {
+  mkdir -p "$STATE_DIR"
+  printf '%s\n' "$SPICETIFY_SOURCE_HASH" >"$SOURCE_STATE"
+}
+
 if ! command -v omarchy >/dev/null 2>&1; then
   printf 'Omarchy is required to install Spotify and Spicetify.\n' >&2
   exit 1
 fi
-
-print_quattro_reminder
 
 if ! command -v spotify >/dev/null 2>&1; then
   omarchy pkg add spotify
@@ -345,17 +380,11 @@ fi
 spicetify config \
   spotify_path "$SPOTIFY_PATH/" \
   prefs_path "$SPOTIFY_PREFS" \
-  current_theme omarchy \
-  color_scheme base \
-  replace_colors 1 \
-  inject_css 1 >/dev/null
-
-if [[ ! -x "$SPICETIFY_HOOK" ]]; then
-  printf 'Spicetify setup skipped: native Omarchy theme hook is missing.\n' >&2
-  exit 0
-fi
-
-OMARCHY_SPICETIFY_SKIP_APPLY=1 "$SPICETIFY_HOOK"
+  current_theme "" \
+  color_scheme "" \
+  replace_colors 0 \
+  inject_css 0 \
+  inject_theme_js 0 >/dev/null
 
 spicetify_version=$(NO_COLOR=1 spicetify --version)
 backup_spotify_version=$(backup_config_value version)
@@ -364,6 +393,11 @@ backup_schema_version=""
 if [[ -f "$BACKUP_STATE" ]]; then
   backup_schema_version=$(awk 'NR == 3 { print; exit }' "$BACKUP_STATE")
 fi
+current_source_hash=""
+if [[ -f "$SOURCE_STATE" ]]; then
+  current_source_hash=$(<"$SOURCE_STATE")
+fi
+spicetify_applied=0
 
 if ! spotify_apps_have_spa && ! spotify_apps_have_directories; then
   printf 'Spotify Apps is empty. Reinstall Spotify, then rerun chezmoi apply.\n' >&2
@@ -376,15 +410,26 @@ elif ! backup_files_exist ||
   spicetify clear
   reset_spotify_web_cache
   spicetify backup apply
+  spicetify_applied=1
 elif [[ $backup_spicetify_version != "$spicetify_version" ]]; then
   reset_spotify_web_cache
   spicetify restore backup apply
+  spicetify_applied=1
 elif spotify_apps_have_spa; then
   reset_spotify_web_cache
   spicetify apply
+  spicetify_applied=1
 fi
 
 record_backup_state "$spotify_version" "$spicetify_version"
+
+if [[ $SPICETIFY_SOURCE_HASH != "$current_source_hash" ]]; then
+  if (( spicetify_applied == 0 )); then
+    reset_spotify_web_cache
+    spicetify apply
+  fi
+  record_source_state
+fi
 
 devtools_version="$spotify_version|$spicetify_version"
 current_devtools_version=""
