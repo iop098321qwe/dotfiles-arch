@@ -1,0 +1,2 @@
+(A) 2026-09-15 add command to authenticate sudo for 90 minutes +dotfiles @feat
+(A) 2026-09-15 add a bypass confirmation for espanso install as it appears currently broken +dotfiles @feat
