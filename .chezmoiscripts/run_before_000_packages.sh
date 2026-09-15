@@ -6,6 +6,7 @@ packages=(
   btop
   diffnav
   entr
+  ffmpeg
   firefox
   git
   git-delta
