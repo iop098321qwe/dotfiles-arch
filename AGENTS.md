@@ -354,7 +354,7 @@ task need and user approval.
 - If Omarchy is not on edge, `.ensure-omarchy-edge.sh` prompts to switch and
   defers initialization until after reboot.
 - If `pass-cli` is missing, `.bootstrap-proton-pass.sh` installs Proton Pass
-  CLI through Omarchy and requires authentication.
+  CLI through Omarchy's AUR helper and requires authentication.
 - If Atuin is not logged in, the Atuin hook reads credentials from Proton Pass.
 - If GitHub is not logged in, the grimoires hook runs `gh auth login -cw`.
 - If Espanso fails to start, check `systemctl --user status espanso.service`.

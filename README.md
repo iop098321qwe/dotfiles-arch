@@ -32,7 +32,7 @@ omarchy pkg add chezmoi
 Initialize Chezmoi from the `main` branch and apply the dotfiles:
 
 ```sh
-chezmoi init --apply https://github.com/iop098321qwe/dotfiles-arch.git
+chezmoi init --apply iop098321qwe/dotfiles-arch
 ```
 
 If the first run stops because Omarchy was switched to `edge`, reboot and run:
@@ -117,7 +117,6 @@ The setup installs these packages through `omarchy pkg add`:
 - `npm`
 - `openscad`
 - `pandoc-cli`
-- `proton-pass-cli-bin`
 - `proton-vpn-gtk-app`
 - `protonmail-bridge`
 - `python-curl_cffi`
@@ -156,6 +155,7 @@ The setup installs these AUR packages through `omarchy pkg aur add`:
 - `ocx`
 - `opencode-bin`
 - `powershell-bin`
+- `proton-pass-cli-bin`
 - `proton-pass-bin`
 - `rustdesk-bin`
 - `sesh-bin`
