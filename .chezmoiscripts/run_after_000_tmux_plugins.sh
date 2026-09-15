@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 
+spin() {
+  local title="$1"
+  shift
+
+  if [[ -t 2 ]] && command -v gum >/dev/null 2>&1; then
+    gum spin --spinner dot --title "$title" -- "$@"
+    return
+  fi
+
+  printf '%s\n' "$title" >&2
+  "$@"
+}
+
 tmux_conf="${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf"
 tpm_root="/usr/share/tmux-plugin-manager"
 install_plugins="$tpm_root/bin/install_plugins"
@@ -24,21 +37,21 @@ if [[ ! -x $install_plugins ]]; then
   exit 0
 fi
 
-if ! tmux start-server >/dev/null 2>&1; then
+if ! spin 'Starting tmux server...' tmux start-server; then
   printf 'Tmux plugin setup warning: could not start the tmux server.\n' >&2
   exit 0
 fi
 
-if ! tmux source-file "$tmux_conf" >/dev/null 2>&1; then
+if ! spin 'Loading tmux config...' tmux source-file "$tmux_conf"; then
   printf 'Tmux plugin setup warning: could not load %s.\n' "$tmux_conf" >&2
   exit 0
 fi
 
-if ! "$install_plugins"; then
+if ! spin 'Installing tmux plugins...' "$install_plugins"; then
   printf 'Tmux plugin setup warning: plugin installation failed.\n' >&2
   exit 0
 fi
 
-if ! tmux source-file "$tmux_conf" >/dev/null 2>&1; then
+if ! spin 'Reloading tmux config...' tmux source-file "$tmux_conf"; then
   printf 'Tmux plugin setup warning: plugins were installed, but the tmux config could not be reloaded.\n' >&2
 fi

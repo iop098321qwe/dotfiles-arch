@@ -11,6 +11,19 @@ fail() {
   exit 1
 }
 
+spin() {
+  local title="$1"
+  shift
+
+  if [[ -t 2 ]] && command -v gum >/dev/null 2>&1; then
+    gum spin --spinner dot --title "$title" -- "$@"
+    return
+  fi
+
+  printf '%s\n' "$title" >&2
+  "$@"
+}
+
 current_boot_id() {
   if [[ ! -r /proc/sys/kernel/random/boot_id ]]; then
     fail 'could not read the current boot ID to enforce the Omarchy edge reboot.'
@@ -106,7 +119,7 @@ require_omarchy_edge() {
 
   prompt_switch_to_edge "$channel"
 
-  omarchy channel set edge
+  spin 'Switching Omarchy to edge...' omarchy channel set edge
 
   channel=$(current_omarchy_channel)
   if ! is_omarchy_edge "$channel"; then

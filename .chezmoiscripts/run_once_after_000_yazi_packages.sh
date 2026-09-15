@@ -1,7 +1,20 @@
 #!/usr/bin/env bash
 
+spin() {
+  local title="$1"
+  shift
+
+  if [[ -t 2 ]] && command -v gum >/dev/null 2>&1; then
+    gum spin --spinner dot --title "$title" -- "$@"
+    return
+  fi
+
+  printf '%s\n' "$title" >&2
+  "$@"
+}
+
 # Install Yazi packages
-ya pkg install
+spin 'Installing Yazi packages...' ya pkg install
 
 # Upgrade Yazi Packages
-ya pkg upgrade
+spin 'Upgrading Yazi packages...' ya pkg upgrade

@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 
+spin() {
+  local title="$1"
+  shift
+
+  if [[ -t 2 ]] && command -v gum >/dev/null 2>&1; then
+    gum spin --spinner dot --title "$title" -- "$@"
+    return
+  fi
+
+  printf '%s\n' "$title" >&2
+  "$@"
+}
+
 packages=(
   7zip
   aria2
@@ -57,9 +70,9 @@ aur_packages=(
 )
 
 for package in "${packages[@]}"; do
-  omarchy pkg add "$package"
+  spin "Installing $package..." omarchy pkg add "$package"
 done
 
 for package in "${aur_packages[@]}"; do
-  omarchy pkg aur add "$package"
+  spin "Installing AUR package $package..." omarchy pkg aur add "$package"
 done

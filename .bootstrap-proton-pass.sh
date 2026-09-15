@@ -5,6 +5,19 @@ set -euo pipefail
 source_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 bash "$source_dir/.ensure-omarchy-edge.sh"
 
+spin() {
+  local title="$1"
+  shift
+
+  if [[ -t 2 ]] && command -v gum >/dev/null 2>&1; then
+    gum spin --spinner dot --title "$title" -- "$@"
+    return
+  fi
+
+  printf '%s\n' "$title" >&2
+  "$@"
+}
+
 # Exit immediately if Proton Pass CLI is installed and authenticated.
 if command -v pass-cli >/dev/null 2>&1 &&
   pass-cli info >/dev/null 2>&1; then
@@ -18,8 +31,8 @@ if ! command -v pass-cli >/dev/null 2>&1; then
     exit 1
   fi
 
-  printf 'Installing Proton Pass CLI...\n'
-  if ! omarchy pkg add proton-pass-cli-bin; then
+  if ! spin 'Installing Proton Pass CLI...' \
+    omarchy pkg add proton-pass-cli-bin; then
     printf 'Error: Proton Pass CLI installation command failed.\n' >&2
     exit 1
   fi

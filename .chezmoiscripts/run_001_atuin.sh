@@ -25,16 +25,12 @@ spin() {
 }
 
 configure_atuin() {
-  if ! atuin config set --type boolean auto_sync true; then
-    printf 'Atuin setup warning: could not enable auto_sync.\n' >&2
-  fi
-
-  if ! atuin config set --type integer sync_frequency 0; then
-    printf 'Atuin setup warning: could not set sync_frequency.\n' >&2
-  fi
-
-  if ! atuin config set --type boolean sync.records true; then
-    printf 'Atuin setup warning: could not enable sync records.\n' >&2
+  if ! spin 'Configuring Atuin sync settings...' bash -c '
+    atuin config set --type boolean auto_sync true &&
+    atuin config set --type integer sync_frequency 0 &&
+    atuin config set --type boolean sync.records true
+  '; then
+    printf 'Atuin setup warning: could not configure sync settings.\n' >&2
   fi
 }
 
@@ -43,7 +39,7 @@ import_history_once() {
     return
   fi
 
-  if atuin import auto; then
+  if spin 'Importing Atuin shell history...' atuin import auto; then
     mkdir -p "$import_state_dir"
     touch "$import_state_file"
   else
@@ -166,14 +162,14 @@ login_atuin_from_proton_pass() {
 }
 
 sync_atuin() {
-  if ! atuin sync; then
+  if ! spin 'Syncing Atuin history...' atuin sync; then
     printf 'Atuin setup warning: sync failed.\n' >&2
     return 1
   fi
 }
 
 # Install atuin. Omarchy package installs are idempotent, so run this every apply.
-omarchy pkg add atuin
+spin 'Installing Atuin...' omarchy pkg add atuin
 
 if ! command -v atuin >/dev/null 2>&1; then
   printf 'Atuin setup skipped: atuin is not available after install attempt.\n' >&2

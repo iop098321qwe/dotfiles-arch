@@ -37,6 +37,19 @@ run_as_root() {
   fi
 }
 
+spin() {
+  local title="$1"
+  shift
+
+  if [[ -t 2 ]] && command -v gum >/dev/null 2>&1; then
+    gum spin --spinner dot --title "$title" -- "$@"
+    return
+  fi
+
+  printf '%s\n' "$title" >&2
+  "$@"
+}
+
 spotify_prefs_version() {
   if [[ -f "$SPOTIFY_PREFS" ]]; then
     awk -F'"' '$1 == "app.last-launched-version=" { print $2; exit }' "$SPOTIFY_PREFS"
@@ -209,7 +222,8 @@ restore_stock_spotify_apps() {
   printf 'Restoring package-owned Spotify app files before rebuilding the Spicetify backup.\n'
   stop_spotify
   if ! spotify_package_apps_are_pristine; then
-    if ! run_as_root pacman -S --noconfirm spotify; then
+    if ! spin 'Reinstalling Spotify package...' \
+      run_as_root pacman -S --noconfirm spotify; then
       printf 'Spotify must be reinstalled to rebuild a clean Spicetify backup. Rerun chezmoi apply in an interactive terminal.\n' >&2
       return 1
     fi
@@ -358,15 +372,15 @@ if ! command -v omarchy >/dev/null 2>&1; then
 fi
 
 if ! command -v spotify >/dev/null 2>&1; then
-  omarchy pkg add spotify
+  spin 'Installing Spotify...' omarchy pkg add spotify
 fi
 
 if ! command -v spicetify >/dev/null 2>&1; then
-  omarchy pkg aur add spicetify-cli
+  spin 'Installing Spicetify...' omarchy pkg aur add spicetify-cli
 fi
 
 if ! command -v setfacl >/dev/null 2>&1; then
-  omarchy pkg add acl
+  spin 'Installing ACL tools...' omarchy pkg add acl
 fi
 
 ensure_write_access "$SPOTIFY_PATH" 0
@@ -407,17 +421,18 @@ elif ! backup_files_exist ||
     $backup_schema_version != "$BACKUP_SCHEMA_VERSION" ]] ||
   ! backup_hashes_match_state; then
   restore_stock_spotify_apps
-  spicetify clear
+  spin 'Clearing Spicetify state...' spicetify clear
   reset_spotify_web_cache
-  spicetify backup apply
+  spin 'Creating Spicetify backup...' spicetify backup apply
   spicetify_applied=1
 elif [[ $backup_spicetify_version != "$spicetify_version" ]]; then
   reset_spotify_web_cache
-  spicetify restore backup apply
+  spin 'Restoring and applying Spicetify backup...' \
+    spicetify restore backup apply
   spicetify_applied=1
 elif spotify_apps_have_spa; then
   reset_spotify_web_cache
-  spicetify apply
+  spin 'Applying Spicetify customizations...' spicetify apply
   spicetify_applied=1
 fi
 
@@ -426,7 +441,7 @@ record_backup_state "$spotify_version" "$spicetify_version"
 if [[ $SPICETIFY_SOURCE_HASH != "$current_source_hash" ]]; then
   if (( spicetify_applied == 0 )); then
     reset_spotify_web_cache
-    spicetify apply
+    spin 'Applying Spicetify customizations...' spicetify apply
   fi
   record_source_state
 fi
@@ -438,7 +453,8 @@ if [[ -f "$DEVTOOLS_STATE" ]]; then
 fi
 
 if [[ $devtools_version != "$current_devtools_version" ]]; then
-  if ! spicetify enable-devtools; then
+  if ! spin 'Enabling Spicetify developer tools...' \
+    spicetify enable-devtools; then
     printf 'Warning: Spicetify applied, but developer tools could not be enabled yet.\n' >&2
   else
     printf '%s\n' "$devtools_version" >"$DEVTOOLS_STATE"
