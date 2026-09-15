@@ -1,5 +1,6 @@
 README.*
 CHANGELOG.*
 LICENSE
+.ensure-omarchy-edge.sh
 todo.txt
 done.txt
