@@ -10,6 +10,20 @@ fail() {
   exit 1
 }
 
+spin() {
+  local title
+  title="$1"
+  shift
+
+  if [[ -t 2 ]] && command -v gum >/dev/null 2>&1; then
+    gum spin --spinner dot --title "$title" -- "$@"
+    return
+  fi
+
+  printf '%s\n' "$title" >&2
+  "$@"
+}
+
 configure_atuin() {
   if ! atuin config set --type boolean auto_sync true; then
     printf 'Atuin setup warning: could not enable auto_sync.\n' >&2
@@ -70,10 +84,10 @@ pass_field() {
   local field value
   field="$1"
 
-  if ! value=$(pass-cli item view \
-    --vault-name "$proton_pass_vault" \
-    --item-title "$atuin_pass_item" \
-    --field "$field" 2>/dev/null); then
+  if ! value=$(spin "Reading Atuin $field from Proton Pass..." \
+    bash -c \
+      'pass-cli item view --vault-name "$1" --item-title "$2" --field "$3" 2>/dev/null' \
+      bash "$proton_pass_vault" "$atuin_pass_item" "$field"); then
     printf \
       "Atuin setup error: could not read '%s' from Proton Pass item '%s'.\n" \
       "$field" "$atuin_pass_item" >&2
@@ -125,12 +139,23 @@ login_atuin_from_proton_pass() {
   { printf '%s\n' "$key" >"$key_fifo"; } &
   writer=$!
 
-  printf '%s\n' "$password" | \
-    ATUIN_USERNAME="$username" \
-    ATUIN_KEY_FIFO="$key_fifo" \
-    script --quiet --return --echo never \
-      -c 'atuin login --username "$ATUIN_USERNAME" < "$ATUIN_KEY_FIFO"' \
-      /dev/null
+  if [[ -t 2 ]] && command -v gum >/dev/null 2>&1; then
+    printf '%s\n' "$password" | \
+      ATUIN_USERNAME="$username" \
+      ATUIN_KEY_FIFO="$key_fifo" \
+      gum spin --spinner dot --show-error --title 'Signing in to Atuin...' -- \
+        script --quiet --return --echo never \
+          -c 'atuin login --username "$ATUIN_USERNAME" < "$ATUIN_KEY_FIFO"' \
+          /dev/null
+  else
+    printf 'Signing in to Atuin...\n' >&2
+    printf '%s\n' "$password" | \
+      ATUIN_USERNAME="$username" \
+      ATUIN_KEY_FIFO="$key_fifo" \
+      script --quiet --return --echo never \
+        -c 'atuin login --username "$ATUIN_USERNAME" < "$ATUIN_KEY_FIFO"' \
+        /dev/null
+  fi
   status=$?
 
   kill "$writer" 2>/dev/null || true
