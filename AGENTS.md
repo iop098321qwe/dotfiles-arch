@@ -309,6 +309,8 @@ task need and user approval.
   `credentials` as sensitive.
 - Use Bash safety practices for shell edits: quote expansions, prefer arrays,
   and keep scripts idempotent when hooks may rerun.
+- If a change affects `README.md` accuracy, prompt to update `README.md`.
+- Keep `README.md` updates in a separate commit from code or config changes.
 - Prefer Conventional Commits for new commits.
 - Commit-history hygiene: prefer amending small related corrections into the
   relevant current-branch commit instead of creating separate `fixup`,
@@ -379,6 +381,8 @@ task need and user approval.
 - Run the self-audit loop after any code, config, or documentation change.
 - Re-scan the repo structure, tracked files, commands, and workflows.
 - Compare this file to current repository behavior and update mismatches.
+- Compare `README.md` to setup behavior and prompt for a separate update
+  commit when commands, packages, services, or initialization steps change.
 - Keep the tracked files overview aligned with tracked source and config files.
 - Confirm the `todo.txt` manual-only rule remains explicit.
 - Remove any update notes or logs from this file.
