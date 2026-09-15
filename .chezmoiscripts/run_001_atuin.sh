@@ -2,6 +2,13 @@
 
 import_state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/chezmoi"
 import_state_file="$import_state_dir/atuin-history-imported"
+proton_pass_vault='Personal'
+atuin_pass_item='Atuin'
+
+fail() {
+  printf 'Atuin setup error: %s\n' "$*" >&2
+  exit 1
+}
 
 configure_atuin() {
   if ! atuin config set --type boolean auto_sync true; then
@@ -59,24 +66,78 @@ atuin_has_local_auth() {
   [[ -s $session_file ]]
 }
 
-prompt_for_login() {
-  local reply
+pass_field() {
+  local field value
+  field="$1"
 
-  printf 'Atuin is not logged in to sync. Log in now? [y/N] '
-  if ! read -r -t 30 reply; then
-    printf '\nAtuin login skipped: no response within 30 seconds.\n'
+  if ! value=$(pass-cli item view \
+    --vault-name "$proton_pass_vault" \
+    --item-title "$atuin_pass_item" \
+    --field "$field" 2>/dev/null); then
+    printf \
+      "Atuin setup error: could not read '%s' from Proton Pass item '%s'.\n" \
+      "$field" "$atuin_pass_item" >&2
     return 1
   fi
 
-  case $reply in
-  [yY] | [yY][eE][sS])
-    return 0
-    ;;
-  *)
-    printf 'Atuin login skipped.\n'
+  if [[ -z $value ]]; then
+    printf \
+      "Atuin setup error: Proton Pass item '%s' has an empty '%s' field.\n" \
+      "$atuin_pass_item" "$field" >&2
     return 1
-    ;;
-  esac
+  fi
+
+  printf '%s' "$value"
+}
+
+login_atuin_from_proton_pass() {
+  local key key_fifo password status tmp_dir username writer
+
+  command -v pass-cli >/dev/null 2>&1 || \
+    fail 'pass-cli is required to automate Atuin login.'
+
+  command -v script >/dev/null 2>&1 || \
+    fail 'script(1) is required to automate the hidden Atuin password prompt.'
+
+  pass-cli info >/dev/null 2>&1 || \
+    fail 'Proton Pass CLI is not authenticated.'
+
+  set +x
+  username=$(pass_field Username) || exit 1
+  password=$(pass_field Password) || exit 1
+  key=$(pass_field 'Atuin Key') || exit 1
+
+  if ! tmp_dir=$(mktemp -d "${TMPDIR:-/tmp}/atuin-login.XXXXXX"); then
+    fail 'could not create a secure temporary directory for Atuin login.'
+  fi
+
+  if ! chmod 700 "$tmp_dir"; then
+    rm -rf "$tmp_dir"
+    fail 'could not secure the temporary Atuin login directory.'
+  fi
+
+  key_fifo="$tmp_dir/key"
+  if ! mkfifo "$key_fifo"; then
+    rm -rf "$tmp_dir"
+    fail 'could not create the temporary Atuin key pipe.'
+  fi
+
+  { printf '%s\n' "$key" >"$key_fifo"; } &
+  writer=$!
+
+  printf '%s\n' "$password" | \
+    ATUIN_USERNAME="$username" \
+    ATUIN_KEY_FIFO="$key_fifo" \
+    script --quiet --return --echo never \
+      -c 'atuin login --username "$ATUIN_USERNAME" < "$ATUIN_KEY_FIFO"' \
+      /dev/null
+  status=$?
+
+  kill "$writer" 2>/dev/null || true
+  wait "$writer" 2>/dev/null || true
+  rm -rf "$tmp_dir"
+
+  return "$status"
 }
 
 sync_atuin() {
@@ -102,14 +163,8 @@ if atuin_has_local_auth; then
   exit 0
 fi
 
-if ! prompt_for_login; then
-  exit 0
-fi
-
-atuin login
-
-if atuin_has_local_auth; then
+if login_atuin_from_proton_pass && atuin_has_local_auth; then
   sync_atuin
 else
-  printf 'Atuin setup warning: login did not complete; sync skipped.\n' >&2
+  fail 'automated login did not complete; sync skipped.'
 fi
