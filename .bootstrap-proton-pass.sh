@@ -32,7 +32,7 @@ if ! command -v pass-cli >/dev/null 2>&1; then
   fi
 
   if ! spin 'Installing Proton Pass CLI...' \
-    omarchy pkg add proton-pass-cli-bin; then
+    omarchy pkg aur add proton-pass-cli-bin; then
     printf 'Error: Proton Pass CLI installation command failed.\n' >&2
     exit 1
   fi
