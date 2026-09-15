@@ -11,6 +11,7 @@ packages=(
   git
   git-delta
   glow
+  github-cli
   harper
   intel-media-driver
   moreutils

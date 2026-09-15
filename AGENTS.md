@@ -43,6 +43,7 @@ service credentials outside this repository.
   `.chezmoiscripts/`.
 - `.chezmoi.toml.tmpl` enables Chezmoi git behavior and pre-read hook.
 - `pass-cli` is installed and authenticated by `.bootstrap-proton-pass.sh`.
+- `gh` is installed by the package hook and used to clone GitHub repositories.
 - Interactive prompts use `gum` in several scripts.
 - Some hooks call `sudo`, `systemctl`, `systemctl --user`, `pacman`, and
   Omarchy package commands.
@@ -98,6 +99,7 @@ task need and user approval.
 - `.chezmoiscripts/run_003_cronie.sh` installs and starts Cronie.
 - `.chezmoiscripts/run_004_proton_mail_bridge.sh` installs Mail Bridge.
 - `.chezmoiscripts/run_005_rustdesk.sh` installs and starts RustDesk.
+- `.chezmoiscripts/run_006_grymms_grimoires.sh` clones grymms_grimoires.
 - `.chezmoiscripts/run_after_000_tmux_plugins.sh` installs tmux plugins.
 - `.chezmoiscripts/run_after_001_spicetify_bootstrap.sh.tmpl` applies
   Spotify and Spicetify setup after Spotify first-run is complete.
@@ -246,7 +248,7 @@ task need and user approval.
 - `.bootstrap-proton-pass.sh` calls `.ensure-omarchy-edge.sh` first.
 - `.ensure-omarchy-edge.sh` requires `omarchy version channel` to be `edge`.
 - `.chezmoiscripts/` hooks install packages, start services, configure apps,
-  and prompt for reboots or confirmation.
+  clone repositories, and prompt for reboots or confirmation.
 - Hyprland config starts from Omarchy defaults and loads local Lua overrides.
 - Bash loads Omarchy defaults, then `~/.sources.sh`, then Atuin init.
 - CBC functions are implemented in `executable_dot_custom_bash_commands.sh`
@@ -321,8 +323,9 @@ task need and user approval.
 - Do not expose secrets from npm, SSH, GitHub, rclone, Atuin, Vesktop,
   Spicetify, Espanso, Proton, or work-specific paths.
 - Avoid running scripts that authenticate, install packages, enable services,
-  change ACLs, or reboot without explicit user approval.
+  clone repositories, change ACLs, or reboot without explicit user approval.
 - `.bootstrap-proton-pass.sh` may start an interactive Proton Pass login.
+- `.chezmoiscripts/run_006_grymms_grimoires.sh` may start GitHub login.
 - `.chezmoiscripts/run_onchange_000_displaylink_setup.sh` can run `reboot now`.
 - Verification needed: no compliance framework is documented.
 
@@ -334,6 +337,8 @@ task need and user approval.
 - Cronie system service is enabled by `run_003_cronie.sh`.
 - Proton Mail Bridge user service is enabled by `run_004_proton_mail_bridge.sh`.
 - RustDesk system service is enabled by `run_005_rustdesk.sh`.
+- `grymms_grimoires` is cloned under `~/Documents` by
+  `run_006_grymms_grimoires.sh`.
 - DisplayLink and EVDI are installed by the onchange DisplayLink hook.
 - Atuin history sync is configured by `run_001_atuin.sh`.
 - Tmux Plugin Manager installs tmux plugins after apply.
@@ -349,6 +354,7 @@ task need and user approval.
 - If `pass-cli` is missing, `.bootstrap-proton-pass.sh` installs Proton Pass
   CLI through Omarchy and requires authentication.
 - If Atuin is not logged in, the Atuin hook reads credentials from Proton Pass.
+- If GitHub is not logged in, the grimoires hook runs `gh auth login -cw`.
 - If Espanso fails to start, check `systemctl --user status espanso.service`.
 - If crontab update fails, inspect `~/.config/cron/crontab.current` syntax.
 - If Spotify first run is incomplete, the Spicetify hook defers setup until
