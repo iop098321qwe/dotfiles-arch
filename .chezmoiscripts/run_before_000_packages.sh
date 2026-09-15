@@ -8,6 +8,7 @@ packages=(
   diffnav
   entr
   firefox
+  git
   git-delta
   glow
   harper
