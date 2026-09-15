@@ -22,6 +22,7 @@ packages=(
   solaar
   speedtest-cli
   tailscale
+  tealdeer
   television
   trash-cli
   tmux
