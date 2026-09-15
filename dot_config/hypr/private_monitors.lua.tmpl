@@ -1,0 +1,18 @@
+{{- /*
+Machine-specific Omarchy Quattro monitor configuration.
+
+Rendered destination:
+  ~/.config/hypr/monitors.lua
+
+Expected source file:
+  .chezmoitemplates/hypr/monitors/<hostname>.lua
+
+The host template renders a complete monitors.lua file, including the
+Omarchy Quattro defaults and host-specific monitor overrides.
+
+Check hostname with:
+  chezmoi execute-template '{{ .chezmoi.hostname }}'
+*/ -}}
+
+{{- $monitorConfig := printf "hypr/monitors/%s.lua" .chezmoi.hostname -}}
+{{ includeTemplate $monitorConfig . -}}

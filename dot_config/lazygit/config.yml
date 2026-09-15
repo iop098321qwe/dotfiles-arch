@@ -1,7 +1,7 @@
 gui:
   sidePanels:
-    - [status, stash]
-    - [files, worktrees, submodules]
+    - [status]
+    - [files, stash, worktrees, submodules]
     - [branches, remotes, tags]
     - [commits, reflog]
   theme:
