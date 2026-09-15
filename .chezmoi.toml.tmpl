@@ -1,3 +1,6 @@
 [git]
   autoCommit = true
   autoPush = true
+
+[hooks.read-source-state.pre]
+  command = "{{ .chezmoi.sourceDir }}/.bootstrap-proton-pass.sh"
