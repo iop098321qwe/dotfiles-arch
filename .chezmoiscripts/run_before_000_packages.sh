@@ -2,6 +2,7 @@
 
 packages=(
   7zip
+  aria2
   btop
   diffnav
   entr
