@@ -24,6 +24,8 @@ if [[ ! -t 0 ]]; then
   fail 'authentication requires an interactive terminal.'
 fi
 
+omarchy sudo passwordless 30
+
 gh auth login -cw
 
 if ! gh auth status --hostname github.com >/dev/null 2>&1; then
