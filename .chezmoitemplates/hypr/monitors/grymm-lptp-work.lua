@@ -13,14 +13,6 @@ hl.monitor({ output = "", mode = "preferred", position = "auto", scale = omarchy
 -- Portrait/rotated secondary monitor (transform: 1 = 90°, 3 = 270°).
 -- hl.monitor({ output = "DP-2", mode = "preferred", position = "auto", scale = 1, transform = 1 })
 
--- External Display (Samsung Odyssey G7)
-hl.monitor({
-  output = "desc:Samsung Electric Company LC27G7xT H4ZR703280",
-  mode = "preferred",
-  position = "auto-right",
-  scale = omarchy_monitor_scale,
-})
-
 -- Laptop Display
 hl.monitor({
   output = "desc:InfoVision Optoelectronics (Kunshan) Co.Ltd China 0x3D41 0x00000004",
@@ -29,11 +21,19 @@ hl.monitor({
   scale = 1,
 })
 
+-- External Display (Samsung Odyssey G7)
+hl.monitor({
+  output = "desc:Samsung Electric Company LC27G7xT H4ZR703280",
+  mode = "2560x1440@120",
+  position = "auto-right",
+  scale = omarchy_monitor_scale,
+})
+
 -- External Display (Samsung Odyssey G3)
 hl.monitor({
   output = "desc:Samsung Electric Company LS27AG32x H9JW800006",
-  mode = "preferred",
-  position = "auto-right",
+  mode = "1920x1080@120",
+  position = "auto-left",
   scale = omarchy_monitor_scale,
 })
 
