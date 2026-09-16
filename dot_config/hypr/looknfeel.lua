@@ -3,9 +3,10 @@
 -- https://wiki.hypr.land/Configuring/Basics/Variables/#general
 hl.config({
   general = {
-    -- No gaps between windows.
+    -- No gaps between windows or borders.
     gaps_in = 0,
     gaps_out = 0,
+    border_size = 0,
 
     -- Change to niri-like side-scrolling layout.
     layout = "scrolling",
@@ -13,22 +14,16 @@ hl.config({
 })
 
 -- https://wiki.hypr.land/Configuring/Basics/Variables/#decoration
-hl.config({
-  decoration = {
-    -- Use round window corners.
-    rounding = 5,
-
-    blur = {
-      enabled = true,
-      size = 2,
-      passes = 2,
-      ignore_opacity = true,
-    },
-  },
-})
-
--- Override Omarchy's default opacity window rule.
-o.window({ tag = "default-opacity" }, { opacity = "1 override 0.75 override" })
+-- hl.config({
+--   decoration = {
+--     -- Use round window corners.
+--     rounding = 8,
+--
+--     -- Dim unfocused windows (0.0 = no dim, 1.0 = fully dimmed).
+--     dim_inactive = true,
+--     dim_strength = 0.15,
+--   },
+-- })
 
 -- https://wiki.hypr.land/Configuring/Basics/Variables/#animations
 -- hl.config({
@@ -53,3 +48,6 @@ o.window({ tag = "default-opacity" }, { opacity = "1 override 0.75 override" })
 --     column_width = 0.97,
 --   },
 -- })
+
+-- Override Omarchy's default opacity window rule.
+o.window({ tag = "default-opacity" }, { opacity = "1 override" })
