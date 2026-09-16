@@ -43,6 +43,7 @@ packages=(
   tmux
   trash-cli
   ttf-jetbrains-mono-nerd
+  uv
   wireshark-cli
   wireshark-qt
   yazi
