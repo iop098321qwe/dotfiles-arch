@@ -1,3 +1,4 @@
 (B) 2026-09-15 add functionality to copy github password during github installation @feat +chezmoi
 (C) 2026-09-15 fix espanso installation manually +espanso @fix @feat
 (B) 2026-09-15 convert launch spotify and authenticate now and have you signed in and reached the spotify app UI prompts to gum +chezmoi @fix
+(A) 2026-09-15 fix 30 minute sudo authentication running after package installs +chezmoi @fix
