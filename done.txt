@@ -24,3 +24,4 @@ x 2026-09-15 2026-09-15 add a bypass confirmation for espanso install as it appe
 x 2026-09-15 2026-09-15 install yazi packages by github shorthand instead of relying on package.toml +chezmoi @fix
 x 2026-09-15 2026-09-15 move github authentication sooner to initialization start +chezmoi @fix
 x 2026-09-15 2026-09-15 add command to authenticate sudo for 20 minutes @feat +chezmoi
+x 2026-09-15 2026-09-15 prompt for reboot after completion +chezmoi @feat
