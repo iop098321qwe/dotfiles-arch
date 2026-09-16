@@ -28,18 +28,6 @@ spin() {
   "$@"
 }
 
-defer_clone() {
-  if [[ -t 0 ]] && command -v gum >/dev/null 2>&1; then
-    if gum confirm --default=false \
-      "Defer cloning $repo_name until a later Chezmoi run?"; then
-      warn 'clone deferred; rerun Chezmoi scripts to try again.'
-      exit 0
-    fi
-  fi
-
-  fail 'GitHub authentication failed; clone was not deferred.'
-}
-
 ensure_branch() {
   local branch="$1"
 
@@ -71,17 +59,7 @@ command -v git >/dev/null 2>&1 || \
   fail 'git is required to configure repository branches.'
 
 if ! gh auth status --hostname github.com >/dev/null 2>&1; then
-  warn 'GitHub authentication is required.'
-
-  if [[ ! -t 0 ]]; then
-    defer_clone
-  fi
-
-  gh auth login -cw || defer_clone
-fi
-
-if ! gh auth status --hostname github.com >/dev/null 2>&1; then
-  defer_clone
+  fail 'GitHub authentication is required before cloning the repository.'
 fi
 
 if [[ -e $repo_dir ]]; then
