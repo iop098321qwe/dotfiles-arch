@@ -28,36 +28,32 @@ run() {
 	fi
 }
 
-yazi_config_dir="${XDG_CONFIG_HOME:-$HOME/.config}/yazi"
-yazi_package_file="$yazi_config_dir/package.toml"
-yazi_package_seed="$(chezmoi source-path)/.chezmoitemplates/yazi/package.toml"
+yazi_packages=(
+	"yazi-rs/plugins:full-border"
+	"yazi-rs/plugins:smart-filter"
+	"yazi-rs/plugins:smart-paste"
+	"yazi-rs/plugins:diff"
+	"yazi-rs/plugins:chmod"
+	"yazi-rs/plugins:toggle-pane"
+	"ciarandg/cd-git-root"
+	"Lil-Dank/lazygit"
+	"boydaihungst/restore"
+	"yazi-rs/plugins:smart-enter"
+	"Rolv-Apneseth/bypass"
+	"Rolv-Apneseth/starship"
+	"yazi-rs/plugins:vcs-files"
+	"TD-Sky/sudo"
+	"uhs-robert/recycle-bin"
+	"MasouShizuka/close-and-restore-tab"
+	"AminurAlam/yazi-plugins:nextension"
+	"ettom/openscad"
+	"lmnek/pandoc"
+	"Jormala/relative-motions"
+	"UnleashedFurai/office"
+	"matt-dong-123/base16"
+	"yazi-rs/plugins:mount"
+)
 
-if [[ ! -e "$yazi_package_file" ]]; then
-	if [[ ! -r "$yazi_package_seed" ]]; then
-		printf 'Yazi package seed is missing or unreadable: %s\n' \
-			"$yazi_package_seed" >&2
-		exit 1
-	fi
-
-	mkdir -p "$yazi_config_dir"
-	status=$?
-	if (( status != 0 )); then
-		printf 'Failed to create Yazi config directory with exit status %d: %s\n' \
-			"$status" "$yazi_config_dir" >&2
-		exit "$status"
-	fi
-
-	cp "$yazi_package_seed" "$yazi_package_file"
-	status=$?
-	if (( status != 0 )); then
-		printf 'Failed to seed Yazi package manifest with exit status %d: %s\n' \
-			"$status" "$yazi_package_file" >&2
-		exit "$status"
-	fi
-
-	printf 'Seeded Yazi package manifest: %s\n' "$yazi_package_file" >&2
-fi
-
-run 'Installing Yazi packages...' ya pkg install
-
-run 'Upgrading Yazi packages...' ya pkg upgrade
+for yazi_package in "${yazi_packages[@]}"; do
+	run "Adding Yazi package: $yazi_package" ya pkg add "$yazi_package"
+done
