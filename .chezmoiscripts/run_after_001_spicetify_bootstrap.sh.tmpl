@@ -69,22 +69,13 @@ launch_spotify() {
 
 prompt_yes_no() {
   local prompt="$1"
-  local reply
 
-  printf '%s [y/N] ' "$prompt"
-  if ! read -r reply; then
-    printf '\n'
+  if ! command -v gum >/dev/null 2>&1; then
+    printf 'gum is required to confirm Spotify first-run setup. Rerun chezmoi apply in an interactive terminal.\n' >&2
     return 1
   fi
 
-  case $reply in
-  [yY] | [yY][eE][sS])
-    return 0
-    ;;
-  *)
-    return 1
-    ;;
-  esac
+  gum confirm --default=false "$prompt"
 }
 
 stop_spotify() {
