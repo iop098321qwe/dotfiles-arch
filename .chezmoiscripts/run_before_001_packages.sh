@@ -25,6 +25,8 @@ packages=(
   git-delta
   glow
   github-cli
+  handbrake
+  handbrake-cli
   harper
   intel-media-driver
   moreutils
