@@ -9,7 +9,7 @@ gum style \
 	"Chezmoi application complete."
 
 if gum confirm "Reboot now to ensure all settings are in place?"; then
-	systemctl reboot
+	omarchy reboot
 else
 	gum style --foreground 3 "Reboot skipped."
 fi
