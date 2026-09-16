@@ -1,4 +1,6 @@
-(A) 2026-09-15 add command to authenticate sudo for 45 minutes @feat +chemzoi
-(B) 2026-09-15 add functionality to copy github password during github installation @feat +chemzoi
+(A) 2026-09-15 add command to authenticate sudo for 45 minutes @feat +chezmoi
+(B) 2026-09-15 add functionality to copy github password during github installation @feat +chezmoi
 (A) 2026-09-15 install yazi packages by github shorthand instead of relying on package.toml +chezmoi @fix
 (C) 2026-09-15 fix espanso installation manually +espanso @fix @feat
+(B) 2026-09-15 launch spotify and authenticate now and have you signed in and reached the spotify app UI prompts to gum +chezmoi @fix
+(A) 2026-09-15 move github authentication sooner to initialization start +chezmoi @fix
