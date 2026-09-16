@@ -20,3 +20,4 @@ x 2026-09-15 2026-09-01 clone grymms_grimoires vault on setup @feat +dotfiles
 x 2026-09-15 2026-09-08 automate signing into Spotify +dotfiles @feat
 x 2026-09-15 2026-09-14 add gum spinners for package installs +dotfiles @feat
 x 2026-09-15 2026-09-08 build a README file for the dotfiles-arch repo @feat +dotfiles
+x 2026-09-15 2026-09-15 add a bypass confirmation for espanso install as it appears currently broken @feat +espanso
