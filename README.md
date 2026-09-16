@@ -81,7 +81,8 @@ High-level system changes include:
 - Enable and start the Cronie system service with sudo.
 - Enable and start the Proton Mail Bridge user service.
 - Enable and start the RustDesk system service with sudo.
-- Authenticate GitHub CLI if needed and clone `grymms_grimoires`.
+- Authenticate GitHub CLI if needed before later setup hooks run.
+- Clone `grymms_grimoires` after GitHub authentication is ready.
 - Install tmux plugins with Tmux Plugin Manager.
 - Install Spotify, Spicetify, and ACL tools when needed.
 - Apply Spicetify customization after Spotify first-run setup is complete.
@@ -174,14 +175,14 @@ The setup may prompt for:
 
 - Omarchy `edge` channel confirmation if it was not changed ahead of time.
 - Proton Pass CLI login.
-- GitHub CLI login for cloning `grymms_grimoires`.
+- GitHub CLI login before later setup hooks run.
 - Spotify first-run confirmation before Spicetify applies.
 - Sudo authentication for system services, ACL fixes, or package repair.
 - Crontab installation confirmation.
 - DisplayLink driver enablement and optional reboot.
 
-If GitHub authentication is not ready, the `grymms_grimoires` clone can be
-deferred and retried on a later Chezmoi run.
+If GitHub authentication is not ready, setup stops before hooks that require
+GitHub access run.
 
 ## After The First Run
 
