@@ -108,7 +108,8 @@ task need and user approval.
   Spotify and Spicetify setup after Spotify first-run is complete.
 - `.chezmoiscripts/run_after_002_update_crontab.sh` validates and installs
   the user crontab after confirmation.
-- `.chezmoiscripts/run_after_999_notify_complete.sh` prints completion notice.
+- `.chezmoiscripts/run_after_999_notify_complete.sh` prints completion notice
+  and prompts for reboot.
 - `.chezmoiscripts/run_once_after_000_yazi_packages.sh` adds Yazi packages.
 - `.chezmoiscripts/run_once_before_000_bootstrap_hypr_monitors.sh.tmpl`
   creates a host monitor template when one is missing.
