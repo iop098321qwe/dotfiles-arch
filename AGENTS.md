@@ -95,7 +95,8 @@ task need and user approval.
 - `.chezmoiscripts/run_before_001_packages.sh` installs package sets.
 - `.chezmoiscripts/run_000_syncthing.sh` installs and starts Syncthing.
 - `.chezmoiscripts/run_001_atuin.sh` installs, configures, and syncs Atuin.
-- `.chezmoiscripts/run_002_espanso.sh` installs and starts Espanso.
+- `.chezmoiscripts/run_002_espanso.sh` installs and starts Espanso, with a
+  temporary gum bypass while the AUR package is broken.
 - `.chezmoiscripts/run_003_cronie.sh` installs and starts Cronie.
 - `.chezmoiscripts/run_004_proton_mail_bridge.sh` installs Mail Bridge.
 - `.chezmoiscripts/run_005_rustdesk.sh` installs and starts RustDesk.
@@ -335,7 +336,8 @@ task need and user approval.
 
 - Omarchy package manager commands install Pacman and AUR packages.
 - Syncthing user service is enabled by `run_000_syncthing.sh`.
-- Espanso user service is registered and started by `run_002_espanso.sh`.
+- Espanso user service is registered and started by `run_002_espanso.sh`,
+  unless the user confirms the temporary AUR bypass.
 - Cronie system service is enabled by `run_003_cronie.sh`.
 - Proton Mail Bridge user service is enabled by `run_004_proton_mail_bridge.sh`.
 - RustDesk system service is enabled by `run_005_rustdesk.sh`.
@@ -358,6 +360,8 @@ task need and user approval.
 - If Atuin is not logged in, the Atuin hook reads credentials from Proton Pass.
 - If GitHub is not logged in, the grimoires hook runs `gh auth login -cw`.
 - If Espanso fails to start, check `systemctl --user status espanso.service`.
+- If `espanso-wayland` fails to build, use the hook's temporary bypass and
+  follow its PKGBUILD icon rename workaround instructions.
 - If crontab update fails, inspect `~/.config/cron/crontab.current` syntax.
 - If Spotify first run is incomplete, the Spicetify hook defers setup until
   Spotify has launched and stored its version in prefs.

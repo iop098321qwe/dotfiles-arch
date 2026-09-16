@@ -76,7 +76,8 @@ High-level system changes include:
 - Install Pacman and AUR packages through `omarchy pkg` commands.
 - Enable and start the Syncthing user service.
 - Install, configure, log in to, import history for, and sync Atuin.
-- Install Espanso, register its service, and start the user service.
+- Install Espanso, register its service, and start the user service, unless
+  the user confirms the temporary AUR package bypass.
 - Enable and start the Cronie system service with sudo.
 - Enable and start the Proton Mail Bridge user service.
 - Enable and start the RustDesk system service with sudo.
@@ -148,7 +149,7 @@ The setup installs these AUR packages through `omarchy pkg aur add`:
 - `blesh-git`
 - `brave-origin-bin`
 - `displaylink`
-- `espanso-wayland`
+- `espanso-wayland` can be temporarily bypassed while its AUR build is broken.
 - `evdi-dkms`
 - `gitflow-avh`
 - `lazyssh-bin`
