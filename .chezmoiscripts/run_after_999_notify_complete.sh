@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
-# echo "Chezmoi application complete"
+gum style \
+	--border rounded \
+	--border-foreground 2 \
+	--foreground 2 \
+	--padding "1 2" \
+	--margin "1 0" \
+	"Chezmoi application complete."
 
-gum style --foreground 2 "Chezmoi application complete."
+if gum confirm "Reboot now to ensure all settings are in place?"; then
+	systemctl reboot
+else
+	gum style --foreground 3 "Reboot skipped."
+fi
