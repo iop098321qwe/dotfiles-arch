@@ -25,3 +25,4 @@ x 2026-09-15 2026-09-15 install yazi packages by github shorthand instead of rel
 x 2026-09-15 2026-09-15 move github authentication sooner to initialization start +chezmoi @fix
 x 2026-09-15 2026-09-15 add command to authenticate sudo for 20 minutes @feat +chezmoi
 x 2026-09-15 2026-09-15 prompt for reboot after completion +chezmoi @feat
+x 2026-09-16 2026-09-15 fix 30 minute sudo authentication running after package installs +chezmoi @fix
