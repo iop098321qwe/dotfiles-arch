@@ -26,3 +26,5 @@ x 2026-09-15 2026-09-15 move github authentication sooner to initialization star
 x 2026-09-15 2026-09-15 add command to authenticate sudo for 20 minutes @feat +chezmoi
 x 2026-09-15 2026-09-15 prompt for reboot after completion +chezmoi @feat
 x 2026-09-16 2026-09-15 fix 30 minute sudo authentication running after package installs +chezmoi @fix
+x 2026-09-16 2026-09-15 add functionality to copy github password during github installation @feat +chezmoi
+x 2026-09-16 2026-09-15 convert launch spotify and authenticate now and have you signed in and reached the spotify app UI prompts to gum +chezmoi @fix
