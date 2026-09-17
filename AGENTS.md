@@ -92,9 +92,9 @@ task need and user approval.
 ### Chezmoi Scripts
 
 - `.chezmoiscripts/run_before_000_omarchy_channel.sh.tmpl` checks edge.
-- `.chezmoiscripts/run_before_001_packages.sh` installs package sets.
-- `.chezmoiscripts/run_000_github_auth.sh` warms sudo and authenticates
-  GitHub CLI.
+- `.chezmoiscripts/run_before_001_sudo_auth.sh` starts passwordless sudo.
+- `.chezmoiscripts/run_before_002_packages.sh` installs package sets.
+- `.chezmoiscripts/run_000_github_auth.sh` authenticates GitHub CLI.
 - `.chezmoiscripts/run_000_syncthing.sh` installs and starts Syncthing.
 - `.chezmoiscripts/run_001_atuin.sh` installs, configures, and syncs Atuin.
 - `.chezmoiscripts/run_002_espanso.sh` installs and starts Espanso, with a
@@ -248,8 +248,9 @@ task need and user approval.
 - `.chezmoi.toml.tmpl` runs `.bootstrap-proton-pass.sh` before reading state.
 - `.bootstrap-proton-pass.sh` calls `.ensure-omarchy-edge.sh` first.
 - `.ensure-omarchy-edge.sh` requires `omarchy version channel` to be `edge`.
-- `.chezmoiscripts/run_000_github_auth.sh` warms sudo and authenticates
-  GitHub CLI early.
+- `.chezmoiscripts/run_before_001_sudo_auth.sh` starts passwordless sudo
+  before package installation.
+- `.chezmoiscripts/run_000_github_auth.sh` authenticates GitHub CLI early.
 - `.chezmoiscripts/` hooks install packages, start services, configure apps,
   clone repositories, and prompt for reboots or confirmation.
 - Hyprland config starts from Omarchy defaults and loads local Lua overrides.
@@ -329,7 +330,8 @@ task need and user approval.
 - Avoid running scripts that authenticate, install packages, enable services,
   clone repositories, change ACLs, or reboot without explicit user approval.
 - `.bootstrap-proton-pass.sh` may start an interactive Proton Pass login.
-- `.chezmoiscripts/run_000_github_auth.sh` may start sudo and GitHub login.
+- `.chezmoiscripts/run_before_001_sudo_auth.sh` may start sudo.
+- `.chezmoiscripts/run_000_github_auth.sh` may start GitHub login.
 - `.chezmoiscripts/run_onchange_000_displaylink_setup.sh` can run `reboot now`.
 - Verification needed: no compliance framework is documented.
 
@@ -359,8 +361,8 @@ task need and user approval.
 - If `pass-cli` is missing, `.bootstrap-proton-pass.sh` installs Proton Pass
   CLI through Omarchy's AUR helper and requires authentication.
 - If Atuin is not logged in, the Atuin hook reads credentials from Proton Pass.
-- If GitHub is not logged in, `run_000_github_auth.sh` warms sudo for 30
-  minutes and runs `gh auth login -cw`.
+- If GitHub is not logged in, `run_000_github_auth.sh` runs
+  `gh auth login -cw`.
 - If Espanso fails to start, check `systemctl --user status espanso.service`.
 - If `espanso-wayland` fails to build, use the hook's temporary bypass and
   follow its PKGBUILD icon rename workaround instructions.
