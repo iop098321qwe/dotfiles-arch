@@ -42,6 +42,7 @@ packages=(
   tailscale
   tealdeer
   television
+  texlive-meta
   tmux
   trash-cli
   ttf-jetbrains-mono-nerd
