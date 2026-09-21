@@ -59,6 +59,7 @@ aur_packages=(
   blesh-git
   brave-origin-bin
   gitflow-avh
+  lazyrsync-bin
   lazyssh-bin
   ocx
   opencode-bin
