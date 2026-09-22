@@ -29,6 +29,7 @@ packages=(
   handbrake-cli
   harper
   intel-media-driver
+  miller
   moreutils
   ncdu
   nmap
