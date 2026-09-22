@@ -36,7 +36,7 @@ service credentials outside this repository.
 ## Environment
 
 - Target OS: Arch Linux with Omarchy, verified by package hooks and configs.
-- Omarchy channel: `edge`, enforced by `.ensure-omarchy-edge.sh`.
+- Omarchy channel is not enforced; any channel can be used.
 - Shell scripts use Bash via `#!/usr/bin/env bash`.
 - Chezmoi manages this source tree, verified by `.chezmoi.toml.tmpl` and
   `.chezmoiscripts/`.
@@ -61,8 +61,8 @@ service credentials outside this repository.
 - Top-level `dot_*` files map to dotfiles in the target home directory.
 - Top-level `private_*` files may contain sensitive target-home data.
 - Top-level `executable_*` files map to executable target-home files.
-- `AGENTS.md`, `CHANGELOG.md`, `LICENSE`, the Omarchy edge helper, and
-  local state files are ignored by Chezmoi through `.chezmoiignore`.
+- `AGENTS.md`, `CHANGELOG.md`, `LICENSE`, and local state files are ignored
+  by Chezmoi through `.chezmoiignore`.
 
 ## Tracked Files Overview
 
@@ -75,7 +75,6 @@ task need and user approval.
 - `.bootstrap-proton-pass.sh` installs and authenticates Proton Pass CLI.
 - `.chezmoi.toml.tmpl` configures Chezmoi git behavior and pre-read hook.
 - `.chezmoiignore` excludes repository-only files from Chezmoi apply.
-- `.ensure-omarchy-edge.sh` requires Omarchy edge before initialization.
 - `AGENTS.md` is this repository operating guide.
 - `CHANGELOG.md` is release history; never edit it directly.
 - `LICENSE` is the repository license.
@@ -91,7 +90,6 @@ task need and user approval.
 
 ### Chezmoi Scripts
 
-- `.chezmoiscripts/run_before_000_omarchy_channel.sh.tmpl` checks edge.
 - `.chezmoiscripts/run_before_001_sudo_auth.sh` starts passwordless sudo.
 - `.chezmoiscripts/run_before_002_packages.sh` installs package sets.
 - `.chezmoiscripts/run_000_github_auth.sh` authenticates GitHub CLI.
@@ -246,8 +244,6 @@ task need and user approval.
 - Chezmoi names map source files into targets, such as `dot_bashrc` to
   `~/.bashrc` and `dot_config/*` to `~/.config/*`.
 - `.chezmoi.toml.tmpl` runs `.bootstrap-proton-pass.sh` before reading state.
-- `.bootstrap-proton-pass.sh` calls `.ensure-omarchy-edge.sh` first.
-- `.ensure-omarchy-edge.sh` requires `omarchy version channel` to be `edge`.
 - `.chezmoiscripts/run_before_001_sudo_auth.sh` starts passwordless sudo
   before package installation.
 - `.chezmoiscripts/run_000_github_auth.sh` authenticates GitHub CLI early.
@@ -264,7 +260,6 @@ task need and user approval.
 - `git diff --check`: check whitespace errors before commit.
 - `git diff -- AGENTS.md .chezmoiignore`: review this guide integration.
 - `chezmoi apply`: apply dotfiles and run hooks; user approval required.
-- `bash .ensure-omarchy-edge.sh`: check or prompt for Omarchy edge.
 - `cbc pkg load`: install and source CBC modules from the manifest.
 - `cbc pkg update`: update installed CBC modules and refresh the manifest.
 - `omarchy-cloned-plugin-diff`: show upstream changes to local plugin clones.
@@ -356,8 +351,6 @@ task need and user approval.
 
 ## Troubleshooting
 
-- If Omarchy is not on edge, `.ensure-omarchy-edge.sh` prompts to switch and
-  defers initialization until after reboot.
 - If `pass-cli` is missing, `.bootstrap-proton-pass.sh` installs Proton Pass
   CLI through Omarchy's AUR helper and requires authentication.
 - If Atuin is not logged in, the Atuin hook reads credentials from Proton Pass.

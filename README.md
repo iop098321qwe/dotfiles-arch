@@ -11,11 +11,6 @@ Begin with a clean Omarchy Quattro installation and a graphical desktop
 session. Run the setup from an interactive terminal because several steps ask
 for confirmation, credentials, or sudo access.
 
-Before running Chezmoi, use the Omarchy Quattro menu to switch Omarchy to the
-`edge` channel. Restart after switching channels. The Chezmoi scripts enforce
-`edge` automatically, but doing this first avoids stopping the initialization
-mid-run for the channel switch and reboot.
-
 Sign in to Spotify before running Chezmoi. The Spicetify setup can launch
 Spotify and wait for first-run authentication, but signing in first makes the
 initialization smoother.
@@ -35,20 +30,12 @@ Initialize Chezmoi from the `main` branch and apply the dotfiles:
 chezmoi init --apply iop098321qwe/dotfiles-arch
 ```
 
-If the first run stops because Omarchy was switched to `edge`, reboot and run:
-
-```sh
-chezmoi apply
-```
-
 Rerun `chezmoi apply` any time a deferred interactive step needs to continue.
 
 ## Before Running Chezmoi
 
 Complete these steps first:
 
-- Switch Omarchy to the `edge` channel from the Omarchy Quattro menu.
-- Restart after switching to `edge`.
 - Sign in to Spotify.
 - Keep Proton Pass credentials available for interactive login.
 - Make sure the Proton Pass `Personal` vault contains an `Atuin` item.
@@ -65,8 +52,8 @@ The Atuin setup expects the Proton Pass `Atuin` item to include these fields:
 
 Chezmoi reads `.chezmoi.toml.tmpl`, which runs
 `.bootstrap-proton-pass.sh` before reading source state. That bootstrap script
-checks Omarchy `edge`, installs Proton Pass CLI when needed, and prompts for
-Proton Pass authentication when needed.
+installs Proton Pass CLI when needed and prompts for Proton Pass authentication
+when needed.
 
 The apply hooks then install packages, write dotfiles, configure application
 state, and enable services. This setup is intentionally side-effectful.
@@ -173,7 +160,6 @@ The setup installs these AUR packages through `omarchy pkg aur add`:
 
 The setup may prompt for:
 
-- Omarchy `edge` channel confirmation if it was not changed ahead of time.
 - Proton Pass CLI login.
 - GitHub CLI login before later setup hooks run.
 - Spotify first-run confirmation before Spicetify applies.
