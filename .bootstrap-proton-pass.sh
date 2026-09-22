@@ -2,9 +2,6 @@
 
 set -euo pipefail
 
-source_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
-bash "$source_dir/.ensure-omarchy-edge.sh"
-
 spin() {
   local title="$1"
   shift
