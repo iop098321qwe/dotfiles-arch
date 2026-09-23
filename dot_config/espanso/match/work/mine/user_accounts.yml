@@ -79,37 +79,3 @@ matches:
 
       Next Steps:
       'Complete'
-
-  ##############################################################################
-  # Indian Family Health Clinic
-  ##############################################################################
-
-  # Set up list for IFHC disabled account(s)
-  - trigger: ";newifhc"
-    replace: |-
-      Completed Tasks:
-      Created the users domain account(s)
-      Created the users Email account(s)
-      Created the users Profile folder
-      Added the user(s) to groups
-      Ran the Sophos AD Sync utility
-      Created the IFHC Welcome Guide for the new user(s)
-      Added the Welcome Guide to James Winters' Profile Folder
-      Added the Welcome Guide to the new users Profile Folder
-      Sent James Winters a confirmation email
-
-      Next Steps:
-      'Complete'
-
-  # Disable list for IFHC disabled account(s)
-  - trigger: ";disifhc"
-    replace: |-
-      Completed Tasks:
-      Disabled the users domain account(s)
-      Disabled the users Email account(s)
-      Removed access to the users Profile folder
-      Removed the user(s) from groups
-      Sent James Winters a confirmation email
-
-      Next Steps:
-      'Complete'

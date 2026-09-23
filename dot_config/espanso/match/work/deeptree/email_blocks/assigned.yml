@@ -1,0 +1,17 @@
+# espanso match file
+
+# Write a dynamic confirmation of assigned to technician.
+matches:
+  - trigger: ";assigned"
+    label: Random Assigned Confirmation
+    comment: "This will output a randomly selected ticket has been assigned message."
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: random
+        params:
+          choices:
+            - "Your ticket has been assigned to a technician."
+            - "A technician has been assigned to your ticket."
+            - "This has been assigned to a technician."
+            - "We have assigned a technician to your ticket."

@@ -1,26 +1,77 @@
 # espanso match file
 
+anchors:
+  email_vars: &email_vars
+    - name: quote
+      type: match
+      params:
+        trigger: ";quote"
+    - name: greeting
+      type: match
+      params:
+        trigger: ";greet"
+    - name: addongreeting
+      type: match
+      params:
+        trigger: ";addongreet"
+    - name: noresponse
+      type: match
+      params:
+        trigger: ";noresponse"
+    - name: assornoass
+      type: match
+      params:
+        trigger: ";assornoass"
+    - name: signature
+      type: match
+      params:
+        trigger: ";signature"
+    - name: reqresponse
+      type: match
+      params:
+        trigger: ";reqresponse"
+    - name: completedwork
+      type: match
+      params:
+        trigger: ";completedwork"
+    - name: voicemail
+      type: match
+      params:
+        trigger: ";voicemail"
+    - name: novoicemail
+      type: match
+      params:
+        trigger: ";novoicemail"
+    - name: missappvm
+      type: match
+      params:
+        trigger: ";missappvm"
+    - name: missappnovm
+      type: match
+      params:
+        trigger: ";missappnovm"
+    - name: notification
+      type: match
+      params:
+        trigger: ";notification"
+    - name: followup
+      type: match
+      params:
+        trigger: ";followup"
+    - name: novmfollowup
+      type: match
+      params:
+        trigger: ";novmfollowup"
+    - name: checkup
+      type: match
+      params:
+        trigger: ";checkup"
+
 # email
 matches:
   - regex: ";emailnorm(?P<person>.*)\\."
     label: Dynamic Deeptree Email
-    vars:
-      - name: quote
-        type: match
-        params:
-          trigger: ";quote"
-      - name: greeting
-        type: match
-        params:
-          trigger: ";greet"
-      - name: addongreeting
-        type: match
-        params:
-          trigger: ";addongreet"
-      - name: signoff
-        type: match
-        params:
-          trigger: ";signoff"
+    vars: *email_vars
     force_mode: clipboard
     replace: |-
       {{greeting}}{{person}},{{addongreeting}}
@@ -29,35 +80,11 @@ matches:
 
       You may respond to this email directly, or call {{dthelp}} with any additional information, questions, or concerns that you may have.
 
-      {{signoff}}
-
-      {{myname}}
-      {{title}}
-      {{company}}
-      {{dthelp}}
-
-      ---
-      {{quote}}
+      {{signature}}
 
   - regex: ";emailreq(?P<person>.*)\\."
     label: Dynamic Request For Action Email
-    vars:
-      - name: quote
-        type: match
-        params:
-          trigger: ";quote"
-      - name: greeting
-        type: match
-        params:
-          trigger: ";greet"
-      - name: addongreeting
-        type: match
-        params:
-          trigger: ";addongreet"
-      - name: signoff
-        type: match
-        params:
-          trigger: ";signoff"
+    vars: *email_vars
     force_mode: clipboard
     replace: |-
       {{greeting}}{{person}},{{addongreeting}}
@@ -66,37 +93,13 @@ matches:
 
       $|$
 
-      We kindly request that you respond to this email or call us at {{dthelp}} at your earliest convenience to confirm the next steps regarding your ticket.
+      {{reqresponse}}
 
-      {{signoff}}
-
-      {{myname}}
-      {{title}}
-      {{company}}
-      {{dthelp}}
-
-      ---
-      {{quote}}
+      {{signature}}
 
   - regex: ";emaildisk(?P<person>.*)\\."
     label: Dynamic Request For Disk Space Email
-    vars:
-      - name: quote
-        type: match
-        params:
-          trigger: ";quote"
-      - name: greeting
-        type: match
-        params:
-          trigger: ";greet"
-      - name: addongreeting
-        type: match
-        params:
-          trigger: ";addongreet"
-      - name: signoff
-        type: match
-        params:
-          trigger: ";signoff"
+    vars: *email_vars
     force_mode: clipboard
     replace: |-
       {{greeting}}{{person}},{{addongreeting}}
@@ -107,302 +110,120 @@ matches:
 
       At the time of this email, you ({{person}}) were the last known user to login to the computer.
 
-      Due to this alert, we would like to coordinate a time (typically around an hour) to perform cleanup on the computer when it is not in use. We do not need to work directly with you to perform the cleanup, however we will need to ensure that we are connecting at a time that the computer will not be needed for the duration of the appointment.
+      Due to this alert, we would like to coordinate an appointment (typically 60-90 minutes) to perform cleanup on the computer when it is not in use. We do not need to work directly with you to perform the cleanup, however we will need to ensure that we are connecting at a time that the computer will not be needed for the duration of the appointment.
 
-      If you have any days/times that would work for this appointment, we would love to get it onto our calendar so that we can perform this cleanup operation.
+      Please provide multiple dates and specific times that would work for this appointment, we would love to get it onto our calendar so that we can perform this cleanup operation.
 
-      We kindly request that you respond to this email or call us at {{dthelp}} at your earliest convenience to confirm the next steps regarding your ticket.
+      {{reqresponse}}
 
-      {{signoff}}
-
-      {{myname}}
-      {{title}}
-      {{company}}
-      {{dthelp}}
-
-      ---
-      {{quote}}
+      {{signature}}
 
   - regex: ";emailfu(?P<person>.*)\\."
     label: Dynamic Follow-Up Email
-    vars:
-      - name: quote
-        type: match
-        params:
-          trigger: ";quote"
-      - name: greeting
-        type: match
-        params:
-          trigger: ";greet"
-      - name: addongreeting
-        type: match
-        params:
-          trigger: ";addongreet"
-      - name: signoff
-        type: match
-        params:
-          trigger: ";signoff"
+    vars: *email_vars
     force_mode: clipboard
     replace: |-
       {{greeting}}{{person}},{{addongreeting}}
 
       **RESPONSE REQUESTED**
 
-      This email is to inquire about the current status of your support ticket and to ensure that all outstanding matters related to your request are being appropriately addressed.
+      {{followup}}
 
       $|$
 
-      We kindly request that you respond to this email or call us at {{dthelp}} at your earliest convenience to confirm the next steps regarding your ticket.
+      {{reqresponse}}
 
-      {{signoff}}
-
-      {{myname}}
-      {{title}}
-      {{company}}
-      {{dthelp}}
-
-      ---
-      {{quote}}
+      {{signature}}
 
   - regex: ";emaildy(?P<person>.*)\\."
     label: Dynamic Done Yet Follow-Up Email
-    vars:
-      - name: quote
-        type: match
-        params:
-          trigger: ";quote"
-      - name: greeting
-        type: match
-        params:
-          trigger: ";greet"
-      - name: addongreeting
-        type: match
-        params:
-          trigger: ";addongreet"
-      - name: noresponse
-        type: match
-        params:
-          trigger: ";noresponse"
-      - name: stillreqass
-        type: match
-        params:
-          trigger: ";stillreqass"
-      - name: nolongerreqass
-        type: match
-        params:
-          trigger: ";nolongerreqass"
-      - name: signoff
-        type: match
-        params:
-          trigger: ";signoff"
+    vars: *email_vars
     force_mode: clipboard
     replace: |-
       {{greeting}}{{person}},{{addongreeting}}
 
       **RESPONSE REQUESTED**
 
-      I am emailing to follow up on your ticket. {{noresponse}}
+      {{noresponse}}
       $|$
-      {{stillreqass}}
+      {{assornoass}}
 
-      {{nolongerreqass}}
-
-      {{signoff}}
-
-      {{myname}}
-      {{title}}
-      {{company}}
-      {{dthelp}}
-
-      ---
-      {{quote}}
+      {{signature}}
 
   - regex: ";emailvm(?P<person>.*)\\."
     label: Dynamic Voicemail Follow-Up Email
-    vars:
-      - name: quote
-        type: match
-        params:
-          trigger: ";quote"
-      - name: greeting
-        type: match
-        params:
-          trigger: ";greet"
-      - name: addongreeting
-        type: match
-        params:
-          trigger: ";addongreet"
-      - name: signoff
-        type: match
-        params:
-          trigger: ";signoff"
+    vars: *email_vars
     force_mode: clipboard
     replace: |-
       {{greeting}}{{person}},{{addongreeting}}
 
       **RESPONSE REQUESTED**
 
-      I attempted to reach you by phone earlier but was unfortunately unable to make contact. I had left a voicemail or a note at that time, and am following up with this email to ensure the message was received.
+      {{voicemail}}
 
       $|$
 
-      We kindly request that you respond to this email or call us at {{dthelp}} at your earliest convenience to confirm the next steps regarding your ticket.
+      {{reqresponse}}
 
-      {{signoff}}
-
-      {{myname}}
-      {{title}}
-      {{company}}
-      {{dthelp}}
-
-      ---
-      {{quote}}
+      {{signature}}
 
   - regex: ";emailnovm(?P<person>.*)\\."
     label: Dynamic Unable to Leave a Voicemail Follow-Up Email
-    vars:
-      - name: quote
-        type: match
-        params:
-          trigger: ";quote"
-      - name: greeting
-        type: match
-        params:
-          trigger: ";greet"
-      - name: addongreeting
-        type: match
-        params:
-          trigger: ";addongreet"
-      - name: signoff
-        type: match
-        params:
-          trigger: ";signoff"
+    vars: *email_vars
     force_mode: clipboard
     replace: |-
       {{greeting}}{{person}},{{addongreeting}}
 
       **RESPONSE REQUESTED**
 
-      I attempted to reach you by phone earlier but was unfortunately unable to make contact. I was not able to leave a voicemail at that time or was unable to reach the number on file, and am now following up with this email to ensure the message was received.
+      {{novoicemail}}
 
       $|$
 
-      Since we were unable to reach you or leave a message, we will likely need to coordinate a time to connect at a time that will work for you.
+      {{novmfollowup}}
 
-      We kindly request that you respond to this email or call us at {{dthelp}} at your earliest convenience to confirm the next steps regarding your ticket.
+      {{reqresponse}}
 
-      {{signoff}}
-
-      {{myname}}
-      {{title}}
-      {{company}}
-      {{dthelp}}
-
-      ---
-      {{quote}}
-
-  - regex: ";emailmissnovm(?P<person>.*)\\."
-    label: Dynamic Missed Appointment Email
-    vars:
-      - name: quote
-        type: match
-        params:
-          trigger: ";quote"
-      - name: greeting
-        type: match
-        params:
-          trigger: ";greet"
-      - name: addongreeting
-        type: match
-        params:
-          trigger: ";addongreet"
-      - name: signoff
-        type: match
-        params:
-          trigger: ";signoff"
-    force_mode: clipboard
-    replace: |-
-      {{greeting}}{{person}},{{addongreeting}}
-
-      **RESPONSE REQUESTED**
-
-      I attempted to reach you by phone earlier but was unfortunately unable to make contact. I was not able to leave a voicemail at that time or was unable to reach the number on file, and am now following up with this email to ensure the message was received.$|$
-
-      As we were unable to reach you, leave a voicemail, or leave a message at the scheduled appointment time, our appointment could not be completed and we will need to coordinate a new time to connect that aligns with your availability.
-
-      We kindly request that you respond to this email or call us at {{dthelp}} at your earliest convenience to confirm the next steps regarding your ticket.
-
-      {{signoff}}
-
-      {{myname}}
-      {{title}}
-      {{company}}
-      {{dthelp}}
-
-      ---
-      {{quote}}
+      {{signature}}
 
   - regex: ";emailmissvm(?P<person>.*)\\."
     label: Dynamic Missed Appointment w/ Voicemail or Message Email
-    vars:
-      - name: quote
-        type: match
-        params:
-          trigger: ";quote"
-      - name: greeting
-        type: match
-        params:
-          trigger: ";greet"
-      - name: addongreeting
-        type: match
-        params:
-          trigger: ";addongreet"
-      - name: signoff
-        type: match
-        params:
-          trigger: ";signoff"
+    vars: *email_vars
     force_mode: clipboard
     replace: |-
       {{greeting}}{{person}},{{addongreeting}}
 
       **RESPONSE REQUESTED**
 
-      I attempted to reach you by phone earlier but was unfortunately unable to make contact. I had left a voicemail or a note at that time, and am following up with this email to ensure the message was received.$|$
+      {{voicemail}}
 
-      As we were unable to reach you at the scheduled appointment time, our appointment could not be completed and we will need to coordinate a new time to connect that aligns with your availability.
+      {{missappvm}}
 
-      We kindly request that you respond to this email or call us at {{dthelp}} at your earliest convenience to confirm the next steps regarding your ticket.
+      {{reqresponse}}
 
-      {{signoff}}
+      {{signature}}
 
-      {{myname}}
-      {{title}}
-      {{company}}
-      {{dthelp}}
+  - regex: ";emailmissnovm(?P<person>.*)\\."
+    label: Dynamic Missed Appointment Email
+    vars: *email_vars
+    force_mode: clipboard
+    replace: |-
+      {{greeting}}{{person}},{{addongreeting}}
 
-      ---
-      {{quote}}
+      **RESPONSE REQUESTED**
+
+      {{novoicemail}}$|$
+
+      {{missappnovm}}
+
+      {{reqresponse}}
+
+      {{signature}}
 
   - regex: ";emailnoti(?P<person>.*)\\."
     label: Dynamic Notification Email
     comment: "This is a dynamically generated email to send notifications. It is useful for sending emails that do not require a response."
-    vars:
-      - name: quote
-        type: match
-        params:
-          trigger: ";quote"
-      - name: greeting
-        type: match
-        params:
-          trigger: ";greet"
-      - name: addongreeting
-        type: match
-        params:
-          trigger: ";addongreet"
-      - name: signoff
-        type: match
-        params:
-          trigger: ";signoff"
+    vars: *email_vars
     force_mode: clipboard
     replace: |-
       {{greeting}}{{person}},{{addongreeting}}
@@ -411,59 +232,24 @@ matches:
 
       $|$
 
-      This is a notification email. If anything does not meet satisfactory completion standards, please respond to this email directly, or call {{dthelp}} with any additional information, questions, or concerns that you may have.
+      {{notification}}
 
-      {{signoff}}
-
-      {{myname}}
-      {{title}}
-      {{company}}
-      {{dthelp}}
-
-      ---
-      {{quote}}
+      {{signature}}
 
   - regex: ";emailcomp(?P<person>.*)\\."
     label: Dynamic Completion Email
     comment: "This is a dynamically generated email to send completion notifications. It is useful for notifying the completion of work."
-    vars:
-      - name: quote
-        type: match
-        params:
-          trigger: ";quote"
-      - name: greeting
-        type: match
-        params:
-          trigger: ";greet"
-      - name: addongreeting
-        type: match
-        params:
-          trigger: ";addongreet"
-      - name: signoff
-        type: match
-        params:
-          trigger: ";signoff"
+    vars: *email_vars
     force_mode: clipboard
     replace: |-
       {{greeting}}{{person}},{{addongreeting}}
 
       **NO RESPONSE REQUIRED**
 
-      I am emailing to inform you that the work for your ticket has been completed at this time and your ticket will be closed.
+      {{completedwork}}
 
-      Though no additional actions are required, it is advised to ensure that there are no errors and that the work meets your expectations.
+      {{checkup}}
       $|$
       This is a notification of completion email. To reopen your ticket if anything does not meet satisfactory completion standards, please respond to this email directly, or call {{dthelp}} with any additional information, questions, or concerns that you may have.
 
-      {{signoff}}
-
-      {{myname}}
-      {{title}}
-      {{company}}
-      {{dthelp}}
-
-      ---
-      {{quote}}
-
-  - trigger: ";dtemail"
-    replace: "{{workemail}}"
+      {{signature}}

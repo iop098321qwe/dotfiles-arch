@@ -1,0 +1,17 @@
+matches:
+  - trigger: ";assornoass"
+    label: Dynamic Deeptree Email
+    vars:
+      - name: stillreqass
+        type: match
+        params:
+          trigger: ";stillreqass"
+      - name: nolongerreqass
+        type: match
+        params:
+          trigger: ";nolongerreqass"
+    force_mode: clipboard
+    replace: |-
+      {{stillreqass}}
+
+      {{nolongerreqass}}

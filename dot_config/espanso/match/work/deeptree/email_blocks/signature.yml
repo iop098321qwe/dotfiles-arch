@@ -1,5 +1,5 @@
 matches:
-  - regex: ";signature"
+  - trigger: ";signature"
     label: Dynamic Deeptree Email
     vars:
       - name: quote
