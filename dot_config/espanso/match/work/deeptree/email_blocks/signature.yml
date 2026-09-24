@@ -2,10 +2,6 @@ matches:
   - trigger: ";signature"
     label: Dynamic Deeptree Email
     vars:
-      - name: quote
-        type: match
-        params:
-          trigger: ";quote"
       - name: signoff
         type: match
         params:

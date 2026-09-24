@@ -2,10 +2,6 @@
 
 anchors:
   email_vars: &email_vars
-    - name: quote
-      type: match
-      params:
-        trigger: ";quote"
     - name: greeting
       type: match
       params:
