@@ -1,73 +1,9 @@
 # espanso match file
 
-anchors:
-  email_vars: &email_vars
-    - name: greeting
-      type: match
-      params:
-        trigger: ";greet"
-    - name: addongreeting
-      type: match
-      params:
-        trigger: ";addongreet"
-    - name: noresponse
-      type: match
-      params:
-        trigger: ";noresponse"
-    - name: assornoass
-      type: match
-      params:
-        trigger: ";assornoass"
-    - name: signature
-      type: match
-      params:
-        trigger: ";signature"
-    - name: reqresponse
-      type: match
-      params:
-        trigger: ";reqresponse"
-    - name: completedwork
-      type: match
-      params:
-        trigger: ";completedwork"
-    - name: voicemail
-      type: match
-      params:
-        trigger: ";voicemail"
-    - name: novoicemail
-      type: match
-      params:
-        trigger: ";novoicemail"
-    - name: missappvm
-      type: match
-      params:
-        trigger: ";missappvm"
-    - name: missappnovm
-      type: match
-      params:
-        trigger: ";missappnovm"
-    - name: notification
-      type: match
-      params:
-        trigger: ";notification"
-    - name: followup
-      type: match
-      params:
-        trigger: ";followup"
-    - name: novmfollowup
-      type: match
-      params:
-        trigger: ";novmfollowup"
-    - name: checkup
-      type: match
-      params:
-        trigger: ";checkup"
-
 # email
 matches:
   - regex: ";emailnorm(?P<person>.*)\\."
     label: Dynamic Deeptree Email
-    vars: *email_vars
     force_mode: clipboard
     replace: |-
       {{greeting}}{{person}},{{addongreeting}}
@@ -80,7 +16,6 @@ matches:
 
   - regex: ";emailreq(?P<person>.*)\\."
     label: Dynamic Request For Action Email
-    vars: *email_vars
     force_mode: clipboard
     replace: |-
       {{greeting}}{{person}},{{addongreeting}}
@@ -95,7 +30,6 @@ matches:
 
   - regex: ";emaildisk(?P<person>.*)\\."
     label: Dynamic Request For Disk Space Email
-    vars: *email_vars
     force_mode: clipboard
     replace: |-
       {{greeting}}{{person}},{{addongreeting}}
@@ -116,7 +50,6 @@ matches:
 
   - regex: ";emailfu(?P<person>.*)\\."
     label: Dynamic Follow-Up Email
-    vars: *email_vars
     force_mode: clipboard
     replace: |-
       {{greeting}}{{person}},{{addongreeting}}
@@ -133,7 +66,6 @@ matches:
 
   - regex: ";emaildy(?P<person>.*)\\."
     label: Dynamic Done Yet Follow-Up Email
-    vars: *email_vars
     force_mode: clipboard
     replace: |-
       {{greeting}}{{person}},{{addongreeting}}
@@ -148,7 +80,6 @@ matches:
 
   - regex: ";emailvm(?P<person>.*)\\."
     label: Dynamic Voicemail Follow-Up Email
-    vars: *email_vars
     force_mode: clipboard
     replace: |-
       {{greeting}}{{person}},{{addongreeting}}
@@ -165,7 +96,6 @@ matches:
 
   - regex: ";emailnovm(?P<person>.*)\\."
     label: Dynamic Unable to Leave a Voicemail Follow-Up Email
-    vars: *email_vars
     force_mode: clipboard
     replace: |-
       {{greeting}}{{person}},{{addongreeting}}
@@ -184,7 +114,6 @@ matches:
 
   - regex: ";emailmissvm(?P<person>.*)\\."
     label: Dynamic Missed Appointment w/ Voicemail or Message Email
-    vars: *email_vars
     force_mode: clipboard
     replace: |-
       {{greeting}}{{person}},{{addongreeting}}
@@ -201,7 +130,6 @@ matches:
 
   - regex: ";emailmissnovm(?P<person>.*)\\."
     label: Dynamic Missed Appointment Email
-    vars: *email_vars
     force_mode: clipboard
     replace: |-
       {{greeting}}{{person}},{{addongreeting}}
@@ -219,7 +147,6 @@ matches:
   - regex: ";emailnoti(?P<person>.*)\\."
     label: Dynamic Notification Email
     comment: "This is a dynamically generated email to send notifications. It is useful for sending emails that do not require a response."
-    vars: *email_vars
     force_mode: clipboard
     replace: |-
       {{greeting}}{{person}},{{addongreeting}}
@@ -235,7 +162,6 @@ matches:
   - regex: ";emailcomp(?P<person>.*)\\."
     label: Dynamic Completion Email
     comment: "This is a dynamically generated email to send completion notifications. It is useful for notifying the completion of work."
-    vars: *email_vars
     force_mode: clipboard
     replace: |-
       {{greeting}}{{person}},{{addongreeting}}

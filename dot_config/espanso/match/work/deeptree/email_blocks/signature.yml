@@ -1,19 +1,5 @@
 matches:
   - trigger: ";signature"
     label: Dynamic Deeptree Email
-    vars:
-      - name: signoff
-        type: match
-        params:
-          trigger: ";signoff"
     force_mode: clipboard
-    replace: |-
-      {{signoff}}
-
-      {{myname}}
-      {{title}}
-      {{company}}
-      {{dthelp}}
-
-      ---
-      {{quote}}
+    replace: "{{signature}}"

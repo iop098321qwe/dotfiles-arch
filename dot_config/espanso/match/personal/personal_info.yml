@@ -15,8 +15,14 @@ matches:
     propagate_case: true
     replace: "{{mylast}}"
 
-  - triggers: [;name, ;fullname, ;legalname]
+  - trigger: ;name
     label: Full Name Match
     comment: "A match to output your full name."
     propagate_case: true
     replace: "{{myname}}"
+
+  - triggers: [;legalname, ;fullname]
+    label: Full Name Match
+    comment: "A match to output your full name."
+    propagate_case: true
+    replace: "{{mylegalname}}"

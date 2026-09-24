@@ -1,61 +1,10 @@
 # Espanso Match File
 
 # Dispatch Email Template Matches
-anchors:
-  greeting: &greeting
-    name: greeting
-    type: match
-    params:
-      trigger: ";greet"
-
-  addongreeting: &addongreeting
-    name: addongreeting
-    type: match
-    params:
-      trigger: ";addongreet"
-
-  setappointment: &setappointment
-    name: setappointment
-    type: match
-    params:
-      trigger: ";setappointment"
-
-  deadlines: &deadlines
-    name: deadlines
-    type: match
-    params:
-      trigger: ";deadlines"
-
-  outreachthanks: &outreachthanks
-    name: outreachthanks
-    type: match
-    params:
-      trigger: ";outreachthanks"
-
-  assigned: &assigned
-    name: assigned
-    type: match
-    params:
-      trigger: ";assigned"
-
-  signature: &signature
-    name: signature
-    type: match
-    params:
-      trigger: ";signature"
-
 matches:
   - regex: ";resreqapp(?P<person>.*)\\."
     label: Request with Appointment Email Response Template
     comment: "This is an email response template for a request with an appointment."
-    vars:
-      - *greeting
-      - *addongreeting
-      - *setappointment
-      - *deadlines
-      - *signature
-      - *assigned
-      - *outreachthanks
     replace: |-
       {{greeting}}{{person}},{{addongreeting}}
 
@@ -73,13 +22,6 @@ matches:
   - regex: ";resreqnoapp(?P<person>.*)\\."
     label: Request without Appointment Email Response Template
     comment: "This is an email response template for a request without an appointment."
-    vars:
-      - *greeting
-      - *addongreeting
-      - *deadlines
-      - *signature
-      - *assigned
-      - *outreachthanks
     replace: |-
       {{greeting}}{{person}},{{addongreeting}}
 
@@ -95,13 +37,6 @@ matches:
   - regex: ";resinc(?P<person>.*)\\."
     label: Incident Email Response Template
     comment: "This is an email response template for an incident."
-    vars:
-      - *greeting
-      - *addongreeting
-      - *setappointment
-      - *signature
-      - *assigned
-      - *outreachthanks
     replace: |-
       {{greeting}}{{person}},{{addongreeting}}
 
@@ -117,12 +52,6 @@ matches:
   - regex: ";resspam(?P<person>.*)\\."
     label: Spam Email Response Template
     comment: "This is an email response template for spam."
-    vars:
-      - *greeting
-      - *addongreeting
-      - *signature
-      - *assigned
-      - *outreachthanks
     replace: |-
       {{greeting}}{{person}},{{addongreeting}}
 

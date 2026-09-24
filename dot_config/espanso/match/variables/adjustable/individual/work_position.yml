@@ -18,7 +18,7 @@ global_vars:
     label: Work Title Variable
     type: echo
     params:
-      echo: "Rapid Response Team Lead"
+      echo: "CEO of entire company"
 
   - name: company
     label: Company
