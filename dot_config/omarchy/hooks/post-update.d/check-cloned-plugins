@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+helper="$HOME/.local/bin/omarchy-cloned-plugin-diff"
+
+[[ -x $helper ]] || exit 0
+"$helper" --summary || true

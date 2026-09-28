@@ -1,1 +1,1 @@
-/home/grymm/.config/omarchy/current/theme/neovim.lua
+/home/grymm/.local/state/omarchy/current/theme/neovim.lua

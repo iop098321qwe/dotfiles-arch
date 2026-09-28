@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+readonly HOSTNAME_VALUE="{{ .chezmoi.hostname }}"
+readonly SOURCE_DIR="{{ .chezmoi.sourceDir }}"
+readonly HOME_DIR="{{ .chezmoi.homeDir }}"
+
+readonly TEMPLATE_DIR="${SOURCE_DIR}/.chezmoitemplates/hypr/monitors"
+readonly HOST_TEMPLATE_FILE="${TEMPLATE_DIR}/${HOSTNAME_VALUE}.lua"
+readonly LIVE_MONITORS_FILE="${HOME_DIR}/.config/hypr/monitors.lua"
+
+case "${HOSTNAME_VALUE}" in
+  "")
+    printf 'ERROR: chezmoi hostname is empty. Cannot bootstrap monitors.lua.\n' >&2
+    exit 1
+    ;;
+esac
+
+case "${SOURCE_DIR}" in
+  "")
+    printf 'ERROR: chezmoi source directory is empty. Cannot bootstrap monitors.lua.\n' >&2
+    exit 1
+    ;;
+esac
+
+mkdir -p -- "${TEMPLATE_DIR}"
+
+if [[ -f "${HOST_TEMPLATE_FILE}" ]]; then
+  printf 'Hyprland monitors bootstrap skipped; host file already exists:\n  %s\n' "${HOST_TEMPLATE_FILE}"
+  exit 0
+fi
+
+if [[ -f "${LIVE_MONITORS_FILE}" ]]; then
+  printf 'Live monitors.lua found; creating host override starter instead of copying it:\n  %s\n' "${LIVE_MONITORS_FILE}"
+fi
+
+cat > "${HOST_TEMPLATE_FILE}" <<EOF
+-- See https://wiki.hypr.land/Configuring/Basics/Monitors/
+-- List current monitors and supported resolutions with: hyprctl monitors all
+
+local omarchy_gdk_scale = 2
+local omarchy_monitor_scale = "auto"
+
+hl.env("GDK_SCALE", tostring(omarchy_gdk_scale))
+hl.monitor({ output = "", mode = "preferred", position = "auto", scale = omarchy_monitor_scale })
+
+-- Configure a specific monitor.
+-- hl.monitor({ output = "DP-2", mode = "2560x1440@144", position = "0x0", scale = 1 })
+
+-- Portrait/rotated secondary monitor (transform: 1 = 90°, 3 = 270°).
+-- hl.monitor({ output = "DP-2", mode = "preferred", position = "auto", scale = 1, transform = 1 })
+
+-- Host-specific Omarchy Quattro monitor overrides for ${HOSTNAME_VALUE}.
+-- Add any extra host-specific hl.monitor(...) or hl.env(...) calls below.
+-- hl.monitor({
+--   output = "DP-1",
+--   mode = "preferred",
+--   position = "auto",
+--   scale = 1,
+-- })
+EOF
+
+printf 'Hyprland monitors bootstrap created host Lua profile:\n  %s\n' "${HOST_TEMPLATE_FILE}"

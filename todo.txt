@@ -1,0 +1,3 @@
+(C) 2026-09-15 fix espanso installation manually +espanso @fix @feat
+(A) 2026-09-16 fix proton pass cli asking for authentication even if it is already authenticated +chezmoi @fix
+(B) 2026-09-18 allow bypass of 30 minute sudo authentication to continue if user will monitor chezmoi initialization +chezmoi @feat

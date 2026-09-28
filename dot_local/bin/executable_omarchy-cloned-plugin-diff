@@ -1,0 +1,162 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+mode="full"
+
+usage() {
+  cat <<'EOF'
+Usage: omarchy-cloned-plugin-diff [--summary]
+
+Report upstream changes to cloned Omarchy plugins. Produces no output when
+every stored upstream baseline still matches the installed Omarchy source.
+
+Options:
+  --summary  List changed files without showing their full diffs
+  -h, --help Show this help
+
+Environment:
+  OMARCHY_PLUGIN_CLONES_DIR       Override the user plugin directory
+  OMARCHY_PLUGIN_UPSTREAM_DIR     Override the first-party plugin directory
+  OMARCHY_PLUGIN_BASELINE_DIRNAME Override the baseline directory name
+EOF
+}
+
+while (( $# > 0 )); do
+  case "$1" in
+  --summary)
+    mode="summary"
+    ;;
+  -h | --help)
+    usage
+    exit 0
+    ;;
+  *)
+    printf 'omarchy-cloned-plugin-diff: unknown option: %s\n' "$1" >&2
+    exit 2
+    ;;
+  esac
+  shift
+done
+
+command -v jq >/dev/null 2>&1 || {
+  printf 'omarchy-cloned-plugin-diff: jq is required\n' >&2
+  exit 2
+}
+command -v diff >/dev/null 2>&1 || {
+  printf 'omarchy-cloned-plugin-diff: diff is required\n' >&2
+  exit 2
+}
+
+config_home="${XDG_CONFIG_HOME:-$HOME/.config}"
+omarchy_path="${OMARCHY_PATH:-/usr/share/omarchy}"
+clones_dir="${OMARCHY_PLUGIN_CLONES_DIR:-$config_home/omarchy/plugins}"
+upstream_root="${OMARCHY_PLUGIN_UPSTREAM_DIR:-$omarchy_path/shell/plugins}"
+baseline_name="${OMARCHY_PLUGIN_BASELINE_DIRNAME:-.omarchy-upstream}"
+
+[[ -d $clones_dir ]] || exit 0
+if [[ ! -d $upstream_root ]]; then
+  printf 'omarchy-cloned-plugin-diff: upstream plugin directory not found: %s\n' \
+    "$upstream_root" >&2
+  exit 2
+fi
+
+declare -A upstream_dirs=()
+while IFS= read -r -d '' manifest; do
+  plugin_id=$(jq -r '.id // empty' "$manifest" 2>/dev/null) || continue
+  [[ -n $plugin_id ]] || continue
+  upstream_dirs["$plugin_id"]="${manifest%/*}"
+done < <(
+  find "$upstream_root" -mindepth 2 -maxdepth 4 -type f \
+    \( -name manifest.json -o -name '*.manifest.json' \) -print0
+)
+
+changed=0
+errors=0
+
+report_plugin() {
+  local clone_id="$1"
+  local source_id="$2"
+
+  if (( changed == 0 )); then
+    printf 'Cloned Omarchy plugins changed upstream:\n'
+  fi
+  changed=1
+  printf '\n%s (from %s)\n' "$clone_id" "$source_id"
+}
+
+shopt -s nullglob
+clone_manifests=("$clones_dir"/*/manifest.json)
+shopt -u nullglob
+
+for manifest in "${clone_manifests[@]}"; do
+  if ! jq -e . "$manifest" >/dev/null 2>&1; then
+    printf 'omarchy-cloned-plugin-diff: invalid manifest: %s\n' \
+      "$manifest" >&2
+    errors=2
+    continue
+  fi
+  clone_id=$(jq -r '.id // empty' "$manifest")
+  source_id=$(jq -r '.omarchy.clonedFrom // empty' "$manifest")
+  [[ -n $source_id ]] || continue
+  [[ -n $clone_id ]] || clone_id="${manifest%/manifest.json}"
+  clone_id="${clone_id##*/}"
+
+  clone_dir="${manifest%/manifest.json}"
+  baseline_dir="$clone_dir/$baseline_name"
+  upstream_dir="${upstream_dirs[$source_id]-}"
+
+  if [[ -z $upstream_dir || ! -d $upstream_dir ]]; then
+    report_plugin "$clone_id" "$source_id"
+    printf '  Upstream plugin is no longer installed.\n'
+    continue
+  fi
+
+  if [[ ! -d $baseline_dir ]]; then
+    report_plugin "$clone_id" "$source_id"
+    printf '  Baseline is missing: %s\n' "$baseline_dir"
+    continue
+  fi
+
+  diff_status=0
+  diff -qr --exclude=.git "$baseline_dir" "$upstream_dir" \
+    >/dev/null 2>&1 || diff_status=$?
+  if (( diff_status == 0 )); then
+    continue
+  fi
+  if (( diff_status > 1 )); then
+    printf 'omarchy-cloned-plugin-diff: comparison failed: %s\n' \
+      "$clone_id" >&2
+    errors=2
+    continue
+  fi
+
+  report_plugin "$clone_id" "$source_id"
+  diff_status=0
+  diff -qr --exclude=.git "$baseline_dir" "$upstream_dir" \
+    || diff_status=$?
+  if (( diff_status > 1 )); then
+    printf 'omarchy-cloned-plugin-diff: diff output failed: %s\n' \
+      "$clone_id" >&2
+    errors=2
+    continue
+  fi
+
+  if [[ $mode == "full" ]]; then
+    printf '\n'
+    diff_status=0
+    diff -ruN --exclude=.git "$baseline_dir" "$upstream_dir" \
+      || diff_status=$?
+    if (( diff_status > 1 )); then
+      printf 'omarchy-cloned-plugin-diff: full diff failed: %s\n' \
+        "$clone_id" >&2
+      errors=2
+    fi
+  fi
+done
+
+if (( changed > 0 )) && [[ $mode == "summary" ]]; then
+  printf '\nRun omarchy-cloned-plugin-diff to view the full diff.\n'
+fi
+
+exit "$errors"
