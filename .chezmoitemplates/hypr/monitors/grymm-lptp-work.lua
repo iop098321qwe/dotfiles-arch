@@ -34,6 +34,7 @@ hl.monitor({
   output = "desc:Samsung Electric Company LS27AG32x H9JW800006",
   mode = "1920x1080@120",
   position = "auto-left",
+  transform = 1,
   scale = omarchy_monitor_scale,
 })
 
