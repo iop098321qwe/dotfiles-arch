@@ -26,7 +26,7 @@ hl.monitor({
   output = "desc:Samsung Electric Company LC27G7xT H4ZR703280",
   mode = "2560x1440@120",
   position = "auto-right",
-  scale = omarchy_monitor_scale,
+  scale = 1.25,
 })
 
 -- External Display (Samsung Odyssey G3)
@@ -35,7 +35,7 @@ hl.monitor({
   mode = "1920x1080@120",
   position = "auto-left",
   transform = 1,
-  scale = omarchy_monitor_scale,
+  scale = 1,
 })
 
 -- GDK scale is GDK_SCALE, the factor GTK draws its own UI at. It's what
