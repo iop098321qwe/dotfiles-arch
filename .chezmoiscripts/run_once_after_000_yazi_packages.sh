@@ -45,7 +45,6 @@ yazi_packages=(
 	"TD-Sky/sudo"
 	"uhs-robert/recycle-bin"
 	"MasouShizuka/close-and-restore-tab"
-	"AminurAlam/yazi-plugins:nextension"
 	"ettom/openscad"
 	"lmnek/pandoc"
 	"Jormala/relative-motions"
