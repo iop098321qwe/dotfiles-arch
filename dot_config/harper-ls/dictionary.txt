@@ -1,6 +1,7 @@
 ACOA
 AMAR
 ASLC
+AUR
 ArchWiki
 Atuin
 Authentik
@@ -15,6 +16,7 @@ CCI
 CCS
 CRL
 CSC
+CachyOS
 Caswell
 Catppuccin
 Codecademy
@@ -126,6 +128,7 @@ arborists
 canyoneering
 chezmoi
 crontab
+dorking
 eClinicalWorks
 exe
 firstname
