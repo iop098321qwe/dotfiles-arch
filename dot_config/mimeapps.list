@@ -46,15 +46,15 @@ x-scheme-handler/mailto=userapp-Betterbird-6ZLPV3.desktop
 x-scheme-handler/discord=vesktop.desktop
 x-scheme-handler/http=brave-origin.desktop
 x-scheme-handler/https=brave-origin.desktop
-x-scheme-handler/mailto=eu.betterbird.Betterbird.desktop
+x-scheme-handler/mailto=userapp-Betterbird-3N40V3.desktop
 x-scheme-handler/t3code=t3code-url-handler.desktop
-x-scheme-handler/mid=userapp-Betterbird-6ZLPV3.desktop
-message/rfc822=userapp-Betterbird-6ZLPV3.desktop
+x-scheme-handler/mid=userapp-Betterbird-3N40V3.desktop
+message/rfc822=userapp-Betterbird-3N40V3.desktop
 x-scheme-handler/net.thunderbird=userapp-Betterbird-WBZNV3.desktop
 
 [Added Associations]
 text/markdown=nvim.desktop;
-x-scheme-handler/mailto=userapp-Betterbird-6ZLPV3.desktop;
-x-scheme-handler/mid=userapp-Betterbird-6ZLPV3.desktop;
-message/rfc822=userapp-Betterbird-6ZLPV3.desktop;
+x-scheme-handler/mailto=userapp-Betterbird-3N40V3.desktop;userapp-Betterbird-6ZLPV3.desktop;
+x-scheme-handler/mid=userapp-Betterbird-3N40V3.desktop;userapp-Betterbird-6ZLPV3.desktop;
+message/rfc822=userapp-Betterbird-6ZLPV3.desktop;userapp-Betterbird-3N40V3.desktop;
 x-scheme-handler/net.thunderbird=userapp-Betterbird-WBZNV3.desktop;

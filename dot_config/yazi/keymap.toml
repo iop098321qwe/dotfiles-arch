@@ -293,11 +293,11 @@ keymap = [
   { on = [
     "g",
     "s",
-  ], run = "cd ~/Documents/Temporary/screenshots", desc = "Screenshots" },
+  ], run = "cd ~/Pictures", desc = "Screenshots" },
   { on = [
     "g",
     "S",
-  ], run = "cd ~/Documents/Temporary/recordings/raw", desc = "Recordings" },
+  ], run = "cd ~/Videos", desc = "Recordings" },
   { on = [
     "g",
     "V",
