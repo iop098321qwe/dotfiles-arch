@@ -42,7 +42,7 @@ fi
 # TEMPORARY ESPANSO AUR BYPASS END
 
 # Install Espanso
-spin 'Installing Espanso...' omarchy pkg aur add espanso-wayland
+spin 'Installing Espanso...' omarchy pkg aur add espanso-wayland-bin
 
 if ! command -v espanso >/dev/null 2>&1; then
   printf 'Espanso setup warning: espanso is not available after install attempt.\n' >&2
