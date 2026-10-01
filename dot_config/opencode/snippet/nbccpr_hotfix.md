@@ -1,4 +1,4 @@
 ---
 aliases: hfix
 ---
-Ensure you use CC commits. nbccpr hotfix
+Ensure you use appropriate CC commits. nbccpr hotfix

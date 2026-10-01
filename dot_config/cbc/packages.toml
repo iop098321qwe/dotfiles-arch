@@ -71,11 +71,6 @@ rev = "fba7154"
 hash = "fba71547f258a99673097728528cba6c5031724f"
 
 [[module.deps]]
-use = "iop098321qwe/commit-and-tag-version"
-rev = "86ff9bf"
-hash = "86ff9bf5eb7ee76812801fee42d2b598b62c5413"
-
-[[module.deps]]
 use = "iop098321qwe/protonmod"
 rev = "5695dc9"
 hash = "5695dc92205f95a17e50d5f1b5c5eada289666fb"
@@ -109,4 +104,9 @@ hash = "2fc3869646b00e91a841d60c9a37054d5c3bbd0d"
 use = "iop098321qwe/randomod"
 rev = "0013d63"
 hash = "0013d631ae9fe2026d4dcacc087b976fe19f96a7"
+
+[[module.deps]]
+use = "iop098321qwe/commit-and-tag-version"
+rev = "704f156"
+hash = "704f15665ecdf04d361714f8607e855fd710ec63"
 

@@ -1,4 +1,4 @@
 ---
 aliases: fix
 ---
-Ensure you use CC commits. nbccpr bugfix
+Ensure you use appropriate CC commits. nbccpr bugfix

@@ -90,7 +90,7 @@ vim.api.nvim_set_keymap(
   { noremap = true, silent = true, desc = "Yank file name to system clipboard" })
 
 -- Map 'jj' to function as 'Esc' in Insert mode
-vim.api.nvim_set_keymap('i', 'jj', '<Esc>', { noremap = true, silent = true, desc = "Map jj to Esc in Insert mode" })
+vim.api.nvim_set_keymap('i', 'jj', '<Esc>', { noremap = true, silent = true, desc = "Escape Insert mode" })
 
 -- Seed Lua's random generator so random line jumps vary across sessions.
 math.randomseed(vim.loop.hrtime())
@@ -106,7 +106,7 @@ local function JumpToRandomLine()
   vim.api.nvim_win_set_cursor(0, { random_line, 0 })
 end
 
-vim.keymap.set('n', '<leader>jr', JumpToRandomLine, { desc = "Jump to random line", silent = true })
+vim.keymap.set('n', '<leader>r', JumpToRandomLine, { desc = "Jump to random line", silent = true })
 
 -- Function to toggle auto-commenting on new lines by modifying 'formatoptions'
 function ToggleAutoCommenting()
