@@ -1,0 +1,26 @@
+# espanso match file
+
+matches:
+  - trigger: ";ffff"
+    label: Contact Info Email
+    force_mode: clipboard
+    form: |-
+      Hello [[user]],
+
+      [[body]]
+
+      [[SHIT]]
+
+      {{signature}}
+    form_fields:
+      user:
+        type: text
+      body:
+        type: text
+        multiline: true
+      SHIT:
+        type: choice
+        values:
+          - Thank you for your time.
+          - Looking forward to hearing from you.
+          - Please respond AS SOON AS POSSIBLE.
