@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.1.1](https://github.com/iop098321qwe/dotfiles-arch/compare/v0.1.0...v0.1.1) (2026-10-01)
+
+### Bug Fixes
+
+* **espanso:** change espanso package to espanso-wayland-bin ([588e85b](https://github.com/iop098321qwe/dotfiles-arch/commit/588e85be69c1ace481bb12702835cc7e571f203e))
+
 ## [0.1.0](https://github.com/iop098321qwe/dotfiles-arch/compare/v0.0.5...v0.1.0) (2026-09-28)
 
 ### Features
