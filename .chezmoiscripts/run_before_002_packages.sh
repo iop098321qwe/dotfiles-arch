@@ -37,6 +37,7 @@ packages=(
   openscad
   pandoc-cli
   proton-vpn-gtk-app
+  putty
   python-curl_cffi
   solaar
   speedtest-cli
