@@ -2,6 +2,11 @@
 
 set -euo pipefail
 
+# Bootstrap Proton Pass only during chezmoi initialization.
+if [[ "${CHEZMOI_COMMAND:-}" != "init" ]]; then
+  exit 0
+fi
+
 spin() {
   local title="$1"
   shift
