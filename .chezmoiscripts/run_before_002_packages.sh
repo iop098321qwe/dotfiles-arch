@@ -23,8 +23,8 @@ packages=(
   firefox
   git
   git-delta
-  glow
   github-cli
+  glow
   handbrake
   handbrake-cli
   harper
@@ -39,6 +39,7 @@ packages=(
   proton-vpn-gtk-app
   putty
   python-curl_cffi
+  rpi-imager
   solaar
   speedtest-cli
   tailscale
@@ -51,6 +52,7 @@ packages=(
   uv
   wireshark-cli
   wireshark-qt
+  xorg-xhost
   yazi
   yt-dlp
 )
