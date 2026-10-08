@@ -41,7 +41,9 @@ service credentials outside this repository.
 - Chezmoi manages this source tree, verified by `.chezmoi.toml.tmpl` and
   `.chezmoiscripts/`.
 - `.chezmoi.toml.tmpl` enables Chezmoi git behavior and pre-read hook.
-- `pass-cli` is installed and authenticated by `.bootstrap-proton-pass.sh`.
+- `.bootstrap-proton-pass.sh` installs and authenticates `pass-cli` on init.
+- The bootstrap requires `CHEZMOI_COMMAND=init`; other values or an unset
+  variable skip all Proton Pass checks.
 - `gh` is installed by the package hook and used to clone GitHub repositories.
 - Interactive prompts use `gum` in several scripts.
 - Some hooks call `sudo`, `systemctl`, `systemctl --user`, `pacman`, and
@@ -72,7 +74,7 @@ task need and user approval.
 
 ### Root Control Files
 
-- `.bootstrap-proton-pass.sh` installs and authenticates Proton Pass CLI.
+- `.bootstrap-proton-pass.sh` bootstraps Proton Pass CLI only on init.
 - `.chezmoi.toml.tmpl` configures Chezmoi git behavior and pre-read hook.
 - `.chezmoiignore` excludes repository-only files from Chezmoi apply.
 - `AGENTS.md` is this repository operating guide.
@@ -244,6 +246,9 @@ task need and user approval.
 - Chezmoi names map source files into targets, such as `dot_bashrc` to
   `~/.bashrc` and `dot_config/*` to `~/.config/*`.
 - `.chezmoi.toml.tmpl` runs `.bootstrap-proton-pass.sh` before reading state.
+- The bootstrap checks Proton Pass on every `chezmoi init`, including
+  `init --apply`, and exits immediately for other commands or direct execution
+  without `CHEZMOI_COMMAND=init`.
 - `.chezmoiscripts/run_before_001_sudo_auth.sh` starts passwordless sudo
   before package installation.
 - `.chezmoiscripts/run_000_github_auth.sh` authenticates GitHub CLI early.
@@ -324,7 +329,7 @@ task need and user approval.
   Spicetify, Espanso, Proton, or work-specific paths.
 - Avoid running scripts that authenticate, install packages, enable services,
   clone repositories, change ACLs, or reboot without explicit user approval.
-- `.bootstrap-proton-pass.sh` may start an interactive Proton Pass login.
+- `.bootstrap-proton-pass.sh` may start Proton Pass login only on init.
 - `.chezmoiscripts/run_before_001_sudo_auth.sh` may start sudo.
 - `.chezmoiscripts/run_000_github_auth.sh` may start GitHub login.
 - `.chezmoiscripts/run_onchange_000_displaylink_setup.sh` can run `reboot now`.
@@ -351,8 +356,8 @@ task need and user approval.
 
 ## Troubleshooting
 
-- If `pass-cli` is missing, `.bootstrap-proton-pass.sh` installs Proton Pass
-  CLI through Omarchy's AUR helper and requires authentication.
+- During `chezmoi init`, `.bootstrap-proton-pass.sh` installs missing Proton
+  Pass CLI through Omarchy's AUR helper and authenticates when needed.
 - If Atuin is not logged in, the Atuin hook reads credentials from Proton Pass.
 - If GitHub is not logged in, `run_000_github_auth.sh` runs
   `gh auth login -cw`.

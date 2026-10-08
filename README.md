@@ -50,10 +50,17 @@ The Atuin setup expects the Proton Pass `Atuin` item to include these fields:
 
 ## What The Initialization Does
 
-Chezmoi reads `.chezmoi.toml.tmpl`, which runs
-`.bootstrap-proton-pass.sh` before reading source state. That bootstrap script
-installs Proton Pass CLI when needed and prompts for Proton Pass authentication
-when needed.
+Chezmoi reads `.chezmoi.toml.tmpl`, which registers
+`.bootstrap-proton-pass.sh` as a pre-read source-state hook. The script checks
+`CHEZMOI_COMMAND` and only bootstraps Proton Pass during `chezmoi init`, including
+`chezmoi init --apply`. Every initialization checks installation and
+authentication, installing Proton Pass CLI or prompting for login only when
+needed.
+
+Other commands, such as `chezmoi re-add`, `apply`, `diff`, and `status`, exit the
+bootstrap immediately without invoking Proton Pass CLI. Direct script execution
+also does nothing unless `CHEZMOI_COMMAND=init` is set. Other hooks that use
+Proton Pass still require a valid session.
 
 The apply hooks then install packages, write dotfiles, configure application
 state, and enable services. This setup is intentionally side-effectful.
