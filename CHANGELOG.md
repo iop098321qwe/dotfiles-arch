@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.1.2](https://github.com/iop098321qwe/dotfiles-arch/compare/v0.1.1...v0.1.2) (2026-10-08)
+
+### Features
+
+* **putty:** add putty package ([86cb239](https://github.com/iop098321qwe/dotfiles-arch/commit/86cb239e4306aee6e3bdafe4c06665b32fd861a8))
+
+### Bug Fixes
+
+* **chezmoi:** restrict Proton Pass bootstrap to init ([a69235a](https://github.com/iop098321qwe/dotfiles-arch/commit/a69235ac34cad3a23bb01b8d6ac26a6323934092))
+
 ## [0.1.1](https://github.com/iop098321qwe/dotfiles-arch/compare/v0.1.0...v0.1.1) (2026-10-01)
 
 ### Bug Fixes
