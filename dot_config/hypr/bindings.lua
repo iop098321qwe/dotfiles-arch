@@ -44,6 +44,7 @@ o.bind("SUPER + K", "Move window focus up", hl.dsp.focus({ direction = "u" }))
 o.bind("SUPER + L", "Move window focus right", hl.dsp.focus({ direction = "r" }))
 
 -- Vim-style window swapping.
+hl.unbind("SUPER + ALT + K") -- was Tmux keybindings
 o.bind("SUPER + ALT + H", "Swap window to the left", hl.dsp.window.swap({ direction = "l" }))
 o.bind("SUPER + ALT + J", "Swap window down", hl.dsp.window.swap({ direction = "d" }))
 o.bind("SUPER + ALT + K", "Swap window up", hl.dsp.window.swap({ direction = "u" }))
@@ -51,6 +52,7 @@ o.bind("SUPER + ALT + L", "Swap window to the right", hl.dsp.window.swap({ direc
 
 o.bind("SUPER + U", "Toggle window split", hl.dsp.layout("togglesplit"))
 o.bind("SUPER + I", "Show keybindings", "omarchy menu keybindings")
+o.bind("SUPER + ALT + I", "Tmux keybindings", "omarchy-menu-tmux-keybindings")
 -- Use the physical apostrophe key so this survives layout changes.
 o.bind("SUPER + Apostrophe", "Toggle workspace layout", "omarchy hyprland workspace layout toggle")
 

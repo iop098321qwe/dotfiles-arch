@@ -29,13 +29,22 @@ matches:
           format: "%Y-%m-%d"
 
   # Write a full timestamp with date and time
-  - triggers: [;now, ;ddt, ;datime, ;stamp]
+  - triggers: [;now, ;ddt, ;datime]
     replace: "{{timestamp}}"
     vars:
       - name: timestamp
         type: date
         params:
           format: "%A %Y-%m-%d %H:%M"
+
+  # Write a full timestamp with date and time
+  - trigger: ;stamp
+    replace: "{{timestamp}}"
+    vars:
+      - name: timestamp
+        type: date
+        params:
+          format: "(%H:%M)"
 
   # Create a match for daily notes
   - trigger: ";daily"

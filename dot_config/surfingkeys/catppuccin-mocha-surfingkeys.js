@@ -232,14 +232,16 @@ api.mapkey(";gg", "#3Create new tab group (TE, yellow)", function () {
   api.RUNTIME("createTabGroup", { title: "TE", color: "yellow" });
 });
 
-api.mapkey(";gr", "#3Go to random tab in current window", function () {
+const focusRandomMatchingTab = (description, urlPattern) => {
   api.RUNTIME(
     "getTabs",
     { queryInfo: { currentWindow: true } },
     function (tabRes) {
-      const tabs = (tabRes && tabRes.tabs) || [];
+      const tabs = ((tabRes && tabRes.tabs) || []).filter((tab) =>
+        urlPattern.test(tab.url || ""),
+      );
       if (!tabs.length) {
-        api.Front.showBanner("No tabs in current window", 2000);
+        api.Front.showBanner(`No ${description} URL tab in current window`, 2000);
         return;
       }
       const activeTab = tabs.find((tab) => tab.active);
@@ -247,16 +249,27 @@ api.mapkey(";gr", "#3Go to random tab in current window", function () {
         activeTab && tabs.length > 1
           ? tabs.filter((tab) => tab.id !== activeTab.id)
           : tabs;
-      if (!candidates.length) {
-        api.Front.showBanner("No other tabs in current window", 2000);
-        return;
-      }
       const randomTab =
         candidates[Math.floor(Math.random() * candidates.length)];
       api.RUNTIME("focusTab", { tabId: randomTab.id });
     },
   );
+};
+
+api.mapkey(";gr", "#3Go to random video URL tab in current window", function () {
+  focusRandomMatchingTab("video", /video/i);
 });
+
+api.mapkey(
+  ";gR",
+  "#3Go to random profile URL tab in current window",
+  function () {
+    focusRandomMatchingTab(
+      "model/pornstar/channel/user",
+      /model|pornstar|channel|user/i,
+    );
+  },
+);
 
 const focusLeftmostMatchingTab = (description, matchesTabUrl) => {
   api.RUNTIME(

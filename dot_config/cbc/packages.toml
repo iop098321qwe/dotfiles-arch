@@ -102,8 +102,8 @@ hash = "2fc3869646b00e91a841d60c9a37054d5c3bbd0d"
 
 [[module.deps]]
 use = "iop098321qwe/randomod"
-rev = "0013d63"
-hash = "0013d631ae9fe2026d4dcacc087b976fe19f96a7"
+rev = "87736e7"
+hash = "87736e74bccb1fc48cd5ee9031678d32cfa104fa"
 
 [[module.deps]]
 use = "iop098321qwe/commit-and-tag-version"
