@@ -107,6 +107,6 @@ hash = "87736e74bccb1fc48cd5ee9031678d32cfa104fa"
 
 [[module.deps]]
 use = "iop098321qwe/commit-and-tag-version"
-rev = "704f156"
-hash = "704f15665ecdf04d361714f8607e855fd710ec63"
+rev = "0ed37fd"
+hash = "0ed37fd1abd0def13dd330d5cf28eda058e994b9"
 

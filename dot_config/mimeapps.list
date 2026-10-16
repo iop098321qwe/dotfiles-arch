@@ -51,6 +51,7 @@ x-scheme-handler/t3code=t3code-url-handler.desktop
 x-scheme-handler/mid=userapp-Betterbird-3N40V3.desktop
 message/rfc822=userapp-Betterbird-3N40V3.desktop
 x-scheme-handler/net.thunderbird=userapp-Betterbird-WBZNV3.desktop
+x-scheme-handler/rpi-imager=com.raspberrypi.rpi-imager-uri-handler.desktop
 
 [Added Associations]
 text/markdown=nvim.desktop;
