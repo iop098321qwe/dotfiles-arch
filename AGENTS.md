@@ -163,6 +163,8 @@ task need and user approval.
 - `dot_config/tensaku/config.toml` configures Tensaku.
 - `dot_config/tmux/tmux.conf` configures tmux keybindings and plugins.
 - `dot_config/tmux/dot_planning/config.json` configures tmux planning data.
+- `dot_config/tmux/scripts/open-tuxedo.sh` opens or focuses Tuxedo for the
+  current directory within the current tmux session.
 - `dot_config/tuxedo/config.toml` configures Tuxedo.
 - `dot_config/user-dirs.dirs` configures XDG user directories.
 - `dot_config/voxtype/config.toml` configures Voxtype.
