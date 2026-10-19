@@ -31,21 +31,21 @@ gui:
       - "#f38ba8"
     defaultFgColor:
       - "#cdd6f4"
+    authorColors:
+      "iop098321qwe": "#89dceb"
+      "Dallas Elliott": "#89dceb"
+    branchColorPatterns:
+      "^(docs|chore)/": "#94e2d5" # use a deep blue for branches beginning with 'docs/'
+      'issue-\d+': "#f5e0dc" # use a orange for branches containing 'issue-<some-number>'
+      "^feature/": "#f5c2e7" # use a pink for branches starting with 'feature/'
+      "^bugfix/": "#fab387" # use a maroon for branches starting with 'bugfix/'
+      "^release/": "#74c7ec" # use an electric blue for branches starting with 'release/'
+      "^hotfix/": "#f38ba8" # use a red for branches starting with 'hotfix/'
+      "^support/": "#f9e2af" # use a yellow for branches starting with 'support/'
+      "^main+": "#a6e3a1" # use a lime green for the main branch
+      "^develop+": "#89b4fa" # use a purple for the develop branch
   showListFooter: true
   showCommandLog: false
-  authorColors:
-    "iop098321qwe": "#89dceb"
-    "Dallas Elliott": "#89dceb"
-  branchColorPatterns:
-    "^(docs|chore)/": "#94e2d5" # use a deep blue for branches beginning with 'docs/'
-    'issue-\d+': "#f5e0dc" # use a orange for branches containing 'issue-<some-number>'
-    "^feature/": "#f5c2e7" # use a pink for branches starting with 'feature/'
-    "^bugfix/": "#fab387" # use a maroon for branches starting with 'bugfix/'
-    "^release/": "#74c7ec" # use an electric blue for branches starting with 'release/'
-    "^hotfix/": "#f38ba8" # use a red for branches starting with 'hotfix/'
-    "^support/": "#f9e2af" # use a yellow for branches starting with 'support/'
-    "^main+": "#a6e3a1" # use a lime green for the main branch
-    "^develop+": "#89b4fa" # use a purple for the develop branch
   nerdFontsVersion: "3"
   showFileIcons: true
   showBranchCommitHash: false
