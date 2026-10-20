@@ -838,8 +838,8 @@ desc = "Open Recycle Bin menu"
 # close-and-restore-tab plugin
 [[mgr.prepend_keymap]]
 on = ["<C-w>"]
-run = "plugin close-and-restore-tab close_to_right"
-desc = "Close the current tab and turn to right tab, or quit if it is last tab"
+run = "close"
+desc = "Close the current tab, or quit if it is last"
 
 [[mgr.prepend_keymap]]
 on = ["<C-t>"]

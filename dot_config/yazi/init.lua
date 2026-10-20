@@ -25,6 +25,9 @@ require("starship"):setup({
 -- Recycle Bin
 require("recycle-bin"):setup()
 
+-- Close and Restore Tab
+require("close-and-restore-tab"):setup()
+
 -- Full Border
 require("full-border"):setup {
   -- Available values: ui.Border.PLAIN, ui.Border.ROUNDED
