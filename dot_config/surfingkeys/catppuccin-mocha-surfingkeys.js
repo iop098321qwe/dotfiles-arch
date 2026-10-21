@@ -74,6 +74,143 @@ api.mapkey("M<", "#3Move current tab to far left", function () {
   api.RUNTIME("moveTab", { step: -99 });
 });
 
+let openingAutotaskTicket = false;
+
+const openAutotaskTicket = (position, categoryId, groupTitle) => {
+  if (openingAutotaskTicket) {
+    return;
+  }
+  openingAutotaskTicket = true;
+  const autotaskTicketUrl =
+    "https://ww15.autotask.net/Mvc/ServiceDesk/" +
+    `TicketNew.mvc/Create?categoryId=${categoryId}`;
+  const previousPosition = settings.newTabPosition || "default";
+
+  api.RUNTIME(
+    "getTabs",
+    { queryInfo: { currentWindow: true }, includeLoading: true },
+    function (initialResponse) {
+      const existingIds = new Set(
+        ((initialResponse && initialResponse.tabs) || []).map((tab) => tab.id),
+      );
+      // openLink uses the background placement setting, not a per-tab index.
+      api.RUNTIME(
+        "updateSettings",
+        { scope: "snippets", settings: { newTabPosition: position } },
+        function () {
+          api.RUNTIME("openLink", {
+            url: autotaskTicketUrl,
+            tab: { tabbed: true, active: true },
+          });
+          const deadline = Date.now() + 5000;
+          let placementRestored = false;
+          const finish = (message) => {
+            openingAutotaskTicket = false;
+            if (message) {
+              api.Front.showBanner(message, 3000);
+            }
+          };
+          const poll = () => {
+            api.RUNTIME(
+              "getTabs",
+              { queryInfo: { currentWindow: true }, includeLoading: true },
+              function (response) {
+                const handleTabs = () => {
+                  if (!groupTitle) {
+                    finish();
+                    return;
+                  }
+                  const newTab = ((response && response.tabs) || []).find(
+                    (tab) =>
+                      !existingIds.has(tab.id) &&
+                      (tab.url === autotaskTicketUrl ||
+                        tab.pendingUrl === autotaskTicketUrl),
+                  );
+                  if (newTab) {
+                    // Target the new tab explicitly; the sender is the old tab.
+                    let settled = false;
+                    const timeout = window.setTimeout(() => {
+                      settled = true;
+                      finish("Timed out creating the TE ticket group");
+                    }, 5000);
+                    api.RUNTIME(
+                      "createTabGroup",
+                      {
+                        tabIds: [newTab.id],
+                        title: groupTitle,
+                        color: "yellow",
+                      },
+                      function (result) {
+                        if (settled) {
+                          return;
+                        }
+                        settled = true;
+                        window.clearTimeout(timeout);
+                        finish(
+                          !result ||
+                            result.error ||
+                            result.groupId === undefined
+                            ? "Could not create the TE ticket group"
+                            : null,
+                        );
+                      },
+                    );
+                  } else if (Date.now() < deadline) {
+                    window.setTimeout(poll, 100);
+                  } else {
+                    finish("Could not find the new Autotask ticket tab");
+                  }
+                };
+                if (placementRestored) {
+                  handleTabs();
+                  return;
+                }
+                // Restore only after the queued openLink request is processed.
+                api.RUNTIME(
+                  "updateSettings",
+                  {
+                    scope: "snippets",
+                    settings: { newTabPosition: previousPosition },
+                  },
+                  function () {
+                    placementRestored = true;
+                    handleTabs();
+                  },
+                );
+              },
+            );
+          };
+          poll();
+        },
+      );
+    },
+  );
+};
+
+api.mapkey(
+  ";ni",
+  "#3Open new Autotask category 108 ticket tab at far right",
+  function () {
+    openAutotaskTicket("last", 108);
+  },
+);
+
+api.mapkey(
+  ";nr",
+  "#3Open new Autotask category 109 ticket tab at far right",
+  function () {
+    openAutotaskTicket("last", 109);
+  },
+);
+
+api.mapkey(
+  ";nn",
+  "#3Open new Autotask ticket in a far-left yellow TE group",
+  function () {
+    openAutotaskTicket("first", 108, "TE");
+  },
+);
+
 api.mapkey(";gn", "#3Create new tab group (prompt for title)", function () {
   api.Front.openOmnibar({ type: "Commands", pref: "createTabGroup" });
 });
@@ -241,7 +378,10 @@ const focusRandomMatchingTab = (description, urlPattern) => {
         urlPattern.test(tab.url || ""),
       );
       if (!tabs.length) {
-        api.Front.showBanner(`No ${description} URL tab in current window`, 2000);
+        api.Front.showBanner(
+          `No ${description} URL tab in current window`,
+          2000,
+        );
         return;
       }
       const activeTab = tabs.find((tab) => tab.active);
@@ -256,9 +396,13 @@ const focusRandomMatchingTab = (description, urlPattern) => {
   );
 };
 
-api.mapkey(";gr", "#3Go to random video URL tab in current window", function () {
-  focusRandomMatchingTab("video", /video/i);
-});
+api.mapkey(
+  ";gr",
+  "#3Go to random video URL tab in current window",
+  function () {
+    focusRandomMatchingTab("video", /video/i);
+  },
+);
 
 api.mapkey(
   ";gR",
