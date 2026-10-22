@@ -34,6 +34,7 @@ packages=(
   ncdu
   nmap
   npm
+  odt2txt
   openscad
   pandoc-cli
   proton-vpn-gtk-app

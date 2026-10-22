@@ -292,11 +292,11 @@ keymap = [
   ], run = "cd ~/Documents/Temporary", desc = "Temporary Files" },
   { on = [
     "g",
-    "s",
+    "b",
   ], run = "cd ~/Pictures", desc = "Screenshots" },
   { on = [
     "g",
-    "S",
+    "B",
   ], run = "cd ~/Videos", desc = "Recordings" },
   { on = [
     "g",
