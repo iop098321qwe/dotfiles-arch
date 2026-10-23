@@ -55,3 +55,7 @@
 
 ; [diff]
 ;     colorMoved = default
+[diff "ods"]
+	textconv = odt2txt
+	binary = true
+	cachetextconv = true
