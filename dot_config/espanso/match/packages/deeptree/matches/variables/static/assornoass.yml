@@ -1,8 +1,0 @@
-global_vars:
-  - name: assornoass
-    type: echo
-    params:
-      echo: |-
-        {{stillreqass}}
-
-        {{nolongerreqass}}

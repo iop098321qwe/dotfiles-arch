@@ -4,3 +4,7 @@ CHANGELOG.*
 LICENSE
 todo.txt
 done.txt
+
+# Espanso installs and updates its own package contents and metadata.
+.config/espanso/match/packages
+.config/espanso/match/packages/**
