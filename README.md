@@ -84,6 +84,38 @@ High-level system changes include:
 - Install and upgrade Yazi packages through `ya pkg`.
 - Create a starter host-specific Hyprland monitor profile when missing.
 - Install DisplayLink packages and optionally enable DisplayLink drivers.
+- Deploy the pinned start-page theme companion on Omarchy machines.
+
+## Start-Page Theme Companion
+
+The apply hook `.chezmoiscripts/run_after_003_theme_companion.sh` installs the
+local Omarchy theme reader and Brave native messaging registrations. It
+downloads a pinned revision from `iop098321qwe/main_page`, caches its source,
+and reruns the idempotent installer on each apply. Linux machines without
+Omarchy skip this step. Python 3.11 or newer and an authenticated GitHub CLI
+are required. The hook reuses the earlier GitHub authentication step to read
+the private companion repository; tokens are not embedded in the files.
+
+After applying, open `brave://extensions`, enable Developer mode, and load
+the unpacked extension from
+`~/.local/share/grymm-theme-companion/extension`. The installer prints the
+actual path and stable extension ID. `XDG_DATA_HOME` can change that path.
+Perform this once per Brave Origin or standard Brave profile on each computer.
+Chezmoi does not enable browser extensions automatically.
+
+The GitHub Pages start page then follows the current local Omarchy palette
+live. Without a working companion it uses its original Catppuccin colors.
+No desktop theme is stored or synced between computers.
+
+To update the companion, change the full revision SHA in the hook, then apply
+the dotfiles on each computer. Reload the extension at `brave://extensions`
+and reload open site tabs after updating unpacked extension files.
+Removing the hook prevents future installation; removal of existing native
+registrations is described in the companion guide.
+
+See the [companion guide](https://github.com/iop098321qwe/main_page/blob/5fde175efb77c135ca3706c4b48fda2dd5384065/companion/README.md)
+for installation, fallback, diagnosis, and removal. The guide link is a URL
+line-length exception and includes Quattro state-directory discovery.
 
 ## Pacman Packages Installed
 
