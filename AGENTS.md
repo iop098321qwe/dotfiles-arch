@@ -108,6 +108,8 @@ task need and user approval.
   Spotify and Spicetify setup after Spotify first-run is complete.
 - `.chezmoiscripts/run_after_002_update_crontab.sh` validates and installs
   the user crontab after confirmation.
+- `.chezmoiscripts/run_after_003_theme_companion.sh` deploys the pinned
+  start-page native host and extension for Brave Origin and standard Brave.
 - `.chezmoiscripts/run_after_999_notify_complete.sh` prints completion notice
   and prompts for reboot.
 - `.chezmoiscripts/run_once_after_000_yazi_packages.sh` adds Yazi packages.
@@ -256,6 +258,11 @@ task need and user approval.
 - `.chezmoiscripts/run_000_github_auth.sh` authenticates GitHub CLI early.
 - `.chezmoiscripts/` hooks install packages, start services, configure apps,
   clone repositories, and prompt for reboots or confirmation.
+- The theme companion hook downloads five source files from a pinned
+  `main_page` revision on Linux with Omarchy. It caches them under
+  `XDG_CACHE_HOME`, or `~/.cache`, and reruns the installer on each apply.
+- The companion uses `XDG_CONFIG_HOME` and `XDG_DATA_HOME` with home defaults.
+  Brave profile extension enablement is a separate manual step.
 - Hyprland config starts from Omarchy defaults and loads local Lua overrides.
 - Bash loads Omarchy defaults, then `~/.sources.sh`, then Atuin init.
 - CBC functions are implemented in `executable_dot_custom_bash_commands.sh`
@@ -355,6 +362,9 @@ task need and user approval.
 - LazyVim and lazy.nvim are bootstrapped by Neovim config.
 - The Omarchy post-update hook reports packaged plugin drift without changing
   clone files or their baselines.
+- The optional start-page theme companion uses Python 3.11+, authenticated
+  GitHub CLI downloads, and Brave native messaging. It installs no service
+  and opens no listening port.
 
 ## Troubleshooting
 
@@ -373,6 +383,8 @@ task need and user approval.
 - If DisplayLink setup runs, expect interactive confirmation and possible
   reboot prompt.
 - If clone drift is reported, run `omarchy-cloned-plugin-diff` for a full diff.
+- For start-page theme fallback, verify the unpacked extension is enabled
+  and its native host is installed for the matching Brave browser.
 
 ## Refining Existing AGENTS.md
 
