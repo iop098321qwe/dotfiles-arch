@@ -49,6 +49,35 @@ if ! command -v espanso >/dev/null 2>&1; then
   exit 0
 fi
 
+# Espanso owns installed package files and updates; only install missing ones.
+if ! installed_packages=$(espanso package list); then
+  printf 'Espanso setup error: could not list installed packages.\n' >&2
+  exit 1
+fi
+
+ensure_espanso_package() {
+  local package="$1"
+  shift
+  local marker installed_name details
+
+  while read -r marker installed_name details; do
+    if [[ "$marker" == '-' && "$installed_name" == "$package" ]]; then
+      return 0
+    fi
+  done <<< "$installed_packages"
+
+  if ! spin "Installing Espanso package $package..." \
+    espanso package install "$package" "$@"; then
+    printf 'Espanso setup error: could not install package %s.\n' "$package" >&2
+    return 1
+  fi
+}
+
+ensure_espanso_package markdown-shortcuts || exit 1
+ensure_espanso_package deeptree \
+  --git https://github.com/iop098321qwe/deeptree_espanso \
+  --external || exit 1
+
 # Ensure the Espanso service is registered.
 if ! spin 'Registering Espanso service...' espanso service register; then
   printf 'Espanso setup warning: could not register the user service.\n' >&2
