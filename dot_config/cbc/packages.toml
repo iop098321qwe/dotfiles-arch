@@ -27,8 +27,8 @@ hash = "4bba2169b931c3dac2df181cd73bd1e8bf90eb28"
 
 [[module.deps]]
 use = "iop098321qwe/surfingkeys-update"
-rev = "a87eb2f"
-hash = "a87eb2f7b2a33947f4f41c01b77223da4842b52f"
+rev = "394ff9b"
+hash = "394ff9b437d2d50f3c6fbb965f2f5156aefc6d6a"
 
 [[module.deps]]
 use = "iop098321qwe/chezmod"
@@ -87,8 +87,8 @@ hash = "8316aae5c4d4f6263e94caba8def226f0ad7aa18"
 
 [[module.deps]]
 use = "iop098321qwe/projectmod"
-rev = "aa18907"
-hash = "aa1890752b0e8d91ce9ead7a214f4e211825f635"
+rev = "20be203"
+hash = "20be20338f0953ab87d7195bbcac3996cb4615d3"
 
 [[module.deps]]
 use = "iop098321qwe/docsmod"
