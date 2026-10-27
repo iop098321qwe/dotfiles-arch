@@ -564,10 +564,13 @@ api.mapkey(";T", "#3List tab groups in current window", function () {
  * This configuration keeps the spirit of the original theme while introducing:
  *   • Centralised palette definitions for clarity and reuse.
  *   • Carefully structured CSS blocks that highlight Surfingkeys UI regions.
- *   • Complete Catppuccin coverage across Surfingkeys surfaces, including Vim insert-mode dialogs.
+ *   • Palette coverage across Surfingkeys surfaces and Vim dialogs.
  */
 
-const mochaPalette = Object.freeze({
+// The installer replaces this declaration in the installed copy only.
+const omarchyThemeOptions = Object.freeze({"paletteUrl":"file:///home/grymm/.config/surfingkeys/omarchy-palette.json"});
+
+const fallbackPalette = Object.freeze({
   rosewater: "#f5e0dc",
   flamingo: "#f2cdcd",
   pink: "#f5c2e7",
@@ -596,45 +599,125 @@ const mochaPalette = Object.freeze({
   crust: "#11111b",
 });
 
-const fontStack =
-  '"JetBrains Mono NL", "Maple Mono", "Cascadia Code", "Iosevka", Consolas, Menlo, monospace';
-const heavyShadow = "0px 30px 50px rgba(17, 17, 27, 0.8)"; // crust shadow depth
-const cardShadow = "1px 3px 5px rgba(17, 17, 27, 0.6)";
-const contrastBorderColor = mochaPalette.sapphire; // accent used for framing floating windows
-const focusBorderColor = mochaPalette.lavender; // accent reserved for focused items
-const hoverBackgroundColor = mochaPalette.surface1; // subtle but higher contrast hover state
-const subtleDividerColor = `rgba(148, 226, 213, 0.35)`; // teal translucent for separators
-const softBackdrop = "rgba(17, 17, 27, 0.65)"; // glassy overlay backdrop
+const rgb = (hex) =>
+  [1, 3, 5].map((offset) => parseInt(hex.slice(offset, offset + 2), 16));
 
-const baseHintStyles = [
-  "font-size: 8pt",
-  `font-family: ${fontStack}`,
-  "padding: 0.5px 2px",
-  `border: solid 0.5px ${mochaPalette.crust}`,
-  `color: ${mochaPalette.base} !important`,
-  "border-radius: 5px",
-  `box-shadow: 3px 3px 5px rgba(17, 17, 27, 0.6)`,
-];
+const luminance = (hex) => rgb(hex).reduce((sum, value, index) => {
+  const channel = value / 255;
+  const linear = channel <= 0.04045 ? channel / 12.92
+    : ((channel + 0.055) / 1.055) ** 2.4;
+  return sum + linear * [0.2126, 0.7152, 0.0722][index];
+}, 0);
 
-const hintStyle = (extra) => `${[...baseHintStyles, ...extra].join("; ")};`;
+const mix = (background, foreground, amount) => {
+  const end = rgb(foreground);
+  return "#" + rgb(background).map((start, index) =>
+    Math.round(start * (1 - amount) + end[index] * amount)
+      .toString(16).padStart(2, "0"),
+  ).join("");
+};
 
-api.Hints.style(hintStyle([`background: ${mochaPalette.yellow} !important`]));
+const resolveOmarchyPalette = (data) => {
+  const required = [
+    "background", "foreground", "accent", "red", "green", "yellow",
+    "blue", "cyan", "magenta", "selection_background",
+    "selection_foreground",
+  ];
+  if (!data || data.version !== 1 || !data.colors ||
+      !["light", "dark"].includes(data.mode) ||
+      required.some((key) => !/^#[\da-f]{6}$/i.test(data.colors[key]))) {
+    throw new Error("Invalid Omarchy palette");
+  }
+  const c = data.colors;
+  const shade = (amount) => mix(c.background, c.foreground, amount);
+  return {
+    ...fallbackPalette,
+    base: c.background,
+    mantle: shade(0.03),
+    crust: shade(0),
+    surface0: shade(0.08),
+    surface1: shade(0.14),
+    surface2: shade(0.24),
+    overlay0: shade(0.4),
+    overlay1: shade(0.55),
+    overlay2: shade(0.65),
+    subtext0: shade(0.7),
+    subtext1: shade(0.85),
+    text: c.foreground,
+    rosewater: c.accent,
+    flamingo: c.red,
+    pink: c.magenta,
+    mauve: c.magenta,
+    red: c.red,
+    maroon: c.red,
+    peach: /^#[\da-f]{6}$/i.test(c.orange) ? c.orange : c.yellow,
+    yellow: c.yellow,
+    green: c.green,
+    teal: c.cyan,
+    sky: c.cyan,
+    sapphire: c.accent,
+    blue: c.blue,
+    lavender: c.accent,
+    selection: c.selection_background,
+    selectionText: c.selection_foreground,
+  };
+};
 
-api.Hints.style(
-  hintStyle(["background: #ffffff !important", "font-weight: 600"]),
-  "text",
-);
+// Preserve the original opacity/layout while deriving every RGB from a role.
+const recolor = (css, palette) => {
+  const roles = Object.fromEntries(Object.entries(fallbackPalette)
+    .map(([key, hex]) => [rgb(hex).join(","), key]));
+  roles["196,167,231"] = "mauve";
+  return css.replace(/rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/g,
+    (original, r, g, b, alpha) => {
+      const role = roles[[r, g, b].join(",")];
+      return role ? `rgba(${rgb(palette[role]).join(", ")}, ${alpha})`
+        : original;
+    });
+};
 
-api.Hints.style(
-  hintStyle([
+const renderTheme = (mochaPalette) => {
+  const fontStack = [
+    '"JetBrains Mono NL"', '"Maple Mono"', '"Cascadia Code"', '"Iosevka"',
+    "Consolas", "Menlo", "monospace",
+  ].join(", ");
+  const heavyShadow = "0px 30px 50px rgba(17, 17, 27, 0.8)";
+  const cardShadow = "1px 3px 5px rgba(17, 17, 27, 0.6)";
+  const contrastBorderColor = mochaPalette.sapphire;
+  const focusBorderColor = mochaPalette.lavender;
+  const hoverBackgroundColor = mochaPalette.surface1;
+  const subtleDividerColor = "rgba(148, 226, 213, 0.35)";
+  const softBackdrop = "rgba(17, 17, 27, 0.65)";
+
+  const baseHintStyles = [
+    "font-size: 8pt",
+    `font-family: ${fontStack}`,
+    "padding: 0.5px 2px",
+    `border: solid 0.5px ${mochaPalette.crust}`,
+    `color: ${mochaPalette.base} !important`,
+    "border-radius: 5px",
+    "box-shadow: 3px 3px 5px rgba(17, 17, 27, 0.6)",
+  ];
+
+  const hintStyle = (extra) => `${[...baseHintStyles, ...extra].join("; ")};`;
+
+  // Choose readable text for both dark and light hint backgrounds.
+  const hintLight = luminance(mochaPalette.yellow) + 0.05;
+  const darkContrast = hintLight / (luminance("#11111b") + 0.05);
+  const lightContrast = 1.05 / hintLight;
+  const hintText = darkContrast >= lightContrast ? "#11111b" : "#ffffff";
+  const clickHint = recolor(hintStyle([
     `background: ${mochaPalette.yellow} !important`,
-    `color: ${mochaPalette.crust} !important`,
+    `color: ${hintText} !important`,
     "border-width: 1px",
-  ]),
-  "active",
-);
+  ]), mochaPalette);
+  const textHint = recolor(hintStyle([
+    `background: ${mochaPalette.text} !important`,
+    `color: ${mochaPalette.base} !important`,
+    "font-weight: 600",
+  ]), mochaPalette);
 
-const themeCSS = `
+  const themeCSS = `
   :root {
     --sk-bg-base: ${mochaPalette.base};
     --sk-bg-elevated: ${mochaPalette.mantle};
@@ -1312,8 +1395,8 @@ const themeCSS = `
 
   /* === Vim-style editor overlay === */
   #sk_editor {
-    background: ${mochaPalette.base};
-    color: ${mochaPalette.text};
+    background: ${mochaPalette.base} !important;
+    color: ${mochaPalette.text} !important;
     border: var(--sk-panel-border, 2px solid ${contrastBorderColor});
     border-radius: var(--sk-radius-lg);
     top: 6% !important;
@@ -1943,9 +2026,130 @@ const themeCSS = `
       padding: 0.16rem 0.12rem;
     }
   }
-`;
+  `;
 
-settings.theme = themeCSS;
+  let css = recolor(themeCSS, mochaPalette);
+  if (mochaPalette.selection) {
+    css += `
+      #sk_editor .ace_marker-layer .ace_selection,
+      #sk_editor .CodeMirror-selected {
+        background: ${mochaPalette.selection} !important;
+      }
+      .sk_theme ::selection {
+        background: ${mochaPalette.selection};
+        color: ${mochaPalette.selectionText};
+      }
+    `;
+  }
+  return { css, clickHint, textHint };
+};
+
+const applyHintTheme = ({ clickHint, textHint }) => {
+  api.Hints.style(clickHint);
+  api.Hints.style(textHint, "text");
+  // Hints.style affects future hints; refresh the already-visible holder too.
+  document.querySelectorAll(".surfingkeys_hints_host").forEach((host) => {
+    const holder = host.shadowRoot?.querySelector("section[mode]");
+    const style = holder?.querySelector("style");
+    if (style) {
+      style.textContent = holder.getAttribute("mode") === "text"
+        ? `[mode='text'] div {${textHint}}` : `div {${clickHint}}`;
+    }
+  });
+};
+
+const initialTheme = renderTheme(fallbackPalette);
+settings.theme = initialTheme.css;
+applyHintTheme(initialTheme);
+
+(function enableOmarchyLiveTheme() {
+  const stateKey = "__surfingkeysOmarchyTheme";
+  window[stateKey]?.stop();
+  if (!omarchyThemeOptions.paletteUrl) return;
+
+  let timer;
+  let stopped = false;
+  let busy = false;
+  let previous = "";
+  let scope;
+  let requestId = 0;
+  const request = (action, args) => new Promise((resolve, reject) => {
+    const timeout = window.setTimeout(() => reject(new Error("Timeout")), 5000);
+    api.RUNTIME(action, args, (response) => {
+      window.clearTimeout(timeout);
+      if (response?.error) reject(new Error(response.error));
+      else resolve(response);
+    });
+  });
+  const poll = async () => {
+    if (stopped || busy) return;
+    busy = true;
+    const id = ++requestId;
+    try {
+      if (scope === undefined) {
+        const response = await request("getChannelScope", {});
+        if (typeof response?.scope !== "string") {
+          throw new Error(
+            "Surfingkeys does not expose its live settings channel",
+          );
+        }
+        scope = response.scope;
+      }
+      const response = await request("request", {
+        url: omarchyThemeOptions.paletteUrl,
+      });
+      const data = JSON.parse(response.text);
+      const palette = resolveOmarchyPalette(data);
+      const signature = JSON.stringify(palette);
+      if (!stopped && id === requestId && signature !== previous) {
+        const theme = renderTheme(palette);
+        const channel = scope ? `surfingkeys:${scope}:front` : "surfingkeys:front";
+        // Use the same channel as snippets, including lazy frontend startup.
+        document.dispatchEvent(new CustomEvent(channel, {
+          detail: ["applySettingsFromSnippets", { theme: theme.css }],
+        }));
+        applyHintTheme(theme);
+        previous = signature;
+      }
+    } catch (error) {
+      // Keep the last good theme; a missing file must not interrupt browsing.
+      if (!previous && !stopped && !window[stateKey].warned) {
+        console.warn("Surfingkeys Omarchy sync:", error.message);
+        window[stateKey].warned = true;
+      }
+    } finally {
+      busy = false;
+      if (!stopped) timer = window.setTimeout(poll, 1000);
+    }
+  };
+  const onVisible = () => {
+    if (!document.hidden) {
+      window.clearTimeout(timer);
+      poll();
+    }
+  };
+  const onPageHide = () => {
+    stopped = true;
+    ++requestId;
+    window.clearTimeout(timer);
+  };
+  const onPageShow = () => {
+    stopped = false;
+    poll();
+  };
+  window[stateKey] = {
+    stop() {
+      onPageHide();
+      document.removeEventListener("visibilitychange", onVisible);
+      window.removeEventListener("pagehide", onPageHide);
+      window.removeEventListener("pageshow", onPageShow);
+    },
+  };
+  document.addEventListener("visibilitychange", onVisible);
+  window.addEventListener("pagehide", onPageHide);
+  window.addEventListener("pageshow", onPageShow);
+  poll();
+})();
 
 /**
  * Collapse tab group details by default and add an explicit expansion toggle.

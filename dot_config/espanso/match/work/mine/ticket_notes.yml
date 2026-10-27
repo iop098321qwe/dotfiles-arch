@@ -2,15 +2,6 @@
 
 # Matches for Ticket Notes.
 matches:
-  # Create a match for pasting the temporary password.
-  - trigger: ";tp"
-    vars:
-      - name: "clipb"
-        type: "clipboard"
-    replace: |-
-      Password: {{clipb}}
-      $|$
-
   # Create a match for client verbally approving closure of ticket.
   - regex: ";va(?P<person>.*)\\."
     vars:
