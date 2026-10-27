@@ -76,7 +76,7 @@ task need and user approval.
 
 - `.bootstrap-proton-pass.sh` bootstraps Proton Pass CLI only on init.
 - `.chezmoi.toml.tmpl` configures Chezmoi git behavior and pre-read hook.
-- `.chezmoiignore` excludes repository-only files from Chezmoi apply.
+- `.chezmoiignore` excludes repository-only files and installed Espanso packages.
 - `AGENTS.md` is this repository operating guide.
 - `CHANGELOG.md` is release history; never edit it directly.
 - `LICENSE` is the repository license.
@@ -98,7 +98,8 @@ task need and user approval.
 - `.chezmoiscripts/run_000_syncthing.sh` installs and starts Syncthing.
 - `.chezmoiscripts/run_001_atuin.sh` installs, configures, and syncs Atuin.
 - `.chezmoiscripts/run_002_espanso.sh` installs and starts Espanso, with a
-  temporary gum bypass while the AUR package is broken.
+  temporary gum bypass while the AUR package is broken. It also installs
+  missing required Espanso packages without updating installed ones.
 - `.chezmoiscripts/run_003_cronie.sh` installs and starts Cronie.
 - `.chezmoiscripts/run_004_proton_mail_bridge.sh` installs Mail Bridge.
 - `.chezmoiscripts/run_005_rustdesk.sh` installs and starts RustDesk.
@@ -177,14 +178,10 @@ task need and user approval.
 - `dot_config/espanso/match/base.yml` is a base Espanso match file.
 - `dot_config/espanso/match/coding/` contains coding text expansions.
 - `dot_config/espanso/match/globals/` contains global text expansions.
-- `dot_config/espanso/match/packages/markdown-shortcuts/` is a tracked
-  Espanso package for Markdown shortcuts.
-- `dot_config/espanso/match/personal/` may contain personal expansions.
 - `dot_config/espanso/match/testing/` contains test match definitions.
 - `dot_config/espanso/match/variables/` contains Espanso variables.
 - `dot_config/espanso/match/work/` may contain work-specific expansions.
-- `dot_config/espanso/scripts/credential-generator.sh` generates credentials.
-- `dot_config/espanso/scripts/credential-generator.sh.bak` is a backup script.
+- `dot_config/espanso/scripts/.keep` preserves the scripts directory.
 
 ### Neovim Config
 
@@ -281,6 +278,7 @@ task need and user approval.
 - `omarchy-cloned-plugin-diff`: show upstream changes to local plugin clones.
 - `omarchy-cloned-plugin-diff --summary`: list changed clone files only.
 - `ya pkg add <github-shorthand>`: add Yazi packages from GitHub shorthand.
+- `espanso package update all`: update installed Espanso packages explicitly.
 - Verification needed: no Makefile, justfile, or package script centralizes
   project commands.
 
@@ -352,6 +350,10 @@ task need and user approval.
 - Syncthing user service is enabled by `run_000_syncthing.sh`.
 - Espanso user service is registered and started by `run_002_espanso.sh`,
   unless the user confirms the temporary AUR bypass.
+- The Espanso hook installs missing `markdown-shortcuts` from the Hub and
+  `deeptree` from `https://github.com/iop098321qwe/deeptree_espanso`.
+- Espanso owns installed package contents and metadata; Chezmoi ignores
+  `.config/espanso/match/packages/`. The hook does not update or remove packages.
 - Cronie system service is enabled by `run_003_cronie.sh`.
 - Proton Mail Bridge user service is enabled by `run_004_proton_mail_bridge.sh`.
 - RustDesk system service is enabled by `run_005_rustdesk.sh`.

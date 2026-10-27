@@ -72,6 +72,7 @@ High-level system changes include:
 - Install, configure, log in to, import history for, and sync Atuin.
 - Install Espanso, register its service, and start the user service, unless
   the user confirms the temporary AUR package bypass.
+- Install missing required Espanso packages without updating installed ones.
 - Enable and start the Cronie system service with sudo.
 - Enable and start the Proton Mail Bridge user service.
 - Enable and start the RustDesk system service with sudo.
@@ -85,6 +86,33 @@ High-level system changes include:
 - Create a starter host-specific Hyprland monitor profile when missing.
 - Install DisplayLink packages and optionally enable DisplayLink drivers.
 - Deploy the pinned start-page theme companion on Omarchy machines.
+
+## Espanso Packages
+
+The Espanso setup hook ensures these packages are installed on each machine:
+
+- `markdown-shortcuts` from Espanso Hub.
+- `deeptree` from `https://github.com/iop098321qwe/deeptree_espanso`.
+
+The hook uses `espanso package install` only for missing packages. If Espanso
+installation is bypassed or the executable is unavailable, package setup is
+also skipped. Rerun `chezmoi apply` when Espanso is available to complete setup.
+
+Espanso owns everything under `~/.config/espanso/match/packages/`, including
+package manifests and source metadata. This directory is ignored by Chezmoi;
+existing installed packages remain in place when migrating from tracked copies.
+Keep custom matches outside the package directory.
+
+Update packages explicitly on each machine:
+
+```sh
+espanso package update all
+```
+
+The setup ensures the same required package set, not identical package versions.
+It neither updates installed packages nor removes additional packages. To add a
+required package, add an installation entry to
+`.chezmoiscripts/run_002_espanso.sh`.
 
 ## Start-Page Theme Companion
 
