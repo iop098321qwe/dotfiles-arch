@@ -14,7 +14,7 @@ readonly SOURCE_STATE="$STATE_DIR/source-hash"
 readonly SPICETIFY_STATE_DIR="${SPICETIFY_STATE:-${XDG_STATE_HOME:-$HOME_DIR/.local/state}/spicetify}"
 readonly SPICETIFY_BACKUP_DIR="$SPICETIFY_STATE_DIR/Backup"
 readonly BACKUP_SCHEMA_VERSION="1"
-readonly SPICETIFY_CONFIG_HASH='{{ include "dot_config/private_spicetify/config-xpui.ini.tmpl" | sha256sum }}'
+readonly SPICETIFY_CONFIG_HASH='{{ include "dot_config/private_spicetify/config-xpui.ini" | sha256sum }}'
 readonly SPICETIFY_SOURCE_HASH="$SPICETIFY_CONFIG_HASH"
 
 if (( EUID == 0 )); then
