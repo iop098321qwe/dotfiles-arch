@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.1.3](https://github.com/iop098321qwe/dotfiles-arch/compare/v0.1.2...v0.1.3) (2026-10-27)
+
+### Features
+
+* **rpi-imager:** add raspberry pi imager package as default ([77053af](https://github.com/iop098321qwe/dotfiles-arch/commit/77053affa99a77f68d11b0f1a52022b61f58fdc9))
+* **theme:** deploy the Omarchy site companion with Chezmoi ([28b9b9a](https://github.com/iop098321qwe/dotfiles-arch/commit/28b9b9a7f4fd6fa7acec2b752639c4d75c7c9bf3))
+
+### Bug Fixes
+
+* **theme:** deploy the Quattro-compatible companion revision ([364bfb5](https://github.com/iop098321qwe/dotfiles-arch/commit/364bfb56c4416e54581e7225c2783179de750f17))
+
 ## [0.1.2](https://github.com/iop098321qwe/dotfiles-arch/compare/v0.1.1...v0.1.2) (2026-10-08)
 
 ### Features
