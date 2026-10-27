@@ -9,7 +9,7 @@ if ! command -v omarchy >/dev/null 2>&1 && [[ ! -d /usr/share/omarchy ]]; then
 fi
 
 # Update this pin intentionally when deploying a new companion version.
-revision='7481e817dfdc9d67eaeece729a7127b783873a84'
+revision='fc12e5d7a78ff70becab040fa2eddc69c8eea629'
 repository='iop098321qwe/main_page'
 cache="${XDG_CACHE_HOME:-$HOME/.cache}/grymm-theme-companion"
 source_dir="$cache/$revision"
