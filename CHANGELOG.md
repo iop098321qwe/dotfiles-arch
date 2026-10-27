@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.1.4](https://github.com/iop098321qwe/dotfiles-arch/compare/v0.1.3...v0.1.4) (2026-10-27)
+
+### Bug Fixes
+
+* **espanso:** let the package manager own installed packages ([8a360ca](https://github.com/iop098321qwe/dotfiles-arch/commit/8a360cac0aab96edac2ce16cc630f6da5b38277f))
+* **spicetify:** resolve config include during bootstrap rendering ([bea07ef](https://github.com/iop098321qwe/dotfiles-arch/commit/bea07ef3aec9b96c4ae1a26e2765fd6a8143784e))
+
 ## [0.1.3](https://github.com/iop098321qwe/dotfiles-arch/compare/v0.1.2...v0.1.3) (2026-10-27)
 
 ### Features
