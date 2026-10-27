@@ -113,9 +113,9 @@ and reload open site tabs after updating unpacked extension files.
 Removing the hook prevents future installation; removal of existing native
 registrations is described in the companion guide.
 
-See the [companion guide](https://github.com/iop098321qwe/main_page/blob/798cf77205b3dc83594243c805087fb0364ab555/companion/README.md)
+See the [companion guide](https://github.com/iop098321qwe/main_page/blob/5fde175efb77c135ca3706c4b48fda2dd5384065/companion/README.md)
 for installation, fallback, diagnosis, and removal. The guide link is a URL
-line-length exception and refers to the initial companion documentation.
+line-length exception and includes Quattro state-directory discovery.
 
 ## Pacman Packages Installed
 

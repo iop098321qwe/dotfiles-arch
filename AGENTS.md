@@ -263,6 +263,8 @@ task need and user approval.
   `XDG_CACHE_HOME`, or `~/.cache`, and reruns the installer on each apply.
 - The companion uses `XDG_CONFIG_HOME` and `XDG_DATA_HOME` with home defaults.
   Brave profile extension enablement is a separate manual step.
+- Palette discovery prefers the Quattro `XDG_STATE_HOME` layout and falls
+  back to the older config layout only when the state layout is absent.
 - Hyprland config starts from Omarchy defaults and loads local Lua overrides.
 - Bash loads Omarchy defaults, then `~/.sources.sh`, then Atuin init.
 - CBC functions are implemented in `executable_dot_custom_bash_commands.sh`
