@@ -1,0 +1,23 @@
+# AGENTS.md self-audit loop
+
+## When to run
+
+- After any code change (feature, fix, refactor, config, or docs).
+- After dependency updates, build script changes, or CI changes.
+- After new directories, services, or workflows are introduced.
+
+## Audit steps
+
+1. Re-scan the repo structure and tooling.
+2. Re-scan tracked files and update the file list section, keeping
+   generated output summarized rather than enumerated.
+3. Verify all commands still run and point to the right files.
+4. Compare AGENTS.md sections to current repo state.
+5. Confirm the `todo.txt` manual-only protection rule is explicit.
+6. Update AGENTS.md where mismatches exist.
+7. Remove any update notes or logs from AGENTS.md.
+
+## Failure rules
+
+- If AGENTS.md conflicts with the repo, the file must be updated.
+- Do not leave known mismatches in place.
