@@ -1,5 +1,20 @@
--- Keep only your personal keybinding overrides here. Add new bindings or
--- unbind defaults before replacing them.
+-- Personal keybindings. Unbind defaults before replacing them on Omarchy 4.0.
+--
+-- ONE-TIME AGENT INSTRUCTIONS: Review every TODO(omarchy-4.5) in this file
+-- and hypr/input.lua after upgrading. Verify installed feature support first;
+-- never activate upgrade-only code on 4.0. Back up every file before editing.
+-- Complete each TODO, preserving actions, URLs, focus behavior, and options.
+-- Explicitly tell the user every shortcut/action changed and which bindings
+-- were mechanically converted. Reload with hyprctl reload, then check
+-- hyprctl configerrors and registered bindings; validate input changes too.
+-- Remove each completed TODO. Keep unresolved TODOs and these instructions;
+-- remove this instruction block itself only when every TODO is complete.
+--
+-- TODO(omarchy-4.5): Once native o.rebind exists, convert EVERY active personal
+-- o.bind below to o.rebind and remove its redundant paired hl.unbind calls.
+-- Preserve any intentional disable-only unbinds. Do not add a compatibility
+-- helper or call o.rebind before the upgrade. This protects custom bindings
+-- against future defaults until the user deliberately changes those mappings.
 
 -- See current bindings and descriptions:
 --   omarchy menu keybindings --print
@@ -12,21 +27,12 @@
 -- To disable all preinstalled app/webapp bindings, set:
 --   omarchy_preinstalled_bindings = false
 
--- Add a new binding.
--- o.bind("SUPER + SHIFT + R", "SSH", "alacritty -e ssh your-server")
-
--- Change an existing binding by unbinding it first, then binding the key again.
--- This example changes SUPER+SPACE from the launcher to the Omarchy root menu.
--- hl.unbind("SUPER + SPACE")
--- o.bind("SUPER + SPACE", "Omarchy menu", "omarchy-menu toggle root")
-
--- Disable a default binding without replacing it.
--- hl.unbind("SUPER + SHIFT + B")
-
--- Logitech MX Keys examples:
--- o.bind("SUPER + SHIFT + S", nil, "omarchy-capture-screenshot")
--- o.bind("SUPER + H", nil, "voxtype record toggle")
--- o.bind("SUPER + PERIOD", nil, "omarchy-shell shell toggle omarchy.emojis")
+-- TODO(omarchy-4.5): Verify inherited defaults: SUPER+A selects all, SUPER+M
+-- minimizes to the dock, SUPER+SHIFT+Q opens Calculator, and SUPER+I / SHIFT+I
+-- cycle input forward/backward. Leave these chords WITHOUT personal bindings
+-- or unbinds. Scratchpad 3/music toggle AND move-to bindings are retired.
+-- Right Alt dictation versus German AltGr is an ACCEPTED overlap: leave it
+-- alone unless the user requests a future change; it is not a migration blocker.
 
 -- Replace default terminal/tmux bindings.
 hl.unbind("SUPER + RETURN")       -- was Terminal
@@ -38,6 +44,7 @@ o.bind("SUPER + ALT + RETURN", "Terminal", { omarchy = "terminal" })
 hl.unbind("SUPER + J") -- was Toggle window split
 hl.unbind("SUPER + K") -- was Keybindings
 hl.unbind("SUPER + L") -- was Toggle workspace layout
+hl.unbind("SUPER + H")
 o.bind("SUPER + H", "Move window focus left", hl.dsp.focus({ direction = "l" }))
 o.bind("SUPER + J", "Move window focus down", hl.dsp.focus({ direction = "d" }))
 o.bind("SUPER + K", "Move window focus up", hl.dsp.focus({ direction = "u" }))
@@ -45,17 +52,32 @@ o.bind("SUPER + L", "Move window focus right", hl.dsp.focus({ direction = "r" })
 
 -- Vim-style window swapping.
 hl.unbind("SUPER + ALT + K") -- was Tmux keybindings
+hl.unbind("SUPER + ALT + L") -- 4.5: backward layout cycle; preserve swap right
+hl.unbind("SUPER + ALT + H")
+hl.unbind("SUPER + ALT + J")
 o.bind("SUPER + ALT + H", "Swap window to the left", hl.dsp.window.swap({ direction = "l" }))
 o.bind("SUPER + ALT + J", "Swap window down", hl.dsp.window.swap({ direction = "d" }))
 o.bind("SUPER + ALT + K", "Swap window up", hl.dsp.window.swap({ direction = "u" }))
 o.bind("SUPER + ALT + L", "Swap window to the right", hl.dsp.window.swap({ direction = "r" }))
 
+hl.unbind("SUPER + U")
 o.bind("SUPER + U", "Toggle window split", hl.dsp.layout("togglesplit"))
-o.bind("SUPER + I", "Show keybindings", "omarchy menu keybindings")
-o.bind("SUPER + ALT + I", "Tmux keybindings", "omarchy-menu-tmux-keybindings")
+hl.unbind("SUPER + CTRL + K") -- was Herdr keybindings, moved below
+o.bind("SUPER + CTRL + K", "Show keybindings", "omarchy menu keybindings")
+hl.unbind("SUPER + CTRL + ALT + K")
+o.bind("SUPER + CTRL + ALT + K", "Tmux keybindings", "omarchy-menu-tmux-keybindings")
+hl.unbind("SUPER + CTRL + SHIFT + K")
+o.bind("SUPER + CTRL + SHIFT + K", "Herdr keybindings", "omarchy-menu-herdr-keybindings")
 -- Use the physical apostrophe key so this survives layout changes.
+hl.unbind("SUPER + Apostrophe")
 o.bind("SUPER + Apostrophe", "Toggle workspace layout", "omarchy hyprland workspace layout toggle")
+-- TODO(omarchy-4.5): Verify the installed layout command supports `back`, then
+-- activate the binding below with native o.rebind. Test forward and backward
+-- cycling between dwindle, scrolling, and floating. Keep SUPER+ALT+L for swapping.
+-- o.rebind("SUPER + ALT + Apostrophe", "Cycle workspace layout back",
+--   "omarchy hyprland workspace layout toggle back")
 
+hl.unbind("SUPER + SHIFT + H")
 o.bind("SUPER + SHIFT + H", "GitHub", {
   webapp = "https://github.com/iop098321qwe?tab=repositories",
   focus = true,
@@ -67,6 +89,7 @@ o.bind("SUPER + SHIFT + SLASH", "Passwords", {
   focus = "proton-pass",
 })
 
+hl.unbind("SUPER + SHIFT + V")
 o.bind("SUPER + SHIFT + V", "Proton VPN", {
   launch = "protonvpn-app",
   focus = "protonvpn-app",
@@ -89,21 +112,19 @@ o.bind("SUPER + SHIFT + C", "Notion Calendar", {
   focus = true,
 })
 
+hl.unbind("SUPER + SHIFT + J")
 o.bind("SUPER + SHIFT + J", "Notion", {
   webapp = "https://notion.so",
   focus = true,
 })
+hl.unbind("SUPER + SHIFT + R")
 o.bind("SUPER + SHIFT + R", "Reddit", {
   webapp = "https://reddit.com",
   focus = true,
 })
 
 hl.unbind("SUPER + SHIFT + W") -- was Omawrite
-o.bind("SUPER + SHIFT + W", "Deeptree RocketChat", {
-  webapp = "https://msg.deeptree.tech/home",
-  focus = true,
-})
-o.bind("SUPER + SHIFT + Q", "Deeptree Matrix", {
+o.bind("SUPER + SHIFT + W", "Deeptree Matrix", {
   webapp = "https://muninn.deeptree.tech/index.html",
   focus = true,
 })
@@ -114,18 +135,22 @@ o.bind("SUPER + SHIFT + S", "Vesktop", {
   focus = "vesktop",
 })
 
+hl.unbind("SUPER + SHIFT + L")
 o.bind("SUPER + SHIFT + L", "Emby", {
   webapp = "https://app.emby.media",
   focus = true,
 })
+hl.unbind("SUPER + SHIFT + K")
 o.bind("SUPER + SHIFT + K", "Deeptree Nextcloud", {
   webapp = "https://cloud.deeptree.tech",
   focus = true,
 })
+hl.unbind("SUPER + SHIFT + ALT + L")
 o.bind("SUPER + SHIFT + ALT + L", "Amazon", {
   webapp = "https://amazon.com",
   focus = true,
 })
+hl.unbind("SUPER + SHIFT + CTRL + M")
 o.bind("SUPER + SHIFT + CTRL + M", "Suno", {
   webapp = "https://suno.com",
   focus = true,
@@ -137,6 +162,7 @@ o.bind("SUPER + SHIFT + ALT + A", "Anthropic", {
   focus = true,
 })
 
+hl.unbind("SUPER + SHIFT + ALT + S")
 o.bind("SUPER + SHIFT + ALT + S", "BambuStudio", {
   launch = "bambustudio",
   focus = "bambustudio",
@@ -148,37 +174,47 @@ o.bind("SUPER + SHIFT + ALT + G", "MakerWorld", {
   focus = true,
 })
 
+hl.unbind("SUPER + SHIFT + ALT + Q")
 o.bind("SUPER + SHIFT + ALT + Q", "Snapchat", {
   webapp = "https://www.snapchat.com/web",
   focus = true,
 })
+hl.unbind("SUPER + SHIFT + CTRL + B")
 o.bind("SUPER + SHIFT + CTRL + B", "Firefox", { launch = "firefox" })
 
+hl.unbind("SUPER + D")
+hl.unbind("SUPER + ALT + D")
 o.bind("SUPER + D", "Scratchpad 2", hl.dsp.workspace.toggle_special("scratchpad2"))
 o.bind("SUPER + ALT + D", "Move window to scratchpad 2",
   hl.dsp.window.move({ workspace = "special:scratchpad2", follow = false }))
-o.bind("SUPER + A", "Scratchpad 3", hl.dsp.workspace.toggle_special("scratchpad3"))
-o.bind("SUPER + ALT + A", "Move window to scratchpad 3",
-  hl.dsp.window.move({ workspace = "special:scratchpad3", follow = false }))
+hl.unbind("SUPER + Z")
+hl.unbind("SUPER + ALT + Z")
 o.bind("SUPER + Z", "Scratchpad 4", hl.dsp.workspace.toggle_special("scratchpad4"))
 o.bind("SUPER + ALT + Z", "Move window to scratchpad 4",
   hl.dsp.window.move({ workspace = "special:scratchpad4", follow = false }))
+hl.unbind("SUPER + E")
+hl.unbind("SUPER + ALT + E")
 o.bind("SUPER + E", "Scratchpad 5", hl.dsp.workspace.toggle_special("scratchpad5"))
 o.bind("SUPER + ALT + E", "Move window to scratchpad 5",
   hl.dsp.window.move({ workspace = "special:scratchpad5", follow = false }))
+hl.unbind("SUPER + Q") -- 4.5: Close window; preserve scratchpad 6 instead
 o.bind("SUPER + Q", "Scratchpad 6", hl.dsp.workspace.toggle_special("scratchpad6"))
+hl.unbind("SUPER + ALT + Q")
 o.bind("SUPER + ALT + Q", "Move window to scratchpad 6",
   hl.dsp.window.move({ workspace = "special:scratchpad6", follow = false }))
+hl.unbind("SUPER + R")
+hl.unbind("SUPER + ALT + R")
 o.bind("SUPER + R", "Scratchpad Passwords", hl.dsp.workspace.toggle_special("passwords"))
 o.bind("SUPER + ALT + R", "Move window to password scratchpad",
   hl.dsp.window.move({ workspace = "special:passwords", follow = false }))
-o.bind("SUPER + M", "Music Scratchpad", hl.dsp.workspace.toggle_special("music"))
-o.bind("SUPER + ALT + M", "Move window to music scratchpad",
-  hl.dsp.window.move({ workspace = "special:music", follow = false }))
+hl.unbind("SUPER + PERIOD")
+hl.unbind("SUPER + ALT + PERIOD")
 o.bind("SUPER + PERIOD", "Secret Scratchpad", hl.dsp.workspace.toggle_special("secret"))
 o.bind("SUPER + ALT + PERIOD", "Move window to secret scratchpad",
   hl.dsp.window.move({ workspace = "special:secret", follow = false }))
 
+hl.unbind("SUPER + SHIFT + ALT + D")
 o.bind("SUPER + SHIFT + ALT + D", "SSH", { tui = "lazyssh", focus = true })
+hl.unbind("CTRL + ALT + R")
 o.bind("CTRL + ALT + R", "Reload Espanso",
   "sh -c 'espanso restart && omarchy-notification-send \"Espanso reloaded successfully.\"'")
