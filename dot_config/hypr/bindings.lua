@@ -1,6 +1,6 @@
 -- Personal keybindings. Unbind defaults before replacing them on Omarchy 4.0.
 --
--- ONE-TIME AGENT INSTRUCTIONS: Review every TODO(omarchy-4.5) in this file
+-- ONE-TIME AGENT INSTRUCTIONS: Review every TODO (omarchy-4.5) in this file
 -- and hypr/input.lua after upgrading. Verify installed feature support first;
 -- never activate upgrade-only code on 4.0. Back up every file before editing.
 -- Complete each TODO, preserving actions, URLs, focus behavior, and options.
@@ -10,11 +10,13 @@
 -- Remove each completed TODO. Keep unresolved TODOs and these instructions;
 -- remove this instruction block itself only when every TODO is complete.
 --
--- TODO(omarchy-4.5): Once native o.rebind exists, convert EVERY active personal
+-- TODO: (omarchy-4.5) Once native o.rebind exists, convert EVERY active personal
 -- o.bind below to o.rebind and remove its redundant paired hl.unbind calls.
 -- Preserve any intentional disable-only unbinds. Do not add a compatibility
 -- helper or call o.rebind before the upgrade. This protects custom bindings
 -- against future defaults until the user deliberately changes those mappings.
+-- This should only effect personal bindings that first have a hl.unbind call,
+-- then an o.bind call.
 
 -- See current bindings and descriptions:
 --   omarchy menu keybindings --print
@@ -27,7 +29,7 @@
 -- To disable all preinstalled app/webapp bindings, set:
 --   omarchy_preinstalled_bindings = false
 
--- TODO(omarchy-4.5): Verify inherited defaults: SUPER+A selects all, SUPER+M
+-- TODO: (omarchy-4.5) Verify inherited defaults: SUPER+A selects all, SUPER+M
 -- minimizes to the dock, SUPER+SHIFT+Q opens Calculator, and SUPER+I / SHIFT+I
 -- cycle input forward/backward. Leave these chords WITHOUT personal bindings
 -- or unbinds. Scratchpad 3/music toggle AND move-to bindings are retired.
@@ -71,7 +73,7 @@ o.bind("SUPER + CTRL + SHIFT + K", "Herdr keybindings", "omarchy-menu-herdr-keyb
 -- Use the physical apostrophe key so this survives layout changes.
 hl.unbind("SUPER + Apostrophe")
 o.bind("SUPER + Apostrophe", "Toggle workspace layout", "omarchy hyprland workspace layout toggle")
--- TODO(omarchy-4.5): Verify the installed layout command supports `back`, then
+-- TODO: (omarchy-4.5) Verify the installed layout command supports `back`, then
 -- activate the binding below with native o.rebind. Test forward and backward
 -- cycling between dwindle, scrolling, and floating. Keep SUPER+ALT+L for swapping.
 -- o.rebind("SUPER + ALT + Apostrophe", "Cycle workspace layout back",

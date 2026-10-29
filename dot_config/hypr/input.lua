@@ -8,7 +8,7 @@ hl.config({
     -- Keep US/German layouts. No toggle is needed during the 4.0 transition;
     -- inherit SUPER+I / SUPER+SHIFT+I input cycling after upgrading to 4.5.
     kb_layout = "us, de",
-    -- TODO(omarchy-4.5): Adapt stock shifted Compose to the swapped keys using
+    -- TODO: (omarchy-4.5) Adapt stock shifted Compose to the swapped keys using
     -- a user-owned XKB definition: physical CAPS -> Escape, physical ESC ->
     -- Caps Lock, physical SHIFT+ESC -> Compose without toggling Caps Lock.
     -- Stock omarchy:shift_caps_compose targets physical CAPS; do not merely
