@@ -2,48 +2,48 @@
 
 [[module.deps]]
 use = "iop098321qwe/filemod"
-rev = "2ab218f"
-hash = "2ab218f5edc6913c0e43d28d360f92896a6d9854"
+rev = "c6c3070"
+hash = "c6c30708afd6b24cd9cc2fd9bca1a90df6937ead"
 
 [[module.deps]]
 use = "iop098321qwe/lazymod"
-rev = "10e3fd0"
-hash = "10e3fd038a4bfed7a4e66bf73fcbedd01b510002"
+rev = "a03f16b"
+hash = "a03f16b261bfc269242716d1009e4826788244bb"
 
 [[module.deps]]
 use = "iop098321qwe/vim-exit"
-rev = "a566d36"
-hash = "a566d36bc3cf618fa50ac6413c535edcad58a4a1"
+rev = "6bd28f8"
+hash = "6bd28f82b8b7c0743907a5fdbea3800af58c44b4"
 
 [[module.deps]]
 use = "iop098321qwe/cd-shortcuts"
-rev = "18f45b7"
-hash = "18f45b7fce0dd4c9033270d1a8b9f79ab28a1d32"
+rev = "179cd4a"
+hash = "179cd4a919270f563f841660b39c35a3c40d80a2"
 
 [[module.deps]]
 use = "iop098321qwe/interactive"
-rev = "4bba216"
-hash = "4bba2169b931c3dac2df181cd73bd1e8bf90eb28"
+rev = "b7d0e0f"
+hash = "b7d0e0fc45ef406ff3483379dddcc036f6b79f71"
 
 [[module.deps]]
 use = "iop098321qwe/surfingkeys-update"
-rev = "394ff9b"
-hash = "394ff9b437d2d50f3c6fbb965f2f5156aefc6d6a"
+rev = "e534071"
+hash = "e5340711c58e2df5138aee05571b90a34e26b8f0"
 
 [[module.deps]]
 use = "iop098321qwe/chezmod"
-rev = "7af34d8"
-hash = "7af34d8fd645633b279d20e407d7b29e80dede82"
+rev = "e0420cf"
+hash = "e0420cfda17a79c456c44dc600cebdf72dfee9ad"
 
 [[module.deps]]
 use = "iop098321qwe/cronmod"
-rev = "001f86e"
-hash = "001f86eb935fdbca9b057fc0eb1b28470a46803a"
+rev = "e9b7074"
+hash = "e9b707452ef5bf719e2a3e485a7f96636afbaa2f"
 
 [[module.deps]]
 use = "iop098321qwe/opencodemod"
-rev = "33e82b0"
-hash = "33e82b0c1edc977391c487576bfdafd184558fc4"
+rev = "bff03ca"
+hash = "bff03ca56682507d84cd1a5f350f8b1e425d11f1"
 
 [[module.deps]]
 use = "iop098321qwe/smartsort"
@@ -52,38 +52,38 @@ hash = "029d4b54abf46db6b9f02e2e7be41b22b30856de"
 
 [[module.deps]]
 use = "iop098321qwe/gitmod"
-rev = "f20beb0"
-hash = "f20beb0e4e8f8cf068f3d97645bf5875b1d78239"
+rev = "d7d658e"
+hash = "d7d658e2b3f34603102d00b5b8b646346215a56a"
 
 [[module.deps]]
 use = "iop098321qwe/makeman"
-rev = "098bdb0"
-hash = "098bdb02f6e9f55c895d07c0230641e70fa7571f"
+rev = "80c52c6"
+hash = "80c52c60ff02f2725d416239480b553bd9b6be0a"
 
 [[module.deps]]
 use = "iop098321qwe/repeat"
-rev = "bba0df1"
-hash = "bba0df196cfabf4c4ae4b1455fa4b44da017bb74"
+rev = "d1eea59"
+hash = "d1eea59a1481dd784fc38b6a954ff08b17af4963"
 
 [[module.deps]]
 use = "iop098321qwe/tmuxmod"
-rev = "fba7154"
-hash = "fba71547f258a99673097728528cba6c5031724f"
+rev = "5e8fff8"
+hash = "5e8fff80aa2cf9c3f19d474b1444710d05d75730"
 
 [[module.deps]]
 use = "iop098321qwe/protonmod"
-rev = "5695dc9"
-hash = "5695dc92205f95a17e50d5f1b5c5eada289666fb"
+rev = "fd4ab2d"
+hash = "fd4ab2dd94252478de3c5ee82eff75dc2eaf0f1d"
 
 [[module.deps]]
 use = "iop098321qwe/tuxedomod"
-rev = "5ae891a"
-hash = "5ae891a9fd52c75e6618a41fda6d646902c687f9"
+rev = "bdf853e"
+hash = "bdf853e36f66efbf6d0ec5a9ebfa44f845076825"
 
 [[module.deps]]
 use = "iop098321qwe/venvmod"
-rev = "8316aae"
-hash = "8316aae5c4d4f6263e94caba8def226f0ad7aa18"
+rev = "071eb32"
+hash = "071eb321d4db0375e26137d63df993fede0cb180"
 
 [[module.deps]]
 use = "iop098321qwe/projectmod"
@@ -92,21 +92,26 @@ hash = "20be20338f0953ab87d7195bbcac3996cb4615d3"
 
 [[module.deps]]
 use = "iop098321qwe/docsmod"
-rev = "fc09d59"
-hash = "fc09d598bc46d30c939139e98610bf335f49e1a8"
+rev = "99f907e"
+hash = "99f907efe23c523f939dc3638ea77a6b0722fb9c"
 
 [[module.deps]]
 use = "iop098321qwe/prettiermod"
-rev = "2fc3869"
-hash = "2fc3869646b00e91a841d60c9a37054d5c3bbd0d"
+rev = "cb927a0"
+hash = "cb927a0541c8c8b7be926e1cac1ee671ede77439"
 
 [[module.deps]]
 use = "iop098321qwe/randomod"
-rev = "87736e7"
-hash = "87736e74bccb1fc48cd5ee9031678d32cfa104fa"
+rev = "a881f9b"
+hash = "a881f9bdf9ed35409317b7b568d700d41bc46a3e"
 
 [[module.deps]]
 use = "iop098321qwe/commit-and-tag-version"
-rev = "0ed37fd"
-hash = "0ed37fd1abd0def13dd330d5cf28eda058e994b9"
+rev = "c2706e8"
+hash = "c2706e81cff0e46e18618a8c66290d31b860e3ca"
+
+[[module.deps]]
+use = "iop098321qwe/skillmod"
+rev = "3242c42"
+hash = "3242c42393e48c57759eeba3748ef97d3d696edb"
 
