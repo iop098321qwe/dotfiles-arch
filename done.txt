@@ -28,3 +28,5 @@ x 2026-09-15 2026-09-15 prompt for reboot after completion +chezmoi @feat
 x 2026-09-16 2026-09-15 fix 30 minute sudo authentication running after package installs +chezmoi @fix
 x 2026-09-16 2026-09-15 add functionality to copy github password during github installation @feat +chezmoi
 x 2026-09-16 2026-09-15 convert launch spotify and authenticate now and have you signed in and reached the spotify app UI prompts to gum +chezmoi @fix
+x 2026-10-30 2026-09-16 fix proton pass cli asking for authentication even if it is already authenticated +chezmoi @fix
+x 2026-10-30 2026-09-18 allow bypass of 30 minute sudo authentication to continue if user will monitor chezmoi initialization +chezmoi @feat
