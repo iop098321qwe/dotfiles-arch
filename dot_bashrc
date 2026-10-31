@@ -30,3 +30,7 @@ source ~/.sources.sh
 
 # Atuin
 eval "$(atuin init bash)"
+
+# Atuin registers BLE_ONLOAD hooks, so it supports loading before ble.sh.
+# Let Readline integrations finish first, then import their bindings once.
+source /usr/share/blesh/ble.sh 2>/dev/null || true

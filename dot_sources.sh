@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-# ble.sh (must be loaded before atuin init)
-source /usr/share/blesh/ble.sh 2>/dev/null || true
+# ble.sh is loaded at the end of ~/.bashrc, after Readline integrations.
 
 # FZF Integration
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
