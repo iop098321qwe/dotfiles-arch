@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Emby
+Comment=Emby
+Exec=omarchy-launch-webapp "https://app.emby.media"
+Terminal=false
+Type=Application
+Icon=emby
+StartupNotify=true
