@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Proton Mail
+Comment=Proton Mail
+Exec=omarchy-launch-webapp "https://mail.proton.me"
+Terminal=false
+Type=Application
+Icon=proton-mail
+StartupNotify=true
