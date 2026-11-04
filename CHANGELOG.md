@@ -2,6 +2,40 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.1.5](https://github.com/iop098321qwe/dotfiles-arch/compare/v0.1.4...v0.1.5) (2026-11-04)
+
+### Features
+
+* **hypr:** move Amazon access from shortcut to app menu ([502f102](https://github.com/iop098321qwe/dotfiles-arch/commit/502f10245934b544dc84c0484cf2a613caa0e48e))
+* **hypr:** move Emby access from shortcut to app menu ([3a49e2e](https://github.com/iop098321qwe/dotfiles-arch/commit/3a49e2ec3e915cff55a6dc601d4610c325d646d4))
+* **hypr:** move GitHub access from shortcut to app menu ([439f53e](https://github.com/iop098321qwe/dotfiles-arch/commit/439f53ecb4021d662ccfea7278655263af75e4ef))
+* **hypr:** move MakerWorld access from shortcut to app menu ([7691d4c](https://github.com/iop098321qwe/dotfiles-arch/commit/7691d4cd46e3918649c462d3d0ddf87e07fd50bc))
+* **hypr:** move Reddit access from shortcut to app menu ([e14d093](https://github.com/iop098321qwe/dotfiles-arch/commit/e14d0936e15d33470f6340a246c03fcfb8118b8c))
+* **hypr:** move Suno access from shortcut to app menu ([f05fca0](https://github.com/iop098321qwe/dotfiles-arch/commit/f05fca0b742cd4525de8da02816f656cc43d68f6))
+* **hypr:** remove dedicated Bambu Studio launch shortcut ([34f5800](https://github.com/iop098321qwe/dotfiles-arch/commit/34f5800b6b1b29e7eb0a0dd3e6c25118cb58ee5b))
+* **hypr:** restore Google Maps shortcut in place of Vesktop ([c6cc7a5](https://github.com/iop098321qwe/dotfiles-arch/commit/c6cc7a5eddbe9cccf71fca958dd7f6aa05d0f432))
+* **webapps:** add synced Amazon menu launcher ([66d9fa3](https://github.com/iop098321qwe/dotfiles-arch/commit/66d9fa31912cf6196374b11219c7cd998975abd7))
+* **webapps:** add synced Claude menu launcher ([512c855](https://github.com/iop098321qwe/dotfiles-arch/commit/512c85540388c705fbab2a94d38f581bea61ad75))
+* **webapps:** add synced Deeptree Matrix menu launcher ([261baf6](https://github.com/iop098321qwe/dotfiles-arch/commit/261baf6ed31be64c2cd4f10e12225231b90d17c1))
+* **webapps:** add synced Deeptree Nextcloud menu launcher ([a893310](https://github.com/iop098321qwe/dotfiles-arch/commit/a893310463f731bfa7f5111f4206975345218241))
+* **webapps:** add synced Emby menu launcher ([f28a06b](https://github.com/iop098321qwe/dotfiles-arch/commit/f28a06b81c3125bb96370452cad4ce8779c6e5ab))
+* **webapps:** add synced Figma menu launcher ([28f35a3](https://github.com/iop098321qwe/dotfiles-arch/commit/28f35a39b58c4df2504b86a1b1df4130f9c5af8f))
+* **webapps:** add synced Fizzy menu launcher ([45db067](https://github.com/iop098321qwe/dotfiles-arch/commit/45db0671045464800be45957bff3ba87b5ca078a))
+* **webapps:** add synced GitHub menu launcher ([2d00db6](https://github.com/iop098321qwe/dotfiles-arch/commit/2d00db66269c93f4fe171fd6d02983fe4be198a3))
+* **webapps:** add synced MakerWorld menu launcher ([5540307](https://github.com/iop098321qwe/dotfiles-arch/commit/55403079b504cd1133348dca8ca5908d59ac1a05))
+* **webapps:** add synced Notion Calendar menu launcher ([4a25b34](https://github.com/iop098321qwe/dotfiles-arch/commit/4a25b34f43fbc8dddf3910b4cb2c1162b5537e1d))
+* **webapps:** add synced Notion menu launcher ([97ad816](https://github.com/iop098321qwe/dotfiles-arch/commit/97ad8162ade8047739ae78046812ad4f048b4848))
+* **webapps:** add synced Proton Mail menu launcher ([dcea171](https://github.com/iop098321qwe/dotfiles-arch/commit/dcea17166533e398431a5221e81644b832cd6a11))
+* **webapps:** add synced Reddit menu launcher ([da8d6be](https://github.com/iop098321qwe/dotfiles-arch/commit/da8d6be0c34dcb73894eb2e1ec23f0de945f9cc6))
+* **webapps:** add synced Snapchat menu launcher ([23fc623](https://github.com/iop098321qwe/dotfiles-arch/commit/23fc62303036682d468250fea6ef807b584bc544))
+* **webapps:** add synced Suno menu launcher ([6c16c8d](https://github.com/iop098321qwe/dotfiles-arch/commit/6c16c8de33aa9c135352f88b924f9cd7bb767ddc))
+* **webapps:** add synced Tailscale menu launcher ([2a46b4d](https://github.com/iop098321qwe/dotfiles-arch/commit/2a46b4d486747c3a507f1e18685b904620694775))
+* **webapps:** add synced Twitch menu launcher ([ff2f541](https://github.com/iop098321qwe/dotfiles-arch/commit/ff2f541c59874037d2fe7636f5e6eed3bcabc07a))
+
+### Bug Fixes
+
+* **webapps:** encode the Proton Mail icon as PNG ([0cb8efc](https://github.com/iop098321qwe/dotfiles-arch/commit/0cb8efcce4be1023cfdadc7b41d017692cce0f5e))
+
 ## [0.1.4](https://github.com/iop098321qwe/dotfiles-arch/compare/v0.1.3...v0.1.4) (2026-10-27)
 
 ### Bug Fixes
