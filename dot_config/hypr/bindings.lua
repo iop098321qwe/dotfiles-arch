@@ -132,12 +132,6 @@ o.bind("SUPER + SHIFT + ALT + A", "Anthropic", {
   focus = true,
 })
 
-hl.unbind("SUPER + SHIFT + ALT + S")
-o.bind("SUPER + SHIFT + ALT + S", "BambuStudio", {
-  launch = "bambustudio",
-  focus = "bambustudio",
-})
-
 hl.unbind("SUPER + SHIFT + ALT + G") -- was WhatsApp
 o.bind("SUPER + SHIFT + ALT + G", "MakerWorld", {
   webapp = "https://makerworld.com/en",
