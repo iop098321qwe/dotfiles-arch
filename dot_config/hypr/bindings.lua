@@ -79,12 +79,6 @@ o.bind("SUPER + Apostrophe", "Toggle workspace layout", "omarchy hyprland worksp
 -- o.rebind("SUPER + ALT + Apostrophe", "Cycle workspace layout back",
 --   "omarchy hyprland workspace layout toggle back")
 
-hl.unbind("SUPER + SHIFT + H")
-o.bind("SUPER + SHIFT + H", "GitHub", {
-  webapp = "https://github.com/iop098321qwe?tab=repositories",
-  focus = true,
-})
-
 hl.unbind("SUPER + SHIFT + SLASH") -- was Passwords (1Password)
 o.bind("SUPER + SHIFT + SLASH", "Passwords", {
   launch = "proton-pass",
@@ -119,11 +113,6 @@ o.bind("SUPER + SHIFT + J", "Notion", {
   webapp = "https://notion.so",
   focus = true,
 })
-hl.unbind("SUPER + SHIFT + R")
-o.bind("SUPER + SHIFT + R", "Reddit", {
-  webapp = "https://reddit.com",
-  focus = true,
-})
 
 hl.unbind("SUPER + SHIFT + W") -- was Omawrite
 o.bind("SUPER + SHIFT + W", "Deeptree Matrix", {
@@ -131,48 +120,15 @@ o.bind("SUPER + SHIFT + W", "Deeptree Matrix", {
   focus = true,
 })
 
-hl.unbind("SUPER + SHIFT + S") -- was Google Maps
-o.bind("SUPER + SHIFT + S", "Vesktop", {
-  launch = "vesktop",
-  focus = "vesktop",
-})
-
-hl.unbind("SUPER + SHIFT + L")
-o.bind("SUPER + SHIFT + L", "Emby", {
-  webapp = "https://app.emby.media",
-  focus = true,
-})
 hl.unbind("SUPER + SHIFT + K")
 o.bind("SUPER + SHIFT + K", "Deeptree Nextcloud", {
   webapp = "https://cloud.deeptree.tech",
-  focus = true,
-})
-hl.unbind("SUPER + SHIFT + ALT + L")
-o.bind("SUPER + SHIFT + ALT + L", "Amazon", {
-  webapp = "https://amazon.com",
-  focus = true,
-})
-hl.unbind("SUPER + SHIFT + CTRL + M")
-o.bind("SUPER + SHIFT + CTRL + M", "Suno", {
-  webapp = "https://suno.com",
   focus = true,
 })
 
 hl.unbind("SUPER + SHIFT + ALT + A") -- was Grok
 o.bind("SUPER + SHIFT + ALT + A", "Anthropic", {
   webapp = "https://claude.ai/new",
-  focus = true,
-})
-
-hl.unbind("SUPER + SHIFT + ALT + S")
-o.bind("SUPER + SHIFT + ALT + S", "BambuStudio", {
-  launch = "bambustudio",
-  focus = "bambustudio",
-})
-
-hl.unbind("SUPER + SHIFT + ALT + G") -- was WhatsApp
-o.bind("SUPER + SHIFT + ALT + G", "MakerWorld", {
-  webapp = "https://makerworld.com/en",
   focus = true,
 })
 

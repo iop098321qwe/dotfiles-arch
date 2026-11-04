@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Deeptree Nextcloud
+Comment=Deeptree Nextcloud
+Exec=omarchy-launch-webapp "https://cloud.deeptree.tech"
+Terminal=false
+Type=Application
+Icon=deeptree-nextcloud
+StartupNotify=true

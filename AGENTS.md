@@ -248,6 +248,31 @@ task need and user approval.
 - `dot_local/bin/executable_omarchy-cloned-plugin-diff` reports upstream
   changes to cloned Omarchy plugins.
 
+### Local Share Web Apps
+
+The following desktop entries live in `dot_local/share/applications/`.
+Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
+
+- `executable_Amazon.desktop` opens Amazon.
+- `executable_Claude.desktop` opens a new Claude conversation.
+- `executable_Deeptree Matrix.desktop` opens Deeptree Matrix.
+- `executable_Deeptree Nextcloud.desktop` opens Deeptree Nextcloud.
+- `executable_Emby.desktop` opens the Emby web app.
+- `executable_Figma.desktop` opens Figma.
+- `executable_Fizzy.desktop` opens Fizzy.
+- `executable_GitHub.desktop` opens GitHub.
+- `executable_MakerWorld.desktop` opens MakerWorld.
+- `executable_Notion.desktop` opens Notion.
+- `executable_Notion Calendar.desktop` opens Notion Calendar.
+- `executable_Proton Mail.desktop` opens Proton Mail.
+- `executable_Reddit.desktop` opens Reddit.
+- `executable_Snapchat.desktop` opens Snapchat's web app.
+- `executable_Suno.desktop` opens Suno.
+- `executable_Tailscale.desktop` opens the Tailscale admin machines page.
+- `executable_Twitch.desktop` opens Twitch.
+- `dot_local/share/icons/hicolor/` stores the launchers' generated PNG icon
+  assets, summarized here rather than listed individually.
+
 ## Architecture
 
 - This repository is a Chezmoi source tree for home-directory dotfiles.
@@ -270,6 +295,13 @@ task need and user approval.
 - Palette discovery prefers the Quattro `XDG_STATE_HOME` layout and falls
   back to the older config layout only when the state layout is absent.
 - Hyprland config starts from Omarchy defaults and loads local Lua overrides.
+- Custom web apps are ordinary desktop entries that call
+  `omarchy-launch-webapp`. Chezmoi installs their launchers and icons directly;
+  no per-machine downloads or installation hook is required.
+- Web-app icons use theme names resolved from the user's hicolor icon directory,
+  with no username-specific absolute paths in desktop entries.
+- Keep Omarchy's default web-app launchers outside Chezmoi management so
+  Omarchy updates retain ownership of their behavior.
 - Television uses the `omarchy` theme, generated from its user template on
   Omarchy theme changes. Reopen the picker to load updated colors.
 - The Sesh binding calls `open-sesh.sh` with the originating pane and client.
@@ -335,6 +367,8 @@ task need and user approval.
 - If a change affects `README.md` accuracy, prompt to update `README.md`.
 - Keep `README.md` updates in a separate commit from code or config changes.
 - Prefer Conventional Commits for new commits.
+- Write standalone, changelog-ready commit headers; keep bodies supplemental.
+- Verification needed: release-note type filters are not defined in this repo.
 - Commit-history hygiene: prefer amending small related corrections into the
   relevant current-branch commit instead of creating separate `fixup`,
   `chore`, or cleanup commits, unless the user requests a separate commit or

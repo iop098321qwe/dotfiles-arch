@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=MakerWorld
+Comment=MakerWorld
+Exec=omarchy-launch-webapp "https://makerworld.com/en"
+Terminal=false
+Type=Application
+Icon=makerworld
+StartupNotify=true
