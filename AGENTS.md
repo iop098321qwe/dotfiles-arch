@@ -76,7 +76,8 @@ task need and user approval.
 
 - `.bootstrap-proton-pass.sh` bootstraps Proton Pass CLI only on init.
 - `.chezmoi.toml.tmpl` configures Chezmoi git behavior and pre-read hook.
-- `.chezmoiignore` excludes repository-only files and installed Espanso packages.
+- `.chezmoiignore` excludes repository-only files and installed Espanso
+  packages.
 - `AGENTS.md` is this repository operating guide.
 - `CHANGELOG.md` is release history; never edit it directly.
 - `LICENSE` is the repository license.
@@ -166,6 +167,8 @@ task need and user approval.
 - `dot_config/tensaku/config.toml` configures Tensaku.
 - `dot_config/tmux/tmux.conf` configures tmux keybindings and plugins.
 - `dot_config/tmux/dot_planning/config.json` configures tmux planning data.
+- `dot_config/tmux/scripts/open-sesh.sh` opens Sesh with an Omarchy-colored
+  popup background and accent border, reading the palette at launch.
 - `dot_config/tmux/scripts/open-tuxedo.sh` opens or focuses Tuxedo for the
   current directory within the current tmux session.
 - `dot_config/tuxedo/config.toml` configures Tuxedo.
@@ -207,6 +210,8 @@ task need and user approval.
 - Each clone's `dot_omarchy-upstream/` stores its packaged source baseline.
 - `dot_config/omarchy/shell.json` configures Omarchy shell UI.
 - `dot_config/omarchy/themed/*.sample` stores theme template samples.
+- `dot_config/omarchy/themed/television.toml.tpl` maps the Omarchy palette
+  to accent-based Television UI colors during theme generation.
 
 ### OpenCode Config
 
@@ -228,6 +233,8 @@ task need and user approval.
 ### Television And Yazi Config
 
 - `dot_config/television/config.toml` configures Television.
+- `dot_config/television/themes/symlink_omarchy.toml` links Television to
+  the generated active Omarchy theme using a home-relative link.
 - `dot_config/television/cable/*.toml` defines Television cable sources.
 - `dot_config/television/cable/.keep` preserves the cable directory.
 - `dot_config/yazi/init.lua` configures Yazi Lua startup.
@@ -263,6 +270,10 @@ task need and user approval.
 - Palette discovery prefers the Quattro `XDG_STATE_HOME` layout and falls
   back to the older config layout only when the state layout is absent.
 - Hyprland config starts from Omarchy defaults and loads local Lua overrides.
+- Television uses the `omarchy` theme, generated from its user template on
+  Omarchy theme changes. Reopen the picker to load updated colors.
+- The Sesh binding calls `open-sesh.sh` with the originating pane and client.
+  It matches the popup surface and rounded frame to the active palette.
 - Bash loads Omarchy defaults, then `~/.sources.sh`, then Atuin init.
 - CBC functions are implemented in `executable_dot_custom_bash_commands.sh`
   and configured through `dot_config/cbc/`.
@@ -353,7 +364,8 @@ task need and user approval.
 - The Espanso hook installs missing `markdown-shortcuts` from the Hub and
   `deeptree` from `https://github.com/iop098321qwe/deeptree_espanso`.
 - Espanso owns installed package contents and metadata; Chezmoi ignores
-  `.config/espanso/match/packages/`. The hook does not update or remove packages.
+  `.config/espanso/match/packages/`. The hook does not update or remove
+  packages.
 - Cronie system service is enabled by `run_003_cronie.sh`.
 - Proton Mail Bridge user service is enabled by `run_004_proton_mail_bridge.sh`.
 - RustDesk system service is enabled by `run_005_rustdesk.sh`.
