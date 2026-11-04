@@ -120,11 +120,6 @@ o.bind("SUPER + SHIFT + W", "Deeptree Matrix", {
   focus = true,
 })
 
-hl.unbind("SUPER + SHIFT + L")
-o.bind("SUPER + SHIFT + L", "Emby", {
-  webapp = "https://app.emby.media",
-  focus = true,
-})
 hl.unbind("SUPER + SHIFT + K")
 o.bind("SUPER + SHIFT + K", "Deeptree Nextcloud", {
   webapp = "https://cloud.deeptree.tech",
