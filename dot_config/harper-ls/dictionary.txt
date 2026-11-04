@@ -1,3 +1,4 @@
+ACBHC
 ACOA
 AMAR
 ASLC
@@ -63,6 +64,7 @@ JetBoil
 KLEBS
 KNOM
 Kdenlive
+Kijik
 Klemheist
 LXC
 Logitech
@@ -111,6 +113,7 @@ Traefik
 Tuxedomod
 UniFi
 VE
+VFJ
 VLAN
 Vencord
 Venvmod
@@ -148,6 +151,7 @@ omarchy
 pagefile
 pihole
 pve
+reinstallation
 ridgeline
 ridgelines
 searxng

@@ -6,7 +6,8 @@
     "question": "allow"
   },
   "plugin": [
-    "opencode-snippets"
+    "opencode-snippets",
+    "opencode-plugin-auto-update"
   ],
   "mcp": {
     "rea": {

@@ -47,8 +47,8 @@ hash = "bff03ca56682507d84cd1a5f350f8b1e425d11f1"
 
 [[module.deps]]
 use = "iop098321qwe/smartsort"
-rev = "db58246"
-hash = "db5824664b1e365484494c9c4d5e582ce6fed8a2"
+rev = "816dcff"
+hash = "816dcff49f116896fe73f9c4d563261133bf92e0"
 
 [[module.deps]]
 use = "iop098321qwe/gitmod"
@@ -87,8 +87,8 @@ hash = "071eb321d4db0375e26137d63df993fede0cb180"
 
 [[module.deps]]
 use = "iop098321qwe/projectmod"
-rev = "8ab649b"
-hash = "8ab649b4e3cafa1e523a7c275493d770eb592366"
+rev = "03da10f"
+hash = "03da10f677caa7e40740459ecfe859fa4dbb8fc4"
 
 [[module.deps]]
 use = "iop098321qwe/docsmod"

@@ -47,7 +47,7 @@ vim.api.nvim_set_keymap(
 -- Toggle relative line numbers
 vim.api.nvim_set_keymap(
   'n',
-  '<leader>tn',
+  '<leader>Tn',
   ':set relativenumber!<CR>',
   { noremap = true, silent = true, desc = "Toggle relative line numbers" })
 
@@ -125,10 +125,10 @@ function ToggleAutoCommenting()
   end
 end
 
--- Map the toggle function to <leader>tc in Normal mode
+-- Map the toggle function to <leader>Tc in Normal mode
 vim.api.nvim_set_keymap(
   'n',                               -- Normal mode
-  '<leader>tc',                      -- Key combination: <leader> followed by 'tc'
+  '<leader>Tc',                      -- Key combination: <leader> followed by 'Tc'
   ':lua ToggleAutoCommenting()<CR>', -- Command to execute the function
   { noremap = true, silent = true, desc = "Toggle auto-commenting on new lines" }
 )
