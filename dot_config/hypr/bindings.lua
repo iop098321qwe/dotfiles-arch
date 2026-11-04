@@ -113,11 +113,6 @@ o.bind("SUPER + SHIFT + J", "Notion", {
   webapp = "https://notion.so",
   focus = true,
 })
-hl.unbind("SUPER + SHIFT + R")
-o.bind("SUPER + SHIFT + R", "Reddit", {
-  webapp = "https://reddit.com",
-  focus = true,
-})
 
 hl.unbind("SUPER + SHIFT + W") -- was Omawrite
 o.bind("SUPER + SHIFT + W", "Deeptree Matrix", {
