@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Snapchat
+Comment=Snapchat
+Exec=omarchy-launch-webapp "https://www.snapchat.com/web"
+Terminal=false
+Type=Application
+Icon=snapchat
+StartupNotify=true
