@@ -125,11 +125,6 @@ o.bind("SUPER + SHIFT + K", "Deeptree Nextcloud", {
   webapp = "https://cloud.deeptree.tech",
   focus = true,
 })
-hl.unbind("SUPER + SHIFT + ALT + L")
-o.bind("SUPER + SHIFT + ALT + L", "Amazon", {
-  webapp = "https://amazon.com",
-  focus = true,
-})
 hl.unbind("SUPER + SHIFT + CTRL + M")
 o.bind("SUPER + SHIFT + CTRL + M", "Suno", {
   webapp = "https://suno.com",
