@@ -120,12 +120,6 @@ o.bind("SUPER + SHIFT + W", "Deeptree Matrix", {
   focus = true,
 })
 
-hl.unbind("SUPER + SHIFT + S") -- was Google Maps
-o.bind("SUPER + SHIFT + S", "Vesktop", {
-  launch = "vesktop",
-  focus = "vesktop",
-})
-
 hl.unbind("SUPER + SHIFT + L")
 o.bind("SUPER + SHIFT + L", "Emby", {
   webapp = "https://app.emby.media",
