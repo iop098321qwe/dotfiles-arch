@@ -79,12 +79,6 @@ o.bind("SUPER + Apostrophe", "Toggle workspace layout", "omarchy hyprland worksp
 -- o.rebind("SUPER + ALT + Apostrophe", "Cycle workspace layout back",
 --   "omarchy hyprland workspace layout toggle back")
 
-hl.unbind("SUPER + SHIFT + H")
-o.bind("SUPER + SHIFT + H", "GitHub", {
-  webapp = "https://github.com/iop098321qwe?tab=repositories",
-  focus = true,
-})
-
 hl.unbind("SUPER + SHIFT + SLASH") -- was Passwords (1Password)
 o.bind("SUPER + SHIFT + SLASH", "Passwords", {
   launch = "proton-pass",
