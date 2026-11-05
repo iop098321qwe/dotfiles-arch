@@ -30,6 +30,6 @@ require("close-and-restore-tab"):setup()
 
 -- Full Border
 require("full-border"):setup {
-  -- Available values: ui.Border.PLAIN, ui.Border.ROUNDED
-  type = ui.Border.ROUNDED,
+  -- Available values: "plain", "rounded"
+  set = "plain",
 }
