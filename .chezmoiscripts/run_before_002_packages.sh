@@ -71,7 +71,6 @@ aur_packages=(
   powershell-bin
   proton-pass-bin
   sesh-bin
-  t3code-bin
   ttl-bin
   tmux-plugin-manager
   tuxedo-bin
