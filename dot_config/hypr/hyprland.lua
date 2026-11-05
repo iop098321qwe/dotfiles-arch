@@ -27,3 +27,7 @@ require("default.hypr.toggles")
 
 -- Add any other personal Hyprland configuration below.
 -- o.window("qemu", { workspace = "5" })
+-- TODO: (AI, omarchy#16365) Remove with the helper/guard only after the fix
+-- is installed and verified locally; see hypr/theme-workaround.lua.
+-- Once complete, delete this entire TODO comment block as well.
+require("hypr.theme-workaround")

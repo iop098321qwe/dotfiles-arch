@@ -1,0 +1,16 @@
+#!/bin/bash
+# Bound policy refreshes; preserve ordinary browser launches.
+# TODO: (AI, omarchy#16365) Remove only after a bounded browser-policy refresh
+# is installed in packaged Omarchy on THIS computer and verified without this
+# guard. A merge, closed issue, or newer version alone is not proof. Test a
+# real theme switch: notification sent, Surfingkeys palette updated, no retint
+# lock held. Then remove this guard, hypr/theme-workaround.lua, and its require
+# in hyprland.lua from live config AND Chezmoi source. Remove the workaround
+# directory from the session PATH, restart the shell, and re-test the hooks.
+# Once complete, delete this entire TODO comment block as well.
+for argument in "$@"; do
+  if [[ $argument == --refresh-platform-policy ]]; then
+    exec timeout --kill-after=2s 8s /usr/bin/brave-origin "$@"
+  fi
+done
+exec /usr/bin/brave-origin "$@"

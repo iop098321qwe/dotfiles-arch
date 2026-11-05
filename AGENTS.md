@@ -153,6 +153,8 @@ task need and user approval.
 - `dot_config/harper-ls/dictionary.txt` customizes Harper dictionary words.
 - `dot_config/hypr/*.lua` configures Hyprland through Omarchy Lua modules.
 - `dot_config/hypr/*.conf` configures Hyprland-related services.
+- `dot_config/hypr/theme-workaround.lua` adds a Brave Origin policy-refresh guard
+  to the session PATH until Omarchy issue #16365 is fixed.
 - `dot_config/hypr/private_monitors.lua.tmpl` is private monitor config.
 - `dot_config/hyprland-preview-share-picker/config.yaml` configures sharing.
 - `dot_config/imv/config` configures imv.
@@ -174,6 +176,10 @@ task need and user approval.
 - `dot_config/tuxedo/config.toml` configures Tuxedo.
 - `dot_config/user-dirs.dirs` configures XDG user directories.
 - `dot_config/voxtype/config.toml` configures Voxtype.
+- `dot_config/xkb/rules/grymm` extends system rules with the personal Compose
+  option used by `dot_config/hypr/input.lua`.
+- `dot_config/xkb/symbols/grymm` adds Shift+Escape Compose after the personal
+  Caps/Escape swap, with explicit actions that preserve Caps Lock state.
 
 ### Espanso Config
 
@@ -205,6 +211,8 @@ task need and user approval.
 - `dot_config/omarchy/defaults/agent` sets the default agent to OpenCode.
 - `dot_config/omarchy/extensions/omarchy-menu.jsonc` extends Omarchy menu.
 - `dot_config/omarchy/hooks/*` contains Omarchy hook scripts.
+- `dot_config/omarchy/workarounds/bin/executable_brave-origin` bounds Brave
+  Origin policy refreshes without changing ordinary browser launches.
 - `dot_config/omarchy/plugins/grymm.*` contains local menu and overlay clones
   with Ctrl-based Vim navigation.
 - Each clone's `dot_omarchy-upstream/` stores its packaged source baseline.
@@ -295,6 +303,8 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 - Palette discovery prefers the Quattro `XDG_STATE_HOME` layout and falls
   back to the older config layout only when the state layout is absent.
 - Hyprland config starts from Omarchy defaults and loads local Lua overrides.
+- Personal replacement bindings use native `o.rebind`; input uses the `grymm`
+  XKB rules with US/German layouts and user-owned shifted-Compose symbols.
 - Custom web apps are ordinary desktop entries that call
   `omarchy-launch-webapp`. Chezmoi installs their launchers and icons directly;
   no per-machine downloads or installation hook is required.

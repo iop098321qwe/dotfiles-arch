@@ -5,21 +5,14 @@
 -- See https://wiki.hypr.land/Configuring/Basics/Variables/#input
 hl.config({
   input = {
-    -- Keep US/German layouts. No toggle is needed during the 4.0 transition;
-    -- inherit SUPER+I / SUPER+SHIFT+I input cycling after upgrading to 4.5.
+    -- Keep US/German layouts with the inherited input-cycling shortcuts.
     kb_layout = "us, de",
-    -- TODO: (omarchy-4.5) Adapt stock shifted Compose to the swapped keys using
-    -- a user-owned XKB definition: physical CAPS -> Escape, physical ESC ->
-    -- Caps Lock, physical SHIFT+ESC -> Compose without toggling Caps Lock.
-    -- Stock omarchy:shift_caps_compose targets physical CAPS; do not merely
-    -- combine it with caps:swapescape or assume the swap redirects Compose.
-    -- Back up affected files first. Once the replacement works, remove
-    -- compose:rctrl so Right Ctrl is normal; retain both-Shifts Caps cancel.
-    -- Validate the swap, Caps Lock state, Compose sequences, and Right Ctrl
-    -- in BOTH US/German layouts before removing this TODO. Keep this explicit
-    -- override rather than inheriting defaults that would discard the swap.
+    -- User XKB rules extend the system definitions; the final option adapts
+    -- shifted Compose to physical Escape after swapping Escape and Caps.
+    -- Explicit actions keep Compose from changing the Caps Lock state.
+    kb_rules = "grymm",
     -- Right Alt dictation/German AltGr overlap is intentionally accepted.
-    kb_options = "caps:swapescape,shift:both_capslock_cancel,compose:rctrl",
+    kb_options = "caps:swapescape,shift:both_capslock_cancel,grymm:shift_escape_compose",
 
     -- Use a specific keyboard variant if needed (e.g. intl for international keyboards).
     -- kb_variant = "intl",

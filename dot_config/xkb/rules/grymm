@@ -1,0 +1,5 @@
+// Extend system rules with the personal swapped-Escape Compose option.
+! include %S/evdev
+
+! option = symbols
+  grymm:shift_escape_compose = +grymm(shift_escape_compose)

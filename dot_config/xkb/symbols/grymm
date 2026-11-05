@@ -1,0 +1,10 @@
+// Used after caps:swapescape: physical Caps is Escape, physical Escape is
+// Caps Lock. Shift + physical Escape starts Compose without changing Lock.
+partial modifier_keys
+xkb_symbols "shift_escape_compose" {
+    key <ESC> {
+        type[Group1] = "TWO_LEVEL",
+        symbols[Group1] = [ Caps_Lock, Multi_key ],
+        actions[Group1] = [ LockMods(modifiers = Lock), NoAction() ]
+    };
+};
