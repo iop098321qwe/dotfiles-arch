@@ -5,9 +5,8 @@
   "permission": {
     "question": "allow"
   },
-  "plugin": [
-    "opencode-snippets",
-    "opencode-plugin-auto-update"
+  "plugins": [
+    "opencode-snippets"
   ],
   "mcp": {
     "rea": {

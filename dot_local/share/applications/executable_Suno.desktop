@@ -3,6 +3,7 @@ Version=1.0
 Name=Suno
 Comment=Suno
 Exec=omarchy-launch-webapp "https://suno.com"
+StartupWMClass=chrome-suno.com__-Default
 Terminal=false
 Type=Application
 Icon=suno

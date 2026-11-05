@@ -2,7 +2,7 @@
 theme = Terminal
 density = compact
 sort = priority
-show_left = true
+show_left = false
 show_right = true
 show_line_num = true
 show_status_bar = true

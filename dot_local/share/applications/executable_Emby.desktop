@@ -3,6 +3,7 @@ Version=1.0
 Name=Emby
 Comment=Emby
 Exec=omarchy-launch-webapp "https://app.emby.media"
+StartupWMClass=chrome-app.emby.media__-Default
 Terminal=false
 Type=Application
 Icon=emby

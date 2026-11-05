@@ -3,6 +3,7 @@ Version=1.0
 Name=Deeptree Nextcloud
 Comment=Deeptree Nextcloud
 Exec=omarchy-launch-webapp "https://cloud.deeptree.tech"
+StartupWMClass=chrome-cloud.deeptree.tech__-Default
 Terminal=false
 Type=Application
 Icon=deeptree-nextcloud

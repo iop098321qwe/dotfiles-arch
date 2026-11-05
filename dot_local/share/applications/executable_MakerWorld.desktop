@@ -3,6 +3,7 @@ Version=1.0
 Name=MakerWorld
 Comment=MakerWorld
 Exec=omarchy-launch-webapp "https://makerworld.com/en"
+StartupWMClass=chrome-makerworld.com__en-Default
 Terminal=false
 Type=Application
 Icon=makerworld

@@ -3,6 +3,7 @@ Version=1.0
 Name=Snapchat
 Comment=Snapchat
 Exec=omarchy-launch-webapp "https://www.snapchat.com/web"
+StartupWMClass=chrome-www.snapchat.com__web-Default
 Terminal=false
 Type=Application
 Icon=snapchat

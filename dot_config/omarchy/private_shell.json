@@ -1,0 +1,100 @@
+{
+  "bar": {
+    "background": "none",
+    "layout": {
+      "center": [
+        {
+          "birthYear": 1999,
+          "format": "MMM d ddd HH:mm",
+          "formatAlt": "d MMMM 'W'ww yyyy",
+          "id": "omarchy.clock",
+          "lifeExpectancy": 80,
+          "verticalFormat": "HH\n—\nmm"
+        }
+      ],
+      "centerBegin": [
+        {
+          "id": "omarchy.indicators"
+        }
+      ],
+      "centerEnd": [
+        {
+          "cities": [
+            {
+              "lat": 43.66294,
+              "lon": -116.68736,
+              "name": "Caldwell",
+              "region": "Idaho, US",
+              "zone": "America/Boise"
+            },
+            {
+              "lat": 36.33023,
+              "lon": -119.29206,
+              "name": "Visalia",
+              "region": "California, US",
+              "zone": "America/Los_Angeles"
+            },
+            {
+              "lat": 51.5,
+              "lon": 10.5,
+              "name": "Germany",
+              "region": "DE",
+              "zone": "Europe/Berlin"
+            }
+          ],
+          "hour24": true,
+          "id": "omarchy.elsewhen",
+          "units": "F"
+        },
+        {
+          "id": "omarchy.system-update"
+        },
+        {
+          "id": "omarchy.weather"
+        }
+      ],
+      "left": [
+        {
+          "id": "omarchy.menu"
+        },
+        {
+          "id": "omarchy.workspaces"
+        }
+      ],
+      "right": [
+        {
+          "id": "omarchy.tray"
+        },
+        {
+          "id": "omarchy.keyboard-layout"
+        },
+        {
+          "id": "omarchy.agents"
+        },
+        {
+          "id": "omarchy.bluetooth"
+        },
+        {
+          "id": "omarchy.network"
+        },
+        {
+          "id": "omarchy.audio"
+        },
+        {
+          "id": "omarchy.monitor"
+        },
+        {
+          "id": "omarchy.power"
+        }
+      ],
+      "tray": []
+    },
+    "position": "top"
+  },
+  "idle": {
+    "lock": 600,
+    "screensaver": 300
+  },
+  "plugins": [],
+  "version": 1
+}

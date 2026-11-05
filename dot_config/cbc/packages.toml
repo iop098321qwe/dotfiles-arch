@@ -107,8 +107,8 @@ hash = "a881f9bdf9ed35409317b7b568d700d41bc46a3e"
 
 [[module.deps]]
 use = "iop098321qwe/commit-and-tag-version"
-rev = "c2706e8"
-hash = "c2706e81cff0e46e18618a8c66290d31b860e3ca"
+rev = "ccb1b44"
+hash = "ccb1b445f1bc20ddc735b3a96728ce13c39c4bc7"
 
 [[module.deps]]
 use = "iop098321qwe/skillmod"

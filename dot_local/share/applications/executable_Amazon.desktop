@@ -3,6 +3,7 @@ Version=1.0
 Name=Amazon
 Comment=Amazon
 Exec=omarchy-launch-webapp "https://amazon.com"
+StartupWMClass=chrome-amazon.com__-Default
 Terminal=false
 Type=Application
 Icon=amazon

@@ -3,6 +3,7 @@ Version=1.0
 Name=Reddit
 Comment=Reddit
 Exec=omarchy-launch-webapp "https://reddit.com"
+StartupWMClass=chrome-reddit.com__-Default
 Terminal=false
 Type=Application
 Icon=reddit

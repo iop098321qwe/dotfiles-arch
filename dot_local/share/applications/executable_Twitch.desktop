@@ -3,6 +3,7 @@ Version=1.0
 Name=Twitch
 Comment=Twitch
 Exec=omarchy-launch-webapp "https://www.twitch.tv/"
+StartupWMClass=chrome-www.twitch.tv__-Default
 Terminal=false
 Type=Application
 Icon=twitch

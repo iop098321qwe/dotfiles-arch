@@ -3,6 +3,7 @@ Version=1.0
 Name=Proton Mail
 Comment=Proton Mail
 Exec=omarchy-launch-webapp "https://mail.proton.me"
+StartupWMClass=chrome-mail.proton.me__-Default
 Terminal=false
 Type=Application
 Icon=proton-mail

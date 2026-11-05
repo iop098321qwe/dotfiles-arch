@@ -3,6 +3,7 @@ Version=1.0
 Name=Deeptree Matrix
 Comment=Deeptree Matrix
 Exec=omarchy-launch-webapp "https://muninn.deeptree.tech/index.html"
+StartupWMClass=chrome-muninn.deeptree.tech__index.html-Default
 Terminal=false
 Type=Application
 Icon=deeptree-matrix
