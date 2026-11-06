@@ -169,6 +169,8 @@ task need and user approval.
 - `dot_config/tensaku/config.toml` configures Tensaku.
 - `dot_config/tmux/tmux.conf` configures tmux keybindings and plugins.
 - `dot_config/tmux/dot_planning/config.json` configures tmux planning data.
+- `dot_config/tmux/scripts/open-daily-summaries.sh` opens or focuses the
+  marked Daily Summaries Yazi pane within the current tmux session.
 - `dot_config/tmux/scripts/open-sesh.sh` opens Sesh with an Omarchy-colored
   popup background and accent border, reading the palette at launch.
 - `dot_config/tmux/scripts/open-tuxedo.sh` opens or focuses Tuxedo for the
