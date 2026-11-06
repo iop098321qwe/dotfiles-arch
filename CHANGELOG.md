@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.1.6](https://github.com/iop098321qwe/dotfiles-arch/compare/v0.1.5...v0.1.6) (2026-11-06)
+
+### Features
+
+* **package:** remove t3code-bin package from installation ([3de78da](https://github.com/iop098321qwe/dotfiles-arch/commit/3de78da9a329818ad1aa80f080094ff7c29d097c))
+* **tmux:** open or focus Daily Summaries per session ([469bf3e](https://github.com/iop098321qwe/dotfiles-arch/commit/469bf3e30d6d50773798e857ccf36146245fbf14))
+* **yazi:** use square corners for full borders ([db43982](https://github.com/iop098321qwe/dotfiles-arch/commit/db43982b8bc752ef560e366e2c0f28db5a6598ba))
+
 ## [0.1.5](https://github.com/iop098321qwe/dotfiles-arch/compare/v0.1.4...v0.1.5) (2026-11-04)
 
 ### Features
