@@ -568,7 +568,11 @@ api.mapkey(";T", "#3List tab groups in current window", function () {
  */
 
 // The installer replaces this declaration in the installed copy only.
-const omarchyThemeOptions = Object.freeze({"paletteUrl":"file:///home/grymm/.config/surfingkeys/omarchy-palette.json"});
+const omarchyThemeOptions = Object.freeze({
+  paletteUrl: "file://" +
+    encodeURIComponent({{ .chezmoi.homeDir | toJson }}).replace(/%2F/g, "/") +
+    "/.config/surfingkeys/omarchy-palette.json",
+});
 
 const fallbackPalette = Object.freeze({
   rosewater: "#f5e0dc",

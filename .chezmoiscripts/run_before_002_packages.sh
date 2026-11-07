@@ -33,6 +33,7 @@ packages=(
   moreutils
   ncdu
   nmap
+  nodejs
   notion-desktop
   npm
   odt2txt

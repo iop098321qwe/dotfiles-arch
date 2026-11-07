@@ -4,6 +4,12 @@ CHANGELOG.*
 LICENSE
 todo.txt
 done.txt
+tests
+
+# Surfingkeys publishes machine-local palettes; backups are not source files.
+.config/surfingkeys/omarchy-palette.json
+.config/surfingkeys/*.before-omarchy
+.config/surfingkeys/*.tmp
 
 # Espanso installs and updates its own package contents and metadata.
 .config/espanso/match/packages
