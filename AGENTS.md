@@ -48,6 +48,8 @@ service credentials outside this repository.
 - Interactive prompts use `gum` in several scripts.
 - Some hooks call `sudo`, `systemctl`, `systemctl --user`, `pacman`, and
   Omarchy package commands.
+- The Spicetify hook runs only on x86_64 because Spotify publishes no
+  Linux build for other architectures.
 - CBC version is `v3.7.0` in `executable_dot_custom_bash_commands.sh`.
 - Verification needed: no pinned Chezmoi, Bash, Lua, Node, or Stylua version
   file was found.
@@ -107,7 +109,8 @@ task need and user approval.
 - `.chezmoiscripts/run_006_grymms_grimoires.sh` clones grymms_grimoires.
 - `.chezmoiscripts/run_after_000_tmux_plugins.sh` installs tmux plugins.
 - `.chezmoiscripts/run_after_001_spicetify_bootstrap.sh.tmpl` applies
-  Spotify and Spicetify setup after Spotify first-run is complete.
+  Spotify and Spicetify setup after Spotify first-run is complete, and
+  skips on non-x86_64 hosts where Spotify cannot run.
 - `.chezmoiscripts/run_after_002_update_crontab.sh` validates and installs
   the user crontab after confirmation.
 - `.chezmoiscripts/run_after_003_theme_companion.sh` deploys the pinned
@@ -441,6 +444,8 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 - If crontab update fails, inspect `~/.config/cron/crontab.current` syntax.
 - If Spotify first run is incomplete, the Spicetify hook defers setup until
   Spotify has launched and stored its version in prefs.
+- On `aarch64`, the Spicetify hook exits successfully without installing
+  Spotify because the official Linux client is x86-64 only.
 - If tmux plugins do not install, verify tmux, git, the tmux config, and TPM.
 - If DisplayLink setup runs, expect interactive confirmation and possible
   reboot prompt.

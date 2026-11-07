@@ -2,6 +2,14 @@
 
 set -euo pipefail
 
+# Spotify publishes only x86_64 Linux builds, so Spicetify cannot run on
+# other architectures. Skip the hook so chezmoi initialization continues.
+if [[ $(uname -m) != x86_64 ]]; then
+  printf 'Skipping Spicetify setup: Spotify is unavailable for %s.\n' \
+    "$(uname -m)" >&2
+  exit 0
+fi
+
 readonly HOME_DIR="{{ .chezmoi.homeDir }}"
 readonly SPOTIFY_PATH="/opt/spotify"
 readonly SPOTIFY_APPS_PATH="$SPOTIFY_PATH/Apps"
@@ -377,7 +385,17 @@ fi
 ensure_write_access "$SPOTIFY_PATH" 0
 ensure_write_access "$SPOTIFY_APPS_PATH" 1
 
-spotify_version=$(spotify --version | awk '{ print $3 }' | tr -d ',')
+if ! spotify_version_output=$(spotify --version 2>/dev/null); then
+  printf '%s\n' \
+    'Skipping Spicetify setup: Spotify could not run on this machine.' >&2
+  exit 0
+fi
+spotify_version=$(awk '{ print $3 }' <<<"$spotify_version_output" | tr -d ',')
+if [[ -z $spotify_version ]]; then
+  printf '%s\n' \
+    'Skipping Spicetify setup: Spotify version detection failed.' >&2
+  exit 0
+fi
 if ! wait_for_spotify_ready "$spotify_version"; then
   exit 0
 fi
