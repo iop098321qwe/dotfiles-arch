@@ -1,6 +1,6 @@
 {
   "bar": {
-    "background": "none",
+    "background": "opaque",
     "layout": {
       "center": [
         {
@@ -87,10 +87,26 @@
           "id": "omarchy.power"
         }
       ],
-      "tray": []
+      "tray": [
+        {
+          "id": "superwhisper.panel"
+        }
+      ]
     },
     "position": "top"
   },
+  "cloneSourceRestores": [
+    "grymm.menu",
+    "grymm.image-picker",
+    "grymm.clipboard",
+    "grymm.emojis"
+  ],
+  "disabledPlugins": [
+    "omarchy.menu",
+    "omarchy.image-picker",
+    "omarchy.clipboard",
+    "omarchy.emojis"
+  ],
   "idle": {
     "lock": 600,
     "screensaver": 300
@@ -106,17 +122,5 @@
       "id": "grymm.emojis"
     }
   ],
-  "version": 1,
-  "disabledPlugins": [
-    "omarchy.menu",
-    "omarchy.image-picker",
-    "omarchy.clipboard",
-    "omarchy.emojis"
-  ],
-  "cloneSourceRestores": [
-    "grymm.menu",
-    "grymm.image-picker",
-    "grymm.clipboard",
-    "grymm.emojis"
-  ]
+  "version": 1
 }
