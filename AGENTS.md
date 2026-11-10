@@ -80,6 +80,7 @@ task need and user approval.
 - `.chezmoi.toml.tmpl` configures Chezmoi git behavior and pre-read hook.
 - `.chezmoiignore` excludes repository-only files and installed Espanso
   packages.
+- `.chezmoiremove` removes the retired Notion web-app launcher and icon.
 - `AGENTS.md` is this repository operating guide.
 - `CHANGELOG.md` is release history; never edit it directly.
 - `LICENSE` is the repository license.
@@ -96,7 +97,8 @@ task need and user approval.
 ### Chezmoi Scripts
 
 - `.chezmoiscripts/run_before_001_sudo_auth.sh` starts passwordless sudo.
-- `.chezmoiscripts/run_before_002_packages.sh` installs package sets.
+- `.chezmoiscripts/run_before_002_packages.sh` installs package sets, including
+  the Omarchy-menu `notion-desktop` package.
 - `.chezmoiscripts/run_000_github_auth.sh` authenticates GitHub CLI.
 - `.chezmoiscripts/run_000_syncthing.sh` installs and starts Syncthing.
 - `.chezmoiscripts/run_001_atuin.sh` installs, configures, and syncs Atuin.
@@ -275,7 +277,6 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 - `executable_Fizzy.desktop` opens Fizzy.
 - `executable_GitHub.desktop` opens GitHub.
 - `executable_MakerWorld.desktop` opens MakerWorld.
-- `executable_Notion.desktop` opens Notion.
 - `executable_Notion Calendar.desktop` opens Notion Calendar.
 - `executable_Proton Mail.desktop` opens Proton Mail.
 - `executable_Reddit.desktop` opens Reddit.
@@ -310,6 +311,9 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 - Hyprland config starts from Omarchy defaults and loads local Lua overrides.
 - Personal replacement bindings use native `o.rebind`; input uses the `grymm`
   XKB rules with US/German layouts and user-owned shifted-Compose symbols.
+- Super+Shift+J launches `notion-desktop` and focuses its `notion` window class.
+  The package owns Notion's desktop entry and icon; Notion Calendar stays a
+  custom web app. `.chezmoiremove` cleans up the old Notion web-app files.
 - Custom web apps are ordinary desktop entries that call
   `omarchy-launch-webapp`. Chezmoi installs their launchers and icons directly;
   no per-machine downloads or installation hook is required.

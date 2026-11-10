@@ -59,8 +59,8 @@ o.rebind("SUPER + SHIFT + C", "Notion Calendar", {
 })
 
 o.rebind("SUPER + SHIFT + J", "Notion", {
-  webapp = "https://notion.so",
-  focus = true,
+  launch = "notion-desktop",
+  focus = "^notion$",
 })
 
 o.rebind("SUPER + SHIFT + W", "Deeptree Matrix", {
