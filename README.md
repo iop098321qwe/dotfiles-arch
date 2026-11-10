@@ -145,6 +145,19 @@ See the [companion guide](https://github.com/iop098321qwe/main_page/blob/5fde175
 for installation, fallback, diagnosis, and removal. The guide link is a URL
 line-length exception and includes Quattro state-directory discovery.
 
+## Notion Desktop
+
+The package hook installs `notion-desktop` through `omarchy pkg add`, using
+the same package as Omarchy Menu's Notion installer. Super+Shift+J launches
+the desktop app or focuses an existing Notion window instead of opening the
+website. The package supplies the app launcher and icon.
+
+On a future apply, `.chezmoiremove` removes only the old user-level
+`~/.local/share/applications/Notion.desktop` launcher and
+`~/.local/share/icons/hicolor/256x256/apps/notion.png` icon. It does not remove
+Notion app data or the package-owned launcher. Notion Calendar remains a web
+app with its existing launcher and Super+Shift+C shortcut.
+
 ## Pacman Packages Installed
 
 The setup installs these packages through `omarchy pkg add`:
@@ -170,6 +183,7 @@ The setup installs these packages through `omarchy pkg add`:
 - `moreutils`
 - `ncdu`
 - `nmap`
+- `notion-desktop`
 - `npm`
 - `openscad`
 - `pandoc-cli`
