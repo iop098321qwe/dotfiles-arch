@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.1.7](https://github.com/iop098321qwe/dotfiles-arch/compare/v0.1.6...v0.1.7) (2026-11-10)
+
+### Features
+
+* **notion:** replace web app with Omarchy desktop package ([c00caca](https://github.com/iop098321qwe/dotfiles-arch/commit/c00cacac73eab85d2910c53fe9d7bbb15c38ee5c))
+
 ## [0.1.6](https://github.com/iop098321qwe/dotfiles-arch/compare/v0.1.5...v0.1.6) (2026-11-06)
 
 ### Features
