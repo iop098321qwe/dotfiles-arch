@@ -45,6 +45,8 @@ service credentials outside this repository.
 - The bootstrap requires `CHEZMOI_COMMAND=init`; other values or an unset
   variable skip all Proton Pass checks.
 - `gh` is installed by the package hook and used to clone GitHub repositories.
+- `nodejs` is installed explicitly for the Surfingkeys palette publisher;
+  hooks use `/usr/bin/node` rather than shell version-manager shims.
 - Interactive prompts use `gum` in several scripts.
 - Some hooks call `sudo`, `systemctl`, `systemctl --user`, `pacman`, and
   Omarchy package commands.
@@ -65,6 +67,7 @@ service credentials outside this repository.
 - Top-level `dot_*` files map to dotfiles in the target home directory.
 - Top-level `private_*` files may contain sensitive target-home data.
 - Top-level `executable_*` files map to executable target-home files.
+- `tests/` contains isolated theme-sync tests and is ignored by Chezmoi.
 - `AGENTS.md`, `CHANGELOG.md`, `LICENSE`, and local state files are ignored
   by Chezmoi through `.chezmoiignore`.
 
@@ -78,8 +81,8 @@ task need and user approval.
 
 - `.bootstrap-proton-pass.sh` bootstraps Proton Pass CLI only on init.
 - `.chezmoi.toml.tmpl` configures Chezmoi git behavior and pre-read hook.
-- `.chezmoiignore` excludes repository-only files and installed Espanso
-  packages.
+- `.chezmoiignore` excludes repository-only files, tests, installed Espanso
+  packages, and Surfingkeys runtime palettes and backups.
 - `.chezmoiremove` removes the retired Notion web-app launcher and icon.
 - `AGENTS.md` is this repository operating guide.
 - `CHANGELOG.md` is release history; never edit it directly.
@@ -116,7 +119,10 @@ task need and user approval.
 - `.chezmoiscripts/run_after_002_update_crontab.sh` validates and installs
   the user crontab after confirmation.
 - `.chezmoiscripts/run_after_003_theme_companion.sh` deploys the pinned
-  start-page native host and extension for Brave Origin and standard Brave.
+  start-page native host and extension for Brave Origin and standard Brave,
+  then configures automatic extension loading for Brave Origin.
+- `.chezmoiscripts/run_after_004_surfingkeys_theme.sh` initializes the local
+  Surfingkeys palette after files are deployed on supported Omarchy systems.
 - `.chezmoiscripts/run_after_999_notify_complete.sh` prints completion notice
   and prompts for reboot.
 - `.chezmoiscripts/run_once_after_000_yazi_packages.sh` adds Yazi packages.
@@ -169,8 +175,10 @@ task need and user approval.
 - `dot_config/mimeapps.list` configures default application handlers.
 - `dot_config/starship.toml` configures the shell prompt.
 - `dot_config/starship_yazi.toml` configures Starship for Yazi.
-- `dot_config/surfingkeys/catppuccin-mocha-surfingkeys.js` themes
-  Surfingkeys.
+- `dot_config/surfingkeys/catppuccin-mocha-surfingkeys.js.tmpl` themes
+  Surfingkeys with a home-specific, URL-encoded local palette URL.
+- `dot_config/surfingkeys/omarchy-theme.cjs` validates and atomically publishes
+  Omarchy colors without rewriting unchanged palettes or managed scripts.
 - `dot_config/tensaku/config.toml` configures Tensaku.
 - `dot_config/tmux/tmux.conf` configures tmux keybindings and plugins.
 - `dot_config/tmux/dot_planning/config.json` configures tmux planning data.
@@ -218,6 +226,8 @@ task need and user approval.
 - `dot_config/omarchy/defaults/agent` sets the default agent to OpenCode.
 - `dot_config/omarchy/extensions/omarchy-menu.jsonc` extends Omarchy menu.
 - `dot_config/omarchy/hooks/*` contains Omarchy hook scripts.
+- `dot_config/omarchy/hooks/theme-set.d/executable_40-surfingkeys.sh`
+  refreshes Surfingkeys colors with a bounded runtime and state-directory log.
 - `dot_config/omarchy/workarounds/bin/executable_brave-origin` bounds Brave
   Origin policy refreshes without changing ordinary browser launches.
 - `dot_config/omarchy/plugins/grymm.*` contains local menu and overlay clones
@@ -259,6 +269,8 @@ task need and user approval.
 
 ### Local Bin
 
+- `dot_local/bin/executable_grymm-theme-companion-browser-setup` merges the
+  installed companion into Brave Origin's extension-loading launch flags.
 - `dot_local/bin/executable_cron_mirror.sh` is an executable local script.
 - `dot_local/bin/executable_omarchy-cloned-plugin-diff` reports upstream
   changes to cloned Omarchy plugins.
@@ -287,6 +299,13 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 - `dot_local/share/icons/hicolor/` stores the launchers' generated PNG icon
   assets, summarized here rather than listed individually.
 
+### Tests
+
+- `tests/surfingkeys-theme.cjs` tests palette validation, atomic publication,
+  home-specific template rendering, and isolated apply and theme-change hooks.
+- `tests/test_theme_companion.py` tests browser flag merging, backups,
+  idempotence, XDG paths, symlinks, permissions, and missing extensions.
+
 ## Architecture
 
 - This repository is a Chezmoi source tree for home-directory dotfiles.
@@ -305,7 +324,15 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
   `main_page` revision on Linux with Omarchy. It caches them under
   `XDG_CACHE_HOME`, or `~/.cache`, and reruns the installer on each apply.
 - The companion uses `XDG_CONFIG_HOME` and `XDG_DATA_HOME` with home defaults.
-  Brave profile extension enablement is a separate manual step.
+- After companion deployment, the browser helper merges its installed path
+  into `brave-origin-flags.conf` without dropping Omarchy extensions or other
+  flags. It backs up changed existing files, preserves permissions and
+  symlinks, and avoids rewriting unchanged files. Fully restart Brave Origin
+  to load the extension; standard Brave still requires manual enablement.
+- Surfingkeys polls a local palette published from `omarchy-theme-color --all`.
+  Chezmoi installs the publisher and executable theme-set hook, then initializes
+  the palette without changing the desktop theme. Systems without Omarchy or
+  its color command skip initialization. Runtime palettes remain untracked.
 - Palette discovery prefers the Quattro `XDG_STATE_HOME` layout and falls
   back to the older config layout only when the state layout is absent.
 - Hyprland config starts from Omarchy defaults and loads local Lua overrides.
@@ -331,6 +358,9 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 
 ## Commands
 
+- `node --test tests/surfingkeys-theme.cjs`: run palette and hook tests.
+- `python3 -m unittest discover -s tests -p 'test_*.py'`: run browser setup
+  tests.
 - `git status --short`: inspect pending work.
 - `git diff --check`: check whitespace errors before commit.
 - `git diff -- AGENTS.md .chezmoiignore`: review this guide integration.
@@ -346,7 +376,10 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 
 ## Testing
 
-- No dedicated automated test suite was found.
+- Node's built-in test runner covers Surfingkeys; Python's standard unittest
+  covers Brave Origin extension loading. See the commands above.
+- Tests use temporary homes and fake Omarchy commands, not live browser
+  profiles or desktop settings. Hook tests require `/usr/bin/node` and Chezmoi.
 - No `*.bats` files were found.
 - Use `git diff --check` for safe whitespace validation.
 - Review shell edits manually for quoting, idempotence, and side effects.
@@ -434,6 +467,9 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 - The optional start-page theme companion uses Python 3.11+, authenticated
   GitHub CLI downloads, and Brave native messaging. It installs no service
   and opens no listening port.
+- Surfingkeys theme sync uses Arch Node.js and Omarchy's color command.
+  Browser setup must load the managed local Surfingkeys configuration and
+  allow the extension to access file URLs; Chezmoi does not edit profiles.
 
 ## Troubleshooting
 
@@ -456,6 +492,12 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 - If clone drift is reported, run `omarchy-cloned-plugin-diff` for a full diff.
 - For start-page theme fallback, verify the unpacked extension is enabled
   and its native host is installed for the matching Brave browser.
+- If the Brave Origin companion is absent, check `brave-origin-flags.conf`
+  includes its installed extension path, fully exit the browser, and reopen
+  it. `chezmoi update` must pull a branch containing both theme setup hooks.
+- For Surfingkeys fallback, check the local configuration URL and file URL
+  permission, then inspect `surfingkeys-theme.log` in Omarchy's state directory
+  under `XDG_STATE_HOME` or `~/.local/state`.
 
 ## Refining Existing AGENTS.md
 
