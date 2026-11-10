@@ -45,6 +45,9 @@ if [[ ! -f "$source_dir/.complete" ]]; then
   trap - EXIT
 fi
 
-# Idempotent registration repairs removed files on the next apply. Browser
-# extension enablement still requires one manual step in each Brave profile.
+# Repair the native host and extension files before registering browser loading.
 python3 "$source_dir/install.py" --browser brave-origin --browser brave
+
+# Arch's Brave Origin launcher reads one argument per line from this flags file.
+# Merge with Omarchy's existing --load-extension list instead of replacing it.
+python3 "$HOME/.local/bin/grymm-theme-companion-browser-setup"

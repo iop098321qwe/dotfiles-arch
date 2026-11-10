@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Hooks run after Omarchy commits its palette. Avoid version-manager shims.
+# Omarchy 4.5 invokes hooks after committing the palette to local state.
+# Use Arch's Node rather than a shell-initialized version-manager shim.
 export PATH="${OMARCHY_PATH:-/usr/share/omarchy}/bin:/usr/bin:${PATH:-}"
 state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/omarchy"
 mkdir -p "$state_dir"
