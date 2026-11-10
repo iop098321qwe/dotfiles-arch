@@ -33,6 +33,7 @@ packages=(
   moreutils
   ncdu
   nmap
+  notion-desktop
   npm
   odt2txt
   openscad
