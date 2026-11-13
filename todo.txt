@@ -1,2 +1,5 @@
-(C) 2026-09-15 fix espanso installation manually +espanso @fix @feat
-(A) 2026-10-30 make all current dotfiles arch-specific, so that other operating systems can be used with this same repo +dotfiles @feat
+(A) 2026-09-15 fix espanso installation manually as package has been fixed #fix +espanso @fix
+(C) 2026-10-30 make all current dotfiles arch-specific, so that other operating systems can be used with this same repo +dotfiles @feat
+(B) 2026-11-13 improve and streamline the initialization of chezmoi @perf +dotfiles
+(A) 2026-11-13 remove unnecessary installation checks on each chezmoi update in favor of on_change #fix @fix +dotfiles
+(A) 2026-11-13 remove prompt for 30 minute sudo #fix @fix +dotfiles
