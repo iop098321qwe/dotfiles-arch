@@ -1,0 +1,63 @@
+#!/usr/bin/env python3
+"""Merge portable Notion preferences; run chezmoi with Notion fully closed.
+
+Do not replace this with a full state.json export or use chezmoi re-add on
+this target: it also contains private session and machine-specific data.
+"""
+
+import json
+import sys
+
+
+SETTINGS = {
+    "zoomFactor": 1,
+    "theme": {"mode": "dark", "usingSystemTheme": True},
+    "contrastMode": "standard",
+    "locale": "en-US",
+    "preferences": {
+        "isHideLastWindowOnCloseEnabled": True,
+        "isMenuBarIconEnabled": True,
+        "isNavigationHistoryEnabled": True,
+        "isNewTabSearchEnabled": True,
+        "isPinnedTabNewTabEnabled": True,
+        "isTabSpacesEnabled": True,
+        "isQuickSearchEnabled": True,
+        "isTabPreviewEnabled": True,
+        "isUniversalLinksEnabled": True,
+        "notionAiShortcut": "shift+ctrl+j",
+        "onStartup": "continue",
+        "quickSearchShortcut": "Shift+CommandOrControl+K",
+        "isAlwaysOnTabBarEnabled": True,
+        "isZenModeEnabled": True,
+    },
+}
+
+
+def merge(target, settings):
+    if not isinstance(target, dict):
+        raise ValueError("expected a JSON object")
+    for key, value in settings.items():
+        if isinstance(value, dict):
+            target[key] = merge(target.get(key, {}), value)
+        else:
+            target[key] = value
+    return target
+
+
+def main():
+    original = sys.stdin.read()
+    try:
+        state = json.loads(original) if original.strip() else {}
+        before = json.dumps(state, sort_keys=True)
+        merge(state, {"appState": SETTINGS})
+        if json.dumps(state, sort_keys=True) == before:
+            sys.stdout.write(original)
+        else:
+            sys.stdout.write(json.dumps(state, indent=2) + "\n")
+    except (ValueError, TypeError):
+        # Never echo state contents: they can include sensitive session data.
+        sys.exit("Notion settings: invalid state structure; leaving file unchanged")
+
+
+if __name__ == "__main__":
+    main()
