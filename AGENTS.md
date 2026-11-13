@@ -47,6 +47,7 @@ service credentials outside this repository.
 - `gh` is installed by the package hook and used to clone GitHub repositories.
 - `nodejs` is installed explicitly for the Surfingkeys palette publisher;
   hooks use `/usr/bin/node` rather than shell version-manager shims.
+- Python 3 runs the Notion state modifier and the isolated Python tests.
 - Interactive prompts use `gum` in several scripts.
 - Some hooks call `sudo`, `systemctl`, `systemctl --user`, `pacman`, and
   Omarchy package commands.
@@ -147,6 +148,8 @@ task need and user approval.
 
 ### Desktop And App Config
 
+- `dot_config/Notion/modify_private_state.json` merges portable desktop
+  preferences while preserving private sessions and machine-specific state.
 - `dot_config/alacritty/alacritty.toml` configures Alacritty.
 - `dot_config/autostart/*.desktop` defines desktop autostart entries.
 - `dot_config/btop/btop.conf` configures btop.
@@ -316,6 +319,9 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 
 ### Tests
 
+- `tests/test_notion_settings.py` tests the portable preference allowlist,
+  local state preservation, idempotence, invalid-input safety, and isolated
+  Chezmoi application with private target permissions.
 - `tests/notion-calendar-desktop-bridge.cjs` tests task URL conversion,
   direct handoff without popups, user activation, converter parity, source-tab
   scoping, navigation races, worker restart, and launch fallback.
@@ -328,6 +334,11 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 ## Architecture
 
 - This repository is a Chezmoi source tree for home-directory dotfiles.
+- Notion's private state target uses a Python 3 modify script, not a full
+  export. Only appearance, locale, UI, search, shortcuts, startup behavior,
+  and link-handling preferences are synced. Sessions, generated theme colors,
+  hardware, updates, beta flags, and login-at-startup remain local.
+  Fully close Notion before applying; never re-add its whole state file.
 - Chezmoi names map source files into targets, such as `dot_bashrc` to
   `~/.bashrc` and `dot_config/*` to `~/.config/*`.
 - `.chezmoi.toml.tmpl` runs `.bootstrap-proton-pass.sh` before reading state.
@@ -411,7 +422,7 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 ## Testing
 
 - Node's built-in test runner covers Surfingkeys and the Calendar bridge;
-  Python's standard unittest covers Brave Origin extension loading.
+  Python's standard unittest covers Brave Origin loading and Notion settings.
 - Tests use temporary homes and fake Omarchy commands, not live browser
   profiles or desktop settings. Hook tests require `/usr/bin/node` and Chezmoi.
 - Calendar tests simulate browser navigation APIs; they do not confirm the
