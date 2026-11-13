@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.1.8](https://github.com/iop098321qwe/dotfiles-arch/compare/v0.1.7...v0.1.8) (2026-11-13)
+
+### Features
+
+* install portable Surfingkeys theme sync through Chezmoi ([2b4bdfc](https://github.com/iop098321qwe/dotfiles-arch/commit/2b4bdfc9961b3373f182a5854bf30bbf5b75b3b6))
+* **notion:** open Calendar tasks in Notion Desktop via Chezmoi ([2dc7c21](https://github.com/iop098321qwe/dotfiles-arch/commit/2dc7c216245c7394e9d0f7e837e333a277f8325a))
+* **notion:** sync portable desktop preferences with chezmoi ([1650059](https://github.com/iop098321qwe/dotfiles-arch/commit/16500590fa8c36c8e6b049bd786851c2a2a02023))
+
+### Bug Fixes
+
+* load the Omarchy theme companion in Brave Origin ([175a3b6](https://github.com/iop098321qwe/dotfiles-arch/commit/175a3b644bb0375292dc823c6271fa6cee81f645))
+* **notion:** recognize the Calendar .com domain for desktop links ([b65309e](https://github.com/iop098321qwe/dotfiles-arch/commit/b65309e26b7f0846429930df0cc6508b405d97cd))
+
 ## [0.1.7](https://github.com/iop098321qwe/dotfiles-arch/compare/v0.1.6...v0.1.7) (2026-11-10)
 
 ### Features
