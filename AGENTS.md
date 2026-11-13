@@ -352,6 +352,8 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 - Calendar-origin task navigation opens a local extension page that attempts
   the desktop protocol and offers an explicit clickable fallback. Browser
   navigation events cover same-tab links and script-created target tabs.
+  Both `https://calendar.notion.com` and `https://calendar.notion.so` are
+  accepted source origins and have explicit host permissions.
   Session storage tracks source tab IDs across MV3 worker suspension; it
   does not retain task URLs. Independently opened Notion tabs are unchanged.
 - Surfingkeys polls a local palette published from `omarchy-theme-color --all`.

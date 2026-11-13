@@ -185,9 +185,10 @@ apply hooks; review pending changes before updating.
 
 If the extension was already loaded manually, click **Reload** on its card
 in `brave://extensions` and approve any requested new permissions. Reload
-Calendar too. Version 1.1.0 replaces the original page-script interception
-with browser-level navigation detection, covering new tabs, blank tabs
-assigned a destination later, and same-tab navigation.
+Calendar too. Version 1.1.1 supports both Calendar domains,
+`calendar.notion.com` and `calendar.notion.so`. It replaces the original
+page-script interception with browser-level navigation detection, covering
+new tabs, blank tabs assigned a destination later, and same-tab navigation.
 
 Click a task's **Manage in Notion** button. The bridge replaces the target
 tab with a local launch page and attempts to open the matching `notion://`
@@ -195,8 +196,9 @@ link. If the browser blocks automatic app launches, click **Open Notion
 Desktop** on that page and approve the prompt. A **Continue in Notion web
 instead** link bypasses the bridge. You may close the launch tab afterward.
 
-The bridge redirects only supported task URLs opened from the top-level
-`https://calendar.notion.so` page. Normal Notion browsing remains unchanged.
+The bridge redirects only supported task URLs opened from a top-level
+`https://calendar.notion.com` or `https://calendar.notion.so` page.
+Normal Notion browsing remains unchanged.
 It requests navigation events, session storage, and access to Calendar and
 the supported Notion hosts. Temporary session storage holds tab IDs only;
 the extension reads no task bodies and sends no network requests. It does
