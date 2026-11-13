@@ -379,6 +379,12 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
   its color command skip initialization. Runtime palettes remain untracked.
 - Palette discovery prefers the Quattro `XDG_STATE_HOME` layout and falls
   back to the older config layout only when the state layout is absent.
+- Surfingkeys polls a local palette published from `omarchy-theme-color --all`.
+  Chezmoi installs the publisher and executable theme-set hook, then initializes
+  the palette without changing the desktop theme. Unsupported systems skip
+  initialization; systems without the color command report that it is skipped.
+- Surfingkeys runtime palettes and backups are ignored by Chezmoi. The browser
+  retains its fallback or last good theme when palette reads fail.
 - Hyprland config starts from Omarchy defaults and loads local Lua overrides.
 - Personal replacement bindings use native `o.rebind`; input uses the `grymm`
   XKB rules with US/German layouts and user-owned shifted-Compose symbols.
@@ -409,6 +415,8 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 - `git status --short`: inspect pending work.
 - `git diff --check`: check whitespace errors before commit.
 - `git diff -- AGENTS.md .chezmoiignore`: review this guide integration.
+- `node --test tests/surfingkeys-theme.cjs`: run isolated palette and hook
+  tests.
 - `chezmoi apply`: apply dotfiles and run hooks; user approval required.
 - `cbc pkg load`: install and source CBC modules from the manifest.
 - `cbc pkg update`: update installed CBC modules and refresh the manifest.
