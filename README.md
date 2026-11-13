@@ -86,6 +86,7 @@ High-level system changes include:
 - Create a starter host-specific Hyprland monitor profile when missing.
 - Install DisplayLink packages and optionally enable DisplayLink drivers.
 - Deploy the pinned start-page theme companion on Omarchy machines.
+- Deploy the Notion Calendar desktop bridge alongside the theme companion.
 
 ## Espanso Packages
 
@@ -124,12 +125,27 @@ Omarchy skip this step. Python 3.11 or newer and an authenticated GitHub CLI
 are required. The hook reuses the earlier GitHub authentication step to read
 the private companion repository; tokens are not embedded in the files.
 
-After applying, open `brave://extensions`, enable Developer mode, and load
-the unpacked extension from
-`~/.local/share/grymm-theme-companion/extension`. The installer prints the
-actual path and stable extension ID. `XDG_DATA_HOME` can change that path.
-Perform this once per Brave Origin or standard Brave profile on each computer.
-Chezmoi does not enable browser extensions automatically.
+After applying, the browser setup helper merges the theme companion and the
+installed Notion Calendar bridge into `~/.config/brave-origin-flags.conf`.
+It preserves Omarchy's stock extensions and other flags, backs up an existing
+flags file before changing it, and skips unchanged writes. Fully exit Brave
+Origin, including its web-app windows, and reopen it to load both extensions.
+`XDG_CONFIG_HOME` changes the flags directory. The companion installer honors
+`XDG_DATA_HOME`; the Calendar bridge uses Chezmoi's standard `~/.local/share`
+target, so automatic pairing assumes the default data directory.
+
+For standard Brave, or a profile where automatic loading is unavailable, open
+`brave://extensions`, enable **Developer mode**, and **Load unpacked** for
+each directory:
+
+```text
+~/.local/share/grymm-theme-companion/extension
+~/.local/share/notion-calendar-desktop-bridge
+```
+
+Use the full expanded paths in the folder picker. The companion installer
+prints its actual path and stable extension ID. Perform manual loading once
+per browser profile on each computer. Chezmoi does not modify browser profiles.
 
 The GitHub Pages start page then follows the current local Omarchy palette
 live. Without a working companion it uses its original Catppuccin colors.
@@ -157,6 +173,60 @@ On a future apply, `.chezmoiremove` removes only the old user-level
 `~/.local/share/icons/hicolor/256x256/apps/notion.png` icon. It does not remove
 Notion app data or the package-owned launcher. Notion Calendar remains a web
 app with its existing launcher and Super+Shift+C shortcut.
+
+### Open Calendar Tasks In Notion Desktop
+
+Chezmoi deploys **Notion Calendar → Desktop** under
+`~/.local/share/notion-calendar-desktop-bridge`. Load it alongside the
+[theme companion](#start-page-theme-companion) using the instructions above.
+For an existing installation, pull these changes with `chezmoi update`, then
+fully exit and reopen Brave Origin. This runs the normal, side-effectful
+apply hooks; review pending changes before updating.
+
+If the extension was already loaded manually, click **Reload** on its card
+in `brave://extensions` and approve any requested new permissions. Reload
+Calendar too. Version 1.1.0 replaces the original page-script interception
+with browser-level navigation detection, covering new tabs, blank tabs
+assigned a destination later, and same-tab navigation.
+
+Click a task's **Manage in Notion** button. The bridge replaces the target
+tab with a local launch page and attempts to open the matching `notion://`
+link. If the browser blocks automatic app launches, click **Open Notion
+Desktop** on that page and approve the prompt. A **Continue in Notion web
+instead** link bypasses the bridge. You may close the launch tab afterward.
+
+The bridge redirects only supported task URLs opened from the top-level
+`https://calendar.notion.so` page. Normal Notion browsing remains unchanged.
+It requests navigation events, session storage, and access to Calendar and
+the supported Notion hosts. Temporary session storage holds tab IDs only;
+the extension reads no task bodies and sends no network requests. It does
+not install a service, native host, or additional system protocol handler.
+
+If Notion still does not launch, verify the protocol handler:
+
+```sh
+xdg-mime query default x-scheme-handler/notion
+xdg-open 'notion://www.notion.so/REPLACE_WITH_YOUR_PAGE_ID'
+```
+
+Replace the placeholder with a real 32-character Notion page ID. If the
+terminal command fails too, repair the Notion Desktop installation or its
+handler before troubleshooting the browser extension. The protocol format
+was manually verified on this machine; automated tests use simulated browser
+events, not the authenticated Calendar UI.
+
+For temporary web-only use, disable the extension in `brave://extensions`.
+To stop automatic loading permanently, remove the bridge path from the
+flags file and stop managing the bridge source and its setup-helper entry;
+otherwise a future apply will register it again. Restart Brave Origin after
+changing launch flags.
+
+Run the isolated bridge and browser-setup tests from the source repository:
+
+```sh
+node --test tests/notion-calendar-desktop-bridge.cjs
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -p 'test_*.py'
+```
 
 ## Pacman Packages Installed
 

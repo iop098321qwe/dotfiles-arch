@@ -120,7 +120,8 @@ task need and user approval.
   the user crontab after confirmation.
 - `.chezmoiscripts/run_after_003_theme_companion.sh` deploys the pinned
   start-page native host and extension for Brave Origin and standard Brave,
-  then configures automatic extension loading for Brave Origin.
+  then configures automatic companion and Calendar bridge loading for
+  Brave Origin.
 - `.chezmoiscripts/run_after_004_surfingkeys_theme.sh` initializes the local
   Surfingkeys palette after files are deployed on supported Omarchy systems.
 - `.chezmoiscripts/run_after_999_notify_complete.sh` prints completion notice
@@ -164,8 +165,8 @@ task need and user approval.
 - `dot_config/harper-ls/dictionary.txt` customizes Harper dictionary words.
 - `dot_config/hypr/*.lua` configures Hyprland through Omarchy Lua modules.
 - `dot_config/hypr/*.conf` configures Hyprland-related services.
-- `dot_config/hypr/theme-workaround.lua` adds a Brave Origin policy-refresh guard
-  to the session PATH until Omarchy issue #16365 is fixed.
+- `dot_config/hypr/theme-workaround.lua` adds a Brave Origin policy-refresh
+  guard to the session PATH until Omarchy issue #16365 is fixed.
 - `dot_config/hypr/private_monitors.lua.tmpl` is private monitor config.
 - `dot_config/hyprland-preview-share-picker/config.yaml` configures sharing.
 - `dot_config/imv/config` configures imv.
@@ -270,12 +271,24 @@ task need and user approval.
 ### Local Bin
 
 - `dot_local/bin/executable_grymm-theme-companion-browser-setup` merges the
-  installed companion into Brave Origin's extension-loading launch flags.
+  installed companion and optional Calendar bridge into Brave Origin's
+  extension-loading launch flags.
 - `dot_local/bin/executable_cron_mirror.sh` is an executable local script.
 - `dot_local/bin/executable_omarchy-cloned-plugin-diff` reports upstream
   changes to cloned Omarchy plugins.
 
-### Local Share Web Apps
+### Local Share Extensions And Web Apps
+
+- `dot_local/share/notion-calendar-desktop-bridge/background.mjs` routes
+  Calendar-origin task navigations through a local desktop-launch page.
+- `dot_local/share/notion-calendar-desktop-bridge/launch.html` provides
+  desktop-launch and web-fallback links.
+- `dot_local/share/notion-calendar-desktop-bridge/launch.mjs` attempts the
+  desktop handoff while preserving an explicit user-click fallback.
+- `dot_local/share/notion-calendar-desktop-bridge/links.mjs` validates
+  supported task URLs and converts page IDs into desktop links.
+- `dot_local/share/notion-calendar-desktop-bridge/manifest.json` declares
+  the navigation worker, session storage, and scoped Notion host access.
 
 The following desktop entries live in `dot_local/share/applications/`.
 Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
@@ -301,10 +314,13 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 
 ### Tests
 
+- `tests/notion-calendar-desktop-bridge.cjs` tests task URL conversion,
+  source-tab scoping, navigation races, worker restart, and launch fallback.
 - `tests/surfingkeys-theme.cjs` tests palette validation, atomic publication,
   home-specific template rendering, and isolated apply and theme-change hooks.
 - `tests/test_theme_companion.py` tests browser flag merging, backups,
-  idempotence, XDG paths, symlinks, permissions, and missing extensions.
+  idempotence, XDG paths, symlinks, permissions, missing extensions, and
+  loading the Calendar bridge alongside the companion.
 
 ## Architecture
 
@@ -325,10 +341,19 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
   `XDG_CACHE_HOME`, or `~/.cache`, and reruns the installer on each apply.
 - The companion uses `XDG_CONFIG_HOME` and `XDG_DATA_HOME` with home defaults.
 - After companion deployment, the browser helper merges its installed path
-  into `brave-origin-flags.conf` without dropping Omarchy extensions or other
-  flags. It backs up changed existing files, preserves permissions and
-  symlinks, and avoids rewriting unchanged files. Fully restart Brave Origin
-  to load the extension; standard Brave still requires manual enablement.
+  and the Calendar bridge path, when installed, into `brave-origin-flags.conf`
+  without dropping Omarchy extensions or other flags. It backs up changed
+  existing files, preserves permissions and symlinks, and avoids rewriting
+  unchanged files. Fully restart Brave Origin to load both extensions;
+  standard Brave still requires manual enablement.
+- The Calendar bridge is deployed under the standard Chezmoi data target,
+  `~/.local/share/notion-calendar-desktop-bridge`; automatic pairing with
+  the XDG-aware companion helper assumes the default data directory.
+- Calendar-origin task navigation opens a local extension page that attempts
+  the desktop protocol and offers an explicit clickable fallback. Browser
+  navigation events cover same-tab links and script-created target tabs.
+  Session storage tracks source tab IDs across MV3 worker suspension; it
+  does not retain task URLs. Independently opened Notion tabs are unchanged.
 - Surfingkeys polls a local palette published from `omarchy-theme-color --all`.
   Chezmoi installs the publisher and executable theme-set hook, then initializes
   the palette without changing the desktop theme. Systems without Omarchy or
@@ -358,6 +383,7 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 
 ## Commands
 
+- `node --test tests/notion-calendar-desktop-bridge.cjs`: run bridge tests.
 - `node --test tests/surfingkeys-theme.cjs`: run palette and hook tests.
 - `python3 -m unittest discover -s tests -p 'test_*.py'`: run browser setup
   tests.
@@ -376,10 +402,12 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 
 ## Testing
 
-- Node's built-in test runner covers Surfingkeys; Python's standard unittest
-  covers Brave Origin extension loading. See the commands above.
+- Node's built-in test runner covers Surfingkeys and the Calendar bridge;
+  Python's standard unittest covers Brave Origin extension loading.
 - Tests use temporary homes and fake Omarchy commands, not live browser
   profiles or desktop settings. Hook tests require `/usr/bin/node` and Chezmoi.
+- Calendar tests simulate browser navigation APIs; they do not confirm the
+  authenticated live UI or OS protocol prompt end to end.
 - No `*.bats` files were found.
 - Use `git diff --check` for safe whitespace validation.
 - Review shell edits manually for quoting, idempotence, and side effects.
@@ -492,6 +520,9 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 - If clone drift is reported, run `omarchy-cloned-plugin-diff` for a full diff.
 - For start-page theme fallback, verify the unpacked extension is enabled
   and its native host is installed for the matching Brave browser.
+- For Calendar task links, reload the bridge after updates and approve its
+  permissions. Use its launch-page button if automatic launch is blocked,
+  and verify `xdg-mime query default x-scheme-handler/notion` if needed.
 - If the Brave Origin companion is absent, check `brave-origin-flags.conf`
   includes its installed extension path, fully exit the browser, and reopen
   it. `chezmoi update` must pull a branch containing both theme setup hooks.

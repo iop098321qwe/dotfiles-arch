@@ -50,4 +50,5 @@ python3 "$source_dir/install.py" --browser brave-origin --browser brave
 
 # Arch's Brave Origin launcher reads one argument per line from this flags file.
 # Merge with Omarchy's existing --load-extension list instead of replacing it.
+# Include the Calendar bridge when Chezmoi has deployed its manifest too.
 python3 "$HOME/.local/bin/grymm-theme-companion-browser-setup"

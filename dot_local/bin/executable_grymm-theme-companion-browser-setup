@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Load the installed theme companion through Arch's Brave Origin wrapper."""
+"""Load the theme companion and Calendar bridge through Brave Origin's wrapper."""
 
 import os
 from pathlib import Path
@@ -50,6 +50,9 @@ def configure(config_home, data_home):
     exists = flags.exists()
     original = flags.read_text() if exists else ""
     configured = merge_extension_flags(original, extension)
+    calendar_bridge = data_home / "notion-calendar-desktop-bridge"
+    if (calendar_bridge / "manifest.json").is_file():
+        configured = merge_extension_flags(configured, calendar_bridge)
     if configured == original:
         return False
     flags.parent.mkdir(parents=True, exist_ok=True)
@@ -81,9 +84,9 @@ def main():
     except (OSError, ValueError) as error:
         print(f"Theme companion browser setup: {error}", file=sys.stderr)
         return 1
-    print("Brave Origin theme companion loading " +
+    print("Brave Origin companion and installed Calendar bridge loading " +
           ("configured." if changed else "already configured."))
-    print("Fully exit Brave Origin and reopen it to load the extension.")
+    print("Fully exit Brave Origin and reopen it to load the extensions.")
     return 0
 
 

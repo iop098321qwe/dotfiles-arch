@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Open task in Notion Desktop</title>
+    <style>
+      :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+      main { max-width: 38rem; margin: 12vh auto; padding: 2rem; }
+      a { display: inline-block; margin: 0.5rem 1rem 0.5rem 0; }
+      [hidden] { display: none; }
+      #desktop { padding: 0.8rem 1rem; border: 1px solid; border-radius: 0.5rem; }
+    </style>
+    <script src="launch.mjs" type="module"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Open task in Notion Desktop</h1>
+      <p id="status">Preparing the desktop link…</p>
+      <a id="desktop" hidden>Open Notion Desktop</a>
+      <a id="web" hidden>Continue in Notion web instead</a>
+      <p>You can close this tab after the task opens.</p>
+    </main>
+  </body>
+</html>

@@ -87,6 +87,33 @@ class ConfigureTests(unittest.TestCase):
         self.assertEqual(backup.read_text(), original)
         self.assertEqual(list(self.config.glob(".brave-origin-flags.conf.*")), [])
 
+    def test_loads_calendar_bridge_alongside_companion_and_stock_extensions(self):
+        bridge = self.data / "notion-calendar-desktop-bridge"
+        bridge.mkdir()
+        (bridge / "manifest.json").write_text('{}\n')
+        self.config.mkdir()
+        original = "--load-extension=/stock/one\n--other\n"
+        self.flags.write_text(original)
+        self.assertTrue(SETUP.configure(self.config, self.data))
+        self.assertEqual(
+            self.flags.read_text(),
+            f"--load-extension=/stock/one,{self.extension},{bridge}\n--other\n",
+        )
+        before = self.flags.stat()
+        self.assertFalse(SETUP.configure(self.config, self.data))
+        self.assertEqual(self.flags.stat().st_mtime_ns, before.st_mtime_ns)
+        backup = self.flags.with_name(
+            self.flags.name + ".before-grymm-theme-companion",
+        )
+        self.assertEqual(backup.read_text(), original)
+
+    def test_bridge_without_manifest_is_not_added(self):
+        bridge = self.data / "notion-calendar-desktop-bridge"
+        bridge.mkdir()
+        self.assertTrue(SETUP.configure(self.config, self.data))
+        self.assertEqual(self.flags.read_text(),
+                         f"--load-extension={self.extension}\n")
+
     def test_preserves_symlink(self):
         self.config.mkdir()
         target = self.home / "linked-flags"
