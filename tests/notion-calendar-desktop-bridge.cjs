@@ -72,7 +72,10 @@ test("rejects unrelated, malformed, credential-bearing, and deceptive URLs", asy
     `https://app.notion.com/p/prefix${id}`, `https://app.notion.com/p/${id}/other`,
     desktop]) assert.equal(desktopUrl(value), null);
   assert.equal(isCalendar(calendar), true);
+  assert.equal(isCalendar("https://calendar.notion.com/"), true);
   assert.equal(isCalendar("https://calendar.notion.so.evil.example/"), false);
+  assert.equal(isCalendar("https://calendar.notion.com.evil.example/"), false);
+  assert.equal(isCalendar("http://calendar.notion.com/"), false);
 });
 
 test("routes a JavaScript-created task tab from Calendar", async () => {
@@ -105,6 +108,16 @@ test("routes a same-tab Calendar navigation", async () => {
   await env.before(task, 1);
   assert.equal(env.updates.length, 1);
   assert.equal(env.updates[0].tabId, 1);
+});
+
+test("recognizes calendar.notion.com for popups and same-tab navigation", async () => {
+  for (const method of ["popup", "same-tab"]) {
+    const env = await bridge();
+    env.tabs.set(1, { url: "https://calendar.notion.com/" });
+    if (method === "popup") await env.created();
+    else await env.before(task, 1);
+    assert.equal(env.updates.length, 1, method);
+  }
 });
 
 test("does not redirect normal Notion browsing, other sites, or iframes", async () => {
@@ -158,7 +171,8 @@ test("manifest grants only the scoped hosts and required navigation/storage APIs
   assert.equal(manifest.manifest_version, 3);
   assert.deepEqual(manifest.permissions, ["webNavigation", "storage"]);
   assert.deepEqual(manifest.host_permissions, [
-    "https://calendar.notion.so/*", "https://app.notion.com/*",
+    "https://calendar.notion.so/*", "https://calendar.notion.com/*",
+    "https://app.notion.com/*",
     "https://www.notion.so/*", "https://notion.so/*",
   ]);
   assert.equal(manifest.content_scripts, undefined);

@@ -1,9 +1,13 @@
 const notionHosts = new Set(["app.notion.com", "www.notion.so", "notion.so"]);
+const calendarOrigins = new Set([
+  "https://calendar.notion.so",
+  "https://calendar.notion.com",
+]);
 const pageIdPattern = /(?:^|[-/])([a-f0-9]{32}|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})$/i;
 
 export function isCalendar(value) {
   try {
-    return new URL(value).origin === "https://calendar.notion.so";
+    return calendarOrigins.has(new URL(value).origin);
   } catch {
     return false;
   }
