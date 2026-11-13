@@ -185,16 +185,23 @@ apply hooks; review pending changes before updating.
 
 If the extension was already loaded manually, click **Reload** on its card
 in `brave://extensions` and approve any requested new permissions. Reload
-Calendar too. Version 1.1.1 supports both Calendar domains,
-`calendar.notion.com` and `calendar.notion.so`. It replaces the original
-page-script interception with browser-level navigation detection, covering
-new tabs, blank tabs assigned a destination later, and same-tab navigation.
+Calendar too. Version 1.2.0 supports both Calendar domains,
+`calendar.notion.com` and `calendar.notion.so`, and installs a direct click
+handler before Calendar's scripts run. Reloading Calendar after the extension
+is essential for this handler to take effect.
 
-Click a task's **Manage in Notion** button. The bridge replaces the target
-tab with a local launch page and attempts to open the matching `notion://`
-link. If the browser blocks automatic app launches, click **Open Notion
-Desktop** on that page and approve the prompt. A **Continue in Notion web
-instead** link bypasses the bridge. You may close the launch tab afterward.
+Click a task's **Manage in Notion** button. Normal task buttons and links now
+launch the matching `notion://` URL directly from Calendar's existing tab,
+without creating a tab, loading a forwarding page, or waking the background
+worker. Calendar stays open in place. Approve the browser's external-app
+prompt if shown; when offered, allow Calendar to open Notion links in future.
+Browser security permissions cannot be bypassed by the extension.
+
+The navigation worker remains a backup for navigation mechanisms the direct
+handler cannot intercept, such as blank tabs assigned a destination later.
+Only this backup route uses the local launch page. There, click **Open Notion
+Desktop** if automatic opening is blocked, or **Continue in Notion web
+instead** for web-only access. You may close that backup tab afterward.
 
 The bridge redirects only supported task URLs opened from a top-level
 `https://calendar.notion.com` or `https://calendar.notion.so` page.

@@ -280,7 +280,9 @@ task need and user approval.
 ### Local Share Extensions And Web Apps
 
 - `dot_local/share/notion-calendar-desktop-bridge/background.mjs` routes
-  Calendar-origin task navigations through a local desktop-launch page.
+  otherwise unhandled Calendar navigations through a desktop-launch page.
+- `dot_local/share/notion-calendar-desktop-bridge/direct.js` intercepts
+  task clicks in Calendar's page world for a direct, current-tab handoff.
 - `dot_local/share/notion-calendar-desktop-bridge/launch.html` provides
   desktop-launch and web-fallback links.
 - `dot_local/share/notion-calendar-desktop-bridge/launch.mjs` attempts the
@@ -288,7 +290,7 @@ task need and user approval.
 - `dot_local/share/notion-calendar-desktop-bridge/links.mjs` validates
   supported task URLs and converts page IDs into desktop links.
 - `dot_local/share/notion-calendar-desktop-bridge/manifest.json` declares
-  the navigation worker, session storage, and scoped Notion host access.
+  the direct click handler, backup worker, and scoped Notion host access.
 
 The following desktop entries live in `dot_local/share/applications/`.
 Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
@@ -315,7 +317,8 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 ### Tests
 
 - `tests/notion-calendar-desktop-bridge.cjs` tests task URL conversion,
-  source-tab scoping, navigation races, worker restart, and launch fallback.
+  direct handoff without popups, user activation, converter parity, source-tab
+  scoping, navigation races, worker restart, and launch fallback.
 - `tests/surfingkeys-theme.cjs` tests palette validation, atomic publication,
   home-specific template rendering, and isolated apply and theme-change hooks.
 - `tests/test_theme_companion.py` tests browser flag merging, backups,
@@ -349,9 +352,12 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 - The Calendar bridge is deployed under the standard Chezmoi data target,
   `~/.local/share/notion-calendar-desktop-bridge`; automatic pairing with
   the XDG-aware companion helper assumes the default data directory.
-- Calendar-origin task navigation opens a local extension page that attempts
-  the desktop protocol and offers an explicit clickable fallback. Browser
-  navigation events cover same-tab links and script-created target tabs.
+- Calendar task clicks use a MAIN-world document-start handler to invoke the
+  desktop protocol in the existing tab during the original user gesture.
+  No new tab or launch page is used on this direct route. Unhandled cases use
+  the navigation worker and its local launch page with clickable fallback.
+  The direct handler and `links.mjs` share converter behavior through parity
+  tests; changes to URL validation must keep both implementations aligned.
   Both `https://calendar.notion.com` and `https://calendar.notion.so` are
   accepted source origins and have explicit host permissions.
   Session storage tracks source tab IDs across MV3 worker suspension; it
