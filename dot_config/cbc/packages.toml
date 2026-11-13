@@ -38,9 +38,10 @@ commit_date = "2026-10-26T23:12:37-06:00"
 
 [[module.deps]]
 use = "iop098321qwe/chezmod"
-rev = "e0420cf"
-hash = "e0420cfda17a79c456c44dc600cebdf72dfee9ad"
-commit_date = "2026-10-26T23:12:04-06:00"
+rev = "652c51f"
+hash = "652c51f12f732a80f9b9caa8c530fd9d04837196"
+commit_date = "2026-11-09T17:44:18-07:00"
+installed_at = "2026-11-10T00:44:50+00:00"
 
 [[module.deps]]
 use = "iop098321qwe/cronmod"
