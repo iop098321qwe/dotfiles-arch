@@ -5,12 +5,109 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { pathToFileURL } = require("node:url");
 const test = require("node:test");
+const vm = require("node:vm");
 const extension = path.join(__dirname, "../dot_local/share/notion-calendar-desktop-bridge");
 const moduleAt = (name) => import(pathToFileURL(path.join(extension, name)).href);
 const id = "0123456789abcdef0123456789abcdef";
 const task = `https://app.notion.com/p/Example-Task-${id}`;
 const desktop = `notion://www.notion.so/${id}`;
 const calendar = "https://calendar.notion.so/";
+
+function direct(origin = "https://calendar.notion.com", active = true) {
+  const opened = [];
+  const assigned = [];
+  const listeners = {};
+  const proxy = {};
+  class Anchor {
+    constructor(href) { this.href = href; }
+    hasAttribute() { return false; }
+  }
+  const window = {
+    location: { origin, assign: (url) => assigned.push(url) },
+    open(...args) { opened.push({ receiver: this, args }); return proxy; },
+  };
+  const navigator = { userActivation: { isActive: active } };
+  vm.runInNewContext(fs.readFileSync(path.join(extension, "direct.js"), "utf8"), {
+    window, navigator, URL, HTMLAnchorElement: Anchor,
+    document: { addEventListener: (type, fn) => { listeners[type] = fn; } },
+  });
+  return { window, navigator, opened, assigned, listeners, Anchor, proxy };
+}
+
+test("direct handoff opens no popup or launch page on either Calendar domain", () => {
+  for (const origin of ["https://calendar.notion.com", "https://calendar.notion.so"]) {
+    const env = direct(origin);
+    assert.equal(env.window.open(task, "_blank", "noopener,noreferrer"), null);
+    assert.deepEqual(env.assigned, [desktop]);
+    assert.deepEqual(env.opened, []);
+  }
+});
+
+test("direct converter agrees with background converter", async () => {
+  const { desktopUrl } = await moduleAt("links.mjs");
+  for (const value of [
+    task, `https://notion.so/Title-${id}/?v=view#block`,
+    "https://www.notion.so/01234567-89AB-CDEF-0123-456789ABCDEF",
+    `https://app.notion.com.evil.example/p/${id}`, `http://app.notion.com/p/${id}`,
+    `https://app.notion.com:8443/p/${id}`, `https://user:pass@app.notion.com/p/${id}`,
+    `https://app.notion.com/p/prefix${id}`, `https://app.notion.com/p/${id}/other`,
+    "", undefined, {}, desktop,
+  ]) {
+    const env = direct();
+    env.window.open(value);
+    const expected = desktopUrl(value);
+    assert.deepEqual(env.assigned, expected ? [expected] : []);
+    assert.equal(env.opened.length, expected ? 0 : 1);
+  }
+  const env = direct();
+  env.window.open(new URL(task));
+  assert.deepEqual(env.assigned, [desktop]);
+});
+
+test("unrelated opens keep native arguments, receiver, and return value", () => {
+  const env = direct();
+  assert.equal(env.window.open("https://example.com", "_blank", "noopener"), env.proxy);
+  assert.deepEqual(env.opened[0].args, ["https://example.com", "_blank", "noopener"]);
+  assert.equal(env.opened[0].receiver, env.window);
+});
+
+test("direct handoff requires activation and remains scoped to Calendar", () => {
+  for (const env of [direct(undefined, false), direct("https://example.com")]) {
+    env.window.open(task);
+    assert.deepEqual(env.assigned, []);
+    assert.equal(env.opened.length, 1);
+  }
+});
+
+test("direct handoff captures anchors within a click without navigating the page", () => {
+  const env = direct();
+  const event = {
+    button: 0, composedPath: () => [new env.Anchor(task)],
+    preventDefault() { this.prevented = true; },
+    stopImmediatePropagation() { this.stopped = true; },
+  };
+  env.listeners.click(event);
+  assert.deepEqual(env.assigned, [desktop]);
+  assert.equal(event.prevented, true);
+  assert.equal(event.stopped, true);
+});
+
+test("direct handoff preserves modified anchor clicks", () => {
+  for (const modifier of ["ctrlKey", "metaKey", "shiftKey", "altKey"]) {
+    const env = direct();
+    env.listeners.click({
+      button: 0, [modifier]: true, composedPath: () => [new env.Anchor(task)],
+    });
+    assert.deepEqual(env.assigned, []);
+  }
+});
+
+test("a synchronous protocol launch error preserves the browser fallback", () => {
+  const env = direct();
+  env.window.location.assign = () => { throw Error("blocked"); };
+  assert.equal(env.window.open(task), env.proxy);
+  assert.equal(env.opened.length, 1);
+});
 
 function setup() {
   const listeners = {};
@@ -175,7 +272,10 @@ test("manifest grants only the scoped hosts and required navigation/storage APIs
     "https://app.notion.com/*",
     "https://www.notion.so/*", "https://notion.so/*",
   ]);
-  assert.equal(manifest.content_scripts, undefined);
+  assert.deepEqual(manifest.content_scripts, [{
+    matches: ["https://calendar.notion.com/*", "https://calendar.notion.so/*"],
+    js: ["direct.js"], run_at: "document_start", world: "MAIN",
+  }]);
   assert.equal(manifest.background.service_worker, "background.mjs");
   assert.equal(manifest.background.type, "module");
   assert.equal(manifest.web_accessible_resources, undefined);
