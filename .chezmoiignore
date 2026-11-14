@@ -14,3 +14,9 @@ tests
 # Espanso installs and updates its own package contents and metadata.
 .config/espanso/match/packages
 .config/espanso/match/packages/**
+
+# Dedicated GitHub repositories own these browser extension installations.
+.local/share/notion-calendar-desktop-bridge
+.local/share/notion-calendar-desktop-bridge/**
+.local/share/grymm-theme-companion
+.local/share/grymm-theme-companion/**
