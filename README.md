@@ -85,8 +85,7 @@ High-level system changes include:
 - Install and upgrade Yazi packages through `ya pkg`.
 - Create a starter host-specific Hyprland monitor profile when missing.
 - Install DisplayLink packages and optionally enable DisplayLink drivers.
-- Deploy the pinned start-page theme companion on Omarchy machines.
-- Deploy the Notion Calendar desktop bridge alongside the theme companion.
+- Browser extensions are installed separately from their GitHub repositories.
 
 ## Espanso Packages
 
@@ -117,49 +116,17 @@ required package, add an installation entry to
 
 ## Start-Page Theme Companion
 
-The apply hook `.chezmoiscripts/run_after_003_theme_companion.sh` installs the
-local Omarchy theme reader and Brave native messaging registrations. It
-downloads a pinned revision from `iop098321qwe/main_page`, caches its source,
-and reruns the idempotent installer on each apply. Linux machines without
-Omarchy skip this step. Python 3.11 or newer and an authenticated GitHub CLI
-are required. The hook reuses the earlier GitHub authentication step to read
-the private companion repository; tokens are not embedded in the files.
+Chezmoi no longer deploys or updates the browser theme companion or Calendar
+bridge. Install and update them from their dedicated GitHub repositories.
+Existing installed paths are preserved, so current browser loading flags
+continue working.
 
-After applying, the browser setup helper merges the theme companion and the
-installed Notion Calendar bridge into `~/.config/brave-origin-flags.conf`.
-It preserves Omarchy's stock extensions and other flags, backs up an existing
-flags file before changing it, and skips unchanged writes. Fully exit Brave
-Origin, including its web-app windows, and reopen it to load both extensions.
-`XDG_CONFIG_HOME` changes the flags directory. The companion installer honors
-`XDG_DATA_HOME`; the Calendar bridge uses Chezmoi's standard `~/.local/share`
-target, so automatic pairing assumes the default data directory.
+- [Omarchy theme sync](https://github.com/iop098321qwe/omarchy_theme_sync/tree/develop)
+- [Notion Calendar desktop bridge](https://github.com/iop098321qwe/notion_calendar_desktop_bridge/tree/develop)
 
-For standard Brave, or a profile where automatic loading is unavailable, open
-`brave://extensions`, enable **Developer mode**, and **Load unpacked** for
-each directory:
-
-```text
-~/.local/share/grymm-theme-companion/extension
-~/.local/share/notion-calendar-desktop-bridge
-```
-
-Use the full expanded paths in the folder picker. The companion installer
-prints its actual path and stable extension ID. Perform manual loading once
-per browser profile on each computer. Chezmoi does not modify browser profiles.
-
-The GitHub Pages start page then follows the current local Omarchy palette
-live. Without a working companion it uses its original Catppuccin colors.
-No desktop theme is stored or synced between computers.
-
-To update the companion, change the full revision SHA in the hook, then apply
-the dotfiles on each computer. Reload the extension at `brave://extensions`
-and reload open site tabs after updating unpacked extension files.
-Removing the hook prevents future installation; removal of existing native
-registrations is described in the companion guide.
-
-See the [companion guide](https://github.com/iop098321qwe/main_page/blob/5fde175efb77c135ca3706c4b48fda2dd5384065/companion/README.md)
-for installation, fallback, diagnosis, and removal. The guide link is a URL
-line-length exception and includes Quattro state-directory discovery.
+The links above are URL line-length exceptions. Each repository README has
+clone, install, update, browser reload, and troubleshooting instructions.
+`chezmoi apply` and `chezmoi update` no longer update these extensions.
 
 ## Notion Desktop
 
@@ -176,12 +143,9 @@ app with its existing launcher and Super+Shift+C shortcut.
 
 ### Open Calendar Tasks In Notion Desktop
 
-Chezmoi deploys **Notion Calendar → Desktop** under
-`~/.local/share/notion-calendar-desktop-bridge`. Load it alongside the
-[theme companion](#start-page-theme-companion) using the instructions above.
-For an existing installation, pull these changes with `chezmoi update`, then
-fully exit and reopen Brave Origin. This runs the normal, side-effectful
-apply hooks; review pending changes before updating.
+Install **Notion Calendar → Desktop** from its dedicated repository, linked
+under [Start-Page Theme Companion](#start-page-theme-companion).
+Its repository installer retains `~/.local/share/notion-calendar-desktop-bridge`.
 
 If the extension was already loaded manually, click **Reload** on its card
 in `brave://extensions` and approve any requested new permissions. Reload
@@ -226,16 +190,9 @@ events, not the authenticated Calendar UI.
 
 For temporary web-only use, disable the extension in `brave://extensions`.
 To stop automatic loading permanently, remove the bridge path from the
-flags file and stop managing the bridge source and its setup-helper entry;
-otherwise a future apply will register it again. Restart Brave Origin after
-changing launch flags.
+flags file. Chezmoi no longer registers it. Restart Brave Origin afterward.
 
-Run the isolated bridge and browser-setup tests from the source repository:
-
-```sh
-node --test tests/notion-calendar-desktop-bridge.cjs
-PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -p 'test_*.py'
-```
+Run extension tests from their dedicated repositories, not this source tree.
 
 ## Pacman Packages Installed
 
