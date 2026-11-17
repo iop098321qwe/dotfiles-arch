@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.1.9](https://github.com/iop098321qwe/dotfiles-arch/compare/v0.1.8...v0.1.9) (2026-11-17)
+
+### Features
+
+* **monitor:** update mac monitor config ([b0b4018](https://github.com/iop098321qwe/dotfiles-arch/commit/b0b40180536b69a7069f45762180c148c2a4bdd6))
+
+### Bug Fixes
+
+* **espanso:** remove obsolete AUR installation bypass ([36fa34b](https://github.com/iop098321qwe/dotfiles-arch/commit/36fa34b4702799bf2ef88d4bad93c75effa8b479))
+* **spicetify:** restore Spotify files without shell functions in Gum ([6526da6](https://github.com/iop098321qwe/dotfiles-arch/commit/6526da62b25e53d820a100c70ebdd49dc0a41340))
+
 ## [0.1.8](https://github.com/iop098321qwe/dotfiles-arch/compare/v0.1.7...v0.1.8) (2026-11-13)
 
 ### Features
