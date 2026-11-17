@@ -147,6 +147,9 @@ description: >-
 - Create `hotfix/*` branches from `main`, or `master` when `master` is the
   repository's default/main branch.
 - Create all other allowed branch types from `develop`.
+- Always base `perf/*` on `develop` unless the user explicitly requests
+  another base. If `develop` is unavailable, stop and ask rather than
+  silently falling back to another branch.
 - For documentation requests, create `docs/<short-description>` and derive a
   descriptive lowercase kebab-case slug from the requested doc changes.
 - Avoid generic docs slugs like `update-docs` or `misc`; include the docs area

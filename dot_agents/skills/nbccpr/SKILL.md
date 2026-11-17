@@ -56,6 +56,9 @@ description: >-
   `conventional-branch/references/conventional-branch-specification.md`.
 - Let `conventional-branch` detect the best base branch for the current
   repo.
+- For `perf/*`, require `develop` unless the user explicitly requests
+  another base. If unavailable, stop and ask; do not use a default-branch
+  fallback.
 - Record the exact branch name created by this step. All later commit
   and push actions must use that same branch.
 - If switching branches would fail because pre-existing changes were

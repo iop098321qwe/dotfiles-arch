@@ -250,7 +250,6 @@ matches:
     replace: "be right there"
 
   - trigger: "qb"
-    propagate_case: true
     word: true
     replace: "QuickBooks"
 

@@ -54,6 +54,9 @@ description: >-
    - If the repair would materially change the user's intent, ask one short
      clarification question.
 4. Detect the best base branch for this repository.
+   - For `perf/*`, use `develop` unless the user explicitly requests another
+     base. If `develop` is unavailable, stop and ask; never silently fall back.
+   - Apply the following defaults only to other branch types.
    - Prefer the remote default branch when it can be detected.
    - If the remote default branch is unavailable, fall back to the first local
      trunk branch that exists in this order: `develop`, `main`, `master`.

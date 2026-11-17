@@ -157,6 +157,9 @@ type =/ "perf"
 - Invalid: `perf/`, `Perf/optimize-query`, `perf/optimize--query`.
 - Pair performance changes with the Conventional Commit type `perf`,
   for example `perf(db): reduce query allocations`.
+- Create `perf/*` branches from `develop` unless the user explicitly requests
+  another base. If `develop` is unavailable, stop and ask instead of using
+  the remote default or another trunk branch.
 
 ## Conclusion
 
