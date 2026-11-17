@@ -304,6 +304,8 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 - `tests/test_notion_settings.py` tests the portable preference allowlist,
   local state preservation, idempotence, invalid-input safety, and isolated
   Chezmoi application with private target permissions.
+- `tests/test_spicetify_bootstrap.py` tests privileged reinstall dispatch,
+  terminal and Gum fallbacks, and failure propagation with mock commands.
 - `tests/surfingkeys-theme.cjs` tests palette validation, atomic publication,
   home-specific template rendering, and isolated apply and theme-change hooks.
 
@@ -366,8 +368,8 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 ## Commands
 
 - `node --test tests/surfingkeys-theme.cjs`: run palette and hook tests.
-- `python3 -m unittest discover -s tests -p 'test_*.py'`: run browser setup
-  tests.
+- `python3 -m unittest discover -s tests -p 'test_*.py'`: run isolated Notion
+  settings and Spicetify bootstrap tests.
 - `git status --short`: inspect pending work.
 - `git diff --check`: check whitespace errors before commit.
 - `git diff -- AGENTS.md .chezmoiignore`: review this guide integration.
@@ -386,7 +388,10 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 ## Testing
 
 - Node's built-in test runner covers Surfingkeys; Python unittest covers
-  portable Notion settings.
+  portable Notion settings and privileged Spicetify command dispatch.
+- Spicetify tests extract only selected Bash functions and use mock Gum,
+  sudo, and Pacman executables with pseudo-terminal coverage. They do not
+  execute the live bootstrap or access private configuration.
 - Tests use temporary homes and fake Omarchy commands, not live browser
   profiles or desktop settings. Hook tests require `/usr/bin/node` and Chezmoi.
 - No `*.bats` files were found.
@@ -487,6 +492,9 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 - If crontab update fails, inspect `~/.config/cron/crontab.current` syntax.
 - If Spotify first run is incomplete, the Spicetify hook defers setup until
   Spotify has launched and stored its version in prefs.
+- Spotify reinstalls pass executable commands, not Bash functions, to Gum.
+  Passwordless sudo uses `sudo -n`; interactive sudo bypasses the spinner
+  so password prompts remain attached to the terminal.
 - On `aarch64`, the Spicetify hook exits successfully without installing
   Spotify because the official Linux client is x86-64 only.
 - If tmux plugins do not install, verify tmux, git, the tmux config, and TPM.
