@@ -2,3 +2,4 @@
 (B) 2026-11-13 improve and streamline the initialization of chezmoi #perf @perf +dotfiles
 (A) 2026-11-13 remove unnecessary installation checks on each chezmoi update in favor of on_change #fix @fix +dotfiles
 (A) 2026-11-13 remove prompt for 30 minute sudo #fix @fix +dotfiles
+(A) 2026-11-17 improve the speed of package checks #perf +dotfiles @perf
