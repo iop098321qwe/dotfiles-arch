@@ -106,8 +106,7 @@ task need and user approval.
 - `.chezmoiscripts/run_000_github_auth.sh` authenticates GitHub CLI.
 - `.chezmoiscripts/run_000_syncthing.sh` installs and starts Syncthing.
 - `.chezmoiscripts/run_001_atuin.sh` installs, configures, and syncs Atuin.
-- `.chezmoiscripts/run_002_espanso.sh` installs and starts Espanso, with a
-  temporary gum bypass while the AUR package is broken. It also installs
+- `.chezmoiscripts/run_002_espanso.sh` installs and starts Espanso and installs
   missing required Espanso packages without updating installed ones.
 - `.chezmoiscripts/run_003_cronie.sh` installs and starts Cronie.
 - `.chezmoiscripts/run_004_proton_mail_bridge.sh` installs Mail Bridge.
@@ -455,8 +454,7 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 
 - Omarchy package manager commands install Pacman and AUR packages.
 - Syncthing user service is enabled by `run_000_syncthing.sh`.
-- Espanso user service is registered and started by `run_002_espanso.sh`,
-  unless the user confirms the temporary AUR bypass.
+- Espanso user service is registered and started by `run_002_espanso.sh`.
 - The Espanso hook installs missing `markdown-shortcuts` from the Hub and
   `deeptree` from `https://github.com/iop098321qwe/deeptree_espanso`.
 - Espanso owns installed package contents and metadata; Chezmoi ignores
@@ -486,8 +484,6 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 - If GitHub is not logged in, `run_000_github_auth.sh` runs
   `gh auth login -cw`.
 - If Espanso fails to start, check `systemctl --user status espanso.service`.
-- If `espanso-wayland` fails to build, use the hook's temporary bypass and
-  follow its PKGBUILD icon rename workaround instructions.
 - If crontab update fails, inspect `~/.config/cron/crontab.current` syntax.
 - If Spotify first run is incomplete, the Spicetify hook defers setup until
   Spotify has launched and stored its version in prefs.

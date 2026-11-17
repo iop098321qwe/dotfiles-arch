@@ -70,8 +70,7 @@ High-level system changes include:
 - Install Pacman and AUR packages through `omarchy pkg` commands.
 - Enable and start the Syncthing user service.
 - Install, configure, log in to, import history for, and sync Atuin.
-- Install Espanso, register its service, and start the user service, unless
-  the user confirms the temporary AUR package bypass.
+- Install Espanso, register its service, and start the user service.
 - Install missing required Espanso packages without updating installed ones.
 - Enable and start the Cronie system service with sudo.
 - Enable and start the Proton Mail Bridge user service.
@@ -94,9 +93,9 @@ The Espanso setup hook ensures these packages are installed on each machine:
 - `markdown-shortcuts` from Espanso Hub.
 - `deeptree` from `https://github.com/iop098321qwe/deeptree_espanso`.
 
-The hook uses `espanso package install` only for missing packages. If Espanso
-installation is bypassed or the executable is unavailable, package setup is
-also skipped. Rerun `chezmoi apply` when Espanso is available to complete setup.
+The hook uses `espanso package install` only for missing packages. If the Espanso
+executable is unavailable after installation, package setup is skipped.
+Rerun `chezmoi apply` when Espanso is available to complete setup.
 
 Espanso owns everything under `~/.config/espanso/match/packages/`, including
 package manifests and source metadata. This directory is ignored by Chezmoi;
@@ -254,7 +253,7 @@ The setup installs these AUR packages through `omarchy pkg aur add`:
 - `blesh-git`
 - `brave-origin-bin`
 - `displaylink`
-- `espanso-wayland` can be temporarily bypassed while its AUR build is broken.
+- `espanso-wayland`
 - `evdi-dkms`
 - `gitflow-avh`
 - `lazyssh-bin`
