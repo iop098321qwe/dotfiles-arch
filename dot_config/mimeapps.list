@@ -55,6 +55,7 @@ x-scheme-handler/rpi-imager=com.raspberrypi.rpi-imager-uri-handler.desktop
 x-scheme-handler/about=brave-origin.desktop
 x-scheme-handler/unknown=brave-origin.desktop
 x-scheme-handler/superwhisper=superwhisper-url.desktop
+x-scheme-handler/codex=chatgpt.desktop
 
 [Added Associations]
 text/markdown=nvim.desktop;

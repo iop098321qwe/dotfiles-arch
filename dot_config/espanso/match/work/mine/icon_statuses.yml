@@ -11,6 +11,11 @@ matches:
     comment: "Normal entry for tracking input times in message to myself."
     form: "{{timeentrysym}} *[[time]]* `Txxxxxxxxxxxx` - Time Differential, {{myfirst}}, {{today}} `$|$`"
 
+  - trigger: ";dsm"
+    label: Daily Standup Meeting Entry
+    comment: "Daily Standup Meeting entry for tracking input times in message to myself"
+    replace: "{{timeentrysym}} *1200-1215* `Txxxxxxxxxxxx` - Time Differential, {{myfirst}}, {{today}} `Daily Standup Meeting$|$`"
+
   - trigger: ";bua"
     label: Backup Auditing Time Differential Entry
     comment: "Backup Auditing entry for tracking input times in message to myself."
