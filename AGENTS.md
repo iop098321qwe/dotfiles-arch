@@ -48,6 +48,7 @@ service credentials outside this repository.
 - `nodejs` is installed explicitly for the Surfingkeys palette publisher;
   hooks use `/usr/bin/node` rather than shell version-manager shims.
 - Python 3 runs the Notion state modifier and the isolated Python tests.
+- `work_layout` requires Python 3.11 or newer for `tomllib`.
 - Interactive prompts use `gum` in several scripts.
 - Some hooks call `sudo`, `systemctl`, `systemctl --user`, `pacman`, and
   Omarchy package commands.
@@ -68,7 +69,7 @@ service credentials outside this repository.
 - Top-level `dot_*` files map to dotfiles in the target home directory.
 - Top-level `private_*` files may contain sensitive target-home data.
 - Top-level `executable_*` files map to executable target-home files.
-- `tests/` contains isolated theme-sync tests and is ignored by Chezmoi.
+- `tests/` contains isolated regression tests and is ignored by Chezmoi.
 - `AGENTS.md`, `CHANGELOG.md`, `LICENSE`, and local state files are ignored
   by Chezmoi through `.chezmoiignore`.
 
@@ -190,6 +191,7 @@ task need and user approval.
 - `dot_config/tuxedo/config.toml` configures Tuxedo.
 - `dot_config/user-dirs.dirs` configures XDG user directories.
 - `dot_config/voxtype/config.toml` configures Voxtype.
+- `dot_config/work_layout/profile.toml` defines work apps and destinations.
 - `dot_config/xkb/rules/grymm` extends system rules with the personal Compose
   option used by `dot_config/hypr/input.lua`.
 - `dot_config/xkb/symbols/grymm` adds Shift+Escape Compose after the personal
@@ -271,6 +273,7 @@ task need and user approval.
 - `dot_local/bin/executable_cron_mirror.sh` is an executable local script.
 - `dot_local/bin/executable_omarchy-cloned-plugin-diff` reports upstream
   changes to cloned Omarchy plugins.
+- `dot_local/bin/executable_work_layout` places work windows in Hyprland.
 
 ### Local Share Extensions And Web Apps
 
@@ -306,6 +309,7 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
   Chezmoi application with private target permissions.
 - `tests/test_spicetify_bootstrap.py` tests privileged reinstall dispatch,
   terminal and Gum fallbacks, and failure propagation with mock commands.
+- `tests/test_work_layout.py` tests work window placement without a desktop.
 - `tests/surfingkeys-theme.cjs` tests palette validation, atomic publication,
   home-specific template rendering, and isolated apply and theme-change hooks.
 
@@ -347,6 +351,9 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 - Hyprland config starts from Omarchy defaults and loads local Lua overrides.
 - Personal replacement bindings use native `o.rebind`; input uses the `grymm`
   XKB rules with US/German layouts and user-owned shifted-Compose symbols.
+- Super+Alt+Shift+Enter runs `work_layout`, which reads its TOML profile on
+  each run and uses Omarchy's per-monitor workspace assignments. Existing
+  terminals outside the assigned scratchpad are never moved.
 - Super+Shift+J launches `notion-desktop` and focuses its `notion` window class.
   The package owns Notion's desktop entry and icon; Notion Calendar stays a
   custom web app. `.chezmoiremove` cleans up the old Notion web-app files.
@@ -368,8 +375,8 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 ## Commands
 
 - `node --test tests/surfingkeys-theme.cjs`: run palette and hook tests.
-- `python3 -m unittest discover -s tests -p 'test_*.py'`: run isolated Notion
-  settings and Spicetify bootstrap tests.
+- `python3 -m unittest discover -s tests -p 'test_*.py'`: run Python tests.
+- `work_layout --dry-run`: preview placements against the live Hyprland session.
 - `git status --short`: inspect pending work.
 - `git diff --check`: check whitespace errors before commit.
 - `git diff -- AGENTS.md .chezmoiignore`: review this guide integration.
@@ -388,7 +395,7 @@ Each `executable_*.desktop` file installs a custom Omarchy web-app launcher.
 ## Testing
 
 - Node's built-in test runner covers Surfingkeys; Python unittest covers
-  portable Notion settings and privileged Spicetify command dispatch.
+  portable Notion settings, Spicetify dispatch, and Hyprland work layout.
 - Spicetify tests extract only selected Bash functions and use mock Gum,
   sudo, and Pacman executables with pseudo-terminal coverage. They do not
   execute the live bootstrap or access private configuration.
