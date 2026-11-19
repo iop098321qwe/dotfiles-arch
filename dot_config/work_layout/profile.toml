@@ -1,0 +1,58 @@
+# Edit this file to change what work_layout opens or where it goes.
+# Window classes are case-insensitive full-match regexes; inspect them with
+# hyprctl -j clients. Commands are argument lists, not shell strings.
+# Monitor aliases match a unique hardware model or full display description.
+# Workspace slots are 1–10 on that display (10 is Super+0).
+[monitors]
+main = "LC27G7xT"
+secondary = "LS27AG32x"
+
+[[apps]]
+name = "Browser"
+command = ["omarchy", "launch", "browser", "--new-window"]
+window_class = 'brave-origin'
+monitor = "main"
+workspace = 1
+
+[[apps]]
+name = "YouTube"
+command = ["omarchy", "launch", "webapp", "https://youtube.com/"]
+window_class = '(?:brave|chrome|chromium)-youtube\.com__-.*'
+monitor = "secondary"
+workspace = 1
+
+[[apps]]
+name = "Obsidian"
+command = ["uwsm-app", "--", "obsidian"]
+window_class = '(?:md\.obsidian\.)?obsidian'
+scratchpad = "scratchpad2" # Super+D
+
+[[apps]]
+name = "Terminal"
+command = [
+    "uwsm-app", "--", "xdg-terminal-exec", "--app-id=work_layout_terminal",
+    "--", "tmux", "new-session", "-A",
+]
+window_class = 'foot(?:client)?|alacritty|com\.mitchellh\.ghostty|ghostty|kitty|org\.wezfurlong\.wezterm|wezterm|work_layout_terminal'
+launch_class = 'work_layout_terminal'
+scratchpad = "scratchpad5" # Super+E
+destination_only = true # Never reuse or move a terminal from elsewhere.
+
+[[apps]]
+name = "Deeptree Matrix"
+command = ["omarchy", "launch", "webapp", "https://muninn.deeptree.tech/index.html"]
+window_class = '(?:brave|chrome|chromium)-muninn\.deeptree\.tech__index\.html-.*'
+scratchpad = "scratchpad6" # Super+Q
+
+[[apps]]
+name = "Signal"
+command = ["uwsm-app", "--", "signal-desktop"]
+window_class = 'signal(?:-desktop)?'
+scratchpad = "passwords" # Super+R
+
+[[apps]]
+name = "ChatGPT"
+command = ["omarchy", "launch", "webapp", "https://chatgpt.com"]
+window_class = '(?:brave|chrome|chromium)-chatgpt\.com__-.*'
+monitor = "main"
+workspace = 10
