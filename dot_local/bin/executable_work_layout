@@ -1,0 +1,272 @@
+#!/usr/bin/env python3
+"""Restore a TOML-defined set of work windows in Hyprland."""
+
+import argparse
+from dataclasses import dataclass
+import fcntl
+import json
+import os
+from pathlib import Path
+import re
+import shutil
+import subprocess
+import sys
+import time
+import tomllib
+
+
+def xdg(variable, fallback):
+    return Path(os.environ.get(variable) or Path.home() / fallback)
+
+
+@dataclass(frozen=True)
+class App:
+    name: str
+    command: list[str]
+    window_class: re.Pattern
+    launch_class: re.Pattern
+    monitor: str | None
+    workspace: int | None
+    scratchpad: str | None
+    destination_only: bool
+
+
+@dataclass(frozen=True)
+class Target:
+    workspace: str
+    monitor: str | None = None
+
+
+def load_profile(path):
+    with path.open("rb") as file:
+        profile = tomllib.load(file)
+    monitors = profile.get("monitors", {})
+    if not isinstance(monitors, dict) or not all(
+        isinstance(value, str) and value.strip() for value in monitors.values()
+    ):
+        raise ValueError("monitors must map aliases to model names or descriptions")
+    entries = profile.get("apps")
+    if not isinstance(entries, list) or not entries:
+        raise ValueError("profile must contain at least one [[apps]] entry")
+    apps = []
+    for entry in entries:
+        name = entry["name"]
+        command = entry["command"]
+        if not isinstance(name, str) or not name.strip():
+            raise ValueError("each app must have a name")
+        if not isinstance(command, list) or not command or not all(
+            isinstance(arg, str) and arg and "\0" not in arg for arg in command
+        ):
+            raise ValueError(f"{name}: command must be a list of arguments")
+        monitor, workspace = entry.get("monitor"), entry.get("workspace")
+        scratchpad = entry.get("scratchpad")
+        if scratchpad is not None:
+            if (
+                not isinstance(scratchpad, str)
+                or not re.fullmatch(r"[\w-]+", scratchpad, re.ASCII)
+                or monitor is not None or workspace is not None
+            ):
+                raise ValueError(f"{name}: specify only a valid scratchpad name")
+        elif monitor not in monitors or type(workspace) is not int or not 1 <= workspace <= 10:
+            raise ValueError(f"{name}: specify a monitor alias and workspace slot (1–10)")
+        destination_only = entry.get("destination_only", False)
+        if type(destination_only) is not bool or (
+            destination_only and (
+                scratchpad is None or "launch_class" not in entry
+            )
+        ):
+            raise ValueError(f"{name}: destination_only needs a scratchpad and launch_class")
+        window_class = re.compile(entry["window_class"], re.IGNORECASE)
+        launch_class = re.compile(
+            entry.get("launch_class", entry["window_class"]), re.IGNORECASE
+        )
+        apps.append(App(name, command, window_class, launch_class, monitor,
+                        workspace, scratchpad, destination_only))
+    return monitors, apps
+
+
+def hypr(*args):
+    result = subprocess.run(
+        ["hyprctl", *args], text=True, capture_output=True, timeout=5
+    )
+    if result.returncode:
+        detail = result.stderr.strip() or result.stdout.strip()
+        raise ValueError(f"hyprctl failed: {detail or result.returncode}")
+    return result.stdout.strip()
+
+
+def query(name):
+    return json.loads(hypr("-j", name))
+
+
+def dispatch(expression):
+    result = hypr("dispatch", expression)
+    if result != "ok":
+        raise ValueError(f"Hyprland rejected the move: {result}")
+
+
+def target_for(app, monitors, connected, blocks):
+    if app.scratchpad:
+        return Target(f"special:{app.scratchpad}")
+    identity = monitors[app.monitor]
+    matches = [m for m in connected if not m.get("disabled") and
+               identity in (m["description"], m["model"])]
+    if not matches:
+        return None
+    if len(matches) != 1:
+        raise ValueError(f"monitor alias {app.monitor!r} matches multiple displays")
+    output = matches[0]
+    block = blocks.get((output["name"], output["description"]))
+    if block is None:
+        raise ValueError(f"Omarchy has not assigned workspace slots to {app.monitor}")
+    return Target(str(block * 10 + app.workspace), output["name"])
+
+
+def workspace_for(target):
+    return next((ws for ws in query("workspaces")
+                 if ws["name"] == target.workspace), None)
+
+
+def matches_class(window, pattern):
+    return any(pattern.fullmatch(window.get(key, ""))
+               for key in ("class", "initialClass"))
+
+
+def in_target(window, target):
+    return window["workspace"]["name"] == target.workspace
+
+
+def decide(app, target, windows):
+    matches = [window for window in windows
+               if matches_class(window, app.window_class)]
+    if any(in_target(window, target) for window in matches):
+        return "keep", None
+    if app.destination_only or not matches:
+        return "launch", None
+    if len(matches) == 1:
+        return "move", matches[0]["address"]
+    return "ambiguous", None
+
+
+def move(address, target):
+    if not re.fullmatch(r"0x[0-9a-fA-F]+", address):
+        raise ValueError("invalid window address")
+    dispatch("hl.dsp.window.move({"
+             f" window = {json.dumps('address:' + address)},"
+             f" workspace = {json.dumps(target.workspace)}, follow = false"
+             " })")
+    if target.monitor:
+        # Hyprland can create a previously empty workspace on the window's
+        # source monitor. Relocate it only if it contains just our window.
+        workspace = workspace_for(target)
+        if workspace and workspace["monitor"] != target.monitor:
+            occupants = [w["address"] for w in query("clients") if in_target(w, target)]
+            if occupants != [address]:
+                raise ValueError("refusing to relocate a workspace with other windows")
+            dispatch("hl.dsp.workspace.move({"
+                     f" workspace = {json.dumps(target.workspace)},"
+                     f" monitor = {json.dumps(target.monitor, ensure_ascii=False)}"
+                     " })")
+    workspace = workspace_for(target)
+    if (
+        not workspace or (target.monitor and workspace["monitor"] != target.monitor)
+        or not any(w["address"] == address and in_target(w, target)
+                   for w in query("clients"))
+    ):
+        raise ValueError(f"Hyprland did not place the window on {target.workspace}")
+
+
+def launch(app, old_windows):
+    before = {window["address"] for window in old_windows}
+    process = subprocess.Popen(
+        app.command, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
+        start_new_session=True
+    )
+    deadline = time.monotonic() + 15
+    while time.monotonic() < deadline:
+        new = [w for w in query("clients") if w["address"] not in before
+               and matches_class(w, app.launch_class)]
+        if len(new) > 1:
+            raise ValueError("multiple new windows matched; none was moved")
+        if new:
+            return new[0]
+        status = process.poll()
+        if status not in (None, 0):
+            raise ValueError(f"app launcher exited with status {status}")
+        time.sleep(0.15)
+    raise ValueError("timed out waiting for a matching new window")
+
+
+def restore(monitors, apps, dry_run):
+    connected = query("monitors")
+    blocks = {}
+    if any(app.monitor for app in apps):
+        state_file = xdg("XDG_STATE_HOME", ".local/state") / "omarchy/monitor-workspaces"
+        if state_file.exists():
+            for line in state_file.read_text().splitlines():
+                fields = line.split("\t", 2)
+                if len(fields) == 3 and fields[0].isdecimal():
+                    block, connector, description = fields
+                    blocks[(connector, description)] = int(block)
+    issues = []
+    for app in apps:
+        try:
+            target = target_for(app, monitors, connected, blocks)
+            if target is None:
+                print(f"{app.name}: skip ({app.monitor} monitor is disconnected)")
+                continue
+            if target.monitor:
+                ws = workspace_for(target)
+                if ws and ws["monitor"] != target.monitor:
+                    raise ValueError(f"workspace {target.workspace} is on the wrong monitor")
+            windows = query("clients")
+            action, address = decide(app, target, windows)
+            if action == "ambiguous":
+                raise ValueError("multiple matching windows elsewhere; none was moved")
+            if not dry_run and action == "launch":
+                window = launch(app, windows)
+                if not in_target(window, target):
+                    move(window["address"], target)
+            elif not dry_run and action == "move":
+                move(address, target)
+            print(f"{app.name}: {'would ' if dry_run else ''}{action} → {target.workspace}")
+        except (OSError, ValueError, KeyError, subprocess.SubprocessError) as error:
+            issue = f"{app.name}: {error}"
+            print(issue, file=sys.stderr)
+            issues.append(issue)
+    return issues
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--profile", type=Path, default=xdg(
+        "XDG_CONFIG_HOME", ".config") / "work_layout/profile.toml")
+    parser.add_argument("--dry-run", action="store_true",
+                        help="preview without launching or moving windows")
+    parser.add_argument("--notify", action="store_true",
+                        help="show problems as desktop notifications")
+    args = parser.parse_args()
+    try:
+        monitors, apps = load_profile(args.profile)
+        if args.dry_run:
+            issues = restore(monitors, apps, True)
+        else:
+            lock = Path(os.environ["XDG_RUNTIME_DIR"]) / "work_layout.lock"
+            with lock.open("a") as file:
+                try:
+                    fcntl.flock(file, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                except BlockingIOError:
+                    print("work_layout: already running")
+                    return 0
+                issues = restore(monitors, apps, False)
+    except (OSError, ValueError, KeyError, TypeError, re.error,
+            subprocess.SubprocessError) as error:
+        print(f"work_layout: {error}", file=sys.stderr)
+        issues = [str(error)]
+    if issues and args.notify and shutil.which("notify-send"):
+        subprocess.run(["notify-send", "Work layout", "\n".join(issues)], check=False)
+    return bool(issues)
+
+
+if __name__ == "__main__":
+    sys.exit(main())
