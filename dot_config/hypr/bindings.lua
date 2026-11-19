@@ -12,6 +12,8 @@
 -- Replace default terminal/tmux bindings.
 o.rebind("SUPER + RETURN", "Tmux", "omarchy-launch-terminal tmux new-session -A")
 o.rebind("SUPER + ALT + RETURN", "Terminal", { omarchy = "terminal" })
+o.bind("SUPER + ALT + SHIFT + RETURN", "Restore work layout",
+  o.shell_quote(os.getenv("HOME") .. "/.local/bin/work_layout") .. " --notify")
 
 -- Vim-style focus navigation.
 o.rebind("SUPER + H", "Move window focus left", hl.dsp.focus({ direction = "l" }))
