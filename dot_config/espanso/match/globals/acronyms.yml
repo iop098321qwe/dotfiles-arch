@@ -151,6 +151,10 @@ matches:
     word: true
     replace: "Microsoft 365"
 
+  - trigger: "ms"
+    word: true
+    replace: "Microsoft"
+
   - trigger: "o365"
     word: true
     replace: "Office 365"
