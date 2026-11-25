@@ -1,4 +1,12 @@
+[options]
+overlay = true
+overlay_text = $imv_current_index / $imv_file_count
+
 [binds]
+
+# Match mpv's next and previous shortcuts
+<Shift+J> = next
+<Shift+K> = prev
 
 # Print the current image file
 <Ctrl+p> = exec lp "$imv_current_file"
