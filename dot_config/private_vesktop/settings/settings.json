@@ -4,9 +4,7 @@
     "useQuickCss": true,
     "themeLinks": [],
     "eagerPatches": false,
-    "enabledThemes": [
-        "vencord.theme.css"
-    ],
+    "enabledThemes": [],
     "enableReactDevtools": false,
     "frameless": false,
     "transparent": true,
@@ -73,7 +71,8 @@
             "closeAllHomeButton": false,
             "closeAllFolders": false,
             "forceOpen": false,
-            "sidebarAnim": true
+            "sidebarAnim": true,
+            "closeServerFolder": false
         },
         "BetterGifAltText": {
             "enabled": false
@@ -169,9 +168,6 @@
         "Experiments": {
             "enabled": false
         },
-        "ExpressionCloner": {
-            "enabled": false
-        },
         "F8Break": {
             "enabled": false
         },
@@ -243,9 +239,6 @@
             "enabled": false
         },
         "KeepCurrentChannel": {
-            "enabled": false
-        },
-        "LastFMRichPresence": {
             "enabled": false
         },
         "LoadingQuotes": {
@@ -538,10 +531,13 @@
             "addBack": false
         },
         "WebKeybinds": {
-            "enabled": true
+            "enabled": true,
+            "showNavigationButtons": true,
+            "overrideCommonKeybinds": true
         },
         "WebScreenShareFixes": {
-            "enabled": true
+            "enabled": true,
+            "betterCodecs": false
         },
         "WhoReacted": {
             "enabled": false
@@ -554,11 +550,13 @@
         },
         "NoTrack": {
             "enabled": true,
-            "disableAnalytics": true
+            "disableAnalytics": true,
+            "allowBadgeTracking": true
         },
         "Settings": {
             "enabled": true,
-            "settingsLocation": "aboveNitro"
+            "settingsLocation": "aboveNitro",
+            "includeVencordInfoWhenCopying": true
         },
         "DisableDeepLinks": {
             "enabled": true
@@ -586,6 +584,57 @@
         },
         "CustomCommands": {
             "enabled": false
+        },
+        "ExpressionManager": {
+            "enabled": false
+        },
+        "MusicRichPresence": {
+            "enabled": false
+        },
+        "AddAttachments": {
+            "enabled": false
+        },
+        "BetterSearch": {
+            "enabled": false
+        },
+        "BetterYouTubeEmbeds": {
+            "enabled": false
+        },
+        "CharacterCounter": {
+            "enabled": false
+        },
+        "DirectFileDownload": {
+            "enabled": false
+        },
+        "GifProviderSwitcher": {
+            "enabled": false
+        },
+        "JumpToTop": {
+            "enabled": false
+        },
+        "MoreQuickReactions": {
+            "enabled": false
+        },
+        "MutedServersActivityBadge": {
+            "enabled": false
+        },
+        "NoMiddleClickPaste": {
+            "enabled": false
+        },
+        "ConcatenatedComponentExtractor": {
+            "enabled": true
+        },
+        "ContextMenuAPI": {
+            "enabled": true
+        },
+        "FixDiscordCss": {
+            "enabled": true
+        },
+        "NoticesAPI": {
+            "enabled": true
+        },
+        "VesktopPatches": {
+            "enabled": true
         }
     },
     "notifications": {
@@ -598,10 +647,12 @@
         "authenticated": true,
         "url": "https://api.vencord.dev/",
         "settingsSync": true,
-        "settingsSyncVersion": 1777263351057
+        "settingsSyncVersion": 1795548675592
     },
     "uiElements": {
         "chatBarButtons": {},
         "messagePopoverButtons": {}
-    }
+    },
+    "windowsMaterial": "none",
+    "nativeTitleBar": false
 }
