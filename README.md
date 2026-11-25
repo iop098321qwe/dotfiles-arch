@@ -270,7 +270,6 @@ The setup installs these AUR packages through `omarchy pkg aur add`:
 - `ttl-bin`
 - `tuxedo-bin`
 - `vesktop-bin`
-- `zennotes-bin`
 
 ## Interactive Prompts To Expect
 
