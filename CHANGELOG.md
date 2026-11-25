@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.1.10](https://github.com/iop098321qwe/dotfiles-arch/compare/v0.1.9...v0.1.10) (2026-11-25)
+
+### Features
+
+* **hypr:** add a shortcut to restore the work layout ([24a7c30](https://github.com/iop098321qwe/dotfiles-arch/commit/24a7c30ec51011c8a76ce498e208c44f7090a571))
+* **hypr:** add work_layout to restore work windows ([40a862f](https://github.com/iop098321qwe/dotfiles-arch/commit/40a862fe1872ba729f7c0a824a29b57811e28ed5))
+* **hypr:** configure work apps and their destinations ([bd9afe5](https://github.com/iop098321qwe/dotfiles-arch/commit/bd9afe502d3ddf500c8d71429bde349585c59d85))
+* **imv:** show image position and add J/K navigation ([35f9dfe](https://github.com/iop098321qwe/dotfiles-arch/commit/35f9dfee557b9681d964cb5e6fa02d6c8e49540b))
+* **mpv:** add Vim-style playback and playlist shortcuts ([f1513c3](https://github.com/iop098321qwe/dotfiles-arch/commit/f1513c3141a4dd891c4ea36285b521ce00c4f967))
+* **mpv:** mirror arrow shortcuts and keep duration visible ([e6e5fdd](https://github.com/iop098321qwe/dotfiles-arch/commit/e6e5fdd0aad3d7c481828fc0f1cf8fe17a857b2c))
+
 ## [0.1.9](https://github.com/iop098321qwe/dotfiles-arch/compare/v0.1.8...v0.1.9) (2026-11-17)
 
 ### Features
