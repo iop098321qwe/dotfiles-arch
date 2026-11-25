@@ -77,7 +77,6 @@ aur_packages=(
   tmux-plugin-manager
   tuxedo-bin
   vesktop-bin
-  zennotes-bin
 )
 
 for package in "${packages[@]}"; do
