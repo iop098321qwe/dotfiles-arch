@@ -173,6 +173,8 @@ task need and user approval.
 - `dot_config/lazydocker/empty_config.yml` is a placeholder config.
 - `dot_config/lazygit/config.yml` configures Lazygit.
 - `dot_config/mimeapps.list` configures default application handlers.
+- `dot_config/private_mpv/input.conf` sets mpv navigation, subtitle, loop,
+  and rotation shortcuts.
 - `dot_config/starship.toml` configures the shell prompt.
 - `dot_config/starship_yazi.toml` configures Starship for Yazi.
 - `dot_config/surfingkeys/catppuccin-mocha-surfingkeys.js.tmpl` themes
